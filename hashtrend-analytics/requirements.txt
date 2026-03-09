@@ -1,0 +1,34 @@
+# Veri Toplama
+pytrends==4.9.2
+aiohttp>=3.9.0
+asyncio-throttle>=1.0.2
+beautifulsoup4>=4.12.0
+praw>=7.7.0
+
+# API Framework
+fastapi>=0.109.0
+uvicorn>=0.27.0
+python-dotenv>=1.0.0
+
+# Veritabanı
+supabase>=2.3.0
+
+# Veri İşleme
+numpy>=1.26.0
+scipy>=1.12.0
+pydantic>=2.5.0
+
+# AI Kategorizasyon
+anthropic>=0.40.0
+
+# Bildirim
+python-telegram-bot>=21.0
+
+# Scraping (Faz 2)
+playwright>=1.41.0
+fake-useragent>=1.4.0
+
+# Yardımcı
+loguru>=0.7.0
+schedule>=1.2.0
+tenacity>=8.2.0
