@@ -39,7 +39,7 @@ class Database:
         rows = [
             {
                 "id": m.id,
-                "source": m.source,
+                "source_id": {"google_trends": 1, "reddit": 2, "hackernews": 3, "wikipedia": 4, "github": 5, "newsapi": 6}.get(m.source, 3),
                 "topic": m.topic,
                 "mention_count": m.mention_count,
                 "raw_data": m.raw_data,
@@ -144,16 +144,37 @@ class Database:
 
     # ─── TREND SCORES ────────────────────────────────────────
 
+    def _ensure_topics_exist(self, scores) -> None:
+        """Trend skorlarını kaydetmeden önce topics tablosuna ekle."""
+        seen = set()
+        for s in scores:
+            if s.topic_id in seen:
+                continue
+            seen.add(s.topic_id)
+            slug = s.topic_name.lower().replace(" ", "-")[:100]
+            try:
+                self.client.table("topics").upsert({
+                    "id": s.topic_id,
+                    "canonical_name": s.topic_name,
+                    "slug": slug,
+                    "category": s.category,
+                    "total_mentions": 0,
+                }, on_conflict="canonical_name").execute()
+            except Exception as e:
+                logger.debug(f"Topic upsert atlandı: {e}")
+
     def insert_trend_scores(self, scores: list[TrendScore]) -> int:
         """Trend skorlarını toplu kaydet."""
         if not scores:
             return 0
+        self._ensure_topics_exist(scores)
 
         rows = [
             {
                 "id": s.id,
                 "topic_id": s.topic_id,
                 "topic_name": s.topic_name,
+                "topic_slug": s.topic_name.lower().replace(" ", "-")[:100],
                 "category": s.category,
                 "cts_score": s.cts_score,
                 "platform_coverage": s.platform_coverage,

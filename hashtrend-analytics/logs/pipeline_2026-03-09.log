@@ -1,0 +1,196 @@
+2026-03-09 22:01:15.311 | INFO     | __main__:run:52 - ============================================================
+2026-03-09 22:01:15.311 | INFO     | __main__:run:53 - HashTrend Pipeline başlatıldı
+2026-03-09 22:01:15.311 | INFO     | __main__:run:54 - ============================================================
+2026-03-09 22:01:15.311 | INFO     | __main__:run:57 - Adım 1/5: Veri toplama...
+2026-03-09 22:01:15.311 | INFO     | collectors.base:__init__:23 - [google_trends] Collector başlatıldı
+2026-03-09 22:01:22.084 | INFO     | collectors.base:run:58 - [google_trends] Çalıştırılıyor...
+2026-03-09 22:01:22.084 | WARNING  | collectors.google_trends:_collect_trending:101 - [google_trends] TR trending hatası: Retry.__init__() got an unexpected keyword argument 'method_whitelist'
+2026-03-09 22:01:24.089 | WARNING  | collectors.google_trends:_collect_trending:101 - [google_trends] US trending hatası: Retry.__init__() got an unexpected keyword argument 'method_whitelist'
+2026-03-09 22:01:26.092 | WARNING  | collectors.google_trends:_collect_trending:101 - [google_trends] GB trending hatası: Retry.__init__() got an unexpected keyword argument 'method_whitelist'
+2026-03-09 22:01:28.095 | WARNING  | collectors.google_trends:_collect_trending:101 - [google_trends] DE trending hatası: Retry.__init__() got an unexpected keyword argument 'method_whitelist'
+2026-03-09 22:01:30.101 | DEBUG    | collectors.google_trends:_collect_realtime_trends:134 - [google_trends] Realtime trends mevcut değil: Retry.__init__() got an unexpected keyword argument 'method_whitelist'
+2026-03-09 22:01:30.102 | INFO     | collectors.base:safe_collect:45 - [google_trends] 0 mention toplandı
+2026-03-09 22:01:30.104 | INFO     | collectors.base:run:60 - [google_trends] Tamamlandı — 0 sonuç
+2026-03-09 22:01:30.104 | INFO     | __main__:run:76 -   ✓ Google Trends: 0 mention
+2026-03-09 22:01:30.108 | INFO     | collectors.base:__init__:23 - [hackernews] Collector başlatıldı
+2026-03-09 22:01:30.108 | INFO     | collectors.base:run:58 - [hackernews] Çalıştırılıyor...
+2026-03-09 22:01:31.341 | INFO     | collectors.base:safe_collect:45 - [hackernews] 47 mention toplandı
+2026-03-09 22:01:31.341 | INFO     | collectors.base:run:60 - [hackernews] Tamamlandı — 47 sonuç
+2026-03-09 22:01:31.342 | INFO     | __main__:run:76 -   ✓ Hacker News: 47 mention
+2026-03-09 22:01:31.342 | INFO     | collectors.base:__init__:23 - [reddit] Collector başlatıldı
+2026-03-09 22:01:31.342 | INFO     | collectors.base:run:58 - [reddit] Çalıştırılıyor...
+2026-03-09 22:01:31.500 | INFO     | collectors.reddit:reddit:66 - [reddit] PRAW bağlantısı kuruldu
+2026-03-09 22:01:31.766 | WARNING  | collectors.reddit:collect:82 - [reddit] r/all hatası: received 401 HTTP response
+2026-03-09 22:01:32.030 | WARNING  | collectors.reddit:collect:82 - [reddit] r/popular hatası: received 401 HTTP response
+2026-03-09 22:01:32.310 | WARNING  | collectors.reddit:collect:82 - [reddit] r/technology hatası: received 401 HTTP response
+2026-03-09 22:01:32.575 | WARNING  | collectors.reddit:collect:82 - [reddit] r/programming hatası: received 401 HTTP response
+2026-03-09 22:01:32.843 | WARNING  | collectors.reddit:collect:82 - [reddit] r/artificial hatası: received 401 HTTP response
+2026-03-09 22:01:33.119 | WARNING  | collectors.reddit:collect:82 - [reddit] r/MachineLearning hatası: received 401 HTTP response
+2026-03-09 22:01:33.378 | WARNING  | collectors.reddit:collect:82 - [reddit] r/finance hatası: received 401 HTTP response
+2026-03-09 22:01:33.661 | WARNING  | collectors.reddit:collect:82 - [reddit] r/cryptocurrency hatası: received 401 HTTP response
+2026-03-09 22:01:33.938 | WARNING  | collectors.reddit:collect:82 - [reddit] r/science hatası: received 401 HTTP response
+2026-03-09 22:01:34.199 | WARNING  | collectors.reddit:collect:82 - [reddit] r/worldnews hatası: received 401 HTTP response
+2026-03-09 22:01:34.477 | WARNING  | collectors.reddit:collect:82 - [reddit] r/learnprogramming hatası: received 401 HTTP response
+2026-03-09 22:01:34.479 | INFO     | collectors.base:safe_collect:45 - [reddit] 0 mention toplandı
+2026-03-09 22:01:34.479 | INFO     | collectors.base:run:60 - [reddit] Tamamlandı — 0 sonuç
+2026-03-09 22:01:34.479 | INFO     | __main__:run:76 -   ✓ Reddit: 0 mention
+2026-03-09 22:01:34.479 | INFO     | __main__:run:85 -   Toplam: 47 ham mention
+2026-03-09 22:01:34.479 | INFO     | __main__:run:88 - Adım 2/5: Normalizasyon...
+2026-03-09 22:02:13.866 | INFO     | __main__:run:52 - ============================================================
+2026-03-09 22:02:13.866 | INFO     | __main__:run:53 - HashTrend Pipeline başlatıldı
+2026-03-09 22:02:13.866 | INFO     | __main__:run:54 - ============================================================
+2026-03-09 22:02:13.866 | INFO     | __main__:run:57 - Adım 1/5: Veri toplama...
+2026-03-09 22:02:13.866 | INFO     | collectors.base:__init__:23 - [google_trends] Collector başlatıldı
+2026-03-09 22:02:14.517 | INFO     | collectors.base:run:58 - [google_trends] Çalıştırılıyor...
+2026-03-09 22:02:14.647 | WARNING  | collectors.google_trends:_collect_trending:101 - [google_trends] TR trending hatası: The request failed: Google returned a response with code 404
+2026-03-09 22:02:16.783 | WARNING  | collectors.google_trends:_collect_trending:101 - [google_trends] US trending hatası: The request failed: Google returned a response with code 404
+2026-03-09 22:02:18.915 | WARNING  | collectors.google_trends:_collect_trending:101 - [google_trends] GB trending hatası: The request failed: Google returned a response with code 404
+2026-03-09 22:02:21.049 | WARNING  | collectors.google_trends:_collect_trending:101 - [google_trends] DE trending hatası: The request failed: Google returned a response with code 404
+2026-03-09 22:02:23.529 | DEBUG    | collectors.google_trends:_collect_realtime_trends:134 - [google_trends] Realtime trends mevcut değil: The request failed: Google returned a response with code 404
+2026-03-09 22:02:23.531 | INFO     | collectors.base:safe_collect:45 - [google_trends] 0 mention toplandı
+2026-03-09 22:02:23.531 | INFO     | collectors.base:run:60 - [google_trends] Tamamlandı — 0 sonuç
+2026-03-09 22:02:23.532 | INFO     | __main__:run:76 -   ✓ Google Trends: 0 mention
+2026-03-09 22:02:23.532 | INFO     | collectors.base:__init__:23 - [hackernews] Collector başlatıldı
+2026-03-09 22:02:23.532 | INFO     | collectors.base:run:58 - [hackernews] Çalıştırılıyor...
+2026-03-09 22:02:26.245 | INFO     | collectors.base:safe_collect:45 - [hackernews] 47 mention toplandı
+2026-03-09 22:02:26.246 | INFO     | collectors.base:run:60 - [hackernews] Tamamlandı — 47 sonuç
+2026-03-09 22:02:26.246 | INFO     | __main__:run:76 -   ✓ Hacker News: 47 mention
+2026-03-09 22:02:26.246 | INFO     | collectors.base:__init__:23 - [reddit] Collector başlatıldı
+2026-03-09 22:02:26.246 | INFO     | collectors.base:run:58 - [reddit] Çalıştırılıyor...
+2026-03-09 22:02:26.295 | INFO     | collectors.reddit:reddit:66 - [reddit] PRAW bağlantısı kuruldu
+2026-03-09 22:02:26.547 | WARNING  | collectors.reddit:collect:82 - [reddit] r/all hatası: received 401 HTTP response
+2026-03-09 22:02:26.812 | WARNING  | collectors.reddit:collect:82 - [reddit] r/popular hatası: received 401 HTTP response
+2026-03-09 22:02:27.076 | WARNING  | collectors.reddit:collect:82 - [reddit] r/technology hatası: received 401 HTTP response
+2026-03-09 22:02:27.345 | WARNING  | collectors.reddit:collect:82 - [reddit] r/programming hatası: received 401 HTTP response
+2026-03-09 22:02:27.616 | WARNING  | collectors.reddit:collect:82 - [reddit] r/artificial hatası: received 401 HTTP response
+2026-03-09 22:02:27.890 | WARNING  | collectors.reddit:collect:82 - [reddit] r/MachineLearning hatası: received 401 HTTP response
+2026-03-09 22:02:28.163 | WARNING  | collectors.reddit:collect:82 - [reddit] r/finance hatası: received 401 HTTP response
+2026-03-09 22:02:28.439 | WARNING  | collectors.reddit:collect:82 - [reddit] r/cryptocurrency hatası: received 401 HTTP response
+2026-03-09 22:02:28.706 | WARNING  | collectors.reddit:collect:82 - [reddit] r/science hatası: received 401 HTTP response
+2026-03-09 22:02:28.972 | WARNING  | collectors.reddit:collect:82 - [reddit] r/worldnews hatası: received 401 HTTP response
+2026-03-09 22:02:29.237 | WARNING  | collectors.reddit:collect:82 - [reddit] r/learnprogramming hatası: received 401 HTTP response
+2026-03-09 22:02:29.237 | INFO     | collectors.base:safe_collect:45 - [reddit] 0 mention toplandı
+2026-03-09 22:02:29.237 | INFO     | collectors.base:run:60 - [reddit] Tamamlandı — 0 sonuç
+2026-03-09 22:02:29.238 | INFO     | __main__:run:76 -   ✓ Reddit: 0 mention
+2026-03-09 22:02:29.238 | INFO     | __main__:run:85 -   Toplam: 47 ham mention
+2026-03-09 22:02:29.238 | INFO     | __main__:run:88 - Adım 2/5: Normalizasyon...
+2026-03-09 22:02:29.241 | INFO     | core.normalizer:normalize:73 - Normalizasyon: 47 mention → 47 benzersiz konu
+2026-03-09 22:02:29.241 | INFO     | __main__:run:90 -   47 mention → 47 benzersiz konu
+2026-03-09 22:02:29.241 | INFO     | __main__:run:93 - Adım 3/5: Kategorizasyon...
+2026-03-09 22:02:29.964 | ERROR    | core.categorizer:_categorize_batch:89 - Claude API hatası: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYt2NcBougCPqJqd9ksmN'}
+2026-03-09 22:02:30.140 | ERROR    | core.categorizer:_categorize_batch:89 - Claude API hatası: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYt2NczvQV9Z8KDoZyB4y'}
+2026-03-09 22:02:30.141 | INFO     | core.categorizer:categorize:54 - 47 konu kategorize edildi
+2026-03-09 22:02:30.141 | INFO     | __main__:run:100 -   47 konu kategorize edildi
+2026-03-09 22:02:30.141 | INFO     | __main__:run:103 - Adım 4/5: Trend skorlama (CTS)...
+2026-03-09 22:02:30.143 | INFO     | core.scorer:score_topics:52 - Skorlama tamamlandı: 47 konu, burst: 0
+2026-03-09 22:02:30.143 | INFO     | __main__:run:105 -   47 skor hesaplandı, 0 burst
+2026-03-09 22:02:30.143 | INFO     | __main__:run:111 - Adım 5/5: Kayıt ve raporlama...
+2026-03-09 22:02:30.143 | INFO     | __main__:run:136 - 
+Pipeline tamamlandı — 16.3 saniye
+2026-03-09 22:12:46.626 | INFO     | __main__:run:52 - ============================================================
+2026-03-09 22:12:46.627 | INFO     | __main__:run:53 - HashTrend Pipeline başlatıldı
+2026-03-09 22:12:46.627 | INFO     | __main__:run:54 - ============================================================
+2026-03-09 22:12:46.627 | INFO     | __main__:run:57 - Adım 1/5: Veri toplama...
+2026-03-09 22:12:46.627 | INFO     | collectors.base:__init__:23 - [google_trends] Collector başlatıldı
+2026-03-09 22:12:47.241 | INFO     | collectors.base:run:58 - [google_trends] Çalıştırılıyor...
+2026-03-09 22:12:47.360 | WARNING  | collectors.google_trends:_collect_trending:101 - [google_trends] TR trending hatası: The request failed: Google returned a response with code 404
+2026-03-09 22:12:49.498 | WARNING  | collectors.google_trends:_collect_trending:101 - [google_trends] US trending hatası: The request failed: Google returned a response with code 404
+2026-03-09 22:12:51.630 | WARNING  | collectors.google_trends:_collect_trending:101 - [google_trends] GB trending hatası: The request failed: Google returned a response with code 404
+2026-03-09 22:12:53.752 | WARNING  | collectors.google_trends:_collect_trending:101 - [google_trends] DE trending hatası: The request failed: Google returned a response with code 404
+2026-03-09 22:12:56.100 | DEBUG    | collectors.google_trends:_collect_realtime_trends:134 - [google_trends] Realtime trends mevcut değil: The request failed: Google returned a response with code 404
+2026-03-09 22:12:56.101 | INFO     | collectors.base:safe_collect:45 - [google_trends] 0 mention toplandı
+2026-03-09 22:12:56.101 | INFO     | collectors.base:run:60 - [google_trends] Tamamlandı — 0 sonuç
+2026-03-09 22:12:56.102 | INFO     | __main__:run:76 -   ✓ Google Trends: 0 mention
+2026-03-09 22:12:56.102 | INFO     | collectors.base:__init__:23 - [hackernews] Collector başlatıldı
+2026-03-09 22:12:56.102 | INFO     | collectors.base:run:58 - [hackernews] Çalıştırılıyor...
+2026-03-09 22:12:59.261 | INFO     | collectors.base:safe_collect:45 - [hackernews] 47 mention toplandı
+2026-03-09 22:12:59.262 | INFO     | collectors.base:run:60 - [hackernews] Tamamlandı — 47 sonuç
+2026-03-09 22:12:59.262 | INFO     | __main__:run:76 -   ✓ Hacker News: 47 mention
+2026-03-09 22:12:59.262 | INFO     | collectors.base:__init__:23 - [reddit] Collector başlatıldı
+2026-03-09 22:12:59.263 | INFO     | collectors.base:run:58 - [reddit] Çalıştırılıyor...
+2026-03-09 22:12:59.336 | INFO     | collectors.reddit:reddit:66 - [reddit] PRAW bağlantısı kuruldu
+2026-03-09 22:12:59.605 | WARNING  | collectors.reddit:collect:82 - [reddit] r/all hatası: received 401 HTTP response
+2026-03-09 22:12:59.875 | WARNING  | collectors.reddit:collect:82 - [reddit] r/popular hatası: received 401 HTTP response
+2026-03-09 22:13:00.142 | WARNING  | collectors.reddit:collect:82 - [reddit] r/technology hatası: received 401 HTTP response
+2026-03-09 22:13:00.413 | WARNING  | collectors.reddit:collect:82 - [reddit] r/programming hatası: received 401 HTTP response
+2026-03-09 22:13:00.693 | WARNING  | collectors.reddit:collect:82 - [reddit] r/artificial hatası: received 401 HTTP response
+2026-03-09 22:13:00.954 | WARNING  | collectors.reddit:collect:82 - [reddit] r/MachineLearning hatası: received 401 HTTP response
+2026-03-09 22:13:01.641 | WARNING  | collectors.reddit:collect:82 - [reddit] r/finance hatası: received 401 HTTP response
+2026-03-09 22:13:01.907 | WARNING  | collectors.reddit:collect:82 - [reddit] r/cryptocurrency hatası: received 401 HTTP response
+2026-03-09 22:13:02.172 | WARNING  | collectors.reddit:collect:82 - [reddit] r/science hatası: received 401 HTTP response
+2026-03-09 22:13:02.431 | WARNING  | collectors.reddit:collect:82 - [reddit] r/worldnews hatası: received 401 HTTP response
+2026-03-09 22:13:02.700 | WARNING  | collectors.reddit:collect:82 - [reddit] r/learnprogramming hatası: received 401 HTTP response
+2026-03-09 22:13:02.701 | INFO     | collectors.base:safe_collect:45 - [reddit] 0 mention toplandı
+2026-03-09 22:13:02.701 | INFO     | collectors.base:run:60 - [reddit] Tamamlandı — 0 sonuç
+2026-03-09 22:13:02.701 | INFO     | __main__:run:76 -   ✓ Reddit: 0 mention
+2026-03-09 22:13:02.701 | INFO     | __main__:run:85 -   Toplam: 47 ham mention
+2026-03-09 22:13:02.701 | INFO     | __main__:run:88 - Adım 2/5: Normalizasyon...
+2026-03-09 22:13:02.705 | INFO     | core.normalizer:normalize:73 - Normalizasyon: 47 mention → 47 benzersiz konu
+2026-03-09 22:13:02.705 | INFO     | __main__:run:90 -   47 mention → 47 benzersiz konu
+2026-03-09 22:13:02.705 | INFO     | __main__:run:93 - Adım 3/5: Kategorizasyon...
+2026-03-09 22:13:03.404 | ERROR    | core.categorizer:_categorize_batch:89 - Claude API hatası: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYt3BJGc5RvK67MqgWvYj'}
+2026-03-09 22:13:03.586 | ERROR    | core.categorizer:_categorize_batch:89 - Claude API hatası: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYt3BKFeHoTiHG4mzWRYk'}
+2026-03-09 22:13:03.587 | INFO     | core.categorizer:categorize:54 - 47 konu kategorize edildi
+2026-03-09 22:13:03.587 | INFO     | __main__:run:100 -   47 konu kategorize edildi
+2026-03-09 22:13:03.587 | INFO     | __main__:run:103 - Adım 4/5: Trend skorlama (CTS)...
+2026-03-09 22:13:03.589 | INFO     | core.scorer:score_topics:52 - Skorlama tamamlandı: 47 konu, burst: 0
+2026-03-09 22:13:03.589 | INFO     | __main__:run:105 -   47 skor hesaplandı, 0 burst
+2026-03-09 22:13:03.589 | INFO     | __main__:run:111 - Adım 5/5: Kayıt ve raporlama...
+2026-03-09 22:13:04.328 | INFO     | core.database:client:29 - Supabase bağlantısı kuruldu
+2026-03-09 22:13:05.051 | ERROR    | core.database:insert_raw_mentions:59 - raw_mentions insert hatası: {'message': "Could not find the 'source' column of 'raw_mentions' in the schema cache", 'code': 'PGRST204', 'hint': None, 'details': None}
+2026-03-09 22:13:05.451 | ERROR    | core.database:insert_trend_scores:176 - trend_scores insert hatası: {'message': 'null value in column "topic_slug" of relation "trend_scores" violates not-null constraint', 'code': '23502', 'hint': None, 'details': 'Failing row contains (0ac4e19d-598a-4d73-b1fe-a42c2b080faf, 98bbe113-4122-4826-96a4-041de8b7d8cf, Ask HN: What Are You Working On? (March 2026), null, Other, 54.17, 0.33, 0.2500, 1.00, 1.00, f, 0, {"hackernews": 1640}, 2026-03-09 19:13:03.589076+00).'}
+2026-03-09 22:13:05.452 | INFO     | __main__:run:119 -   ✓ Veritabanına kaydedildi
+2026-03-09 22:13:05.452 | INFO     | __main__:run:136 - 
+Pipeline tamamlandı — 18.8 saniye
+2026-03-09 22:18:42.072 | INFO     | __main__:run:52 - ============================================================
+2026-03-09 22:18:42.072 | INFO     | __main__:run:53 - HashTrend Pipeline başlatıldı
+2026-03-09 22:18:42.072 | INFO     | __main__:run:54 - ============================================================
+2026-03-09 22:18:42.072 | INFO     | __main__:run:57 - Adım 1/5: Veri toplama...
+2026-03-09 22:18:42.072 | INFO     | collectors.base:__init__:23 - [google_trends] Collector başlatıldı
+2026-03-09 22:18:42.683 | INFO     | collectors.base:run:58 - [google_trends] Çalıştırılıyor...
+2026-03-09 22:18:42.817 | WARNING  | collectors.google_trends:_collect_trending:101 - [google_trends] TR trending hatası: The request failed: Google returned a response with code 404
+2026-03-09 22:18:44.954 | WARNING  | collectors.google_trends:_collect_trending:101 - [google_trends] US trending hatası: The request failed: Google returned a response with code 404
+2026-03-09 22:18:47.088 | WARNING  | collectors.google_trends:_collect_trending:101 - [google_trends] GB trending hatası: The request failed: Google returned a response with code 404
+2026-03-09 22:18:49.221 | WARNING  | collectors.google_trends:_collect_trending:101 - [google_trends] DE trending hatası: The request failed: Google returned a response with code 404
+2026-03-09 22:18:51.413 | DEBUG    | collectors.google_trends:_collect_realtime_trends:134 - [google_trends] Realtime trends mevcut değil: The request failed: Google returned a response with code 404
+2026-03-09 22:18:51.416 | INFO     | collectors.base:safe_collect:45 - [google_trends] 0 mention toplandı
+2026-03-09 22:18:51.416 | INFO     | collectors.base:run:60 - [google_trends] Tamamlandı — 0 sonuç
+2026-03-09 22:18:51.416 | INFO     | __main__:run:76 -   ✓ Google Trends: 0 mention
+2026-03-09 22:18:51.416 | INFO     | collectors.base:__init__:23 - [hackernews] Collector başlatıldı
+2026-03-09 22:18:51.416 | INFO     | collectors.base:run:58 - [hackernews] Çalıştırılıyor...
+2026-03-09 22:18:52.649 | INFO     | collectors.base:safe_collect:45 - [hackernews] 47 mention toplandı
+2026-03-09 22:18:52.649 | INFO     | collectors.base:run:60 - [hackernews] Tamamlandı — 47 sonuç
+2026-03-09 22:18:52.649 | INFO     | __main__:run:76 -   ✓ Hacker News: 47 mention
+2026-03-09 22:18:52.649 | INFO     | collectors.base:__init__:23 - [reddit] Collector başlatıldı
+2026-03-09 22:18:52.649 | INFO     | collectors.base:run:58 - [reddit] Çalıştırılıyor...
+2026-03-09 22:18:52.697 | INFO     | collectors.reddit:reddit:66 - [reddit] PRAW bağlantısı kuruldu
+2026-03-09 22:18:52.964 | WARNING  | collectors.reddit:collect:82 - [reddit] r/all hatası: received 401 HTTP response
+2026-03-09 22:18:53.231 | WARNING  | collectors.reddit:collect:82 - [reddit] r/popular hatası: received 401 HTTP response
+2026-03-09 22:18:53.497 | WARNING  | collectors.reddit:collect:82 - [reddit] r/technology hatası: received 401 HTTP response
+2026-03-09 22:18:53.753 | WARNING  | collectors.reddit:collect:82 - [reddit] r/programming hatası: received 401 HTTP response
+2026-03-09 22:18:54.016 | WARNING  | collectors.reddit:collect:82 - [reddit] r/artificial hatası: received 401 HTTP response
+2026-03-09 22:18:54.284 | WARNING  | collectors.reddit:collect:82 - [reddit] r/MachineLearning hatası: received 401 HTTP response
+2026-03-09 22:18:54.539 | WARNING  | collectors.reddit:collect:82 - [reddit] r/finance hatası: received 401 HTTP response
+2026-03-09 22:18:54.793 | WARNING  | collectors.reddit:collect:82 - [reddit] r/cryptocurrency hatası: received 401 HTTP response
+2026-03-09 22:18:55.065 | WARNING  | collectors.reddit:collect:82 - [reddit] r/science hatası: received 401 HTTP response
+2026-03-09 22:18:55.324 | WARNING  | collectors.reddit:collect:82 - [reddit] r/worldnews hatası: received 401 HTTP response
+2026-03-09 22:18:55.591 | WARNING  | collectors.reddit:collect:82 - [reddit] r/learnprogramming hatası: received 401 HTTP response
+2026-03-09 22:18:55.592 | INFO     | collectors.base:safe_collect:45 - [reddit] 0 mention toplandı
+2026-03-09 22:18:55.592 | INFO     | collectors.base:run:60 - [reddit] Tamamlandı — 0 sonuç
+2026-03-09 22:18:55.592 | INFO     | __main__:run:76 -   ✓ Reddit: 0 mention
+2026-03-09 22:18:55.592 | INFO     | __main__:run:85 -   Toplam: 47 ham mention
+2026-03-09 22:18:55.592 | INFO     | __main__:run:88 - Adım 2/5: Normalizasyon...
+2026-03-09 22:18:55.595 | INFO     | core.normalizer:normalize:73 - Normalizasyon: 47 mention → 47 benzersiz konu
+2026-03-09 22:18:55.595 | INFO     | __main__:run:90 -   47 mention → 47 benzersiz konu
+2026-03-09 22:18:55.595 | INFO     | __main__:run:93 - Adım 3/5: Kategorizasyon...
+2026-03-09 22:18:56.038 | ERROR    | core.categorizer:_categorize_batch:89 - Claude API hatası: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYt3dJ1T9jq2xBtcQX1jx'}
+2026-03-09 22:18:56.213 | ERROR    | core.categorizer:_categorize_batch:89 - Claude API hatası: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYt3dJo5Zcy18ERwWM1tm'}
+2026-03-09 22:18:56.214 | INFO     | core.categorizer:categorize:54 - 47 konu kategorize edildi
+2026-03-09 22:18:56.215 | INFO     | __main__:run:100 -   47 konu kategorize edildi
+2026-03-09 22:18:56.215 | INFO     | __main__:run:103 - Adım 4/5: Trend skorlama (CTS)...
+2026-03-09 22:18:56.217 | INFO     | core.scorer:score_topics:52 - Skorlama tamamlandı: 47 konu, burst: 0
+2026-03-09 22:18:56.217 | INFO     | __main__:run:105 -   47 skor hesaplandı, 0 burst
+2026-03-09 22:18:56.217 | INFO     | __main__:run:111 - Adım 5/5: Kayıt ve raporlama...
+2026-03-09 22:18:56.221 | ERROR    | __main__:run:121 -   ✗ DB kayıt hatası: ':' expected after dictionary key (database.py, line 156)
+2026-03-09 22:18:56.221 | INFO     | __main__:run:136 - 
+Pipeline tamamlandı — 14.1 saniye

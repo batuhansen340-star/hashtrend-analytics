@@ -20,6 +20,7 @@ from loguru import logger
 from collectors.google_trends import GoogleTrendsCollector
 from collectors.reddit import RedditCollector
 from collectors.hackernews import HackerNewsCollector
+from collectors.wikipedia import WikipediaCollector
 from core.normalizer import Normalizer
 from core.scorer import TrendScorer
 from core.categorizer import Categorizer
@@ -60,6 +61,7 @@ class Pipeline:
         collectors = [
             ("Google Trends", GoogleTrendsCollector),
             ("Hacker News", HackerNewsCollector),
+            ("Wikipedia", WikipediaCollector),
         ]
 
         # Reddit sadece credentials varsa çalış

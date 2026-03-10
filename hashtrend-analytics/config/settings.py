@@ -43,7 +43,7 @@ class Settings:
     BURST_THRESHOLD: float = 2.0
 
     # Aktif kaynak sayısı (CTS hesabında kullanılır)
-    TOTAL_SOURCES: int = 3  # MVP: google_trends, reddit, hackernews
+    TOTAL_SOURCES: int = 4  # MVP: google_trends, reddit, hackernews
 
     # Kategoriler
     CATEGORIES: list = [
