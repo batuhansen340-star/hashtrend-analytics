@@ -770,3 +770,7 @@ async def clear_cache():
         raise HTTPException(403, "Sadece development ortamında erişilebilir")
     cache.clear()
     return {"status": "cache temizlendi"}
+
+from api.signup import router as signup_router
+app.include_router(signup_router)
+
