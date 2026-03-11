@@ -1,19 +1,26 @@
-
 import time
 import requests
 from loguru import logger
 from collectors.base import BaseCollector
 from core.models import RawMention
 
+
 class RedditCollector(BaseCollector):
     SOURCE_NAME = "reddit"
     COLLECT_INTERVAL_MINUTES = 30
-    SUBREDDITS = ["technology","programming","artificial","MachineLearning","finance","cryptocurrency","science","worldnews","learnprogramming","SideProject","startups"]
+    SUBREDDITS = [
+        "technology", "programming", "artificial",
+        "MachineLearning", "finance", "cryptocurrency",
+        "science", "worldnews", "learnprogramming",
+        "SideProject", "startups",
+    ]
 
     def __init__(self):
         super().__init__()
         self.session = requests.Session()
-        self.session.headers.update({"User-Agent": "HashTrend/1.0 (trend analytics bot)"})
+        self.session.headers.update({
+            "User-Agent": "HashTrend/1.0 (trend analytics bot)"
+        })
 
     def collect(self):
         all_mentions = []
@@ -44,11 +51,24 @@ class RedditCollector(BaseCollector):
                 score = p.get("score", 0)
                 if not title or score < 5:
                     continue
-                mentions.append(RawMention(source=self.SOURCE_NAME, topic=title, mention_count=score, url=f"https://reddit.com{p.get("permalink", "")}", raw_data={"subreddit": subreddit, "score": score, "num_comments": p.get("num_comments", 0), "type": "reddit_hot"}))
+                permalink = p.get("permalink", "")
+                mentions.append(RawMention(
+                    source=self.SOURCE_NAME,
+                    topic=title,
+                    mention_count=score,
+                    url=f"https://reddit.com{permalink}",
+                    raw_data={
+                        "subreddit": subreddit,
+                        "score": score,
+                        "num_comments": p.get("num_comments", 0),
+                        "type": "reddit_hot",
+                    },
+                ))
             logger.debug(f"[reddit] r/{subreddit}: {len(mentions)} post")
         except Exception as e:
             logger.warning(f"[reddit] r/{subreddit} fetch hatasi: {e}")
         return mentions
+
 
 if __name__ == "__main__":
     collector = RedditCollector()
