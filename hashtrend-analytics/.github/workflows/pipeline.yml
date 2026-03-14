@@ -1,58 +1,36 @@
-# HashTrend Analytics — Saatlik Veri Toplama Pipeline
-#
-# Bu workflow her saat başı çalışır:
-# 1. Collector'ları çalıştırır (Google Trends, Reddit, HN)
-# 2. Verileri normalize + skorlar
-# 3. Supabase'e kaydeder
-# 4. Telegram'a rapor gönderir (sadece sabah 07:00 ve akşam 20:00)
-
 name: HashTrend Pipeline
-
 on:
   schedule:
-    # Her saat başı çalış (UTC)
-    - cron: '0 * * * *'
-  workflow_dispatch:  # Manuel tetikleme
-
-env:
-  SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-  SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
-  ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-  TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-  TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-  REDDIT_CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}
-  REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
-  REDDIT_USER_AGENT: "HashTrend/1.0"
-  LOG_LEVEL: "INFO"
-  ENVIRONMENT: "production"
+    - cron: '0 */2 * * *'
+  workflow_dispatch:
 
 jobs:
-  collect-and-score:
+  run-pipeline:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
-
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Python
-        uses: actions/setup-python@v5
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
-          cache: 'pip'
-
+          python-version: '3.11'
       - name: Install dependencies
-        run: pip install -r requirements.txt
-
+        run: pip install -r hashtrend-analytics/requirements.txt
       - name: Run pipeline
+        working-directory: hashtrend-analytics
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+          ENVIRONMENT: production
+        run: python pipeline.py --no-telegram
+      - name: Refresh materialized view
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
         run: |
-          python pipeline.py --json > report.json 2>&1 || true
-          cat report.json
-
-      - name: Upload report artifact
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: trend-report-${{ github.run_number }}
-          path: report.json
-          retention-days: 7
+          pip install supabase
+          python3 -c "
+          from supabase import create_client
+          import os
+          db = create_client(os.environ['SUPABASE_URL'], os.environ['SUPABASE_KEY'])
+          db.rpc('refresh_latest_scores', {}).execute()
+          print('Materialized view refreshed')
+          "
