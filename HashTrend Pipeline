@@ -1,0 +1,36 @@
+name: HashTrend Pipeline
+on:
+  schedule:
+    - cron: '0 */2 * * *'
+  workflow_dispatch:
+
+jobs:
+  run-pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: pip install -r hashtrend-analytics/requirements.txt
+      - name: Run pipeline
+        working-directory: hashtrend-analytics
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+          ENVIRONMENT: production
+        run: python pipeline.py --no-telegram
+      - name: Refresh materialized view
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+        run: |
+          pip install supabase
+          python3 -c "
+          from supabase import create_client
+          import os
+          db = create_client(os.environ['SUPABASE_URL'], os.environ['SUPABASE_KEY'])
+          db.rpc('refresh_latest_scores', {}).execute()
+          print('Materialized view refreshed')
+          "
