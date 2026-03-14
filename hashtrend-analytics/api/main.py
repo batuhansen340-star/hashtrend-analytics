@@ -361,6 +361,7 @@ ALLOWED_ORIGINS = [
     "https://hashtrend.io",
     "https://www.hashtrend.io",
     "https://dashboard.hashtrend.io",
+    "https://eclectic-churros-ab7a49.netlify.app",
 ]
 if settings.ENVIRONMENT == "development":
     ALLOWED_ORIGINS.append("http://localhost:3000")
@@ -370,7 +371,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=ALLOWED_ORIGINS,
     allow_credentials=True,
-    allow_methods=["GET"],  # API sadece okuma — POST/PUT/DELETE yok
+    allow_methods=["GET", "POST", "OPTIONS"],  # API sadece okuma — POST/PUT/DELETE yok
     allow_headers=["X-API-Key", "Content-Type"],
 )
 
