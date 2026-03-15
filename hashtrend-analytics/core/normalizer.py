@@ -194,6 +194,7 @@ class Normalizer:
             first_seen=min(timestamps),
             last_seen=max(timestamps),
             total_mentions=total,
+            country=best[0].country,
             sources=sources,
         )
 
