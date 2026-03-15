@@ -99,19 +99,10 @@ class Pipeline:
             ("Twitch", TwitchCollector),
             ("IMDb", IMDbCollector),
             ("Fediverse", FediverseCollector),
-            ("Spotify", SpotifyCollector),
             ("Search Trends", SearchTrendsCollector),
             ("Commerce", CommerceCollector),
-            ("App Trends", AppTrendsCollector),
-            ("TikTok", TikTokCollector),
-            ("Instagram", InstagramCollector),
-            ("LinkedIn", LinkedInCollector),
-            ("Pinterest", PinterestCollector),
-            ("Quora", QuoraCollector),
             ("Yahoo Finance", YahooFinanceCollector),
             ("Global News", GlobalNewsCollector),
-            ("Regional Search", RegionalSearchCollector),
-            ("Telegram", TelegramCollector),
         ]
 
         # Reddit sadece credentials varsa çalış
