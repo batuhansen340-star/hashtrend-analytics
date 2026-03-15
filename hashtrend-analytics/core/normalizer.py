@@ -194,7 +194,7 @@ class Normalizer:
             first_seen=min(timestamps),
             last_seen=max(timestamps),
             total_mentions=total,
-            country=best[0].country,
+            country=next((m.country for m, _ in group if m.country and m.country != 'GLOBAL' and m.country is not None), best[0].country),
             sources=sources,
         )
 
