@@ -4,297 +4,301 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>HashTrend — Global Trend Intelligence</title>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{
---bg:#09090b;--bg2:#18181b;--bg3:#27272a;--border:#3f3f46;
---text:#fafafa;--dim:#a1a1aa;--dim2:#71717a;
---cyan:#22d3ee;--cyan-bg:rgba(34,211,238,0.08);--cyan-border:rgba(34,211,238,0.2);
---purple:#a78bfa;--orange:#fb923c;--green:#4ade80;--red:#f87171;--pink:#f472b6;--yellow:#facc15;
---mono:'JetBrains Mono',monospace;--sans:'DM Sans',sans-serif;
-}
-body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.5;overflow-x:hidden}
+:root{--bg:#06060a;--bg2:#0f1017;--bg3:#181920;--bg4:#1f2029;--border:rgba(255,255,255,0.06);--border2:rgba(255,255,255,0.1);--text:#ebebf0;--dim:#8b8d9e;--dim2:#5c5e6e;--cyan:#06d6e0;--cyan2:#08f0fb;--cyan-bg:rgba(6,214,224,0.06);--cyan-border:rgba(6,214,224,0.15);--purple:#9580ff;--orange:#ff9e44;--green:#3ddc84;--red:#ff5f5f;--pink:#ff79c6;--yellow:#f1fa8c;--blue:#6272ff;--mono:'JetBrains Mono',monospace;--sans:'Instrument Sans',system-ui,sans-serif;--radius:10px}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.5;-webkit-font-smoothing:antialiased}
 a{color:var(--cyan);text-decoration:none}
-.container{max-width:1200px;margin:0 auto;padding:0 20px}
-
-nav{padding:16px 0;border-bottom:1px solid var(--border);position:sticky;top:0;background:rgba(9,9,11,0.92);backdrop-filter:blur(16px);z-index:100}
+.container{max-width:1320px;margin:0 auto;padding:0 24px}
+nav{padding:14px 0;border-bottom:1px solid var(--border);position:sticky;top:0;background:rgba(6,6,10,0.88);backdrop-filter:blur(20px);z-index:100}
 nav .container{display:flex;justify-content:space-between;align-items:center}
-.logo{font-size:1.3rem;font-weight:800;letter-spacing:-0.5px}
+.logo{font-size:1.25rem;font-weight:700;letter-spacing:-0.3px;display:flex;align-items:center;gap:8px}
+.logo-icon{width:28px;height:28px;background:linear-gradient(135deg,var(--cyan),var(--purple));border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#000}
 .logo span{color:var(--cyan)}
-.nav-links{display:flex;align-items:center;gap:28px}
-.nav-links a{color:var(--dim);font-size:0.88rem;transition:color .2s}
-.nav-links a:hover{color:var(--text)}
-.nav-cta{background:var(--cyan);color:var(--bg);padding:8px 18px;border-radius:8px;font-weight:600;font-size:0.85rem}
-.nav-cta:hover{opacity:.9;color:var(--bg)}
-
-.hero{padding:60px 0 40px;text-align:center}
-.hero-badge{display:inline-flex;align-items:center;gap:6px;background:var(--cyan-bg);border:1px solid var(--cyan-border);color:var(--cyan);padding:6px 14px;border-radius:20px;font-size:0.78rem;font-weight:500;margin-bottom:20px}
-.hero-badge .dot{width:6px;height:6px;background:var(--green);border-radius:50%;animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-h1{font-size:clamp(2rem,5vw,3.4rem);font-weight:800;line-height:1.1;letter-spacing:-1.5px;margin-bottom:14px}
-h1 em{font-style:normal;color:var(--cyan)}
-.hero p{font-size:1.05rem;color:var(--dim);max-width:560px;margin:0 auto 28px}
-
-.stats{display:flex;justify-content:center;gap:32px;margin-bottom:40px;flex-wrap:wrap}
-.stat{text-align:center}
-.stat-num{font-size:1.8rem;font-weight:700;font-family:var(--mono)}
-.stat-label{font-size:0.75rem;color:var(--dim2);text-transform:uppercase;letter-spacing:1px}
-
-.controls{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px;align-items:center}
-.search-box{flex:1;min-width:200px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:10px 14px;color:var(--text);font-size:0.9rem;font-family:var(--sans);outline:none;transition:border-color .2s}
-.search-box:focus{border-color:var(--cyan)}
-.filter-btn{background:var(--bg2);border:1px solid var(--border);color:var(--dim);padding:8px 14px;border-radius:8px;font-size:0.82rem;cursor:pointer;transition:all .2s;font-family:var(--sans)}
-.filter-btn:hover{border-color:var(--dim2);color:var(--text)}
-.filter-btn.active{background:var(--cyan-bg);border-color:var(--cyan-border);color:var(--cyan)}
-.burst-toggle{background:var(--bg2);border:1px solid var(--border);color:var(--orange);padding:8px 14px;border-radius:8px;font-size:0.82rem;cursor:pointer;font-family:var(--sans);transition:all .2s}
-.burst-toggle.active{background:rgba(251,146,60,0.1);border-color:rgba(251,146,60,0.3)}
-
-.trend-table{width:100%;border-collapse:separate;border-spacing:0}
-.trend-table th{text-align:left;padding:10px 14px;font-size:0.72rem;color:var(--dim2);text-transform:uppercase;letter-spacing:1px;border-bottom:1px solid var(--border);font-weight:500}
-.trend-table td{padding:12px 14px;border-bottom:1px solid rgba(63,63,70,0.4);font-size:0.9rem;vertical-align:middle}
-.trend-table tr:hover td{background:var(--bg2)}
-.trend-table tr.burst-row td{background:rgba(251,146,60,0.04)}
-.trend-table tr.burst-row:hover td{background:rgba(251,146,60,0.08)}
-.rank{font-family:var(--mono);font-size:0.82rem;color:var(--dim2);width:40px}
-.topic-name{font-weight:500;max-width:400px}
-.topic-name .burst-tag{display:inline-block;background:rgba(251,146,60,0.12);color:var(--orange);font-size:0.65rem;padding:2px 7px;border-radius:4px;margin-left:6px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px}
-.cts{font-family:var(--mono);font-weight:600;font-size:0.95rem}
-.cts-high{color:var(--cyan)}
-.cts-mid{color:var(--green)}
-.cts-low{color:var(--dim)}
-.category-tag{display:inline-block;padding:3px 10px;border-radius:6px;font-size:0.72rem;font-weight:500}
-.cat-Technology{background:rgba(34,211,238,0.1);color:var(--cyan)}
-.cat-Finance{background:rgba(74,222,128,0.1);color:var(--green)}
-.cat-Politics{background:rgba(248,113,113,0.1);color:var(--red)}
-.cat-Science{background:rgba(167,139,250,0.1);color:var(--purple)}
-.cat-Entertainment{background:rgba(244,114,182,0.1);color:var(--pink)}
-.cat-Sports{background:rgba(250,204,21,0.1);color:var(--yellow)}
-.cat-Health{background:rgba(74,222,128,0.1);color:var(--green)}
-.cat-Education{background:rgba(167,139,250,0.1);color:var(--purple)}
-.cat-Other{background:rgba(161,161,170,0.1);color:var(--dim)}
-.sources-pills{display:flex;gap:4px;flex-wrap:wrap}
-.src-pill{font-size:0.68rem;padding:2px 7px;border-radius:4px;font-family:var(--mono);font-weight:500}
-.src-hackernews{background:rgba(251,146,60,0.1);color:var(--orange)}
-.src-reddit{background:rgba(248,113,113,0.1);color:var(--red)}
-.src-wikipedia{background:rgba(167,139,250,0.1);color:var(--purple)}
-.src-google_trends{background:rgba(34,211,238,0.1);color:var(--cyan)}
-
-.loading{text-align:center;padding:60px 20px;color:var(--dim)}
-.loading .spinner{width:32px;height:32px;border:3px solid var(--border);border-top-color:var(--cyan);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 16px}
+.nav-r{display:flex;align-items:center;gap:24px}
+.nav-r a{color:var(--dim);font-size:0.85rem;font-weight:500;transition:color .2s}
+.nav-r a:hover{color:var(--text)}
+.nav-cta{background:var(--cyan);color:#000;padding:7px 16px;border-radius:7px;font-weight:600;font-size:0.82rem}
+.nav-cta:hover{opacity:.9;color:#000}
+.ub{padding:8px 0;border-bottom:1px solid var(--border);background:var(--bg2)}
+.ub .container{display:flex;justify-content:space-between;align-items:center;font-size:0.75rem;color:var(--dim2)}
+.ub .live{display:flex;align-items:center;gap:6px;color:var(--green)}
+.ub .live .dot{width:6px;height:6px;background:var(--green);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.2}}
+.hero{padding:40px 0 24px;text-align:center}
+h1{font-size:clamp(1.8rem,4.5vw,2.8rem);font-weight:700;line-height:1.1;letter-spacing:-1.2px;margin-bottom:10px}
+h1 em{font-style:normal;background:linear-gradient(135deg,var(--cyan),var(--cyan2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{font-size:0.92rem;color:var(--dim);max-width:520px;margin:0 auto}
+.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:24px 0}
+.sc{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:14px;text-align:center}
+.sv{font-size:1.5rem;font-weight:700;font-family:var(--mono);letter-spacing:-1px}
+.sv.c1{color:var(--cyan)}.sv.c2{color:var(--green)}.sv.c3{color:var(--orange)}.sv.c4{color:var(--purple)}
+.sl{font-size:0.64rem;color:var(--dim2);text-transform:uppercase;letter-spacing:1.5px;margin-top:2px}
+.fb{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:12px 14px;margin-bottom:14px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.sw{flex:1;min-width:180px;position:relative}
+.sw input{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:9px 12px 9px 32px;color:var(--text);font-size:0.84rem;font-family:var(--sans);outline:none;transition:border-color .2s}
+.sw input:focus{border-color:var(--cyan)}
+.sw svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);opacity:.35}
+.dd{position:relative}
+.dd-btn{display:flex;align-items:center;gap:5px;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:8px 11px;color:var(--dim);font-size:0.8rem;cursor:pointer;font-family:var(--sans);font-weight:500;transition:all .15s;white-space:nowrap;user-select:none}
+.dd-btn:hover{border-color:var(--border2);color:var(--text)}
+.dd-btn.hv{color:var(--cyan);border-color:var(--cyan-border)}
+.dd-btn svg{opacity:.5;transition:transform .2s}
+.dd.open .dd-btn svg{transform:rotate(180deg)}
+.dd-label{font-size:0.6rem;color:var(--dim2);text-transform:uppercase;letter-spacing:1px;position:absolute;top:-7px;left:9px;background:var(--bg2);padding:0 3px;line-height:1}
+.dd-menu{position:absolute;top:calc(100% + 4px);left:0;min-width:200px;max-height:360px;overflow-y:auto;background:var(--bg3);border:1px solid var(--border2);border-radius:8px;z-index:50;display:none;box-shadow:0 8px 32px rgba(0,0,0,0.5)}
+.dd.open .dd-menu{display:block}
+.dd-menu::-webkit-scrollbar{width:4px}
+.dd-menu::-webkit-scrollbar-thumb{background:var(--border2);border-radius:4px}
+.di{padding:8px 12px;font-size:0.8rem;cursor:pointer;transition:background .1s;display:flex;align-items:center;gap:7px;color:var(--dim)}
+.di:hover{background:var(--bg4);color:var(--text)}
+.di.act{color:var(--cyan)}
+.di .fl{font-size:0.95rem}.di .dl{flex:1}.di .dc{font-family:var(--mono);font-size:0.68rem;color:var(--dim2)}
+.di .ck{width:14px;height:14px;border:1.5px solid var(--border2);border-radius:3px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s}
+.di.act .ck{background:var(--cyan);border-color:var(--cyan)}
+.di.act .ck::after{content:'';width:5px;height:8px;border:solid #000;border-width:0 2px 2px 0;transform:rotate(45deg) translate(-1px,-1px)}
+.dd-actions{display:flex;gap:6px;padding:8px 12px;border-top:1px solid var(--border)}
+.dd-act-btn{font-size:0.72rem;color:var(--cyan);cursor:pointer;font-family:var(--sans);background:none;border:none;padding:2px 0}
+.dd-act-btn:hover{text-decoration:underline}
+.cg{display:flex;gap:3px;flex-wrap:wrap}
+.ch{background:var(--bg);border:1px solid var(--border);color:var(--dim);padding:6px 11px;border-radius:7px;font-size:0.76rem;cursor:pointer;font-family:var(--sans);font-weight:500;transition:all .15s;white-space:nowrap}
+.ch:hover{border-color:var(--border2);color:var(--text)}
+.ch.act{color:var(--cyan);background:var(--cyan-bg);border-color:var(--cyan-border)}
+.bch{color:var(--orange);border-color:rgba(255,158,68,0.15)}
+.bch.act{background:rgba(255,158,68,0.08);border-color:rgba(255,158,68,0.25);color:var(--orange)}
+.bch .bc{background:rgba(255,158,68,0.15);padding:1px 5px;border-radius:3px;font-size:0.68rem;font-family:var(--mono);margin-left:3px}
+.af{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px}
+.at{display:flex;align-items:center;gap:4px;background:var(--cyan-bg);border:1px solid var(--cyan-border);color:var(--cyan);padding:3px 9px;border-radius:5px;font-size:0.7rem;font-weight:500}
+.at .x{cursor:pointer;opacity:.6;font-size:0.8rem}.at .x:hover{opacity:1}
+.tw{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;background:var(--bg2)}
+table{width:100%;border-collapse:collapse}
+th{text-align:left;padding:9px 14px;font-size:0.64rem;color:var(--dim2);text-transform:uppercase;letter-spacing:1px;font-weight:500;background:var(--bg3);border-bottom:1px solid var(--border)}
+td{padding:12px 14px;border-bottom:1px solid var(--border);font-size:0.85rem;vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:rgba(255,255,255,0.015)}
+tr.br td{background:rgba(255,158,68,0.025)}
+tr.br:hover td{background:rgba(255,158,68,0.05)}
+tr.ex{cursor:pointer}
+.rk{font-family:var(--mono);font-size:0.76rem;color:var(--dim2);width:34px}
+.tc{max-width:440px}
+.tn{font-weight:600;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.tm{display:flex;align-items:center;gap:9px;margin-top:3px;font-size:0.72rem;color:var(--dim2)}
+.bg{display:inline-flex;align-items:center;gap:2px;padding:2px 6px;border-radius:4px;font-size:0.58rem;font-weight:600;text-transform:uppercase;letter-spacing:0.3px}
+.bg-b{background:rgba(255,158,68,0.12);color:var(--orange)}
+.bg-c{background:rgba(6,214,224,0.1);color:var(--cyan)}
+.cts{font-family:var(--mono);font-weight:600;font-size:0.88rem}
+.ch1{color:var(--cyan)}.ch2{color:var(--green)}.ch3{color:var(--dim)}
+.ct{display:inline-block;padding:3px 9px;border-radius:5px;font-size:0.68rem;font-weight:500}
+.ct-Technology{background:rgba(6,214,224,0.08);color:var(--cyan)}.ct-Finance{background:rgba(61,220,132,0.08);color:var(--green)}.ct-Politics{background:rgba(255,95,95,0.08);color:var(--red)}.ct-Science{background:rgba(149,128,255,0.08);color:var(--purple)}.ct-Entertainment{background:rgba(255,121,198,0.08);color:var(--pink)}.ct-Sports{background:rgba(241,250,140,0.08);color:var(--yellow)}.ct-Health{background:rgba(61,220,132,0.08);color:var(--green)}.ct-Education{background:rgba(98,114,255,0.08);color:var(--blue)}.ct-Other{background:rgba(139,141,158,0.08);color:var(--dim)}
+.sp{display:flex;gap:3px;flex-wrap:wrap}
+.sr{font-size:0.63rem;padding:2px 6px;border-radius:4px;font-family:var(--mono);font-weight:500}
+.sr-hackernews{background:rgba(255,158,68,0.1);color:var(--orange)}.sr-reddit{background:rgba(255,95,95,0.1);color:var(--red)}.sr-wikipedia{background:rgba(149,128,255,0.1);color:var(--purple)}.sr-google_trends{background:rgba(6,214,224,0.1);color:var(--cyan)}
+.dr td{padding:0;background:var(--bg3)}
+.dc2{padding:14px 14px 14px 48px;display:grid;grid-template-columns:repeat(auto-fit,minmax(115px,1fr));gap:7px}
+.dti{background:var(--bg2);border-radius:7px;padding:10px;text-align:center}
+.dti .dtl{font-size:0.62rem;color:var(--dim2);text-transform:uppercase;letter-spacing:1px;margin-bottom:3px}
+.dti .dtv{font-family:var(--mono);font-size:0.88rem;font-weight:600}
+.ld{text-align:center;padding:60px 20px;color:var(--dim)}
+.ld .sp2{width:26px;height:26px;border:2.5px solid var(--border2);border-top-color:var(--cyan);border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 12px}
 @keyframes spin{to{transform:rotate(360deg)}}
-
-.pagination{display:flex;justify-content:center;gap:8px;margin:28px 0}
-.page-btn{background:var(--bg2);border:1px solid var(--border);color:var(--dim);padding:8px 14px;border-radius:8px;font-size:0.82rem;cursor:pointer;font-family:var(--sans)}
-.page-btn:hover{border-color:var(--dim2);color:var(--text)}
-.page-btn.active{background:var(--cyan-bg);border-color:var(--cyan-border);color:var(--cyan)}
-
-.signup-section{padding:60px 0;text-align:center;border-top:1px solid var(--border);margin-top:40px}
-.signup-section h2{font-size:2rem;font-weight:700;letter-spacing:-0.5px;margin-bottom:10px}
-.signup-section p{color:var(--dim);margin-bottom:24px}
-.signup-form{display:flex;gap:10px;max-width:440px;margin:0 auto}
-.signup-form input{flex:1;background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:12px 16px;color:var(--text);font-size:0.9rem;font-family:var(--sans);outline:none}
-.signup-form input:focus{border-color:var(--cyan)}
-.signup-form button{background:var(--cyan);color:var(--bg);border:none;padding:12px 24px;border-radius:10px;font-weight:700;font-size:0.9rem;cursor:pointer;font-family:var(--sans);white-space:nowrap}
-.signup-form button:hover{opacity:.9}
-.signup-result{margin-top:16px;padding:14px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;max-width:440px;margin-left:auto;margin-right:auto;display:none}
-.signup-result.show{display:block}
-.signup-result .key{font-family:var(--mono);color:var(--cyan);font-size:0.85rem;word-break:break-all}
-
-.how-section{padding:60px 0;border-top:1px solid var(--border)}
-.how-section h2{text-align:center;font-size:1.6rem;font-weight:700;margin-bottom:32px;letter-spacing:-0.5px}
-.how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.how-card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:24px}
-.how-step{font-family:var(--mono);color:var(--cyan);font-size:0.75rem;margin-bottom:8px}
-.how-card h3{font-size:1rem;font-weight:600;margin-bottom:6px}
-.how-card p{font-size:0.85rem;color:var(--dim);line-height:1.6}
-.how-card code{background:var(--bg);padding:8px 12px;border-radius:8px;display:block;margin-top:10px;font-size:0.75rem;color:var(--cyan);font-family:var(--mono);overflow-x:auto;border:1px solid var(--border)}
-
-footer{padding:28px 0;border-top:1px solid var(--border);text-align:center;color:var(--dim2);font-size:0.78rem}
-
-@media(max-width:768px){
-  .nav-links a:not(.nav-cta){display:none}
-  .trend-table th:nth-child(5),.trend-table td:nth-child(5){display:none}
-  .topic-name{max-width:200px}
-  .stats{gap:20px}
-  .how-grid{grid-template-columns:1fr}
-}
-@media(max-width:480px){
-  .trend-table th:nth-child(4),.trend-table td:nth-child(4){display:none}
-}
+.pg{display:flex;justify-content:center;align-items:center;gap:5px;margin:20px 0}
+.pb{background:var(--bg2);border:1px solid var(--border);color:var(--dim);padding:6px 11px;border-radius:6px;font-size:0.78rem;cursor:pointer;font-family:var(--sans)}
+.pb:hover{border-color:var(--border2);color:var(--text)}
+.pb.act{background:var(--cyan-bg);border-color:var(--cyan-border);color:var(--cyan)}
+.pi{font-size:0.73rem;color:var(--dim2);margin:0 6px}
+.hw{padding:48px 0;border-top:1px solid var(--border)}
+.hw h2{text-align:center;font-size:1.4rem;font-weight:700;letter-spacing:-0.5px;margin-bottom:6px}
+.hw .sub{text-align:center;color:var(--dim);font-size:0.88rem;margin-bottom:28px}
+.hg{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.hc{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:22px;transition:border-color .2s}
+.hc:hover{border-color:var(--border2)}
+.hs{font-family:var(--mono);color:var(--cyan);font-size:0.7rem;font-weight:600;margin-bottom:8px}
+.hc h3{font-size:0.92rem;font-weight:600;margin-bottom:5px}
+.hc p{font-size:0.8rem;color:var(--dim);line-height:1.6}
+.hc code{background:var(--bg);padding:9px 12px;border-radius:7px;display:block;margin-top:10px;font-size:0.7rem;color:var(--cyan);font-family:var(--mono);border:1px solid var(--border);line-height:1.6;overflow-x:auto}
+.su{padding:48px 0;text-align:center;border-top:1px solid var(--border)}
+.su h2{font-size:1.7rem;font-weight:700;letter-spacing:-0.5px;margin-bottom:6px}
+.su>p{color:var(--dim);margin-bottom:20px;font-size:0.9rem}
+.sf{display:flex;gap:8px;max-width:400px;margin:0 auto}
+.sf input{flex:1;background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:11px 14px;color:var(--text);font-size:0.86rem;font-family:var(--sans);outline:none}
+.sf input:focus{border-color:var(--cyan)}
+.sf button{background:var(--cyan);color:#000;border:none;padding:11px 20px;border-radius:8px;font-weight:700;font-size:0.86rem;cursor:pointer;font-family:var(--sans);white-space:nowrap}
+.sres{margin-top:14px;padding:14px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);max-width:400px;margin-left:auto;margin-right:auto;display:none;text-align:left}
+.sres.show{display:block}
+.sres .key{font-family:var(--mono);color:var(--cyan);font-size:0.83rem;word-break:break-all;background:var(--bg);padding:7px 10px;border-radius:6px;border:1px solid var(--border);margin-top:5px}
+footer{padding:20px 0;border-top:1px solid var(--border);text-align:center;color:var(--dim2);font-size:0.73rem}
+@media(max-width:900px){.stats{grid-template-columns:repeat(3,1fr)}.hg{grid-template-columns:1fr}}
+@media(max-width:640px){.stats{grid-template-columns:repeat(2,1fr)}.nav-r a:not(.nav-cta){display:none}th:nth-child(5),td:nth-child(5){display:none}.tc{max-width:180px}.dc2{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
 <body>
-
-<nav>
-<div class="container">
-  <div class="logo">Hash<span>Trend</span></div>
-  <div class="nav-links">
-    <a href="#dashboard">Dashboard</a>
-    <a href="#how">How it works</a>
-    <a href="https://hashtrend-analytics-production.up.railway.app/docs" target="_blank">API Docs</a>
-    <a href="#signup" class="nav-cta">Get Free Key</a>
-  </div>
+<nav><div class="container"><div class="logo"><div class="logo-icon">H</div>Hash<span>Trend</span></div><div class="nav-r"><a href="#dashboard">Dashboard</a><a href="#how">How it works</a><a href="https://hashtrend-analytics-production.up.railway.app/docs" target="_blank">API Docs</a><a href="#signup" class="nav-cta">Get Free Key</a></div></div></nav>
+<div class="ub"><div class="container"><div class="live"><span class="dot"></span> Live — 19 sources, 20 countries</div><div id="lu">Last updated: loading...</div></div></div>
+<section class="hero"><div class="container"><h1>What the internet is<br>talking about <em>right now</em></h1><p>Cross-platform trend intelligence from Google Trends, Reddit, Hacker News & Wikipedia — 20 countries, unified CTS score.</p></div></section>
+<section id="dashboard"><div class="container">
+<div class="stats"><div class="sc"><div class="sv c1" id="st">—</div><div class="sl">Topics</div></div><div class="sc"><div class="sv c2" id="sm">—</div><div class="sl">Total mentions</div></div><div class="sc"><div class="sv c3" id="sb">—</div><div class="sl">Bursts</div></div><div class="sc"><div class="sv c4" id="sx">—</div><div class="sl">Cross-platform</div></div><div class="sc"><div class="sv" id="ss">20</div><div class="sl">Countries</div></div></div>
+<div class="fb">
+<div class="sw"><svg width="15" height="15" fill="currentColor" viewBox="0 0 16 16"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85zm-5.242.656a5 5 0 1 1 0-10 5 5 0 0 1 0 10z"/></svg><input id="search" type="text" placeholder="Search by topic, keyword, or hashtag..."></div>
+<div class="dd" id="ddc"><div class="dd-label">Countries</div><div class="dd-btn" onclick="tdd('ddc')"><span id="ddc-t">All countries</span><svg width="11" height="11" fill="currentColor" viewBox="0 0 16 16"><path d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg></div>
+<div class="dd-menu" id="ddc-m"></div></div>
+<div class="dd" id="ddt"><div class="dd-label">Sort</div><div class="dd-btn" onclick="tdd('ddt')"><span id="ddt-t">Top CTS Score</span><svg width="11" height="11" fill="currentColor" viewBox="0 0 16 16"><path d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg></div>
+<div class="dd-menu"><div class="di act" onclick="sSort('cts','Top CTS Score')">Top CTS Score</div><div class="di" onclick="sSort('mentions','Most Mentions')">Most Mentions</div><div class="di" onclick="sSort('burst','Bursts First')">Bursts First</div><div class="di" onclick="sSort('alpha','A-Z')">A-Z</div></div></div>
+<div class="cg" id="cats"></div>
+<div class="ch bch" id="bch" onclick="tBurst()">Bursts<span class="bc" id="bcn">0</span></div>
 </div>
-</nav>
-
-<section class="hero">
-<div class="container">
-  <div class="hero-badge"><span class="dot"></span> Live — 4 sources, updated hourly</div>
-  <h1>What the internet is<br>talking about <em>right now</em></h1>
-  <p>Cross-platform trend intelligence from Google Trends, Reddit, Hacker News & Wikipedia — unified with a single CTS score.</p>
-  <div class="stats">
-    <div class="stat"><div class="stat-num" id="total-topics">—</div><div class="stat-label">Topics tracked</div></div>
-    <div class="stat"><div class="stat-num">4</div><div class="stat-label">Live sources</div></div>
-    <div class="stat"><div class="stat-num" id="total-bursts">—</div><div class="stat-label">Bursts detected</div></div>
-    <div class="stat"><div class="stat-num">4</div><div class="stat-label">Countries</div></div>
-  </div>
-</div>
-</section>
-
-<section id="dashboard">
-<div class="container">
-  <div class="controls">
-    <input class="search-box" id="search" type="text" placeholder="Search trends...">
-    <button class="filter-btn active" data-cat="all">All</button>
-    <button class="filter-btn" data-cat="Technology">Tech</button>
-    <button class="filter-btn" data-cat="Finance">Finance</button>
-    <button class="filter-btn" data-cat="Politics">Politics</button>
-    <button class="filter-btn" data-cat="Science">Science</button>
-    <button class="filter-btn" data-cat="Sports">Sports</button>
-    <button class="filter-btn" data-cat="Entertainment">Fun</button>
-    <button class="filter-btn" data-cat="Other">Other</button>
-    <button class="burst-toggle" id="burstToggle">Bursts only</button>
-  </div>
-  <div id="table-container"><div class="loading"><div class="spinner"></div>Fetching live trends...</div></div>
-  <div class="pagination" id="pagination"></div>
-</div>
-</section>
-
-<section class="how-section" id="how">
-<div class="container">
-  <h2>Start in 30 seconds</h2>
-  <div class="how-grid">
-    <div class="how-card">
-      <div class="how-step">Step 1</div>
-      <h3>Get your API key</h3>
-      <p>Sign up with your email below. Instant key, no credit card.</p>
-      <code>POST /api/v1/signup<br>{"email": "you@company.com"}</code>
-    </div>
-    <div class="how-card">
-      <div class="how-step">Step 2</div>
-      <h3>Fetch trends</h3>
-      <p>One endpoint, all sources combined. Filter by category, country, or score.</p>
-      <code>curl hashtrend.io/api/v1/trends \<br>  -H "X-API-Key: ht_live_xxx"</code>
-    </div>
-    <div class="how-card">
-      <div class="how-step">Step 3</div>
-      <h3>Build with it</h3>
-      <p>Integrate into your app, dashboard, newsletter, or automation pipeline.</p>
-      <code>{"topicName": "...",<br> "ctsScore": 54.2,<br> "sources": {"reddit":16k}}</code>
-    </div>
-  </div>
-</div>
-</section>
-
-<section class="signup-section" id="signup">
-<div class="container">
-  <h2>Get your free API key</h2>
-  <p>100 requests/day. No credit card. Upgrade anytime.</p>
-  <div class="signup-form">
-    <input type="email" id="signup-email" placeholder="your@email.com">
-    <button id="signup-btn" onclick="doSignup()">Get Key</button>
-  </div>
-  <div class="signup-result" id="signup-result">
-    <div style="font-size:0.82rem;color:var(--dim);margin-bottom:6px">Your API key:</div>
-    <div class="key" id="signup-key"></div>
-    <div style="font-size:0.78rem;color:var(--dim);margin-top:8px">Header: <code style="color:var(--cyan)">X-API-Key: your_key</code></div>
-  </div>
-</div>
-</section>
-
-<footer><div class="container"><p>HashTrend Analytics &middot; Built by Batuhan Sen &middot; <a href="https://hashtrend-analytics-production.up.railway.app/docs">API Docs</a></p></div></footer>
-
+<div class="af" id="aftag"></div>
+<div class="tw"><div id="tc"><div class="ld"><div class="sp2"></div>Fetching live trends from 20 countries...</div></div></div>
+<div class="pg" id="pg"></div>
+</div></section>
+<section class="hw" id="how"><div class="container"><h2>Start in 30 seconds</h2><p class="sub">One API, 20 countries, all platforms combined.</p><div class="hg"><div class="hc"><div class="hs">01 — Sign up</div><h3>Get your API key</h3><p>Enter your email below. Instant key, no credit card.</p><code>POST /api/v1/signup<br>{"email": "you@company.com"}</code></div><div class="hc"><div class="hs">02 — Fetch</div><h3>Query trends</h3><p>One endpoint, all sources. Filter by category, country, score.</p><code>GET /api/v1/trends?country=TR<br>&nbsp;&nbsp;-H "X-API-Key: ht_live_xxx"</code></div><div class="hc"><div class="hs">03 — Build</div><h3>Integrate anywhere</h3><p>Power your newsletter, dashboard, automation, or AI agent.</p><code>{"topicName": "Vite 8.0",<br>&nbsp;"ctsScore": 58.3,<br>&nbsp;"isBurst": true,<br>&nbsp;"sources": {"reddit":546}}</code></div></div></div></section>
+<section class="su" id="signup"><div class="container"><h2>Get your free API key</h2><p>100 requests/day. No credit card. Upgrade anytime.</p><div class="sf"><input type="email" id="se" placeholder="your@email.com"><button onclick="doSignup()">Get Key</button></div><div class="sres" id="sres"><div style="font-size:0.75rem;color:var(--dim);margin-bottom:3px">Your API key (save it!):</div><div class="key" id="sk"></div><div style="font-size:0.72rem;color:var(--dim);margin-top:6px">Header: <code style="color:var(--cyan);background:var(--bg);padding:2px 5px;border-radius:3px;font-size:0.7rem">X-API-Key: your_key</code></div></div></div></section>
+<footer><div class="container">HashTrend Analytics &middot; Built by Batuhan Sen &middot; <a href="https://hashtrend-analytics-production.up.railway.app/docs">API Docs</a></div></footer>
 <script>
-const API='https://hashtrend-analytics-production.up.railway.app';
-const KEY='ht_live_81b0a73385734642970237f6';
-let allData=[],filtered=[],currentCat='all',burstOnly=false,searchTerm='',page=1;
-const perPage=25;
+const API='https://hashtrend-analytics-production.up.railway.app',KEY='ht_live_81b0a73385734642970237f6';
+const CO=[
+{c:'US',n:'United States',f:'\u{1F1FA}\u{1F1F8}'},
+{c:'GB',n:'United Kingdom',f:'\u{1F1EC}\u{1F1E7}'},
+{c:'DE',n:'Germany',f:'\u{1F1E9}\u{1F1EA}'},
+{c:'TR',n:'Turkey',f:'\u{1F1F9}\u{1F1F7}'},
+{c:'FR',n:'France',f:'\u{1F1EB}\u{1F1F7}'},
+{c:'BR',n:'Brazil',f:'\u{1F1E7}\u{1F1F7}'},
+{c:'IN',n:'India',f:'\u{1F1EE}\u{1F1F3}'},
+{c:'JP',n:'Japan',f:'\u{1F1EF}\u{1F1F5}'},
+{c:'KR',n:'South Korea',f:'\u{1F1F0}\u{1F1F7}'},
+{c:'CA',n:'Canada',f:'\u{1F1E8}\u{1F1E6}'},
+{c:'AU',n:'Australia',f:'\u{1F1E6}\u{1F1FA}'},
+{c:'ES',n:'Spain',f:'\u{1F1EA}\u{1F1F8}'},
+{c:'IT',n:'Italy',f:'\u{1F1EE}\u{1F1F9}'},
+{c:'NL',n:'Netherlands',f:'\u{1F1F3}\u{1F1F1}'},
+{c:'MX',n:'Mexico',f:'\u{1F1F2}\u{1F1FD}'},
+{c:'SA',n:'Saudi Arabia',f:'\u{1F1F8}\u{1F1E6}'},
+{c:'AE',n:'UAE',f:'\u{1F1E6}\u{1F1EA}'},
+{c:'PL',n:'Poland',f:'\u{1F1F5}\u{1F1F1}'},
+{c:'ID',n:'Indonesia',f:'\u{1F1EE}\u{1F1E9}'},
+{c:'SE',n:'Sweden',f:'\u{1F1F8}\u{1F1EA}'}
+];
+const CATS=['All','Technology','Finance','Politics','Science','Sports','Entertainment','Other'];
+let allData=[],origData=[],filtered=[],selCo=new Set(),tFilter=0,catFilter='all',burstOnly=false,searchTerm='',page=1,PP=25,expRow=null;
 
-async function loadTrends(){
-  try{
-    const r=await fetch(API+'/api/v1/trends?limit=100',{headers:{'X-API-Key':KEY}});
-    const j=await r.json();
-    allData=j.data||[];
-    document.getElementById('total-topics').textContent=allData.length;
-    document.getElementById('total-bursts').textContent=allData.filter(t=>t.isBurst).length;
-    applyFilters();
-  }catch(e){
-    document.getElementById('table-container').innerHTML='<div class="loading" style="color:var(--red)">Failed to load — refresh in a moment.</div>';
-  }
+function init(){
+const cm=document.getElementById('ddc-m');
+let h='';
+CO.forEach(c=>{h+='<div class="di" data-co="'+c.c+'" onclick="toggleCo(\''+c.c+'\')"><div class="ck"></div><span class="fl">'+c.f+'</span><span class="dl">'+c.n+'</span><span class="dc" id="cc-'+c.c+'"></span></div>'});
+h+='<div class="dd-actions"><button class="dd-act-btn" onclick="selAllCo()">Select all</button><button class="dd-act-btn" onclick="clrCo()">Clear all</button></div>';
+cm.innerHTML=h;
+const cg=document.getElementById('cats');
+cg.innerHTML=CATS.map((c,i)=>'<div class="ch'+(i===0?' act':'')+'" data-cat="'+(i===0?'all':c)+'">'+(i===0?'All':c==='Technology'?'Tech':c==='Entertainment'?'Fun':c)+'</div>').join('');
+document.querySelectorAll('#cats .ch').forEach(c=>{c.addEventListener('click',()=>{document.querySelectorAll('#cats .ch').forEach(x=>x.classList.remove('act'));c.classList.add('act');catFilter=c.dataset.cat;doFilter()})});
 }
 
-function applyFilters(){
-  filtered=allData.filter(t=>{
-    if(currentCat!=='all'&&t.category!==currentCat)return false;
-    if(burstOnly&&!t.isBurst)return false;
-    if(searchTerm&&!t.topicName.toLowerCase().includes(searchTerm.toLowerCase()))return false;
-    return true;
-  });
-  page=1;renderTable();renderPagination();
+function toggleCo(code){
+if(selCo.has(code))selCo.delete(code);else selCo.add(code);
+updCoUI();doFilter()}
+function selAllCo(){CO.forEach(c=>selCo.add(c.c));updCoUI();doFilter()}
+function clrCo(){selCo.clear();updCoUI();doFilter()}
+function updCoUI(){
+document.querySelectorAll('#ddc-m .di[data-co]').forEach(el=>{el.classList.toggle('act',selCo.has(el.dataset.co))});
+const btn=document.querySelector('#ddc .dd-btn');
+const txt=document.getElementById('ddc-t');
+if(selCo.size===0){txt.textContent='All countries';btn.classList.remove('hv')}
+else if(selCo.size===1){const c=CO.find(x=>x.c===[...selCo][0]);txt.textContent=c?c.f+' '+c.n:[...selCo][0];btn.classList.add('hv')}
+else if(selCo.size<=3){txt.textContent=[...selCo].map(code=>{const c=CO.find(x=>x.c===code);return c?c.f:code}).join(' ');btn.classList.add('hv')}
+else{txt.textContent=selCo.size+' countries selected';btn.classList.add('hv')}
 }
 
-function renderTable(){
-  const s=(page-1)*perPage,sl=filtered.slice(s,s+perPage);
-  if(!sl.length){document.getElementById('table-container').innerHTML='<div class="loading" style="animation:none">No trends match your filters.</div>';return;}
-  let h='<table class="trend-table"><thead><tr><th>#</th><th>Topic</th><th>CTS</th><th>Category</th><th>Sources</th></tr></thead><tbody>';
-  sl.forEach((t,i)=>{
-    const rk=s+i+1;
-    const cc=t.ctsScore>=52?'cts-high':t.ctsScore>=48?'cts-mid':'cts-low';
-    const bt=t.isBurst?'<span class="burst-tag">burst</span>':'';
-    const rc=t.isBurst?'burst-row':'';
-    const catc='cat-'+(t.category||'Other');
-    let sp='';
-    if(t.sources){Object.keys(t.sources).forEach(k=>{
-      const lb=k==='hackernews'?'HN':k==='google_trends'?'GT':k==='wikipedia'?'Wiki':k==='reddit'?'Reddit':k;
-      const v=t.sources[k]>=1000?(t.sources[k]/1000).toFixed(0)+'k':t.sources[k];
-      sp+='<span class="src-pill src-'+k+'">'+lb+' '+v+'</span>';
-    });}
-    h+='<tr class="'+rc+'"><td class="rank">'+rk+'</td><td class="topic-name">'+esc(t.topicName)+bt+'</td><td class="cts '+cc+'">'+t.ctsScore.toFixed(1)+'</td><td><span class="category-tag '+catc+'">'+(t.category||'Other')+'</span></td><td><div class="sources-pills">'+sp+'</div></td></tr>';
-  });
-  h+='</tbody></table>';
-  document.getElementById('table-container').innerHTML=h;
-}
+function fn(n){if(n>=1e6)return(n/1e6).toFixed(1)+'M';if(n>=1e3)return(n/1e3).toFixed(n>=1e4?0:1)+'K';return n.toString()}
+function ttm(t){return t.sources?Object.values(t.sources).reduce((a,b)=>a+b,0):0}
+function scn(t){return t.sources?Object.keys(t.sources).length:0}
+function ta(d){const s=Math.floor((new Date()-new Date(d))/1000);if(s<60)return'just now';if(s<3600)return Math.floor(s/60)+'m ago';if(s<86400)return Math.floor(s/3600)+'h ago';return Math.floor(s/86400)+'d ago'}
+function ft(d){const dt=new Date(d);return dt.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})+' '+dt.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'})}
+function dri(v){if(v>=0.5)return'<span style="color:var(--green)">&#9650;</span>';if(v<=0.25)return'<span style="color:var(--red)">&#9660;</span>';return'<span style="color:var(--dim2)">&#9654;</span>'}
+function es(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML}
+function cFlag(c){const F={US:'\u{1F1FA}\u{1F1F8}',GB:'\u{1F1EC}\u{1F1E7}',DE:'\u{1F1E9}\u{1F1EA}',TR:'\u{1F1F9}\u{1F1F7}',FR:'\u{1F1EB}\u{1F1F7}',BR:'\u{1F1E7}\u{1F1F7}',IN:'\u{1F1EE}\u{1F1F3}',JP:'\u{1F1EF}\u{1F1F5}',KR:'\u{1F1F0}\u{1F1F7}',CA:'\u{1F1E8}\u{1F1E6}',AU:'\u{1F1E6}\u{1F1FA}',ES:'\u{1F1EA}\u{1F1F8}',IT:'\u{1F1EE}\u{1F1F9}',NL:'\u{1F1F3}\u{1F1F1}',MX:'\u{1F1F2}\u{1F1FD}',SA:'\u{1F1F8}\u{1F1E6}',AE:'\u{1F1E6}\u{1F1EA}',PL:'\u{1F1F5}\u{1F1F1}',ID:'\u{1F1EE}\u{1F1E9}',SE:'\u{1F1F8}\u{1F1EA}',GLOBAL:'\u{1F30E}'};return F[c]||'\u{1F30E}'}
+function gco(t){return t.country||'GLOBAL'}
 
-function renderPagination(){
-  const tp=Math.ceil(filtered.length/perPage);
-  if(tp<=1){document.getElementById('pagination').innerHTML='';return;}
-  let h='';for(let i=1;i<=tp;i++)h+='<button class="page-btn '+(i===page?'active':'')+'" onclick="goPage('+i+')">'+i+'</button>';
-  document.getElementById('pagination').innerHTML=h;
-}
+function tdd(id){document.querySelectorAll('.dd').forEach(d=>{if(d.id!==id)d.classList.remove('open')});document.getElementById(id).classList.toggle('open')}
+document.addEventListener('click',e=>{if(!e.target.closest('.dd'))document.querySelectorAll('.dd').forEach(d=>d.classList.remove('open'))});
 
-function goPage(p){page=p;renderTable();renderPagination();document.getElementById('dashboard').scrollIntoView({behavior:'smooth',block:'start'});}
-function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML;}
+var sortMode='cts';function sSort(mode,label){sortMode=mode;document.getElementById('ddt-t').textContent=label;document.querySelector('#ddt .dd-btn').classList.toggle('hv',mode!=='cts');document.querySelectorAll('#ddt .dd-menu .di').forEach(i=>i.classList.remove('act'));event.target.closest('.di').classList.add('act');document.getElementById('ddt').classList.remove('open');doFilter()}
+function tBurst(){burstOnly=!burstOnly;document.getElementById('bch').classList.toggle('act');doFilter()}
 
-document.querySelectorAll('.filter-btn').forEach(b=>{b.addEventListener('click',()=>{document.querySelectorAll('.filter-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');currentCat=b.dataset.cat;applyFilters();});});
-document.getElementById('burstToggle').addEventListener('click',function(){burstOnly=!burstOnly;this.classList.toggle('active');applyFilters();});
-document.getElementById('search').addEventListener('input',function(){searchTerm=this.value;applyFilters();});
+function rAF(){
+let tags=[];
+if(catFilter!=='all')tags.push({l:'Category: '+catFilter,c:()=>{catFilter='all';document.querySelectorAll('#cats .ch').forEach(c=>c.classList.toggle('act',c.dataset.cat==='all'))}});
+if(selCo.size>0){const names=[...selCo].map(code=>{const c=CO.find(x=>x.c===code);return c?c.f+c.n:code}).join(', ');tags.push({l:selCo.size+' countries',c:()=>{clrCo()}})}
+if(sortMode!=='cts')tags.push({l:'Sort: '+document.getElementById('ddt-t').textContent,c:()=>sSort('cts','Top CTS Score')});
+if(burstOnly)tags.push({l:'Bursts only',c:()=>{burstOnly=false;document.getElementById('bch').classList.remove('act')}});
+if(searchTerm)tags.push({l:'Search: '+searchTerm,c:()=>{searchTerm='';document.getElementById('search').value=''}});
+const el=document.getElementById('aftag');
+if(!tags.length){el.innerHTML='';return}
+window._fc=tags.map(t=>t.c);
+el.innerHTML=tags.map((t,i)=>'<div class="at">'+es(t.l)+' <span class="x" onclick="cf('+i+')">&#10005;</span></div>').join('')+'<div class="at" style="cursor:pointer;opacity:.5" onclick="ca()">Clear all &#10005;</div>'}
+function cf(i){window._fc[i]();doFilter()}
+function ca(){catFilter='all';selCo.clear();updCoUI();tFilter=0;burstOnly=false;searchTerm='';document.getElementById('search').value='';document.querySelectorAll('#cats .ch').forEach(c=>c.classList.toggle('act',c.dataset.cat==='all'));document.getElementById('bch').classList.remove('act');sTime(0,'All time');doFilter()}
 
-async function doSignup(){
-  const em=document.getElementById('signup-email').value.trim();
-  if(!em||!em.includes('@')){alert('Enter a valid email');return;}
-  const btn=document.getElementById('signup-btn');btn.textContent='...';btn.disabled=true;
-  try{
-    const r=await fetch(API+'/api/v1/signup',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:em})});
-    const j=await r.json();
-    if(j.api_key){document.getElementById('signup-key').textContent=j.api_key;document.getElementById('signup-result').classList.add('show');}
-    else alert(j.detail||'Error');
-  }catch(e){alert('Network error');}
-  btn.textContent='Get Key';btn.disabled=false;
-}
+async function load(){
+try{const r=await fetch(API+'/api/v1/trends?limit=500',{headers:{'X-API-Key':KEY}});const j=await r.json();allData=j.data||[];origData=allData.slice();
+const tm2=allData.reduce((a,t)=>a+ttm(t),0);const bst=allData.filter(t=>t.isBurst).length;const crs=allData.filter(t=>scn(t)>=2).length;
+document.getElementById('st').textContent=allData.length;document.getElementById('sm').textContent=fn(tm2);document.getElementById('sb').textContent=bst;document.getElementById('sx').textContent=crs;document.getElementById('bcn').textContent=bst;
+if(allData.length)document.getElementById('lu').textContent='Last updated: '+ta(allData[0].scoredAt);
+CO.forEach(c=>{const cnt=allData.filter(t=>gco(t)===c.c).length;const el=document.getElementById('cc-'+c.c);if(el)el.textContent=cnt||''});
+doFilter()}catch(e){document.getElementById('tc').innerHTML='<div class="ld" style="color:var(--red)">Failed to load. Try refreshing.</div>'}}
 
-loadTrends();
-setInterval(loadTrends,5*60*1000);
+function doFilter(){
+const now=new Date();
+filtered=allData.filter(t=>{
+if(catFilter!=='all'&&t.category!==catFilter)return false;
+if(burstOnly&&!t.isBurst)return false;
+if(searchTerm&&!t.topicName.toLowerCase().includes(searchTerm.toLowerCase()))return false;
+if(selCo.size>0){const co=gco(t);if(!selCo.has(co))return false}
+
+return true});
+if(sortMode==='mentions')filtered.sort((a,b)=>ttm(b)-ttm(a));
+else if(sortMode==='burst')filtered.sort((a,b)=>(b.isBurst?1:0)-(a.isBurst?1:0)||b.ctsScore-a.ctsScore);
+else if(sortMode==='alpha')filtered.sort((a,b)=>a.topicName.localeCompare(b.topicName));
+else filtered.sort((a,b)=>b.ctsScore-a.ctsScore);
+page=1;expRow=null;rt();rp();rAF()}
+
+function rt(){
+const s=(page-1)*PP,sl=filtered.slice(s,s+PP);
+if(!sl.length){document.getElementById('tc').innerHTML='<div class="ld" style="animation:none">No trends match your filters.</div>';return}
+let h='<table><thead><tr><th style="width:34px">#</th><th>Topic</th><th style="width:65px">CTS</th><th style="width:100px">Category</th><th style="width:150px">Sources</th></tr></thead><tbody>';
+sl.forEach((t,i)=>{const idx=s+i,rk=idx+1;const cc=t.ctsScore>=52?'ch1':t.ctsScore>=46?'ch2':'ch3';const rc=t.isBurst?'br':'';const sn=scn(t),tm2=ttm(t);
+const cb=sn>=2?'<span class="bg bg-c">'+sn+' src</span>':'';const bb=t.isBurst?'<span class="bg bg-b">BURST</span>':'';const cf='<span style="font-size:0.85rem;margin-right:2px">'+cFlag(gco(t))+'</span>';
+let sp='';if(t.sources)Object.entries(t.sources).forEach(([k,v])=>{const lb=k==='hackernews'?'HN':k==='google_trends'?'GT':k==='wikipedia'?'Wiki':k==='reddit'?'Reddit':k;sp+='<span class="sr sr-'+k+'">'+lb+' '+fn(v)+'</span>'});
+h+='<tr class="'+rc+' ex" onclick="tr2('+idx+')"><td class="rk">'+rk+'</td><td class="tc"><div class="tn">'+cf+es(t.topicName)+' '+bb+cb+'</div><div style="font-size:0.72rem;color:var(--dim);margin-top:2px;max-width:420px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+((t.summary)?' '+t.summary:' ')+'</div><div class="tm"><span>'+fn(tm2)+' mentions</span><span>'+ta(t.scoredAt)+'</span><span>'+dri(t.velocity)+'</span></div></td><td class="cts '+cc+'">'+t.ctsScore.toFixed(1)+'</td><td><span class="ct ct-'+(t.category||'Other')+'">'+(t.category||'Other')+'</span></td><td><div class="sp">'+sp+'</div></td></tr>';
+if(expRow===idx){h+='<tr class="dr"><td colspan="5"><div class="dc2"><div class="dti"><div class="dtl">CTS</div><div class="dtv" style="color:var(--cyan)">'+t.ctsScore.toFixed(1)+'</div></div><div class="dti"><div class="dtl">Coverage</div><div class="dtv">'+(t.platformCoverage*100).toFixed(0)+'%</div></div><div class="dti"><div class="dtl">Velocity</div><div class="dtv">'+dri(t.velocity)+' '+(t.velocity*100).toFixed(0)+'%</div></div><div class="dti"><div class="dtl">Volume</div><div class="dtv">'+(t.volume*100).toFixed(0)+'%</div></div><div class="dti"><div class="dtl">Recency</div><div class="dtv">'+(t.recency*100).toFixed(0)+'%</div></div><div class="dti"><div class="dtl">Scored at</div><div class="dtv" style="font-size:0.72rem">'+ft(t.scoredAt)+'</div></div>';
+if(t.sources)Object.entries(t.sources).forEach(([k,v])=>{const lb=k==='hackernews'?'Hacker News':k==='google_trends'?'Google Trends':k==='wikipedia'?'Wikipedia':k==='reddit'?'Reddit':k;h+='<div class="dti"><div class="dtl">'+lb+'</div><div class="dtv">'+fn(v)+'</div></div>'});
+h+='</div><div style="padding:8px 14px 14px 48px;display:flex;gap:8px;flex-wrap:wrap">';
+var tn=encodeURIComponent(t.topicName);
+h+='<a href="https://www.google.com/search?q='+tn+'" target="_blank" style="font-size:0.72rem;padding:5px 12px;border-radius:6px;background:rgba(6,214,224,0.08);color:var(--cyan);border:1px solid rgba(6,214,224,0.15);text-decoration:none">Search Google</a>';
+if(t.sources&&t.sources.wikipedia)h+='<a href="https://en.wikipedia.org/wiki/'+tn+'" target="_blank" style="font-size:0.72rem;padding:5px 12px;border-radius:6px;background:rgba(149,128,255,0.08);color:var(--purple);border:1px solid rgba(149,128,255,0.15);text-decoration:none">Wikipedia</a>';
+if(t.sources&&t.sources.reddit)h+='<a href="https://www.reddit.com/search/?q='+tn+'" target="_blank" style="font-size:0.72rem;padding:5px 12px;border-radius:6px;background:rgba(255,95,95,0.08);color:var(--red);border:1px solid rgba(255,95,95,0.15);text-decoration:none">Reddit</a>';
+if(t.sources&&t.sources.hackernews)h+='<a href="https://hn.algolia.com/?q='+tn+'" target="_blank" style="font-size:0.72rem;padding:5px 12px;border-radius:6px;background:rgba(255,158,68,0.08);color:var(--orange);border:1px solid rgba(255,158,68,0.15);text-decoration:none">Hacker News</a>';
+if(t.sources&&t.sources.google_trends)h+='<a href="https://trends.google.com/trends/explore?q='+tn+'" target="_blank" style="font-size:0.72rem;padding:5px 12px;border-radius:6px;background:rgba(6,214,224,0.08);color:var(--cyan);border:1px solid rgba(6,214,224,0.15);text-decoration:none">Google Trends</a>';
+h+='</div>';
+h+='</div></td></tr>'}});
+h+='</tbody></table>';document.getElementById('tc').innerHTML=h}
+
+function tr2(i){expRow=expRow===i?null:i;rt()}
+function rp(){const tp=Math.ceil(filtered.length/PP);if(tp<=1){document.getElementById('pg').innerHTML='';return}let h='';if(page>1)h+='<button class="pb" onclick="gp('+(page-1)+')">&#8592;</button>';for(let i=1;i<=tp;i++){if(tp>7&&i>2&&i<tp-1&&Math.abs(i-page)>1){if(i===3||i===tp-2)h+='<span class="pi">...</span>';continue}h+='<button class="pb '+(i===page?'act':'')+'" onclick="gp('+i+')">'+i+'</button>'}if(page<tp)h+='<button class="pb" onclick="gp('+(page+1)+')">&#8594;</button>';h+='<span class="pi">'+filtered.length+' results</span>';document.getElementById('pg').innerHTML=h}
+function gp(p){page=p;expRow=null;rt();rp();document.getElementById('dashboard').scrollIntoView({behavior:'smooth',block:'start'})}
+var searchTimer;document.getElementById('search').addEventListener('input',function(){searchTerm=this.value;clearTimeout(searchTimer);if(this.value.length>=2){searchTimer=setTimeout(function(){dynamicSearch(searchTerm)},500)}else if(this.value.length===0){allData=origData.slice();doFilter()}else{doFilter()}});
+
+async function doSignup(){const em=document.getElementById('se').value.trim();if(!em||!em.includes('@')){alert('Enter a valid email');return}const btn=document.querySelector('.sf button');btn.textContent='...';btn.disabled=true;try{const r=await fetch(API+'/api/v1/signup',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:em})});const j=await r.json();if(j.api_key){document.getElementById('sk').textContent=j.api_key;document.getElementById('sres').classList.add('show')}else alert(j.detail||'Error')}catch(e){alert('Network error')}btn.textContent='Get Key';btn.disabled=false}
+
+init();load();
+async function dynamicSearch(query){
+if(!query||query.length<2){allData=origData.slice();doFilter();return}
+try{
+var r2=await fetch(API+'/api/v2/feed?q='+encodeURIComponent(query)+'&limit=200',{headers:{'X-API-Key':KEY}});
+var j2=await r2.json();
+if(j2.data&&j2.data.length>0){allData=j2.data;doFilter()}
+else{allData=origData.filter(function(t){return t.topicName.toLowerCase().includes(query.toLowerCase())||(t.summary||'').toLowerCase().includes(query.toLowerCase())});doFilter()}
+}catch(e){allData=origData.filter(function(t){return t.topicName.toLowerCase().includes(query.toLowerCase())});doFilter()}}
+
+setInterval(load,5*60*1000);
 </script>
 </body>
 </html>
