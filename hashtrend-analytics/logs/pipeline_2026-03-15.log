@@ -1060,3 +1060,179 @@ Pipeline tamamlandı — 343.8 saniye
 2026-03-15 16:51:22.642 | INFO     | __main__:run:127 -   ✓ Veritabanına kaydedildi
 2026-03-15 16:51:22.643 | INFO     | __main__:run:144 - 
 Pipeline tamamlandı — 280.4 saniye
+2026-03-15 17:26:10.771 | INFO     | __main__:run:55 - ============================================================
+2026-03-15 17:26:10.772 | INFO     | __main__:run:56 - HashTrend Pipeline başlatıldı
+2026-03-15 17:26:10.772 | INFO     | __main__:run:57 - ============================================================
+2026-03-15 17:26:10.772 | INFO     | __main__:run:60 - Adım 1/5: Veri toplama...
+2026-03-15 17:26:10.772 | INFO     | collectors.base:__init__:23 - [google_trends] Collector başlatıldı
+2026-03-15 17:26:10.772 | INFO     | collectors.base:run:58 - [google_trends] Çalıştırılıyor...
+2026-03-15 17:26:10.980 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] US: 10 trend (RSS)
+2026-03-15 17:26:12.515 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] GB: 10 trend (RSS)
+2026-03-15 17:26:14.062 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] DE: 10 trend (RSS)
+2026-03-15 17:26:15.179 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] TR: 10 trend (RSS)
+2026-03-15 17:26:16.730 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] FR: 10 trend (RSS)
+2026-03-15 17:26:18.494 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] BR: 10 trend (RSS)
+2026-03-15 17:26:20.000 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] IN: 10 trend (RSS)
+2026-03-15 17:26:21.526 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] JP: 10 trend (RSS)
+2026-03-15 17:26:23.150 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] KR: 10 trend (RSS)
+2026-03-15 17:26:24.690 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] CA: 10 trend (RSS)
+2026-03-15 17:26:26.515 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] AU: 10 trend (RSS)
+2026-03-15 17:26:28.201 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] ES: 10 trend (RSS)
+2026-03-15 17:26:29.791 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] IT: 10 trend (RSS)
+2026-03-15 17:26:31.293 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] NL: 10 trend (RSS)
+2026-03-15 17:26:32.857 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] MX: 10 trend (RSS)
+2026-03-15 17:26:34.391 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] SA: 10 trend (RSS)
+2026-03-15 17:26:35.843 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] AE: 10 trend (RSS)
+2026-03-15 17:26:37.229 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] PL: 10 trend (RSS)
+2026-03-15 17:26:38.842 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] ID: 10 trend (RSS)
+2026-03-15 17:26:40.566 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] SE: 10 trend (RSS)
+2026-03-15 17:26:41.571 | INFO     | collectors.base:safe_collect:45 - [google_trends] 200 mention toplandı
+2026-03-15 17:26:41.572 | INFO     | collectors.base:run:60 - [google_trends] Tamamlandı — 200 sonuç
+2026-03-15 17:26:41.573 | INFO     | __main__:run:80 -   ✓ Google Trends: 200 mention
+2026-03-15 17:26:41.573 | INFO     | collectors.base:__init__:23 - [hackernews] Collector başlatıldı
+2026-03-15 17:26:41.575 | INFO     | collectors.base:run:58 - [hackernews] Çalıştırılıyor...
+2026-03-15 17:26:42.956 | INFO     | collectors.base:safe_collect:45 - [hackernews] 46 mention toplandı
+2026-03-15 17:26:42.956 | INFO     | collectors.base:run:60 - [hackernews] Tamamlandı — 46 sonuç
+2026-03-15 17:26:42.957 | INFO     | __main__:run:80 -   ✓ Hacker News: 46 mention
+2026-03-15 17:26:42.957 | INFO     | collectors.base:__init__:23 - [wikipedia] Collector başlatıldı
+2026-03-15 17:26:42.957 | INFO     | collectors.base:run:58 - [wikipedia] Çalıştırılıyor...
+2026-03-15 17:26:43.257 | DEBUG    | collectors.wikipedia:_fetch_top_pages:152 - [wikipedia] en.wikipedia: 30 makale
+2026-03-15 17:26:43.332 | DEBUG    | collectors.wikipedia:_fetch_top_pages:152 - [wikipedia] tr.wikipedia: 30 makale
+2026-03-15 17:26:43.334 | INFO     | collectors.base:safe_collect:45 - [wikipedia] 60 mention toplandı
+2026-03-15 17:26:43.334 | INFO     | collectors.base:run:60 - [wikipedia] Tamamlandı — 60 sonuç
+2026-03-15 17:26:43.334 | INFO     | __main__:run:80 -   ✓ Wikipedia: 60 mention
+2026-03-15 17:26:43.335 | INFO     | collectors.base:__init__:23 - [reddit] Collector başlatıldı
+2026-03-15 17:26:43.336 | INFO     | collectors.base:run:58 - [reddit] Çalıştırılıyor...
+2026-03-15 17:26:43.946 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/technology: 10 post
+2026-03-15 17:26:45.834 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/programming: 10 post
+2026-03-15 17:26:48.005 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/artificial: 2 post
+2026-03-15 17:26:50.290 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/MachineLearning: 6 post
+2026-03-15 17:26:52.371 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/finance: 9 post
+2026-03-15 17:26:54.634 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/cryptocurrency: 10 post
+2026-03-15 17:26:56.651 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/science: 10 post
+2026-03-15 17:26:58.632 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/worldnews: 10 post
+2026-03-15 17:27:00.901 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/learnprogramming: 7 post
+2026-03-15 17:27:02.988 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/SideProject: 10 post
+2026-03-15 17:27:05.273 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/startups: 8 post
+2026-03-15 17:27:07.475 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/turkey: 10 post
+2026-03-15 17:27:09.696 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/germany: 8 post
+2026-03-15 17:27:11.919 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/france: 9 post
+2026-03-15 17:27:14.174 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/india: 9 post
+2026-03-15 17:27:16.341 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/japan: 9 post
+2026-03-15 17:27:18.488 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/korea: 9 post
+2026-03-15 17:27:20.599 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/brazil: 9 post
+2026-03-15 17:27:22.896 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/mexico: 10 post
+2026-03-15 17:27:24.887 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/unitedkingdom: 10 post
+2026-03-15 17:27:26.884 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/canada: 10 post
+2026-03-15 17:27:28.988 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/australia: 9 post
+2026-03-15 17:27:31.854 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/spain: 9 post
+2026-03-15 17:27:34.244 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/italy: 9 post
+2026-03-15 17:27:36.646 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/indonesia: 10 post
+2026-03-15 17:27:38.653 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/europe: 10 post
+2026-03-15 17:27:40.158 | INFO     | collectors.base:safe_collect:45 - [reddit] 232 mention toplandı
+2026-03-15 17:27:40.159 | INFO     | collectors.base:run:60 - [reddit] Tamamlandı — 232 sonuç
+2026-03-15 17:27:40.159 | INFO     | __main__:run:80 -   ✓ Reddit: 232 mention
+2026-03-15 17:27:40.159 | INFO     | __main__:run:89 -   Toplam: 538 ham mention
+2026-03-15 17:27:40.160 | INFO     | __main__:run:92 - Adım 2/5: Normalizasyon...
+2026-03-15 17:27:40.181 | INFO     | core.normalizer:normalize:73 - Normalizasyon: 538 mention → 468 benzersiz konu
+2026-03-15 17:27:40.181 | INFO     | __main__:run:94 -   538 mention → 468 benzersiz konu
+2026-03-15 17:27:40.181 | INFO     | __main__:run:97 - Adım 3/5: Kategorizasyon...
+2026-03-15 17:30:15.244 | INFO     | core.categorizer:categorize:55 - 468 konu kategorize edildi
+2026-03-15 17:30:15.249 | INFO     | __main__:run:110 -   468 konu kategorize edildi
+2026-03-15 17:30:15.249 | INFO     | __main__:run:113 - Adım 4/5: Trend skorlama (CTS)...
+2026-03-15 17:30:15.259 | INFO     | core.scorer:score_topics:52 - Skorlama tamamlandı: 468 konu, burst: 2
+2026-03-15 17:30:15.260 | INFO     | __main__:run:115 -   468 skor hesaplandı, 2 burst
+2026-03-15 17:30:15.260 | INFO     | __main__:run:121 - Adım 4.5/5: Egitim potansiyeli analizi...
+2026-03-15 17:34:39.539 | INFO     | core.edu_scorer:score:41 - Edu scoring: 468 konu, 103 egitim potansiyelli
+2026-03-15 17:35:27.303 | INFO     | __main__:run:55 - ============================================================
+2026-03-15 17:35:27.303 | INFO     | __main__:run:56 - HashTrend Pipeline başlatıldı
+2026-03-15 17:35:27.304 | INFO     | __main__:run:57 - ============================================================
+2026-03-15 17:35:27.304 | INFO     | __main__:run:60 - Adım 1/5: Veri toplama...
+2026-03-15 17:35:27.304 | INFO     | collectors.base:__init__:23 - [google_trends] Collector başlatıldı
+2026-03-15 17:35:27.304 | INFO     | collectors.base:run:58 - [google_trends] Çalıştırılıyor...
+2026-03-15 17:35:27.770 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] US: 10 trend (RSS)
+2026-03-15 17:35:29.313 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] GB: 10 trend (RSS)
+2026-03-15 17:35:30.892 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] DE: 10 trend (RSS)
+2026-03-15 17:35:32.017 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] TR: 10 trend (RSS)
+2026-03-15 17:35:34.937 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] FR: 10 trend (RSS)
+2026-03-15 17:35:36.383 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] BR: 10 trend (RSS)
+2026-03-15 17:35:38.015 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] IN: 10 trend (RSS)
+2026-03-15 17:35:39.563 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] JP: 10 trend (RSS)
+2026-03-15 17:35:41.099 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] KR: 10 trend (RSS)
+2026-03-15 17:35:42.594 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] CA: 10 trend (RSS)
+2026-03-15 17:35:44.107 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] AU: 10 trend (RSS)
+2026-03-15 17:35:45.625 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] ES: 10 trend (RSS)
+2026-03-15 17:35:47.097 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] IT: 10 trend (RSS)
+2026-03-15 17:35:48.690 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] NL: 10 trend (RSS)
+2026-03-15 17:35:50.182 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] MX: 10 trend (RSS)
+2026-03-15 17:35:51.704 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] SA: 10 trend (RSS)
+2026-03-15 17:35:53.156 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] AE: 10 trend (RSS)
+2026-03-15 17:35:54.943 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] PL: 10 trend (RSS)
+2026-03-15 17:35:56.571 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] ID: 10 trend (RSS)
+2026-03-15 17:35:58.012 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] SE: 10 trend (RSS)
+2026-03-15 17:35:59.014 | INFO     | collectors.base:safe_collect:45 - [google_trends] 200 mention toplandı
+2026-03-15 17:35:59.015 | INFO     | collectors.base:run:60 - [google_trends] Tamamlandı — 200 sonuç
+2026-03-15 17:35:59.016 | INFO     | __main__:run:80 -   ✓ Google Trends: 200 mention
+2026-03-15 17:35:59.016 | INFO     | collectors.base:__init__:23 - [hackernews] Collector başlatıldı
+2026-03-15 17:35:59.019 | INFO     | collectors.base:run:58 - [hackernews] Çalıştırılıyor...
+2026-03-15 17:36:00.315 | INFO     | collectors.base:safe_collect:45 - [hackernews] 46 mention toplandı
+2026-03-15 17:36:00.315 | INFO     | collectors.base:run:60 - [hackernews] Tamamlandı — 46 sonuç
+2026-03-15 17:36:00.315 | INFO     | __main__:run:80 -   ✓ Hacker News: 46 mention
+2026-03-15 17:36:00.315 | INFO     | collectors.base:__init__:23 - [wikipedia] Collector başlatıldı
+2026-03-15 17:36:00.315 | INFO     | collectors.base:run:58 - [wikipedia] Çalıştırılıyor...
+2026-03-15 17:36:00.626 | DEBUG    | collectors.wikipedia:_fetch_top_pages:152 - [wikipedia] en.wikipedia: 30 makale
+2026-03-15 17:36:00.704 | DEBUG    | collectors.wikipedia:_fetch_top_pages:152 - [wikipedia] tr.wikipedia: 30 makale
+2026-03-15 17:36:00.706 | INFO     | collectors.base:safe_collect:45 - [wikipedia] 60 mention toplandı
+2026-03-15 17:36:00.707 | INFO     | collectors.base:run:60 - [wikipedia] Tamamlandı — 60 sonuç
+2026-03-15 17:36:00.707 | INFO     | __main__:run:80 -   ✓ Wikipedia: 60 mention
+2026-03-15 17:36:00.707 | INFO     | collectors.base:__init__:23 - [reddit] Collector başlatıldı
+2026-03-15 17:36:00.708 | INFO     | collectors.base:run:58 - [reddit] Çalıştırılıyor...
+2026-03-15 17:36:01.290 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/technology: 10 post
+2026-03-15 17:36:03.426 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/programming: 9 post
+2026-03-15 17:36:05.693 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/artificial: 1 post
+2026-03-15 17:36:07.973 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/MachineLearning: 6 post
+2026-03-15 17:36:10.104 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/finance: 9 post
+2026-03-15 17:36:12.170 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/cryptocurrency: 10 post
+2026-03-15 17:36:14.217 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/science: 10 post
+2026-03-15 17:36:16.484 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/worldnews: 10 post
+2026-03-15 17:36:18.606 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/learnprogramming: 7 post
+2026-03-15 17:36:20.730 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/SideProject: 10 post
+2026-03-15 17:36:23.113 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/startups: 9 post
+2026-03-15 17:36:25.425 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/turkey: 10 post
+2026-03-15 17:36:27.588 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/germany: 8 post
+2026-03-15 17:36:29.785 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/france: 9 post
+2026-03-15 17:36:32.057 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/india: 9 post
+2026-03-15 17:36:34.864 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/japan: 9 post
+2026-03-15 17:36:37.465 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/korea: 9 post
+2026-03-15 17:36:39.655 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/brazil: 8 post
+2026-03-15 17:36:41.973 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/mexico: 10 post
+2026-03-15 17:36:43.977 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/unitedkingdom: 10 post
+2026-03-15 17:36:46.159 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/canada: 10 post
+2026-03-15 17:36:48.352 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/australia: 9 post
+2026-03-15 17:36:51.222 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/spain: 9 post
+2026-03-15 17:36:53.611 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/italy: 10 post
+2026-03-15 17:36:56.008 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/indonesia: 10 post
+2026-03-15 17:36:58.496 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/europe: 10 post
+2026-03-15 17:37:00.002 | INFO     | collectors.base:safe_collect:45 - [reddit] 231 mention toplandı
+2026-03-15 17:37:00.003 | INFO     | collectors.base:run:60 - [reddit] Tamamlandı — 231 sonuç
+2026-03-15 17:37:00.004 | INFO     | __main__:run:80 -   ✓ Reddit: 231 mention
+2026-03-15 17:37:00.004 | INFO     | __main__:run:89 -   Toplam: 537 ham mention
+2026-03-15 17:37:00.004 | INFO     | __main__:run:92 - Adım 2/5: Normalizasyon...
+2026-03-15 17:37:00.029 | INFO     | core.normalizer:normalize:73 - Normalizasyon: 537 mention → 469 benzersiz konu
+2026-03-15 17:37:00.029 | INFO     | __main__:run:94 -   537 mention → 469 benzersiz konu
+2026-03-15 17:37:00.029 | INFO     | __main__:run:97 - Adım 3/5: Kategorizasyon...
+2026-03-15 17:39:30.869 | INFO     | core.categorizer:categorize:55 - 469 konu kategorize edildi
+2026-03-15 17:39:30.873 | INFO     | __main__:run:110 -   469 konu kategorize edildi
+2026-03-15 17:39:30.873 | INFO     | __main__:run:113 - Adım 4/5: Trend skorlama (CTS)...
+2026-03-15 17:39:30.883 | INFO     | core.scorer:score_topics:52 - Skorlama tamamlandı: 469 konu, burst: 2
+2026-03-15 17:39:30.883 | INFO     | __main__:run:115 -   469 skor hesaplandı, 2 burst
+2026-03-15 17:39:30.883 | INFO     | __main__:run:121 - Adım 4.5/5: Egitim potansiyeli analizi...
+2026-03-15 17:40:54.163 | WARNING  | core.edu_scorer:_score_batch:66 - Edu JSON error: Expecting ',' delimiter: line 85 column 18 (char 3062)
+2026-03-15 17:43:55.200 | INFO     | core.edu_scorer:score:41 - Edu scoring: 469 konu, 98 egitim potansiyelli
+2026-03-15 17:43:55.209 | INFO     | __main__:run:129 - Adım 5/5: Kayıt ve raporlama...
+2026-03-15 17:43:55.488 | INFO     | core.database:client:29 - Supabase bağlantısı kuruldu
+2026-03-15 17:43:56.256 | INFO     | core.database:insert_raw_mentions:56 - 537 raw mention kaydedildi
+2026-03-15 17:44:30.273 | INFO     | core.database:insert_trend_scores:200 - 469 trend skoru kaydedildi
+2026-03-15 17:44:30.277 | INFO     | __main__:run:137 -   ✓ Veritabanına kaydedildi
+2026-03-15 17:44:30.278 | INFO     | __main__:run:154 - 
+Pipeline tamamlandı — 543.0 saniye

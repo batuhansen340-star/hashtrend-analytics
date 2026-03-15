@@ -49,6 +49,10 @@ class TrendScore(BaseModel):
     source_breakdown: dict = {}  # Kaynak bazlı mention count
     country: Optional[str] = None
     summary: str = ""
+    edu_score: int = 0
+    edu_category: str = ""
+    edu_reason: str = ""
+    edu_course: str = ""
     scored_at: datetime = Field(default_factory=datetime.utcnow)
 
 

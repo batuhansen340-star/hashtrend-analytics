@@ -185,6 +185,10 @@ class Database:
                 "source_breakdown": s.source_breakdown,
                 "country": s.country or "GLOBAL",
                 "summary": s.summary or "",
+                "edu_score": getattr(s, "edu_score", 0),
+                "edu_category": getattr(s, "edu_category", ""),
+                "edu_reason": getattr(s, "edu_reason", ""),
+                "course_idea": getattr(s, "edu_course", ""),
                 "scored_at": s.scored_at.isoformat(),
             }
             for s in scores

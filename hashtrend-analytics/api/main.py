@@ -323,6 +323,10 @@ def row_to_trend_item(row: dict) -> dict:
         "sources": row.get("source_breakdown", {}),
         "country": row.get("country", "GLOBAL"),
         "summary": row.get("summary", ""),
+        "eduScore": row.get("edu_score", 0),
+        "eduCategory": row.get("edu_category", ""),
+        "eduReason": row.get("edu_reason", ""),
+        "courseIdea": row.get("course_idea", ""),
         "scoredAt": row.get("scored_at", ""),
     }
 

@@ -24,6 +24,7 @@ from collectors.wikipedia import WikipediaCollector
 from core.normalizer import Normalizer
 from core.scorer import TrendScorer
 from core.categorizer import Categorizer
+from core.edu_scorer import EduScorer
 from core.models import TrendReport, TrendScore
 from config.settings import settings
 
@@ -42,6 +43,7 @@ class Pipeline:
         self.send_telegram = send_telegram
         self.normalizer = Normalizer()
         self.categorizer = Categorizer()
+        self.edu_scorer = EduScorer()
         self.scorer = TrendScorer()
 
     def run(self) -> TrendReport:
@@ -116,6 +118,14 @@ class Pipeline:
         )
 
         # ─── ADIM 5: KAYDET + RAPORLA ───────────────────────
+        logger.info("Adım 4.5/5: Egitim potansiyeli analizi...")
+        edu_input = [{"topic_name": s.topic_name, "category": s.category, "summary": s.summary} for s in scores]
+        edu_results = self.edu_scorer.score(edu_input)
+        for s, edu in zip(scores, edu_results):
+            s.edu_score = edu.get("edu_score", 0)
+            s.edu_category = edu.get("edu_category", "")
+            s.edu_reason = edu.get("edu_reason", "")
+            s.edu_course = edu.get("course_idea", "")
         logger.info("Adım 5/5: Kayıt ve raporlama...")
 
         # Veritabanına kaydet
