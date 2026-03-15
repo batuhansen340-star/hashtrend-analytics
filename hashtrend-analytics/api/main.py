@@ -500,6 +500,113 @@ async def get_trends(
     return response
 
 
+
+
+# ─── DYNAMIC FEED (v2) ──────────────────────────────────────
+
+@app.get("/api/v2/feed", tags=["Feed"])
+async def get_dynamic_feed(
+    auth: dict = Depends(verify_api_key),
+    q: str = Query(..., min_length=1, max_length=200, description="Arama keyword'u (MMA, crypto, AI, etc.)"),
+    countries: Optional[str] = Query(None, description="Ulke kodlari, virgul ile (US,TR,GB)"),
+    sources: Optional[str] = Query(None, description="Kaynak filtresi (reddit,youtube,hackernews)"),
+    minScore: float = Query(0, ge=0, le=100, description="Minimum CTS skoru"),
+    minEngagement: int = Query(0, ge=0, description="Minimum mention sayisi"),
+    eduOnly: bool = Query(False, description="Sadece egitim potansiyelli konular (edu_score >= 6)"),
+    sort: str = Query("cts", description="Siralama: cts, mentions, edu, newest"),
+    page: int = Query(1, ge=1),
+    limit: int = Query(50, ge=1, le=500),
+):
+    """
+    Dinamik Feed — Zelimkhan'in istegi.
+    
+    Kullanici kendi keyword'unu yazar, sistem o keyword etrafinda
+    tum platformlardan trend feed olusturur.
+    
+    Ornekler:
+    - /api/v2/feed?q=MMA&countries=US,TR
+    - /api/v2/feed?q=artificial+intelligence&minScore=40
+    - /api/v2/feed?q=crypto&sources=reddit,youtube&sort=mentions
+    - /api/v2/feed?q=egitim&eduOnly=true&sort=edu
+    """
+    try:
+        from core.database import db
+
+        query = db.client.table("latest_trend_scores").select("*")
+
+        # Keyword arama — topic_name ve summary'de ara
+        query = query.or_(
+            f"topic_name.ilike.%{q}%,summary.ilike.%{q}%,category.ilike.%{q}%,course_idea.ilike.%{q}%,edu_category.ilike.%{q}%"
+        )
+
+        # Filtreler
+        if minScore > 0:
+            query = query.gte("cts_score", minScore)
+        if eduOnly:
+            query = query.gte("edu_score", 6)
+
+        # Siralama
+        if sort == "mentions":
+            query = query.order("source_count", desc=True)
+        elif sort == "edu":
+            query = query.order("edu_score", desc=True)
+        elif sort == "newest":
+            query = query.order("scored_at", desc=True)
+        else:
+            query = query.order("cts_score", desc=True)
+
+        # Pagination
+        offset = (page - 1) * limit
+        query = query.range(offset, offset + limit - 1)
+
+        result = query.execute()
+        rows = result.data or []
+
+        # Post-filter: countries
+        if countries:
+            co_list = [c.strip().upper() for c in countries.split(",")]
+            rows = [r for r in rows if r.get("country", "GLOBAL") in co_list or "GLOBAL" in co_list]
+
+        # Post-filter: sources
+        if sources:
+            src_list = [s.strip().lower() for s in sources.split(",")]
+            rows = [r for r in rows if any(
+                s in (r.get("source_breakdown", {}) or {}) for s in src_list
+            )]
+
+        # Post-filter: minEngagement
+        if minEngagement > 0:
+            def total_mentions(r):
+                sb = r.get("source_breakdown", {}) or {}
+                return sum(v for v in sb.values() if isinstance(v, (int, float)))
+            rows = [r for r in rows if total_mentions(r) >= minEngagement]
+
+    except Exception as e:
+        logger.error(f"Feed sorgu hatasi: {e}")
+        rows = []
+
+    trends = [row_to_trend_item(row) for row in rows]
+
+    return {
+        "query": q,
+        "filters": {
+            "countries": countries,
+            "sources": sources,
+            "minScore": minScore,
+            "minEngagement": minEngagement,
+            "eduOnly": eduOnly,
+            "sort": sort,
+        },
+        "data": trends,
+        "meta": make_meta(
+            request_id=auth["request_id"],
+            total=len(trends),
+            page=page,
+            limit=limit,
+        ),
+    }
+
+
 # ─── BURST TRENDS ────────────────────────────────────────────
 
 @app.get("/api/v1/trends/burst", tags=["Trends"])
