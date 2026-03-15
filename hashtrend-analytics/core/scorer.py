@@ -104,6 +104,7 @@ class TrendScorer:
             is_burst=is_burst,
             source_breakdown=source_breakdown,
             country=topic.country,
+            summary=getattr(topic, "summary", ""),
         )
 
     def _calculate_velocity(self, topic: NormalizedTopic) -> float:

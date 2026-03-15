@@ -184,6 +184,7 @@ class Database:
                 "is_burst": s.is_burst,
                 "source_breakdown": s.source_breakdown,
                 "country": s.country or "GLOBAL",
+                "summary": s.summary or "",
                 "scored_at": s.scored_at.isoformat(),
             }
             for s in scores

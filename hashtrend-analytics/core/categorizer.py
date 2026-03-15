@@ -13,12 +13,13 @@ from config.settings import settings
 class Categorizer:
     """Claude API ile toplu kategori atama."""
 
-    SYSTEM_PROMPT = """You are a trend categorizer. Given a list of trending topics,
-assign EXACTLY ONE category to each from this list:
-Technology, Finance, Health, Politics, Entertainment, Education, Science, Sports, Other
+    SYSTEM_PROMPT = """You are a trend categorizer and analyst. Given a list of trending topics,
+assign EXACTLY ONE category and write a brief 1-sentence summary explaining why it is trending or what it is about.
 
-Respond ONLY with a JSON array of objects: [{"topic": "...", "category": "..."}]
-No explanation, no markdown, just raw JSON."""
+Categories: Technology, Finance, Health, Politics, Entertainment, Education, Science, Sports, Other
+
+Respond ONLY with a JSON array: [{"topic": "...", "category": "...", "summary": "..."}]
+No explanation, no markdown, just raw JSON. Summary must be max 15 words, in English."""
 
     def __init__(self):
         self._client = None
@@ -44,7 +45,7 @@ No explanation, no markdown, just raw JSON."""
 
         # Batch halinde gönder (max 30 konu per request, token tasarrufu)
         results = {}
-        batch_size = 30
+        batch_size = 15
 
         for i in range(0, len(topics), batch_size):
             batch = topics[i : i + batch_size]
@@ -63,8 +64,8 @@ No explanation, no markdown, just raw JSON."""
 
         try:
             message = self.client.messages.create(
-                model="claude-sonnet-4-20250514",
-                max_tokens=1000,
+                model="claude-haiku-4-5-20251001",
+                max_tokens=4000,
                 system=self.SYSTEM_PROMPT,
                 messages=[
                     {
@@ -80,7 +81,10 @@ No explanation, no markdown, just raw JSON."""
             response_text = response_text.replace("```json", "").replace("```", "").strip()
 
             data = json.loads(response_text)
-            return {item["topic"]: item["category"] for item in data}
+            result = {}
+            for item in data:
+                result[item["topic"]] = {"category": item.get("category", "Other"), "summary": item.get("summary", "")}
+            return result
 
         except json.JSONDecodeError as e:
             logger.warning(f"Claude JSON parse hatası: {e}")
@@ -183,7 +187,7 @@ No explanation, no markdown, just raw JSON."""
                     best_match_count = match_count
                     assigned = category
 
-            results[topic] = assigned
+            results[topic] = {"category": assigned, "summary": ""}
 
         return results
 

@@ -97,7 +97,13 @@ class Pipeline:
         categories = self.categorizer.categorize(topic_names)
 
         for topic in topics:
-            topic.category = categories.get(topic.canonical_name, "Other")
+            cat_data = categories.get(topic.canonical_name, {"category": "Other", "summary": ""})
+            if isinstance(cat_data, str):
+                topic.category = cat_data
+                topic.summary = ""
+            else:
+                topic.category = cat_data.get("category", "Other")
+                topic.summary = cat_data.get("summary", "")
 
         logger.info(f"  {len(categories)} konu kategorize edildi")
 
