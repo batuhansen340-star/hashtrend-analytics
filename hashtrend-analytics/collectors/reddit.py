@@ -23,7 +23,7 @@ class RedditCollector(BaseCollector):
         super().__init__()
         self.session = requests.Session()
         self.session.headers.update({
-            "User-Agent": "HashTrend/1.0 (trend analytics bot)"
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
         })
 
     def collect(self):
@@ -43,8 +43,10 @@ class RedditCollector(BaseCollector):
         try:
             resp = self.session.get(url, timeout=15)
             if resp.status_code == 429:
-                time.sleep(5)
-                return []
+                time.sleep(10)
+                resp = self.session.get(url, timeout=15)
+                if resp.status_code != 200:
+                    return []
             if resp.status_code != 200:
                 return []
             data = resp.json()
