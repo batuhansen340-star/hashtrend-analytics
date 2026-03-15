@@ -103,6 +103,7 @@ class TrendScorer:
             recency=round(recency, 2),
             is_burst=is_burst,
             source_breakdown=source_breakdown,
+            country=topic.country,
         )
 
     def _calculate_velocity(self, topic: NormalizedTopic) -> float:

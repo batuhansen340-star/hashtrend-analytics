@@ -183,6 +183,7 @@ class Database:
                 "recency": s.recency,
                 "is_burst": s.is_burst,
                 "source_breakdown": s.source_breakdown,
+                "country": s.country or "GLOBAL",
                 "scored_at": s.scored_at.isoformat(),
             }
             for s in scores

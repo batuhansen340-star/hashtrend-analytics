@@ -46,6 +46,7 @@ class TrendScore(BaseModel):
     recency: float = 0.0  # Tazelik skoru
     is_burst: bool = False  # Patlama tespiti
     source_breakdown: dict = {}  # Kaynak bazlı mention count
+    country: Optional[str] = None
     scored_at: datetime = Field(default_factory=datetime.utcnow)
 
 

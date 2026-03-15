@@ -321,6 +321,7 @@ def row_to_trend_item(row: dict) -> dict:
         "recency": float(row.get("recency", 0)),
         "sourceCount": row.get("source_count", 0),
         "sources": row.get("source_breakdown", {}),
+        "country": row.get("country", "GLOBAL"),
         "scoredAt": row.get("scored_at", ""),
     }
 
