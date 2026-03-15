@@ -88,6 +88,30 @@ class Pipeline:
             ("Google Trends", GoogleTrendsCollector),
             ("Hacker News", HackerNewsCollector),
             ("Wikipedia", WikipediaCollector),
+            ("YouTube", YouTubeCollector),
+            ("GitHub", GitHubCollector),
+            ("NewsAPI", NewsAPICollector),
+            ("Product Hunt", ProductHuntCollector),
+            ("Stack Overflow", StackOverflowCollector),
+            ("Dev.to", DevtoCollector),
+            ("Arxiv", ArxivCollector),
+            ("Medium", MediumCollector),
+            ("Twitch", TwitchCollector),
+            ("IMDb", IMDbCollector),
+            ("Fediverse", FediverseCollector),
+            ("Spotify", SpotifyCollector),
+            ("Search Trends", SearchTrendsCollector),
+            ("Commerce", CommerceCollector),
+            ("App Trends", AppTrendsCollector),
+            ("TikTok", TikTokCollector),
+            ("Instagram", InstagramCollector),
+            ("LinkedIn", LinkedInCollector),
+            ("Pinterest", PinterestCollector),
+            ("Quora", QuoraCollector),
+            ("Yahoo Finance", YahooFinanceCollector),
+            ("Global News", GlobalNewsCollector),
+            ("Regional Search", RegionalSearchCollector),
+            ("Telegram", TelegramCollector),
         ]
 
         # Reddit sadece credentials varsa çalış
@@ -143,13 +167,17 @@ class Pipeline:
 
         # ─── ADIM 5: KAYDET + RAPORLA ───────────────────────
         logger.info("Adım 4.5/5: Egitim potansiyeli analizi...")
-        edu_input = [{"topic_name": s.topic_name, "category": s.category, "summary": s.summary} for s in scores]
-        edu_results = self.edu_scorer.score(edu_input)
-        for s, edu in zip(scores, edu_results):
-            s.edu_score = edu.get("edu_score", 0)
-            s.edu_category = edu.get("edu_category", "")
-            s.edu_reason = edu.get("edu_reason", "")
-            s.edu_course = edu.get("course_idea", "")
+        try:
+            edu_input = [{"topic_name": s.topic_name, "category": s.category, "summary": s.summary} for s in scores]
+            edu_results = self.edu_scorer.score(edu_input)
+            for s, edu in zip(scores, edu_results):
+                s.edu_score = edu.get("edu_score", 0)
+                s.edu_category = edu.get("edu_category", "")
+                s.edu_reason = edu.get("edu_reason", "")
+                s.edu_course = edu.get("course_idea", "")
+        except Exception as e:
+            logger.warning(f"Edu scoring atlandi: {e}")
+
         logger.info("Adım 5/5: Kayıt ve raporlama...")
 
         # Veritabanına kaydet
