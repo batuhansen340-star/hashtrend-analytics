@@ -1236,3 +1236,18 @@ Pipeline tamamlandı — 280.4 saniye
 2026-03-15 17:44:30.277 | INFO     | __main__:run:137 -   ✓ Veritabanına kaydedildi
 2026-03-15 17:44:30.278 | INFO     | __main__:run:154 - 
 Pipeline tamamlandı — 543.0 saniye
+2026-03-15 22:13:32.953 | INFO     | __main__:run:79 - ============================================================
+2026-03-15 22:13:32.953 | INFO     | __main__:run:80 - HashTrend Pipeline başlatıldı
+2026-03-15 22:13:32.953 | INFO     | __main__:run:81 - ============================================================
+2026-03-15 22:13:32.953 | INFO     | __main__:run:84 - Adım 1/5: Veri toplama...
+2026-03-15 22:13:32.953 | INFO     | collectors.base:__init__:23 - [google_trends] Collector başlatıldı
+2026-03-15 22:13:32.953 | INFO     | collectors.base:run:58 - [google_trends] Çalıştırılıyor...
+2026-03-15 22:13:33.427 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] US: 10 trend (RSS)
+2026-03-15 22:13:35.063 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] GB: 10 trend (RSS)
+2026-03-15 22:13:36.529 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] DE: 10 trend (RSS)
+2026-03-15 22:13:37.647 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] TR: 10 trend (RSS)
+2026-03-15 22:13:39.145 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] FR: 10 trend (RSS)
+2026-03-15 22:13:40.764 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] BR: 10 trend (RSS)
+2026-03-15 22:13:42.204 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] IN: 10 trend (RSS)
+2026-03-15 22:13:43.775 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] JP: 10 trend (RSS)
+2026-03-15 22:13:45.287 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] KR: 10 trend (RSS)
