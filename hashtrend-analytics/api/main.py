@@ -428,7 +428,7 @@ async def get_trends(
     burstOnly: bool = Query(False, description="Sadece patlama yapan konular"),
     country: Optional[str] = Query(None, description="Ülke kodu (TR, US, GB, DE)"),
     page: int = Query(1, ge=1, description="Sayfa numarası"),
-    limit: int = Query(20, ge=1, le=100, description="Sayfa başına sonuç"),
+    limit: int = Query(20, ge=1, le=500, description="Sayfa başına sonuç"),
 ):
     """
     Güncel trend listesi — HashTrend'in ana endpoint'i.
