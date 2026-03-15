@@ -262,3 +262,109 @@ Pipeline tamamlandı — 49.3 saniye
 2026-03-15 13:53:41.930 | INFO     | __main__:run:121 -   ✓ Veritabanına kaydedildi
 2026-03-15 13:53:41.931 | INFO     | __main__:run:138 - 
 Pipeline tamamlandı — 50.5 saniye
+2026-03-15 14:21:34.153 | INFO     | __main__:run:53 - ============================================================
+2026-03-15 14:21:34.153 | INFO     | __main__:run:54 - HashTrend Pipeline başlatıldı
+2026-03-15 14:21:34.153 | INFO     | __main__:run:55 - ============================================================
+2026-03-15 14:21:34.153 | INFO     | __main__:run:58 - Adım 1/5: Veri toplama...
+2026-03-15 14:21:34.153 | INFO     | collectors.base:__init__:23 - [google_trends] Collector başlatıldı
+2026-03-15 14:21:34.153 | INFO     | collectors.base:run:58 - [google_trends] Çalıştırılıyor...
+2026-03-15 14:21:34.752 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] US: 10 trend (RSS)
+2026-03-15 14:21:36.212 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] GB: 10 trend (RSS)
+2026-03-15 14:21:37.563 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] DE: 10 trend (RSS)
+2026-03-15 14:21:38.691 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] TR: 10 trend (RSS)
+2026-03-15 14:21:40.068 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] FR: 10 trend (RSS)
+2026-03-15 14:21:41.504 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] BR: 10 trend (RSS)
+2026-03-15 14:21:42.992 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] IN: 10 trend (RSS)
+2026-03-15 14:21:44.530 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] JP: 10 trend (RSS)
+2026-03-15 14:21:45.927 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] KR: 10 trend (RSS)
+2026-03-15 14:21:47.419 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] CA: 10 trend (RSS)
+2026-03-15 14:21:48.795 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] AU: 10 trend (RSS)
+2026-03-15 14:21:50.269 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] ES: 10 trend (RSS)
+2026-03-15 14:21:51.693 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] IT: 10 trend (RSS)
+2026-03-15 14:21:53.093 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] NL: 10 trend (RSS)
+2026-03-15 14:21:54.613 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] MX: 9 trend (RSS)
+2026-03-15 14:21:56.124 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] SA: 10 trend (RSS)
+2026-03-15 14:21:57.733 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] AE: 10 trend (RSS)
+2026-03-15 14:21:59.069 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] PL: 10 trend (RSS)
+2026-03-15 14:22:00.851 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] ID: 10 trend (RSS)
+2026-03-15 14:22:02.444 | DEBUG    | collectors.google_trends:_collect_rss:145 - [google_trends] SE: 10 trend (RSS)
+2026-03-15 14:22:03.447 | INFO     | collectors.base:safe_collect:45 - [google_trends] 199 mention toplandı
+2026-03-15 14:22:03.448 | INFO     | collectors.base:run:60 - [google_trends] Tamamlandı — 199 sonuç
+2026-03-15 14:22:03.448 | INFO     | __main__:run:78 -   ✓ Google Trends: 199 mention
+2026-03-15 14:22:03.448 | INFO     | collectors.base:__init__:23 - [hackernews] Collector başlatıldı
+2026-03-15 14:22:03.451 | INFO     | collectors.base:run:58 - [hackernews] Çalıştırılıyor...
+2026-03-15 14:22:04.800 | INFO     | collectors.base:safe_collect:45 - [hackernews] 49 mention toplandı
+2026-03-15 14:22:04.801 | INFO     | collectors.base:run:60 - [hackernews] Tamamlandı — 49 sonuç
+2026-03-15 14:22:04.801 | INFO     | __main__:run:78 -   ✓ Hacker News: 49 mention
+2026-03-15 14:22:04.801 | INFO     | collectors.base:__init__:23 - [wikipedia] Collector başlatıldı
+2026-03-15 14:22:04.801 | INFO     | collectors.base:run:58 - [wikipedia] Çalıştırılıyor...
+2026-03-15 14:22:05.186 | DEBUG    | collectors.wikipedia:_fetch_top_pages:149 - [wikipedia] en.wikipedia: 30 makale
+2026-03-15 14:22:05.265 | DEBUG    | collectors.wikipedia:_fetch_top_pages:149 - [wikipedia] tr.wikipedia: 30 makale
+2026-03-15 14:22:05.267 | INFO     | collectors.base:safe_collect:45 - [wikipedia] 60 mention toplandı
+2026-03-15 14:22:05.268 | INFO     | collectors.base:run:60 - [wikipedia] Tamamlandı — 60 sonuç
+2026-03-15 14:22:05.268 | INFO     | __main__:run:78 -   ✓ Wikipedia: 60 mention
+2026-03-15 14:22:05.268 | INFO     | collectors.base:__init__:23 - [reddit] Collector başlatıldı
+2026-03-15 14:22:05.268 | INFO     | collectors.base:run:58 - [reddit] Çalıştırılıyor...
+2026-03-15 14:22:05.898 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/technology: 10 post
+2026-03-15 14:22:07.834 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/programming: 8 post
+2026-03-15 14:22:10.118 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/artificial: 2 post
+2026-03-15 14:22:12.318 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/MachineLearning: 8 post
+2026-03-15 14:22:14.301 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/finance: 9 post
+2026-03-15 14:22:16.418 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/cryptocurrency: 10 post
+2026-03-15 14:22:18.435 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/science: 10 post
+2026-03-15 14:22:20.420 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/worldnews: 10 post
+2026-03-15 14:22:22.487 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/learnprogramming: 9 post
+2026-03-15 14:22:24.677 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/SideProject: 9 post
+2026-03-15 14:22:26.948 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/startups: 7 post
+2026-03-15 14:22:29.562 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/turkey: 10 post
+2026-03-15 14:22:31.919 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/germany: 8 post
+2026-03-15 14:22:33.918 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/france: 9 post
+2026-03-15 14:22:36.082 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/india: 9 post
+2026-03-15 14:22:38.018 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/japan: 9 post
+2026-03-15 14:22:40.186 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/korea: 7 post
+2026-03-15 14:22:42.338 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/brazil: 9 post
+2026-03-15 14:22:44.638 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/mexico: 10 post
+2026-03-15 14:22:46.699 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/unitedkingdom: 10 post
+2026-03-15 14:22:48.799 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/canada: 10 post
+2026-03-15 14:22:51.572 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/australia: 9 post
+2026-03-15 14:22:54.863 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/spain: 8 post
+2026-03-15 14:22:57.177 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/italy: 10 post
+2026-03-15 14:22:59.428 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/indonesia: 10 post
+2026-03-15 14:23:01.477 | DEBUG    | collectors.reddit:_fetch_subreddit:71 - [reddit] r/europe: 10 post
+2026-03-15 14:23:02.979 | INFO     | collectors.base:safe_collect:45 - [reddit] 230 mention toplandı
+2026-03-15 14:23:02.981 | INFO     | collectors.base:run:60 - [reddit] Tamamlandı — 230 sonuç
+2026-03-15 14:23:02.981 | INFO     | __main__:run:78 -   ✓ Reddit: 230 mention
+2026-03-15 14:23:02.981 | INFO     | __main__:run:87 -   Toplam: 538 ham mention
+2026-03-15 14:23:02.982 | INFO     | __main__:run:90 - Adım 2/5: Normalizasyon...
+2026-03-15 14:23:03.004 | INFO     | core.normalizer:normalize:73 - Normalizasyon: 538 mention → 485 benzersiz konu
+2026-03-15 14:23:03.005 | INFO     | __main__:run:92 -   538 mention → 485 benzersiz konu
+2026-03-15 14:23:03.005 | INFO     | __main__:run:95 - Adım 3/5: Kategorizasyon...
+2026-03-15 14:23:03.493 | DEBUG    | core.categorizer:_categorize_batch:89 - Claude API fallback: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CZ4nC4KndmSRMouxubMzz'}
+2026-03-15 14:23:04.032 | DEBUG    | core.categorizer:_categorize_batch:89 - Claude API fallback: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CZ4nC6TGm1Q4eD7X6rQWn'}
+2026-03-15 14:23:04.214 | DEBUG    | core.categorizer:_categorize_batch:89 - Claude API fallback: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CZ4nC7PLGpwKN3ck1v37N'}
+2026-03-15 14:23:04.391 | DEBUG    | core.categorizer:_categorize_batch:89 - Claude API fallback: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CZ4nC8AxiEgJTqob58y61'}
+2026-03-15 14:23:04.579 | DEBUG    | core.categorizer:_categorize_batch:89 - Claude API fallback: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CZ4nC8vMfFpgqn24t5fDo'}
+2026-03-15 14:23:04.747 | DEBUG    | core.categorizer:_categorize_batch:89 - Claude API fallback: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CZ4nC9ijQm4dBYmb2qLef'}
+2026-03-15 14:23:04.914 | DEBUG    | core.categorizer:_categorize_batch:89 - Claude API fallback: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CZ4nCASt4df4VQkqchezp'}
+2026-03-15 14:23:05.090 | DEBUG    | core.categorizer:_categorize_batch:89 - Claude API fallback: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CZ4nCBAJEV74iDeoofATz'}
+2026-03-15 14:23:05.262 | DEBUG    | core.categorizer:_categorize_batch:89 - Claude API fallback: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CZ4nCBuwdJ9Db2LiNbEbC'}
+2026-03-15 14:23:05.438 | DEBUG    | core.categorizer:_categorize_batch:89 - Claude API fallback: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CZ4nCCfLaQSZ1bpEudTaF'}
+2026-03-15 14:23:05.616 | DEBUG    | core.categorizer:_categorize_batch:89 - Claude API fallback: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CZ4nCDQjAhkeXNqLuQxCW'}
+2026-03-15 14:23:05.795 | DEBUG    | core.categorizer:_categorize_batch:89 - Claude API fallback: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CZ4nCEB7zQfQNPk2MRYCd'}
+2026-03-15 14:23:05.970 | DEBUG    | core.categorizer:_categorize_batch:89 - Claude API fallback: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CZ4nCEwFrekHh21mfAGXv'}
+2026-03-15 14:23:06.211 | DEBUG    | core.categorizer:_categorize_batch:89 - Claude API fallback: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CZ4nCFhtZS8W5MmxoFZK3'}
+2026-03-15 14:23:06.390 | DEBUG    | core.categorizer:_categorize_batch:89 - Claude API fallback: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CZ4nCGiASW9Ld3JBo2ed1'}
+2026-03-15 14:23:06.565 | DEBUG    | core.categorizer:_categorize_batch:89 - Claude API fallback: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CZ4nCHTowsNF3GyVpJffH'}
+2026-03-15 14:23:06.739 | DEBUG    | core.categorizer:_categorize_batch:89 - Claude API fallback: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CZ4nCJDCkbzvzqUVGvD8F'}
+2026-03-15 14:23:06.740 | INFO     | core.categorizer:categorize:54 - 485 konu kategorize edildi
+2026-03-15 14:23:06.741 | INFO     | __main__:run:102 -   485 konu kategorize edildi
+2026-03-15 14:23:06.742 | INFO     | __main__:run:105 - Adım 4/5: Trend skorlama (CTS)...
+2026-03-15 14:23:06.751 | INFO     | core.scorer:score_topics:52 - Skorlama tamamlandı: 485 konu, burst: 2
+2026-03-15 14:23:06.751 | INFO     | __main__:run:107 -   485 skor hesaplandı, 2 burst
+2026-03-15 14:23:06.751 | INFO     | __main__:run:113 - Adım 5/5: Kayıt ve raporlama...
+2026-03-15 14:23:07.001 | INFO     | core.database:client:29 - Supabase bağlantısı kuruldu
+2026-03-15 14:23:07.778 | INFO     | core.database:insert_raw_mentions:56 - 538 raw mention kaydedildi
+2026-03-15 14:23:41.919 | INFO     | core.database:insert_trend_scores:194 - 485 trend skoru kaydedildi
+2026-03-15 14:23:41.921 | INFO     | __main__:run:121 -   ✓ Veritabanına kaydedildi
+2026-03-15 14:23:41.922 | INFO     | __main__:run:138 - 
+Pipeline tamamlandı — 127.8 saniye

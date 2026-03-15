@@ -13,6 +13,10 @@ class RedditCollector(BaseCollector):
         "MachineLearning", "finance", "cryptocurrency",
         "science", "worldnews", "learnprogramming",
         "SideProject", "startups",
+        "turkey", "germany", "france", "india",
+        "japan", "korea", "brazil", "mexico",
+        "unitedkingdom", "canada", "australia",
+        "spain", "italy", "indonesia", "europe",
     ]
 
     def __init__(self):

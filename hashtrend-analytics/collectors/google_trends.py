@@ -27,10 +27,26 @@ class GoogleTrendsCollector(BaseCollector):
 
     # Google Trends Daily RSS — ülke bazlı
     RSS_URLS = {
-        "TR": "https://trends.google.com/trending/rss?geo=TR",
         "US": "https://trends.google.com/trending/rss?geo=US",
         "GB": "https://trends.google.com/trending/rss?geo=GB",
         "DE": "https://trends.google.com/trending/rss?geo=DE",
+        "TR": "https://trends.google.com/trending/rss?geo=TR",
+        "FR": "https://trends.google.com/trending/rss?geo=FR",
+        "BR": "https://trends.google.com/trending/rss?geo=BR",
+        "IN": "https://trends.google.com/trending/rss?geo=IN",
+        "JP": "https://trends.google.com/trending/rss?geo=JP",
+        "KR": "https://trends.google.com/trending/rss?geo=KR",
+        "CA": "https://trends.google.com/trending/rss?geo=CA",
+        "AU": "https://trends.google.com/trending/rss?geo=AU",
+        "ES": "https://trends.google.com/trending/rss?geo=ES",
+        "IT": "https://trends.google.com/trending/rss?geo=IT",
+        "NL": "https://trends.google.com/trending/rss?geo=NL",
+        "MX": "https://trends.google.com/trending/rss?geo=MX",
+        "SA": "https://trends.google.com/trending/rss?geo=SA",
+        "AE": "https://trends.google.com/trending/rss?geo=AE",
+        "PL": "https://trends.google.com/trending/rss?geo=PL",
+        "ID": "https://trends.google.com/trending/rss?geo=ID",
+        "SE": "https://trends.google.com/trending/rss?geo=SE",
     }
 
     def __init__(self):
