@@ -34,7 +34,13 @@ class WikipediaCollector(BaseCollector):
         "Main_Page", "Special:Search", "-", "Wikipedia:Featured_pictures",
         "Portal:Current_events", "Special:CreateAccount",
         "Special:ElectronSignup", "Ana_Sayfa", "Wikipedia:About",
+        "wiki.phtml", "Haber",
     }
+    EXCLUDE_PREFIXES = (
+        "Special:", "Wikipedia:", "File:", "Kategori:", "Category:",
+        "Portal:", "Template:", "Talk:", "User:", "Help:",
+        "Özel:", "Vikipedi:", "Şablon:", "Tartışma:",
+    )
 
     TOP_N = 30  # Her projeden en popüler N makale
 
@@ -114,7 +120,7 @@ class WikipediaCollector(BaseCollector):
                     # Genel sayfaları filtrele
                     if title in self.EXCLUDE_TITLES:
                         continue
-                    if title.startswith(("Special:", "Wikipedia:", "File:")):
+                    if title.startswith(self.EXCLUDE_PREFIXES):
                         continue
 
                     # Başlığı temizle: alt çizgileri boşluğa çevir

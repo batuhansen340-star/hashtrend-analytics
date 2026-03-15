@@ -86,7 +86,7 @@ No explanation, no markdown, just raw JSON."""
             logger.warning(f"Claude JSON parse hatası: {e}")
             return self._fallback_categorize(topics)
         except Exception as e:
-            logger.error(f"Claude API hatası: {e}")
+            logger.debug(f"Claude API fallback: {e}")
             return self._fallback_categorize(topics)
 
     def _fallback_categorize(self, topics: list[str]) -> dict[str, str]:
@@ -97,47 +97,76 @@ No explanation, no markdown, just raw JSON."""
         # Keyword → Kategori eşlemesi
         keyword_map = {
             "Technology": [
-                "ai", "gpt", "openai", "llm", "machine learning", "software",
-                "app", "code", "programming", "developer", "tech", "api",
-                "cloud", "startup", "github", "python", "javascript", "rust",
-                "chip", "semiconductor", "robot", "automation", "cyber",
+                "ai", "gpt", "openai", "anthropic", "claude", "llm", "machine learning",
+                "software", "app", "code", "programming", "developer", "tech", "api",
+                "cloud", "startup", "github", "python", "javascript", "rust", "vite",
+                "chip", "semiconductor", "robot", "automation", "cyber", "hacker",
                 "browser", "linux", "windows", "apple", "google", "microsoft",
-                "meta", "nvidia", "open source", "database", "algorithm",
+                "meta", "nvidia", "open source", "database", "algorithm", "docker",
+                "react", "node", "typescript", "devops", "kubernetes", "aws", "azure",
+                "compiler", "emacs", "vim", "copilot", "chatgpt", "gemini", "hugging",
+                "webkit", "chromium", "firefox", "safari", "android", "ios",
+                "server", "deploy", "frontend", "backend", "fullstack", "framework",
+                "libreoffice", "pgadmin", "sql", "nosql", "redis", "postgres",
+                "homelab", "self-host", "raspberry", "arduino", "iot",
             ],
             "Finance": [
                 "bitcoin", "crypto", "stock", "market", "invest", "bank",
                 "inflation", "economy", "gdp", "trade", "dollar", "euro",
                 "fed", "interest rate", "earnings", "ipo", "fintech", "defi",
+                "oracle", "debt", "revenue", "billion", "million", "funding",
+                "venture", "seed round", "valuation", "acquisition", "acquire",
+                "coal", "energy", "oil", "gas", "renewable", "solar",
             ],
             "Health": [
                 "health", "medical", "vaccine", "disease", "hospital",
                 "mental health", "drug", "fda", "cancer", "virus", "covid",
-                "fitness", "nutrition", "surgery", "clinical",
+                "fitness", "nutrition", "surgery", "clinical", "therapy",
+                "addiction", "brain", "neuroscience", "dna", "gene",
             ],
             "Politics": [
                 "president", "election", "government", "congress", "senate",
-                "policy", "war", "military", "nato", "un", "sanctions",
+                "policy", "war", "military", "nato", "sanctions",
                 "democrat", "republican", "vote", "legislation", "diplomat",
+                "trump", "biden", "netanyahu", "putin", "zelensky", "khamenei",
+                "iran", "ukraine", "russia", "china", "israel", "palestine",
+                "doge", "elon musk", "political", "judge", "court", "ruling",
+                "constitutional", "unconstitutional", "law", "legal", "lawsuit",
+                "fbi", "cia", "nsa", "surveillance", "privacy", "censorship",
+                "minister", "parliament", "regime", "coup", "protest",
+                "refugee", "immigration", "border", "tariff", "embargo",
+                "massacre", "genocide", "bombing", "missile", "strait",
+                "hegseth", "leavitt", "maga", "gop",
             ],
             "Entertainment": [
                 "movie", "film", "music", "game", "gaming", "netflix",
                 "disney", "concert", "album", "tv show", "celebrity",
                 "oscar", "grammy", "trailer", "stream", "anime",
+                "series", "one piece", "manga", "marvel", "dc",
+                "spotify", "youtube", "tiktok", "twitch", "podcast",
+                "muppet", "bride", "horror", "comedy", "drama",
             ],
             "Education": [
                 "education", "university", "school", "course", "learn",
                 "student", "teacher", "tutorial", "certificate", "degree",
-                "training", "bootcamp", "scholarship",
+                "training", "bootcamp", "scholarship", "academic", "professor",
             ],
             "Science": [
                 "science", "research", "study", "space", "nasa", "physics",
                 "biology", "climate", "environment", "energy", "quantum",
-                "experiment", "discovery", "journal", "arxiv",
+                "experiment", "discovery", "journal", "arxiv", "nature",
+                "telescope", "mars", "moon", "satellite", "rocket",
+                "earthquake", "volcano", "ocean", "species", "evolution",
+                "boeing", "aircraft", "aviation",
             ],
             "Sports": [
                 "football", "soccer", "basketball", "tennis", "nba", "nfl",
                 "champions league", "world cup", "olympics", "match",
                 "score", "player", "team", "coach", "tournament",
+                "cricket", "t20", "baseball", "f1", "formula", "grand prix",
+                "transfer", "league", "goal", "striker", "goalkeeper",
+                "haaland", "messi", "ronaldo", "samson",
+                "nfl", "super bowl", "playoff", "draft", "doubs", "smith nfl",
             ],
         }
 
