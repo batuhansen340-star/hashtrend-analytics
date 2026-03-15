@@ -34,8 +34,9 @@ class WikipediaCollector(BaseCollector):
         "Main_Page", "Special:Search", "-", "Wikipedia:Featured_pictures",
         "Portal:Current_events", "Special:CreateAccount",
         "Special:ElectronSignup", "Ana_Sayfa", "Wikipedia:About",
-        "wiki.phtml", "Haber",
+        "wiki.phtml", "Haber", "Anasayfa",
     }
+    EXCLUDE_CONTAINS = ("bölümleri listesi", "Dosya:", "logo.png", "şampiyonları listesi", "padişahları listesi")
     EXCLUDE_PREFIXES = (
         "Special:", "Wikipedia:", "File:", "Kategori:", "Category:",
         "Portal:", "Template:", "Talk:", "User:", "Help:",
@@ -121,6 +122,8 @@ class WikipediaCollector(BaseCollector):
                     if title in self.EXCLUDE_TITLES:
                         continue
                     if title.startswith(self.EXCLUDE_PREFIXES):
+                        continue
+                    if hasattr(self, "EXCLUDE_CONTAINS") and any(x in title for x in self.EXCLUDE_CONTAINS):
                         continue
 
                     # Başlığı temizle: alt çizgileri boşluğa çevir
