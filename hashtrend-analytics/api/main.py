@@ -362,7 +362,9 @@ ALLOWED_ORIGINS = [
     "https://www.hashtrend.io",
     "https://dashboard.hashtrend.io",
     "https://eclectic-churros-ab7a49.netlify.app",
+    "https://super-fairy-57078e.netlify.app",
     "https://eclectic-churros-ab7a49.netlify.app",
+    "https://super-fairy-57078e.netlify.app",
 ]
 if settings.ENVIRONMENT == "development":
     ALLOWED_ORIGINS.append("http://localhost:3000")
