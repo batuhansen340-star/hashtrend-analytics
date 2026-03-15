@@ -575,10 +575,16 @@ async def get_dynamic_feed(
 
         query = db.client.table("latest_trend_scores").select("*")
 
-        # Keyword arama — topic_name ve summary'de ara
-        query = query.or_(
-            f"topic_name.ilike.%{q}%,summary.ilike.%{q}%,category.ilike.%{q}%,course_idea.ilike.%{q}%,edu_category.ilike.%{q}%"
-        )
+        # Keyword arama — kelime bazli (word boundary)
+        # Kisa sorgular icin bosluklu arama, uzun sorgular icin normal ilike
+        if len(q) <= 4:
+            query = query.or_(
+                f"topic_name.ilike.% {q} %,topic_name.ilike.{q} %,topic_name.ilike.% {q},topic_name.eq.{q},summary.ilike.% {q} %,summary.ilike.{q} %,category.ilike.{q}"
+            )
+        else:
+            query = query.or_(
+                f"topic_name.ilike.%{q}%,summary.ilike.%{q}%,category.ilike.%{q}%,course_idea.ilike.%{q}%"
+            )
 
         # Filtreler
         if minScore > 0:
