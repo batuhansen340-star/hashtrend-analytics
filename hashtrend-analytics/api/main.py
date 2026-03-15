@@ -308,6 +308,45 @@ def make_meta(
 
 def row_to_trend_item(row: dict) -> dict:
     """DB row'unu TrendItem formatına çevir."""
+    # Platform bazli engagement label
+    ENGAGEMENT_LABELS = {
+        "reddit": "upvotes",
+        "hackernews": "points",
+        "youtube": "views",
+        "wikipedia": "pageviews",
+        "google_trends": "search interest",
+        "github": "stars",
+        "newsapi": "articles",
+        "producthunt": "votes",
+        "stackoverflow": "views",
+        "devto": "reactions",
+        "arxiv": "papers",
+        "medium": "claps",
+        "twitch": "viewers",
+        "imdb": "popularity",
+        "fediverse": "boosts",
+        "spotify": "plays",
+        "search_trends": "searches",
+        "commerce": "sales rank",
+        "yahoo_finance": "volume",
+        "global_news": "articles",
+        "tiktok": "views",
+        "instagram": "posts",
+        "linkedin": "engagement",
+        "pinterest": "pins",
+        "quora": "answers",
+        "regional_search": "searches",
+        "telegram": "views",
+        "apptrends": "downloads",
+    }
+    raw_sources = row.get("source_breakdown", {}) or {}
+    enriched = {}
+    for src, count in raw_sources.items():
+        enriched[src] = {
+            "count": count,
+            "metric": ENGAGEMENT_LABELS.get(src, "mentions"),
+        }
+
     return {
         "id": row.get("id", ""),
         "topicName": row.get("topic_name", ""),
@@ -320,7 +359,9 @@ def row_to_trend_item(row: dict) -> dict:
         "volume": float(row.get("volume", 0)),
         "recency": float(row.get("recency", 0)),
         "sourceCount": row.get("source_count", 0),
-        "sources": row.get("source_breakdown", {}),
+        "sources": raw_sources,
+        "engagement": enriched,
+        "totalEngagement": sum(v for v in raw_sources.values() if isinstance(v, (int, float))),
         "country": row.get("country", "GLOBAL"),
         "summary": row.get("summary", ""),
         "eduScore": row.get("edu_score", 0),
