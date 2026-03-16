@@ -575,10 +575,17 @@ async def get_dynamic_feed(
 
         query = db.client.table("latest_trend_scores").select("*")
 
-        # Keyword arama
-        query = query.or_(
-            f"topic_name.ilike.%{q}%,summary.ilike.%{q}%,category.ilike.%{q}%,course_idea.ilike.%{q}%"
-        )
+        # Keyword arama — kisa kelimeler icin kelime siniri, uzun kelimeler icin ilike
+        if len(q) <= 4:
+            # Kisa kelimeler: basinda veya sonunda bosluk/noktalama olmali
+            safe_q = q.replace("'", "''")
+            query = query.or_(
+                f"topic_name.ilike.{q} %,topic_name.ilike.% {q} %,topic_name.ilike.% {q},topic_name.ilike.{q},summary.ilike.{q} %,summary.ilike.% {q} %,summary.ilike.% {q},category.eq.{q}"
+            )
+        else:
+            query = query.or_(
+                f"topic_name.ilike.%{q}%,summary.ilike.%{q}%,category.ilike.%{q}%,course_idea.ilike.%{q}%"
+            )
 
         # Filtreler
         if minScore > 0:
@@ -757,7 +764,7 @@ async def get_feed_results(
         for kw in keywords:
             query = db.client.table("latest_trend_scores").select("*")
             query = query.or_(
-                f"topic_name.ilike.%{kw}%,summary.ilike.%{kw}%,category.ilike.%{kw}%,course_idea.ilike.%{kw}%"
+                f"topic_name.ilike.%{kw}%,summary.ilike.%{kw}%,category.ilike.%{kw}%,course_idea.ilike.%{kw}%" if len(kw) > 4 else f"topic_name.ilike.{kw} %,topic_name.ilike.% {kw} %,topic_name.ilike.% {kw},summary.ilike.{kw} %,summary.ilike.% {kw} %,summary.ilike.% {kw},category.eq.{kw}"
             )
             if min_score > 0:
                 query = query.gte("cts_score", min_score)
