@@ -141,8 +141,18 @@ TIER_LIMITS = {
     "enterprise": {"per_minute": 1000, "daily": 500000},
 }
 
+# LLM endpoint'leri için ek tier-bazlı saatlik limit (Ollama maliyet koruması).
+# /api/v2/trends/{slug}/idea gibi LLM-pahalı endpoint'lerde uygulanır.
+TIER_LLM_HOURLY_LIMITS = {
+    "free":       5,   # Free tier: saatte 5 LLM çağrısı (caching ile pratik daha fazla)
+    "pro":        60,
+    "business":   300,
+    "enterprise": 2000,
+}
+
 # In-memory rate limit counter (production'da Redis kullan)
 _rate_counters: dict[str, list[float]] = {}
+_llm_rate_counters: dict[str, list[float]] = {}  # LLM-spesifik counter
 
 
 def check_rate_limit(api_key: str, tier: str) -> bool:
@@ -168,6 +178,35 @@ def check_rate_limit(api_key: str, tier: str) -> bool:
 
     _rate_counters[api_key].append(now)
     return True
+
+
+def check_llm_rate_limit(api_key: str, tier: str) -> tuple[bool, int, int]:
+    """
+    LLM endpoint'leri için saatlik sliding window limiter.
+    Returns: (allowed, current_count, limit).
+
+    Gerekçe: /idea gibi LLM çağıran endpoint'ler genel rate limit'in
+    yanı sıra ekstra bir maliyet koruması ister — Ollama Cloud quota'yı
+    aşmamak için tier başına saatlik upstream cap.
+    """
+    now = time.time()
+    window = 3600  # 1 saat
+
+    if api_key not in _llm_rate_counters:
+        _llm_rate_counters[api_key] = []
+
+    _llm_rate_counters[api_key] = [
+        t for t in _llm_rate_counters[api_key] if now - t < window
+    ]
+
+    limit = TIER_LLM_HOURLY_LIMITS.get(tier, TIER_LLM_HOURLY_LIMITS["free"])
+    current = len(_llm_rate_counters[api_key])
+
+    if current >= limit:
+        return False, current, limit
+
+    _llm_rate_counters[api_key].append(now)
+    return True, current + 1, limit
 
 
 async def verify_api_key(
@@ -980,11 +1019,29 @@ async def generate_idea(
 
     LLM: Ollama Cloud gpt-oss:120b. Cache: 1 saat (aynı trend için tekrar
     üretmez). OLLAMA_API_KEY zorunlu.
+
+    Rate limit: tier başına saatlik LLM-spesifik kota (Ollama upstream
+    koruması). Free 5/saat, Pro 60/saat, Business 300/saat, Enterprise 2000/saat.
+    Cache hit rate limit sayılmaz.
     """
     cache_key = make_cache_key("idea", slug=slug)
     cached = cache.get(cache_key)
     if cached:
+        # Cache hit — LLM kotası tüketilmez
         return cached
+
+    # LLM-spesifik rate limit kontrolü (cache miss → upstream call gelir)
+    allowed, current, limit = check_llm_rate_limit(
+        auth.get("api_key", ""), auth.get("tier", "free")
+    )
+    if not allowed:
+        return api_error(
+            429, ErrorCode.RATE_LIMIT_EXCEEDED,
+            f"LLM saatlik kota aşıldı ({current}/{limit}). "
+            f"Tier yükselt veya 1 saat bekle. "
+            f"Cache hit'leri sayılmaz, popüler slug'lar tekrar tüketilebilir.",
+            auth["request_id"]
+        )
 
     try:
         from core.database import db
