@@ -960,6 +960,99 @@ async def get_topic(
     return response
 
 
+# ─── IDEA LAYER (v2) — trend → ürün/iş fikri pitch'i ────────────────────────
+
+
+@app.post("/api/v2/trends/{slug}/idea", tags=["Idea Layer"])
+async def generate_idea(
+    slug: str,
+    auth: dict = Depends(verify_api_key),
+):
+    """
+    Bir trend için iş/ürün fikri pitch'i üret.
+
+    Returns:
+    - idea_pitch (1 cümle somut fikir)
+    - target_type (mobile_module / new_standalone_app / new_micro_saas /
+      content_only / passing_meme)
+    - recommended_tools (3 adet öncelikli format)
+    - rationale, pre_mortem, differentiation, binding_constraint_action
+
+    LLM: Ollama Cloud gpt-oss:120b. Cache: 1 saat (aynı trend için tekrar
+    üretmez). OLLAMA_API_KEY zorunlu.
+    """
+    cache_key = make_cache_key("idea", slug=slug)
+    cached = cache.get(cache_key)
+    if cached:
+        return cached
+
+    try:
+        from core.database import db
+        from core.idea_director import IdeaDirector
+
+        # Trend'i çek
+        topic_result = (
+            db.client.table("topics")
+            .select("*")
+            .eq("slug", slug)
+            .limit(1)
+            .execute()
+        )
+        if not topic_result.data:
+            return api_error(
+                404, ErrorCode.TOPIC_NOT_FOUND,
+                f"'{slug}' konusu bulunamadı.",
+                auth["request_id"]
+            )
+        topic = topic_result.data[0]
+
+        # En son skor
+        score_result = (
+            db.client.table("latest_trend_scores")
+            .select("*")
+            .eq("topic_id", topic["id"])
+            .limit(1)
+            .execute()
+        )
+        score_row = score_result.data[0] if score_result.data else {}
+
+        # Director'a gönderilecek trend dict
+        trend_dict = {
+            "topicName": topic["canonical_name"],
+            "category": topic.get("category"),
+            "ctsScore": float(score_row.get("cts_score", 0)),
+            "isBurst": bool(score_row.get("is_burst", False)),
+            "country": topic.get("country") or score_row.get("country"),
+            "summary": topic.get("summary", ""),
+            "totalEngagement": int(score_row.get("total_engagement", 0) or 0),
+            "sources": score_row.get("source_breakdown") or {},
+        }
+
+        director = IdeaDirector()
+        idea = director.evaluate(trend_dict)
+
+    except Exception as e:
+        logger.error(f"Idea generation hatası: {e}")
+        return api_error(
+            500, ErrorCode.INTERNAL_ERROR,
+            "Idea üretilirken hata oluştu.",
+            auth["request_id"]
+        )
+
+    response = {
+        "data": {
+            "slug": slug,
+            "topicName": trend_dict["topicName"],
+            "idea": idea,
+        },
+        "meta": make_meta(request_id=auth["request_id"]),
+    }
+
+    # 1 saatlik cache — aynı trend için tekrar LLM çağrısı yapma
+    cache.set(cache_key, response, ttl=3600)
+    return response
+
+
 # ─── SEARCH ──────────────────────────────────────────────────
 
 @app.get("/api/v1/search", tags=["Search"])

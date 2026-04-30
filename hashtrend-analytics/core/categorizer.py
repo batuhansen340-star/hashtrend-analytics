@@ -26,21 +26,37 @@ No explanation, no markdown, just raw JSON. Summary must be max 15 words, in Eng
 
     @property
     def client(self):
+        """Ollama Cloud client (OpenAI-compatible). User memory: marjinal $0/ay."""
         if self._client is None:
-            import anthropic
-            self._client = anthropic.Anthropic(api_key=settings.ANTHROPIC_API_KEY)
+            from openai import OpenAI
+            import os
+            api_key = (
+                os.getenv("OLLAMA_API_KEY")
+                or getattr(settings, "OLLAMA_API_KEY", None)
+            )
+            self._client = OpenAI(
+                base_url="https://ollama.com/v1",
+                api_key=api_key,
+                timeout=45.0,
+                max_retries=0,
+            )
         return self._client
+
+    def _has_llm_key(self) -> bool:
+        import os
+        key = os.getenv("OLLAMA_API_KEY") or getattr(settings, "OLLAMA_API_KEY", None)
+        return bool(key) and "..." not in (key or "") and len(key or "") >= 16
 
     def categorize(self, topics: list[str]) -> dict[str, str]:
         """
         Konu listesini kategorize et.
-        Returns: {topic_name: category}
+        Returns: {topic_name: {"category": ..., "summary": ...}}
         """
         if not topics:
             return {}
 
-        if not settings.ANTHROPIC_API_KEY:
-            logger.warning("ANTHROPIC_API_KEY yok — keyword bazlı fallback kullanılıyor")
+        if not self._has_llm_key():
+            logger.warning("OLLAMA_API_KEY yok — keyword bazlı fallback")
             return self._fallback_categorize(topics)
 
         # Batch halinde gönder (max 30 konu per request, token tasarrufu)
@@ -56,41 +72,51 @@ No explanation, no markdown, just raw JSON. Summary must be max 15 words, in Eng
         return results
 
     def _categorize_batch(self, topics: list[str]) -> dict[str, str]:
-        """Tek bir batch'i Claude API ile kategorize et."""
+        """Tek bir batch'i Ollama Cloud (gpt-oss:120b) ile kategorize et."""
         import json
+        import os
 
-        # Konu listesini numaralı olarak hazırla
         topic_list = "\n".join(f"{i+1}. {t}" for i, t in enumerate(topics))
+        model = os.getenv("OLLAMA_CATEGORIZER_MODEL", "gpt-oss:120b")
 
         try:
-            message = self.client.messages.create(
-                model="claude-haiku-4-5-20251001",
-                max_tokens=4000,
-                system=self.SYSTEM_PROMPT,
+            response = self.client.chat.completions.create(
+                model=model,
                 messages=[
+                    {"role": "system", "content": self.SYSTEM_PROMPT},
                     {
                         "role": "user",
                         "content": f"Categorize these trending topics:\n{topic_list}",
-                    }
+                    },
                 ],
+                temperature=0.2,
+                max_tokens=4000,
             )
 
-            # Response'u parse et
-            response_text = message.content[0].text.strip()
+            response_text = (response.choices[0].message.content or "").strip()
             # Markdown fence temizliği
-            response_text = response_text.replace("```json", "").replace("```", "").strip()
+            if response_text.startswith("```"):
+                first_nl = response_text.find("\n")
+                if first_nl > 0:
+                    response_text = response_text[first_nl + 1:]
+                if response_text.endswith("```"):
+                    response_text = response_text[:-3]
+            response_text = response_text.strip()
 
             data = json.loads(response_text)
             result = {}
             for item in data:
-                result[item["topic"]] = {"category": item.get("category", "Other"), "summary": item.get("summary", "")}
+                result[item["topic"]] = {
+                    "category": item.get("category", "Other"),
+                    "summary": item.get("summary", ""),
+                }
             return result
 
         except json.JSONDecodeError as e:
-            logger.warning(f"Claude JSON parse hatası: {e}")
+            logger.warning(f"Ollama JSON parse hatası: {e}")
             return self._fallback_categorize(topics)
         except Exception as e:
-            logger.debug(f"Claude API fallback: {e}")
+            logger.debug(f"Ollama API fallback: {e}")
             return self._fallback_categorize(topics)
 
     def _fallback_categorize(self, topics: list[str]) -> dict[str, str]:
