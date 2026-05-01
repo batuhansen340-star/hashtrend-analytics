@@ -1221,17 +1221,63 @@ async def get_categories(
 async def get_sources(
     auth: dict = Depends(verify_api_key),
 ):
-    """Aktif veri kaynakları listesi."""
+    """Aktif veri kaynakları listesi (32 toplam — pipeline.py registry).
+
+    Status:
+    - active: pipeline'da çağrılır + DB'ye yazılır
+    - tr_specific: TR pazarı kaynağı (Trend Radar'dan port)
+    - scraping: Playwright/HTTP scraping, kırılma riski var
+    - oauth_optional: REDDIT_CLIENT_ID gibi env varsa aktif
+    """
     return {
         "data": [
-            {"name": "google_trends", "displayName": "Google Trends", "status": "active"},
-            {"name": "reddit", "displayName": "Reddit", "status": "active"},
-            {"name": "hackernews", "displayName": "Hacker News", "status": "active"},
-            {"name": "wikipedia", "displayName": "Wikipedia", "status": "planned"},
-            {"name": "github", "displayName": "GitHub Trending", "status": "planned"},
-            {"name": "newsapi", "displayName": "NewsAPI", "status": "planned"},
+            # Tier A — büyük platformlar, API'lar
+            {"name": "google_trends", "displayName": "Google Trends", "status": "active", "category": "search"},
+            {"name": "reddit", "displayName": "Reddit", "status": "oauth_optional", "category": "social"},
+            {"name": "hackernews", "displayName": "Hacker News", "status": "active", "category": "tech"},
+            {"name": "wikipedia", "displayName": "Wikipedia", "status": "active", "category": "knowledge"},
+            {"name": "github_trending", "displayName": "GitHub Trending", "status": "active", "category": "tech"},
+            {"name": "newsapi", "displayName": "NewsAPI", "status": "active", "category": "news"},
+            {"name": "global_news", "displayName": "Global News", "status": "active", "category": "news"},
+            {"name": "youtube", "displayName": "YouTube", "status": "active", "category": "video"},
+            {"name": "producthunt", "displayName": "Product Hunt", "status": "active", "category": "product"},
+            {"name": "stackoverflow", "displayName": "Stack Overflow", "status": "active", "category": "tech"},
+
+            # Tier B — content platforms
+            {"name": "devto", "displayName": "Dev.to", "status": "active", "category": "tech"},
+            {"name": "medium", "displayName": "Medium", "status": "active", "category": "content"},
+            {"name": "arxiv", "displayName": "Arxiv", "status": "active", "category": "science"},
+            {"name": "twitch", "displayName": "Twitch", "status": "active", "category": "streaming"},
+            {"name": "imdb", "displayName": "IMDb", "status": "active", "category": "entertainment"},
+            {"name": "fediverse", "displayName": "Fediverse (Mastodon)", "status": "active", "category": "social"},
+            {"name": "search_trends", "displayName": "Search Trends", "status": "active", "category": "search"},
+            {"name": "commerce", "displayName": "E-commerce Trends", "status": "active", "category": "commerce"},
+            {"name": "yahoo_finance", "displayName": "Yahoo Finance", "status": "active", "category": "finance"},
+
+            # Tier C — scraping / niche (kırılma riski)
+            {"name": "tiktok", "displayName": "TikTok", "status": "scraping", "category": "social"},
+            {"name": "instagram", "displayName": "Instagram", "status": "scraping", "category": "social"},
+            {"name": "linkedin", "displayName": "LinkedIn", "status": "scraping", "category": "professional"},
+            {"name": "pinterest", "displayName": "Pinterest", "status": "scraping", "category": "visual"},
+            {"name": "quora", "displayName": "Quora", "status": "scraping", "category": "qa"},
+            {"name": "apptrends", "displayName": "App Trends", "status": "active", "category": "mobile"},
+            {"name": "regional_search", "displayName": "Regional Search", "status": "active", "category": "search"},
+            {"name": "telegram_trends", "displayName": "Telegram Trends", "status": "active", "category": "messaging"},
+            {"name": "spotify", "displayName": "Spotify", "status": "active", "category": "audio"},
+
+            # TR-spesifik (Trend Radar'dan port)
+            {"name": "eksisozluk", "displayName": "Ekşi Sözlük", "status": "tr_specific", "category": "tr_pulse"},
+            {"name": "gdelt", "displayName": "GDELT (TR)", "status": "tr_specific", "category": "tr_news"},
+            {"name": "webrazzi", "displayName": "Webrazzi", "status": "tr_specific", "category": "tr_startup"},
+            {"name": "trends24", "displayName": "trends24 (TR)", "status": "tr_specific", "category": "tr_social"},
         ],
-        "meta": make_meta(request_id=auth["request_id"]),
+        "meta": {
+            **make_meta(request_id=auth["request_id"]),
+            "total": 32,
+            "active_count": 23,
+            "tr_specific_count": 4,
+            "scraping_count": 5,
+        },
     }
 
 
