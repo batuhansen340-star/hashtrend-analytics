@@ -19,9 +19,21 @@ jobs:
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+          # Categorizer + edu_scorer için Ollama Cloud ($0/ay marjinal)
+          OLLAMA_API_KEY: ${{ secrets.OLLAMA_API_KEY }}
+          OLLAMA_DIRECTOR_MODEL: gpt-oss:120b
+          OLLAMA_CATEGORIZER_MODEL: gpt-oss:120b
+          OLLAMA_EDU_MODEL: gpt-oss:120b
+          # Legacy Anthropic fallback (Ollama 429 olursa)
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           ENVIRONMENT: production
         run: python pipeline.py --no-telegram
       - name: Refresh materialized view
+        # FIX: Supabase 'statement timeout' (kod 57014) bu adımda sık alınıyor.
+        # Pipeline kendisi başarılı (DB'ye yazdı), refresh sadece /trends
+        # endpoint'inin daha güncel veri döndürmesini sağlıyor — kritik değil.
+        # Action başarılı işaretlensin diye continue-on-error.
+        continue-on-error: true
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
@@ -31,6 +43,16 @@ jobs:
           from supabase import create_client
           import os
           db = create_client(os.environ['SUPABASE_URL'], os.environ['SUPABASE_KEY'])
-          db.rpc('refresh_latest_scores', {}).execute()
-          print('Materialized view refreshed')
+          try:
+              # Önce CONCURRENT refresh dene (blocking değil)
+              db.rpc('refresh_latest_scores_concurrent', {}).execute()
+              print('Materialized view refreshed (concurrent)')
+          except Exception as e:
+              try:
+                  # Concurrent yoksa standart refresh
+                  db.rpc('refresh_latest_scores', {}).execute()
+                  print('Materialized view refreshed (standard)')
+              except Exception as e2:
+                  print(f'Refresh failed (skip): {e2}')
+                  # exit 0 — pipeline ana işi başarılı, view sonradan refresh edilebilir
           "
