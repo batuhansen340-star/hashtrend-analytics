@@ -141,8 +141,18 @@ TIER_LIMITS = {
     "enterprise": {"per_minute": 1000, "daily": 500000},
 }
 
+# LLM endpoint'leri için ek tier-bazlı saatlik limit (Ollama maliyet koruması).
+# /api/v2/trends/{slug}/idea gibi LLM-pahalı endpoint'lerde uygulanır.
+TIER_LLM_HOURLY_LIMITS = {
+    "free":       5,   # Free tier: saatte 5 LLM çağrısı (caching ile pratik daha fazla)
+    "pro":        60,
+    "business":   300,
+    "enterprise": 2000,
+}
+
 # In-memory rate limit counter (production'da Redis kullan)
 _rate_counters: dict[str, list[float]] = {}
+_llm_rate_counters: dict[str, list[float]] = {}  # LLM-spesifik counter
 
 
 def check_rate_limit(api_key: str, tier: str) -> bool:
@@ -168,6 +178,35 @@ def check_rate_limit(api_key: str, tier: str) -> bool:
 
     _rate_counters[api_key].append(now)
     return True
+
+
+def check_llm_rate_limit(api_key: str, tier: str) -> tuple[bool, int, int]:
+    """
+    LLM endpoint'leri için saatlik sliding window limiter.
+    Returns: (allowed, current_count, limit).
+
+    Gerekçe: /idea gibi LLM çağıran endpoint'ler genel rate limit'in
+    yanı sıra ekstra bir maliyet koruması ister — Ollama Cloud quota'yı
+    aşmamak için tier başına saatlik upstream cap.
+    """
+    now = time.time()
+    window = 3600  # 1 saat
+
+    if api_key not in _llm_rate_counters:
+        _llm_rate_counters[api_key] = []
+
+    _llm_rate_counters[api_key] = [
+        t for t in _llm_rate_counters[api_key] if now - t < window
+    ]
+
+    limit = TIER_LLM_HOURLY_LIMITS.get(tier, TIER_LLM_HOURLY_LIMITS["free"])
+    current = len(_llm_rate_counters[api_key])
+
+    if current >= limit:
+        return False, current, limit
+
+    _llm_rate_counters[api_key].append(now)
+    return True, current + 1, limit
 
 
 async def verify_api_key(
@@ -957,6 +996,117 @@ async def get_topic(
     }
 
     cache.set(cache_key, response, ttl=CACHE_TTL["trend_detail"])
+    return response
+
+
+# ─── IDEA LAYER (v2) — trend → ürün/iş fikri pitch'i ────────────────────────
+
+
+@app.post("/api/v2/trends/{slug}/idea", tags=["Idea Layer"])
+async def generate_idea(
+    slug: str,
+    auth: dict = Depends(verify_api_key),
+):
+    """
+    Bir trend için iş/ürün fikri pitch'i üret.
+
+    Returns:
+    - idea_pitch (1 cümle somut fikir)
+    - target_type (mobile_module / new_standalone_app / new_micro_saas /
+      content_only / passing_meme)
+    - recommended_tools (3 adet öncelikli format)
+    - rationale, pre_mortem, differentiation, binding_constraint_action
+
+    LLM: Ollama Cloud gpt-oss:120b. Cache: 1 saat (aynı trend için tekrar
+    üretmez). OLLAMA_API_KEY zorunlu.
+
+    Rate limit: tier başına saatlik LLM-spesifik kota (Ollama upstream
+    koruması). Free 5/saat, Pro 60/saat, Business 300/saat, Enterprise 2000/saat.
+    Cache hit rate limit sayılmaz.
+    """
+    cache_key = make_cache_key("idea", slug=slug)
+    cached = cache.get(cache_key)
+    if cached:
+        # Cache hit — LLM kotası tüketilmez
+        return cached
+
+    # LLM-spesifik rate limit kontrolü (cache miss → upstream call gelir)
+    allowed, current, limit = check_llm_rate_limit(
+        auth.get("api_key", ""), auth.get("tier", "free")
+    )
+    if not allowed:
+        return api_error(
+            429, ErrorCode.RATE_LIMIT_EXCEEDED,
+            f"LLM saatlik kota aşıldı ({current}/{limit}). "
+            f"Tier yükselt veya 1 saat bekle. "
+            f"Cache hit'leri sayılmaz, popüler slug'lar tekrar tüketilebilir.",
+            auth["request_id"]
+        )
+
+    try:
+        from core.database import db
+        from core.idea_director import IdeaDirector
+
+        # Trend'i çek
+        topic_result = (
+            db.client.table("topics")
+            .select("*")
+            .eq("slug", slug)
+            .limit(1)
+            .execute()
+        )
+        if not topic_result.data:
+            return api_error(
+                404, ErrorCode.TOPIC_NOT_FOUND,
+                f"'{slug}' konusu bulunamadı.",
+                auth["request_id"]
+            )
+        topic = topic_result.data[0]
+
+        # En son skor
+        score_result = (
+            db.client.table("latest_trend_scores")
+            .select("*")
+            .eq("topic_id", topic["id"])
+            .limit(1)
+            .execute()
+        )
+        score_row = score_result.data[0] if score_result.data else {}
+
+        # Director'a gönderilecek trend dict
+        trend_dict = {
+            "topicName": topic["canonical_name"],
+            "category": topic.get("category"),
+            "ctsScore": float(score_row.get("cts_score", 0)),
+            "isBurst": bool(score_row.get("is_burst", False)),
+            "country": topic.get("country") or score_row.get("country"),
+            "summary": topic.get("summary", ""),
+            "totalEngagement": int(score_row.get("total_engagement", 0) or 0),
+            "sources": score_row.get("source_breakdown") or {},
+        }
+
+        director = IdeaDirector()
+        idea = director.evaluate(trend_dict)
+
+    except Exception as e:
+        logger.error(f"Idea generation hatası: {e}")
+        return api_error(
+            500, ErrorCode.INTERNAL_ERROR,
+            "Idea üretilirken hata oluştu.",
+            auth["request_id"]
+        )
+
+    response = {
+        "data": {
+            "slug": slug,
+            "topicName": trend_dict["topicName"],
+            "idea": idea,
+        },
+        "meta": make_meta(request_id=auth["request_id"]),
+    }
+
+    # 1 saatlik cache — aynı trend için tekrar LLM çağrısı yapma
+    cache.set(cache_key, response, ttl=3600)
     return response
 
 

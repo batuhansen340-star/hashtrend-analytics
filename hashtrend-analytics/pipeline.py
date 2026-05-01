@@ -45,6 +45,11 @@ from collectors.yahoo_finance import YahooFinanceCollector
 from collectors.global_news import GlobalNewsCollector
 from collectors.regional_search import RegionalSearchCollector
 from collectors.telegram_trends import TelegramCollector
+# ── TR-spesifik collectors (Trend Radar'dan port) ──
+from collectors.eksisozluk import EksiSozlukCollector
+from collectors.gdelt import GDELTCollector
+from collectors.webrazzi import WebrazziCollector
+from collectors.trends24 import Trends24Collector
 from core.normalizer import Normalizer
 from core.scorer import TrendScorer
 from core.categorizer import Categorizer
@@ -103,6 +108,20 @@ class Pipeline:
             ("Commerce", CommerceCollector),
             ("Yahoo Finance", YahooFinanceCollector),
             ("Global News", GlobalNewsCollector),
+            # ── Hayalet collector'lar — import vardı, listede yoktu (FIX) ──
+            ("TikTok", TikTokCollector),
+            ("Instagram", InstagramCollector),
+            ("LinkedIn", LinkedInCollector),
+            ("Pinterest", PinterestCollector),
+            ("Quora", QuoraCollector),
+            ("App Trends", AppTrendsCollector),
+            ("Regional Search", RegionalSearchCollector),
+            ("Telegram", TelegramCollector),
+            # ── TR pazarı için 4 ek kaynak (Trend Radar'dan port) ──
+            ("Ekşi Sözlük", EksiSozlukCollector),
+            ("GDELT (TR)", GDELTCollector),
+            ("Webrazzi", WebrazziCollector),
+            ("trends24 (TR)", Trends24Collector),
         ]
 
         # Reddit sadece credentials varsa çalış

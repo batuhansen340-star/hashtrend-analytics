@@ -14,18 +14,36 @@ SYS_P = ("You are an education trend analyst. Evaluate trending topics for onlin
 
 
 class EduScorer:
+    """Ollama Cloud (gpt-oss:120b) ile egitim potansiyeli skorlama. $0/ay marjinal."""
+
     def __init__(self):
         self._client = None
 
     @property
     def client(self):
         if self._client is None:
-            import anthropic
-            self._client = anthropic.Anthropic(api_key=settings.ANTHROPIC_API_KEY)
+            from openai import OpenAI
+            import os
+            api_key = (
+                os.getenv("OLLAMA_API_KEY")
+                or getattr(settings, "OLLAMA_API_KEY", None)
+            )
+            self._client = OpenAI(
+                base_url="https://ollama.com/v1",
+                api_key=api_key,
+                timeout=45.0,
+                max_retries=0,
+            )
         return self._client
 
+    def _has_llm_key(self) -> bool:
+        import os
+        key = os.getenv("OLLAMA_API_KEY") or getattr(settings, "OLLAMA_API_KEY", None)
+        return bool(key) and "..." not in (key or "") and len(key or "") >= 16
+
     def score(self, topics):
-        if not settings.ANTHROPIC_API_KEY:
+        if not self._has_llm_key():
+            logger.debug("OLLAMA_API_KEY yok, edu scoring skip")
             return topics
         names = [t.get("topic_name", "") for t in topics]
         results = {}
@@ -42,18 +60,23 @@ class EduScorer:
         return topics
 
     def _score_batch(self, topics):
+        import os
+        model = os.getenv("OLLAMA_EDU_MODEL", "gpt-oss:120b")
         lines = [str(i+1) + ". " + t for i, t in enumerate(topics)]
         topic_list = chr(10).join(lines)
         prompt = "Evaluate these trending topics for education potential:" + chr(10) + topic_list
         try:
-            msg = self.client.messages.create(
-                model="claude-haiku-4-5-20251001",
+            response = self.client.chat.completions.create(
+                model=model,
+                messages=[
+                    {"role": "system", "content": SYS_P},
+                    {"role": "user", "content": prompt},
+                ],
+                temperature=0.2,
                 max_tokens=4000,
-                system=SYS_P,
-                messages=[{"role": "user", "content": prompt}],
             )
-            txt = msg.content[0].text.strip()
-            if txt.startswith("\x60\x60\x60") or txt.startswith("```"):
+            txt = (response.choices[0].message.content or "").strip()
+            if txt.startswith("```"):
                 first_nl = txt.find(chr(10))
                 if first_nl > 0:
                     txt = txt[first_nl+1:]
