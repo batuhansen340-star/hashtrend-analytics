@@ -110,6 +110,28 @@ tr.detail-row{display:none}
 .detail-why{background:var(--bg3);border-radius:6px;padding:10px;margin-bottom:10px;font-size:0.76rem;color:var(--dim);line-height:1.6}
 .detail-why strong{color:var(--text)}
 
+/* Idea Layer — "💡 Bu trende ne yapayım?" */
+.idea-section{margin-bottom:12px}
+.idea-btn{background:linear-gradient(135deg,var(--cyan-bg),rgba(149,128,255,0.06));border:1px solid var(--cyan-border);color:var(--cyan);font-family:var(--sans);font-size:0.82rem;font-weight:600;padding:9px 14px;border-radius:7px;cursor:pointer;transition:all .15s;display:inline-flex;align-items:center;gap:6px}
+.idea-btn:hover{border-color:var(--cyan);background:rgba(6,214,224,0.08);transform:translateY(-1px)}
+.idea-btn-sm{background:transparent;border:1px solid var(--border2);color:var(--dim);font-size:0.7rem;padding:3px 8px;border-radius:4px;cursor:pointer;margin-left:8px;font-family:var(--sans)}
+.idea-btn-sm:hover{color:var(--text);border-color:var(--border3)}
+.idea-loading{display:flex;align-items:center;gap:10px;padding:12px 14px;background:var(--bg3);border-radius:7px;font-size:0.78rem;color:var(--dim)}
+.sp-sm{width:14px;height:14px;border:2px solid var(--border2);border-top-color:var(--cyan);border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
+.idea-error{padding:10px 12px;background:rgba(255,95,95,0.06);border:1px solid rgba(255,95,95,0.15);border-radius:7px;font-size:0.74rem;color:var(--red);display:flex;align-items:center;flex-wrap:wrap}
+.idea-result{padding:14px;background:linear-gradient(135deg,rgba(6,214,224,0.04),rgba(149,128,255,0.03));border:1px solid var(--cyan-border);border-radius:8px}
+.idea-target{display:inline-block;font-size:0.6rem;padding:3px 8px;border-radius:4px;background:var(--bg3);color:var(--dim);text-transform:uppercase;letter-spacing:1px;font-weight:600;font-family:var(--mono);margin-bottom:8px}
+.idea-target-mobile_module{background:rgba(149,128,255,0.12);color:var(--purple)}
+.idea-target-new_standalone_app{background:rgba(6,214,224,0.12);color:var(--cyan)}
+.idea-target-new_micro_saas{background:rgba(61,220,132,0.12);color:var(--green)}
+.idea-target-content_only{background:rgba(255,158,68,0.1);color:var(--orange)}
+.idea-target-passing_meme{background:rgba(139,141,158,0.1);color:var(--dim)}
+.idea-pitch{font-size:0.9rem;font-weight:600;color:var(--text);line-height:1.45;margin:0 0 10px}
+.idea-tools{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px}
+.idea-tool{font-size:0.65rem;padding:3px 8px;border-radius:4px;background:var(--bg3);color:var(--dim);font-family:var(--mono);border:1px solid var(--border)}
+.idea-meta-row{font-size:0.72rem;color:var(--dim);line-height:1.5;margin-top:5px}
+.idea-meta-row strong{color:var(--text);font-weight:600}
+
 .pg{display:flex;justify-content:center;gap:4px;margin:16px 0;align-items:center}
 .pb{background:var(--bg2);border:1px solid var(--border);color:var(--dim);padding:5px 10px;border-radius:5px;font-size:0.76rem;cursor:pointer;font-family:var(--sans)}
 .pb:hover{border-color:var(--border2);color:var(--text)}
@@ -184,6 +206,69 @@ var METRICS={reddit:'upvotes',hackernews:'points',youtube:'views',wikipedia:'pag
 var SRC_NAMES={hackernews:'Hacker News',google_trends:'Google Trends',yahoo_finance:'Yahoo Finance',global_news:'Global News',search_trends:'Bing/DDG',producthunt:'Product Hunt',stackoverflow:'Stack Overflow'};
 
 var allData=[],origData=[],filtered=[],catFilter='all',coFilter='all',sortMode='cts',page=1,PP=20,expIdx=null;
+// Idea Layer cache: slug -> {state:'loading'|'done'|'error', data?, error?}
+// Tier-bazlı saatlik LLM kotası tükettiği için sonuçları render'lar arasında saklarız.
+var ideaCache={};
+
+var TARGET_LABELS={mobile_module:'Mobil Modül',new_standalone_app:'Yeni Bağımsız App',new_micro_saas:'Mikro SaaS',content_only:'Sadece İçerik',passing_meme:'Geçici Meme'};
+
+function ideaSectionHTML(slug){
+  if(!slug)return'';
+  return'<div class="idea-section" id="idea-'+esc(slug)+'">'+ideaContentHTML(slug)+'</div>';
+}
+
+function ideaContentHTML(slug){
+  var c=ideaCache[slug];
+  if(!c)return'<button class="idea-btn" onclick="event.stopPropagation();getIdea(\''+slug.replace(/'/g,"\\'")+'\')">\u{1F4A1} Bu trende ne yapayım?</button>';
+  if(c.state==='loading')return'<div class="idea-loading"><div class="sp-sm"></div>AI fikri üretiyor… (Ollama gpt-oss:120b)</div>';
+  if(c.state==='error')return'<div class="idea-error">'+esc(c.error||'AI fikri üretilemedi.')+'<button class="idea-btn-sm" onclick="event.stopPropagation();getIdea(\''+slug.replace(/'/g,"\\'")+'\',true)">Tekrar dene</button></div>';
+  // done
+  var d=c.data||{};
+  var label=TARGET_LABELS[d.target_type]||d.target_type||'';
+  var tools=(d.recommended_tools||[]).map(function(t){return'<span class="idea-tool">'+esc(String(t))+'</span>'}).join('');
+  var h='<div class="idea-result">';
+  if(label)h+='<span class="idea-target idea-target-'+esc(d.target_type||'')+'">'+esc(label)+'</span>';
+  if(d.idea_pitch)h+='<div class="idea-pitch">'+esc(d.idea_pitch)+'</div>';
+  if(tools)h+='<div class="idea-tools">'+tools+'</div>';
+  if(d.rationale)h+='<div class="idea-meta-row"><strong>Neden:</strong> '+esc(d.rationale)+'</div>';
+  if(d.differentiation)h+='<div class="idea-meta-row"><strong>Farklılaşma:</strong> '+esc(d.differentiation)+'</div>';
+  if(d.pre_mortem)h+='<div class="idea-meta-row"><strong>Risk:</strong> '+esc(d.pre_mortem)+'</div>';
+  if(d.binding_constraint_action)h+='<div class="idea-meta-row"><strong>İlk aksiyon:</strong> '+esc(d.binding_constraint_action)+'</div>';
+  h+='</div>';
+  return h;
+}
+
+async function getIdea(slug,retry){
+  if(!slug)return;
+  // Halihazırda loading veya done ise re-fetch etme (retry hariç).
+  if(ideaCache[slug]&&!retry&&ideaCache[slug].state!=='error')return;
+  ideaCache[slug]={state:'loading'};
+  refreshIdeaSection(slug);
+  try{
+    var r=await fetch(API+'/api/v2/trends/'+encodeURIComponent(slug)+'/idea',{
+      method:'POST',
+      headers:{'X-API-Key':KEY,'Content-Type':'application/json'},
+    });
+    if(!r.ok){
+      var msg='AI fikri üretilemedi (HTTP '+r.status+').';
+      if(r.status===429)msg='Saatlik AI kotası doldu — Free 5/saat, Pro 60/saat. Bir sonraki saatte tekrar dene.';
+      else if(r.status===404)msg='Bu trend için detay bulunamadı.';
+      else if(r.status===401||r.status===403)msg='API anahtarı geçersiz.';
+      ideaCache[slug]={state:'error',error:msg};
+    }else{
+      var j=await r.json();
+      ideaCache[slug]={state:'done',data:j};
+    }
+  }catch(e){
+    ideaCache[slug]={state:'error',error:'Bağlantı hatası — tekrar dene.'};
+  }
+  refreshIdeaSection(slug);
+}
+
+function refreshIdeaSection(slug){
+  var el=document.getElementById('idea-'+slug);
+  if(el)el.innerHTML=ideaContentHTML(slug);
+}
 
 function fn(n){if(n>=1e9)return(n/1e9).toFixed(1)+'B';if(n>=1e6)return(n/1e6).toFixed(1)+'M';if(n>=1e3)return(n/1e3).toFixed(n>=1e4?0:1)+'K';return n.toString()}
 function ta(d){var s=Math.floor((new Date()-new Date(d))/1000);if(s<60)return'just now';if(s<3600)return Math.floor(s/60)+'m ago';if(s<86400)return Math.floor(s/3600)+'h ago';return Math.floor(s/86400)+'d ago'}
@@ -290,6 +375,9 @@ if(t.isBurst)h+='<strong style="color:var(--orange)">Burst detected</strong> —
 if(t.eduScore>=6)h+='<strong style="color:var(--green)">Education potential: '+t.eduScore+'/10</strong>';
 if(t.courseIdea)h+=' — suggested course: "'+esc(t.courseIdea)+'"';
 h+='</div>';
+
+// Idea Layer — "💡 Bu trende ne yapayım?" — POST /api/v2/trends/{slug}/idea
+h+=ideaSectionHTML(t.slug);
 
 // Engagement cards
 h+='<div class="engagement-grid">';
