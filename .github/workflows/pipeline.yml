@@ -19,19 +19,17 @@ jobs:
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+          # Categorizer + edu_scorer için Ollama Cloud ($0/ay marjinal)
+          OLLAMA_API_KEY: ${{ secrets.OLLAMA_API_KEY }}
+          OLLAMA_DIRECTOR_MODEL: gpt-oss:120b
+          OLLAMA_CATEGORIZER_MODEL: gpt-oss:120b
+          OLLAMA_EDU_MODEL: gpt-oss:120b
+          # Legacy Anthropic fallback (Ollama 429 olursa)
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           ENVIRONMENT: production
         run: python pipeline.py --no-telegram
-      - name: Refresh materialized view
-        env:
-          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
-        run: |
-          pip install supabase
-          python3 -c "
-          from supabase import create_client
-          import os
-          db = create_client(os.environ['SUPABASE_URL'], os.environ['SUPABASE_KEY'])
-          db.rpc('refresh_latest_scores', {}).execute()
-          print('Materialized view refreshed')
-          "
+      # NOT: Mat view refresh PostgREST üzerinden 60s statement_timeout'a
+      # takılıyordu (kod 57014). Refresh artık Supabase tarafında pg_cron
+      # ile DB-side schedule edilmiş durumda (her 2 saatte bir, *:15 UTC).
+      # Workflow refresh adımı kaldırıldı; pipeline yalnızca collector +
+      # DB write yapar, refresh background job hallediyor.
