@@ -55,7 +55,9 @@ h1 em{font-style:normal;background:linear-gradient(135deg,var(--cyan),var(--cyan
 .demo-search input:focus{border-color:var(--cyan)}
 .demo-search button{background:var(--cyan);color:#000;border:none;padding:10px 20px;border-radius:8px;font-weight:600;cursor:pointer;font-family:var(--sans);font-size:0.84rem;white-space:nowrap}
 .demo-results{min-height:200px}
-.demo-card{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:14px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:flex-start}
+.demo-card{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:14px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:flex-start;position:relative;overflow:hidden}
+.demo-card.is-burst{border-color:rgba(255,158,68,0.4);background:linear-gradient(135deg,rgba(255,158,68,0.04),rgba(255,69,0,0.02));box-shadow:0 0 0 1px rgba(255,158,68,0.15),0 4px 16px -8px rgba(255,158,68,0.25)}
+.demo-card.is-burst::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--orange),#ff5e3a);box-shadow:0 0 12px rgba(255,158,68,0.5)}
 .demo-card-left{flex:1}
 .demo-card-title{font-size:0.88rem;font-weight:600;margin-bottom:3px}
 .demo-card-meta{font-size:0.72rem;color:var(--dim2);display:flex;gap:8px;flex-wrap:wrap}
@@ -63,14 +65,34 @@ h1 em{font-style:normal;background:linear-gradient(135deg,var(--cyan),var(--cyan
 .demo-card-cts{font-family:var(--mono);font-size:0.9rem;font-weight:600;color:var(--cyan)}
 .demo-card-cat{font-size:0.65rem;color:var(--dim2);background:var(--bg3);padding:2px 6px;border-radius:3px;margin-top:3px;display:inline-block}
 .src-pill{font-size:0.6rem;padding:2px 5px;border-radius:3px;font-family:var(--mono);font-weight:500}
-.src-reddit{background:rgba(255,95,95,0.08);color:var(--red)}
-.src-hackernews{background:rgba(255,158,68,0.08);color:var(--orange)}
-.src-wikipedia{background:rgba(149,128,255,0.08);color:var(--purple)}
-.src-google_trends{background:rgba(6,214,224,0.08);color:var(--cyan)}
-.src-youtube{background:rgba(255,95,95,0.08);color:var(--red)}
-.src-github{background:rgba(255,255,255,0.06);color:var(--dim)}
-.src-newsapi{background:rgba(6,214,224,0.08);color:var(--cyan)}
-.src-medium{background:rgba(61,220,132,0.08);color:var(--green)}
+.src-reddit{background:rgba(255,69,0,0.1);color:#ff6b35}
+.src-hackernews{background:rgba(255,102,0,0.1);color:#ff8a3d}
+.src-wikipedia{background:rgba(149,128,255,0.1);color:var(--purple)}
+.src-google_trends{background:rgba(66,133,244,0.1);color:#669df6}
+.src-youtube{background:rgba(255,0,0,0.1);color:#ff5252}
+.src-github{background:rgba(140,140,140,0.1);color:#aaa}
+.src-newsapi{background:rgba(6,214,224,0.1);color:var(--cyan)}
+.src-medium{background:rgba(61,220,132,0.1);color:var(--green)}
+.src-arxiv{background:rgba(178,34,52,0.12);color:#e85d75}
+.src-devto{background:rgba(64,64,64,0.15);color:#ddd}
+.src-stackoverflow{background:rgba(244,128,36,0.1);color:#f48024}
+.src-producthunt{background:rgba(218,55,29,0.1);color:#da371d}
+.src-twitch{background:rgba(145,71,255,0.1);color:#9147ff}
+.src-imdb{background:rgba(245,197,24,0.1);color:#f5c518}
+.src-fediverse{background:rgba(99,100,255,0.1);color:#6364ff}
+.src-search_trends{background:rgba(255,158,68,0.1);color:var(--orange)}
+.src-commerce{background:rgba(255,153,0,0.1);color:#ff9900}
+.src-yahoo_finance{background:rgba(118,0,221,0.1);color:#9c4ddc}
+.src-global_news{background:rgba(6,214,224,0.1);color:var(--cyan)}
+.src-spotify{background:rgba(30,215,96,0.12);color:#1ed760}
+.src-apptrends{background:rgba(0,122,255,0.12);color:#4ea7ff}
+.src-tiktok{background:rgba(0,0,0,0.3);color:#ee1d52;border:1px solid rgba(238,29,82,0.3)}
+.src-bluesky{background:rgba(0,133,255,0.12);color:#3b9eff}
+.src-tr_news_rss{background:rgba(227,10,23,0.12);color:#ff5e5e}
+.src-eksisozluk{background:rgba(186,168,108,0.12);color:#cab28a}
+.src-webrazzi{background:rgba(255,107,107,0.1);color:#ff6b6b}
+.src-trends24{background:rgba(29,161,242,0.1);color:#1da1f2}
+.src-gdelt{background:rgba(102,178,178,0.12);color:#7fd1d1}
 .demo-empty{text-align:center;color:var(--dim);padding:40px;font-size:0.84rem}
 .demo-loading{text-align:center;color:var(--dim);padding:40px}
 
@@ -385,14 +407,33 @@ function fn(n){if(n>=1e9)return(n/1e9).toFixed(1)+'B';if(n>=1e6)return(n/1e6).to
 function ta(d){var s=Math.floor((new Date()-new Date(d))/1000);if(s<60)return'just now';if(s<3600)return Math.floor(s/60)+'m ago';if(s<86400)return Math.floor(s/3600)+'h ago';return Math.floor(s/86400)+'d ago'}
 function srcClass(s){return'src-pill src-'+(s||'').toLowerCase().replace(/[^a-z]/g,'')}
 
+// Sayı count-up animasyonu — 0'dan hedef değere kadar yumuşak geçiş
+function animateNumber(el, target, duration, formatter){
+  if(!el)return;
+  duration=duration||900;
+  formatter=formatter||function(n){return Math.round(n).toString()};
+  var start=parseFloat(el.dataset.lastVal||'0');
+  if(start===target){el.textContent=formatter(target);return}
+  var startTs=performance.now();
+  function tick(now){
+    var p=Math.min(1,(now-startTs)/duration);
+    var eased=1-Math.pow(1-p,3); // ease-out cubic
+    var v=start+(target-start)*eased;
+    el.textContent=formatter(v);
+    if(p<1)requestAnimationFrame(tick);
+    else el.dataset.lastVal=String(target);
+  }
+  requestAnimationFrame(tick);
+}
+
 async function loadNumbers(){
 try{
 var r=await fetch(API+'/api/v1/trends?limit=500',{headers:{'X-API-Key':KEY}});
 var j=await r.json();var d=j.data||[];
-document.getElementById('n-topics').textContent=d.length;
+animateNumber(document.getElementById('n-topics'),d.length);
 var tm=0;d.forEach(function(t){var s=t.sources||{};for(var k in s)if(typeof s[k]==='number')tm+=s[k]});
-document.getElementById('n-mentions').textContent=fn(tm);
-document.getElementById('n-bursts').textContent=d.filter(function(t){return t.isBurst}).length;
+animateNumber(document.getElementById('n-mentions'),tm,900,fn);
+animateNumber(document.getElementById('n-bursts'),d.filter(function(t){return t.isBurst}).length);
 // Live trend ticker — top 5 CTS skoru en yüksek konu, 2x copy ile sürekli kayma
 loadTicker(d);
 }catch(e){}}
@@ -475,7 +516,7 @@ function buildCardHTML(t){
   metrics=metrics.slice(0,-3);
   var burstBadge=t.isBurst?'<span class="src-pill" style="background:rgba(255,158,68,0.12);color:var(--orange)">🔥 BURST</span> ':'';
   var country=t.country&&t.country!=='GLOBAL'?'<span class="src-pill" style="background:rgba(149,128,255,0.08);color:var(--purple)">'+t.country+'</span> ':'';
-  var h='<div class="demo-card">';
+  var h='<div class="demo-card'+(t.isBurst?' is-burst':'')+'">';
   h+='<div class="demo-card-left">';
   h+='<div class="demo-card-title">'+(t.topicName||'').substring(0,80)+'</div>';
   h+='<div class="demo-card-meta">';
