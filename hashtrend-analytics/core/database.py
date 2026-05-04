@@ -187,6 +187,9 @@ class Database:
                 "volume": s.volume,
                 "recency": s.recency,
                 "is_burst": s.is_burst,
+                # source_count: source_breakdown'daki kaynak sayısı.
+                # Eski insert'lerde set edilmiyordu, mat view'da hep 0 dönüyordu.
+                "source_count": len(s.source_breakdown or {}),
                 "source_breakdown": s.source_breakdown,
                 "country": s.country or "GLOBAL",
                 "summary": s.summary or "",
@@ -236,6 +239,25 @@ class Database:
         except Exception as e:
             logger.error(f"trend_scores select hatası: {e}")
             return []
+
+    def refresh_latest_trend_scores(self) -> bool:
+        """
+        latest_trend_scores mat view'ını yenile.
+
+        Pipeline her run sonrası çağrılır — yoksa mat view bir kere oluşturulduğu
+        andaki snapshot'ta donuk kalır (üretimde 28 gün bayat kalmıştı).
+
+        Supabase tarafında `public.refresh_latest_trend_scores()` SQL function'ı
+        tanımlı olmalı (statement_timeout=300s + SECURITY DEFINER). Migration:
+        `migrations/2026-05-05-refresh-mat-view-fn.sql`.
+        """
+        try:
+            self.client.rpc("refresh_latest_trend_scores").execute()
+            logger.info("Mat view yenilendi: latest_trend_scores")
+            return True
+        except Exception as e:
+            logger.warning(f"Mat view refresh hatası: {e}")
+            return False
 
     def get_historical_scores(self, topic_name: str, days: int = 30) -> list[dict]:
         """Bir konunun tarihsel skorlarını getir (zaman serisi için)."""
