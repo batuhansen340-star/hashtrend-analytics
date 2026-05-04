@@ -512,6 +512,7 @@ async def get_trends(
     minScore: float = Query(0, ge=0, le=100, description="Minimum CTS skoru"),
     burstOnly: bool = Query(False, description="Sadece patlama yapan konular"),
     country: Optional[str] = Query(None, description="Ülke kodu (TR, US, GB, DE)"),
+    sort: str = Query("cts", description="Sıralama: 'cts' (varsayılan, en yüksek skor) veya 'recent' (en yeni)"),
     page: int = Query(1, ge=1, description="Sayfa numarası"),
     limit: int = Query(20, ge=1, le=500, description="Sayfa başına sonuç"),
 ):
@@ -520,12 +521,15 @@ async def get_trends(
 
     Varsayılan olarak en son pipeline çalıştırmasındaki CTS skorlarını döner.
     Filtreleme, sıralama ve pagination destekler.
+
+    sort=cts (default) — yüksek skorlu trendler önce
+    sort=recent — yeni skorlanan trendler önce (taze veri için)
     """
     # Cache kontrol
     cache_key = make_cache_key(
         "trends",
         category=category, source=source, minScore=minScore,
-        burstOnly=burstOnly, country=country, page=page, limit=limit,
+        burstOnly=burstOnly, country=country, sort=sort, page=page, limit=limit,
     )
     cached = cache.get(cache_key)
     if cached:
@@ -536,11 +540,13 @@ async def get_trends(
         from core.database import db
 
         # Materialized view'dan oku (en hızlı)
+        # Sort: 'recent' → scored_at desc (taze trendler), default 'cts' → cts_score desc
+        order_column = "scored_at" if sort == "recent" else "cts_score"
         query = (
             db.client.table("latest_trend_scores")
             .select("*")
             .gte("cts_score", minScore)
-            .order("cts_score", desc=True)
+            .order(order_column, desc=True)
         )
 
         if category:
