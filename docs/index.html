@@ -671,7 +671,24 @@ function buildCardHTML(t){
 }
 function renderResults(items){
   var dr=document.getElementById('dr');
-  if(!items.length){dr.innerHTML='<div class="demo-empty">Filtrelere uyan sonuç yok. <a href="javascript:resetFilters()">Filtreleri sıfırla</a>.</div>';return}
+  if(!items.length){
+    // Hangi filter'ı sıkı, akıllı ipucu üret
+    var hints=[];
+    var minCts=parseFloat((document.getElementById('f-cts')||{}).value||'0');
+    if(minCts>=50)hints.push('Min CTS '+minCts+' çok yüksek');
+    var country=(document.getElementById('f-country')||{}).value;
+    if(country)hints.push('"'+country+'" ülke filtresini kaldırmayı dene');
+    var src=(document.getElementById('f-source')||{}).value;
+    if(src)hints.push('"'+src+'" kaynak filtresini kaldır');
+    var burst=(document.getElementById('f-burst')||{}).checked;
+    if(burst)hints.push('Patlama filtresini kapatmayı dene');
+    var hours=parseInt((document.getElementById('f-time')||{}).value||'0',10);
+    if(hours>0&&hours<24)hints.push('Zaman aralığını "Son 7 gün"e çek');
+    var hintHTML=hints.length?'<div style="font-size:0.74rem;color:var(--dim2);margin-top:8px">İpucu: '+hints.join(' · ')+'</div>':'';
+    var totalAvail=lastResults?lastResults.length:0;
+    dr.innerHTML='<div class="demo-empty"><div style="font-size:0.92rem;color:var(--text);margin-bottom:6px">Filtrelere uyan sonuç yok</div><div style="font-size:0.78rem;color:var(--dim);margin-bottom:8px">'+totalAvail+' trend yüklü, hepsini filtrelendi.</div>'+hintHTML+'<div style="margin-top:14px"><button onclick="resetFilters()" class="filter-reset" style="display:inline-block;padding:8px 16px;font-size:0.84rem">Tüm filtreleri sıfırla</button></div></div>';
+    return;
+  }
   var h='';
   items.forEach(function(t){h+=buildCardHTML(t);});
   dr.innerHTML=h;
@@ -729,10 +746,23 @@ else alert(j.detail||'Error');
 }catch(e){alert('Network error')}}
 
 loadNumbers();
-// Sayfa açılır açılmaz live trend'ler ve filter UX hazır olsun
+// Sayfa açılır açılmaz live trend'ler ve filter UX hazır olsun.
+// Filter default state'i ZORLA (browser bazen slider state'i restore eder)
+function ensureDefaultFilters(){
+  var c=document.getElementById('f-country');if(c)c.value='';
+  var t=document.getElementById('f-time');if(t)t.value='168';
+  var cts=document.getElementById('f-cts');if(cts)cts.value='0';
+  var ctsv=document.getElementById('f-cts-val');if(ctsv)ctsv.textContent='0';
+  var b=document.getElementById('f-burst');if(b)b.checked=false;
+  var bl=document.getElementById('f-burst-label');if(bl)bl.classList.remove('act');
+  var s=document.getElementById('f-source');if(s)s.value='';
+}
+ensureDefaultFilters();
 loadDefaultTrends();
-// Her 5 dakikada bir API'dan taze veriyi çek (filter state korunur)
-setInterval(loadDefaultTrends, 5 * 60 * 1000);
+// Daha "anlık" his — 60 saniyede bir polling (önceden 5 dk idi)
+setInterval(loadDefaultTrends, 60 * 1000);
+// Stats ve ticker da 60 saniyede bir
+setInterval(loadNumbers, 60 * 1000);
 </script>
 </body>
 </html>
