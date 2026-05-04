@@ -30,6 +30,12 @@ class GDELTCollector(BaseCollector):
     API = "https://api.gdeltproject.org/api/v2/doc/doc"
     MAX_RECORDS = 100  # 250'den indirildi — CI runner IP'si 429 yiyordu
     MIN_PHRASE_OCCURRENCE = 3
+    # GDELT default 'python-requests/X.X.X' UA'sını 429 ile reddediyor — açık UA
+    # gönderilince 200 dönüyor. Test edilmiş: requests + UA ile 100 article.
+    HEADERS = {
+        "User-Agent": "Mozilla/5.0 (HashTrendAnalytics/2.0; +https://hashtrend.app)",
+        "Accept": "application/json",
+    }
 
     def _phrases(self, title: str) -> list[str]:
         if not title:
@@ -51,12 +57,13 @@ class GDELTCollector(BaseCollector):
                 "maxrecords": self.MAX_RECORDS,
                 "sort": "hybridrel",
             }
-            # 429 retry — GitHub Actions runner IP'si paylaşımlı, rate limit yiyor.
-            # Exponential backoff ile 3 dene.
+            # 429 retry — Açık UA olmasına rağmen GHA runner IP'si rate limit
+            # yiyebilir, exponential backoff ile 3 dene.
             resp = None
             for attempt in range(3):
-                time.sleep(2 * (attempt + 1))
-                resp = requests.get(self.API, params=params, timeout=30)
+                if attempt > 0:
+                    time.sleep(3 * attempt)  # 0, 3, 6 sn
+                resp = requests.get(self.API, params=params, headers=self.HEADERS, timeout=30)
                 if resp.status_code == 200:
                     break
                 if resp.status_code == 429:

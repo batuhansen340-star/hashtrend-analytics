@@ -19,10 +19,18 @@ from collectors.base import BaseCollector
 from core.models import RawMention
 
 
-# Aktif feed'ler — health check sırasında 200 dönen kaynaklar
+# Aktif feed'ler — 2026-05-05 health check'inde 200 + valid XML + >=10 item dönen
+# kaynaklar. Onedio /rss endpoint'i HTML dönmeye başladı (kapatmış olabilirler) —
+# bu liste yerine 7 ana akım TR haber kaynağına genişletildi (~300 mention/run).
 RSS_FEEDS = [
-    ("hurriyet", "https://www.hurriyet.com.tr/rss/anasayfa"),
-    ("onedio", "https://onedio.com/rss"),
+    ("hurriyet",   "https://www.hurriyet.com.tr/rss/anasayfa"),
+    ("milliyet",   "https://www.milliyet.com.tr/rss/rssNew/gundemRss.xml"),
+    ("sabah",      "https://www.sabah.com.tr/rss/anasayfa.xml"),
+    ("haberturk",  "https://www.haberturk.com/rss"),
+    ("cumhuriyet", "https://www.cumhuriyet.com.tr/rss/1.xml"),
+    ("cnnturk",    "https://www.cnnturk.com/feed/rss/all/news"),
+    ("trthaber",   "https://www.trthaber.com/sondakika.rss"),
+    ("aa",         "https://www.aa.com.tr/tr/rss/default?cat=guncel"),
 ]
 
 # Recency cutoff — son N saat içindeki haberleri al
