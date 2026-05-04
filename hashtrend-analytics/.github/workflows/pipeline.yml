@@ -28,31 +28,8 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           ENVIRONMENT: production
         run: python pipeline.py --no-telegram
-      - name: Refresh materialized view
-        # FIX: Supabase 'statement timeout' (kod 57014) bu adımda sık alınıyor.
-        # Pipeline kendisi başarılı (DB'ye yazdı), refresh sadece /trends
-        # endpoint'inin daha güncel veri döndürmesini sağlıyor — kritik değil.
-        # Action başarılı işaretlensin diye continue-on-error.
-        continue-on-error: true
-        env:
-          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
-        run: |
-          pip install supabase
-          python3 -c "
-          from supabase import create_client
-          import os
-          db = create_client(os.environ['SUPABASE_URL'], os.environ['SUPABASE_KEY'])
-          try:
-              # Önce CONCURRENT refresh dene (blocking değil)
-              db.rpc('refresh_latest_scores_concurrent', {}).execute()
-              print('Materialized view refreshed (concurrent)')
-          except Exception as e:
-              try:
-                  # Concurrent yoksa standart refresh
-                  db.rpc('refresh_latest_scores', {}).execute()
-                  print('Materialized view refreshed (standard)')
-              except Exception as e2:
-                  print(f'Refresh failed (skip): {e2}')
-                  # exit 0 — pipeline ana işi başarılı, view sonradan refresh edilebilir
-          "
+      # NOT: Mat view refresh PostgREST üzerinden 60s statement_timeout'a
+      # takılıyordu (kod 57014). Refresh artık Supabase tarafında pg_cron
+      # ile DB-side schedule edilmiş durumda (her 2 saatte bir, *:15 UTC).
+      # Workflow refresh adımı kaldırıldı; pipeline yalnızca collector +
+      # DB write yapar, refresh background job hallediyor.
