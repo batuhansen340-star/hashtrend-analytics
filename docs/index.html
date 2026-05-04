@@ -3,8 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>HashTrend — What the internet is talking about, right now</title>
-<meta name="description" content="34 sources. 20 countries. Real-time trend intelligence API with dynamic feeds, engagement metrics, and AI categorization.">
+<title>HashTrend — İnternetin şu an konuştuğu</title>
+<meta name="description" content="34 kaynak. 20 ülke. Dinamik akış, etkileşim metrikleri ve AI kategorizasyon ile gerçek zamanlı trend istihbarat API'si.">
+<meta name="language" content="tr">
+<meta property="og:locale" content="tr_TR">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -228,6 +230,25 @@ footer{padding:20px 0;border-top:1px solid var(--border);text-align:center;font-
   .hero-ticker-item{font-size:0.78rem}
   .hero-ticker-item .topic{max-width:180px}
 }
+
+/* ━━ Tooltip + glossary modal — kullanıcıya ne demek anlatır ━━ */
+.info-tip{display:inline-block;width:14px;height:14px;line-height:13px;text-align:center;font-size:9px;background:var(--bg3);border:1px solid var(--border2);color:var(--dim);border-radius:50%;cursor:help;margin-left:3px;font-family:var(--mono);position:relative;vertical-align:middle;font-weight:600}
+.info-tip:hover{color:var(--cyan);border-color:var(--cyan-border)}
+.info-tip:hover::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:var(--bg3);border:1px solid var(--border2);border-radius:6px;padding:8px 12px;font-size:0.72rem;color:var(--text);white-space:normal;width:max-content;max-width:240px;z-index:100;box-shadow:0 8px 24px rgba(0,0,0,.5);font-family:var(--sans);font-weight:400;line-height:1.4;text-align:left;letter-spacing:0;cursor:default}
+.info-tip:hover::before{content:'';position:absolute;bottom:calc(100% + 2px);left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:var(--border2);z-index:100}
+
+.glossary-modal{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.85);backdrop-filter:blur(8px);z-index:1000;align-items:center;justify-content:center;padding:20px}
+.glossary-modal.open{display:flex}
+.glossary-content{background:var(--bg2);border:1px solid var(--border2);border-radius:12px;padding:28px;max-width:600px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.6)}
+.glossary-content h2{font-size:1.4rem;margin:0 0 18px;background:linear-gradient(90deg,var(--cyan),var(--purple));-webkit-background-clip:text;background-clip:text;color:transparent}
+.glossary-content h3{font-size:0.92rem;font-weight:700;color:var(--cyan);margin:18px 0 4px;letter-spacing:0.3px}
+.glossary-content p{font-size:0.84rem;color:var(--dim);line-height:1.55;margin:0 0 4px}
+.glossary-content .formula{font-family:var(--mono);font-size:0.74rem;background:var(--bg3);padding:8px 12px;border-radius:6px;color:var(--cyan);margin-top:6px;display:inline-block}
+.glossary-close{float:right;background:transparent;border:none;color:var(--dim);font-size:1.4rem;cursor:pointer;line-height:1;margin-top:-4px}
+.glossary-close:hover{color:var(--text)}
+.how-link{position:relative}
+.how-link::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:1px;background:var(--cyan);transform:scaleX(0);transition:transform .15s;transform-origin:left}
+.how-link:hover::after{transform:scaleX(1)}
 </style>
 </head>
 <body>
@@ -235,100 +256,101 @@ footer{padding:20px 0;border-top:1px solid var(--border);text-align:center;font-
 <nav><div class="container">
 <div class="logo"><div class="logo-icon">H</div>Hash<span>Trend</span></div>
 <div class="nav-r">
-<a href="#demo">Live Demo</a>
-<a href="#sources">Sources</a>
-<a href="#pricing">Pricing</a>
-<a href="https://hashtrend-analytics-production.up.railway.app/docs" target="_blank">API Docs</a>
-<a href="#signup" class="nav-cta">Get Free Key</a>
+<a href="#demo">Canlı Demo</a>
+<a href="#sources">Kaynaklar</a>
+<a href="#pricing">Fiyatlar</a>
+<a href="https://hashtrend-analytics-production.up.railway.app/docs" target="_blank">API Dokümanı</a>
+<a href="#how" class="how-link" onclick="openGlossary();return false;">Nasıl Çalışır?</a>
+<a href="#signup" class="nav-cta">Ücretsiz Anahtar Al</a>
 </div>
 </div></nav>
 
 <section class="hero"><div class="container">
-<div class="hero-badge"><span class="dot"></span> Live — 34 sources, 20 countries, updated every 2 hours</div>
-<h1>What the internet is<br>talking about <em>right now</em></h1>
-<p class="hero-sub">Cross-platform trend intelligence from 34 sources. Dynamic feeds, engagement metrics, AI categorization. One API.</p>
+<div class="hero-badge"><span class="dot"></span> Canlı — 34 kaynak, 20 ülke, her 2 saatte bir güncellenir</div>
+<h1>İnternetin <em>şu an</em><br>konuştuğu her şey</h1>
+<p class="hero-sub">34 kaynaktan platform-üstü trend istihbaratı. Dinamik akış, etkileşim metrikleri, AI kategorizasyon. Tek API.</p>
 <div class="hero-actions">
-<a href="#signup" class="btn-primary">Get Free API Key</a>
-<a href="#demo" class="btn-secondary">Try Live Demo ↓</a>
+<a href="#signup" class="btn-primary">Ücretsiz API Anahtarı Al</a>
+<a href="#demo" class="btn-secondary">Canlı Demo'yu Dene ↓</a>
 </div>
 <!-- Live trend ticker — şu an gerçekten trend olan top 5 konu kayar -->
 <div class="hero-ticker" id="hero-ticker">
-  <div class="hero-ticker-label"><span class="pulse"></span> Trending now</div>
-  <div class="hero-ticker-loading" id="ticker-loading">Loading live trends…</div>
+  <div class="hero-ticker-label"><span class="pulse"></span> Şu an trend</div>
+  <div class="hero-ticker-loading" id="ticker-loading">Canlı trendler yükleniyor…</div>
   <div class="hero-ticker-track" id="ticker-track" style="display:none"></div>
 </div>
 </div></section>
 
 <div class="container">
 <div class="numbers">
-<div class="num"><div class="num-val c1" id="n-topics">—</div><div class="num-label">Topics</div></div>
-<div class="num"><div class="num-val c2" id="n-mentions">—</div><div class="num-label">Total Mentions</div></div>
-<div class="num"><div class="num-val c3" id="n-bursts">—</div><div class="num-label">Bursts</div></div>
-<div class="num"><div class="num-val c4" id="n-sources">34</div><div class="num-label">Sources</div></div>
-<div class="num"><div class="num-val c5" id="n-countries">20</div><div class="num-label">Countries</div></div>
+<div class="num"><div class="num-val c1" id="n-topics">—</div><div class="num-label">Konular <span class="info-tip" data-tip="Şu an aktif olarak takip edilen benzersiz trend sayısı">?</span></div></div>
+<div class="num"><div class="num-val c2" id="n-mentions">—</div><div class="num-label">Toplam Bahsetme <span class="info-tip" data-tip="34 kaynaktan toplanan tüm post/yorum/aramalar">?</span></div></div>
+<div class="num"><div class="num-val c3" id="n-bursts">—</div><div class="num-label">Patlamalar <span class="info-tip" data-tip="Anormal hızlı büyüyen trend (z-score>2)">?</span></div></div>
+<div class="num"><div class="num-val c4" id="n-sources">34</div><div class="num-label">Kaynaklar</div></div>
+<div class="num"><div class="num-val c5" id="n-countries">20</div><div class="num-label">Ülkeler</div></div>
 </div>
 </div>
 
 <section class="container" id="demo">
 <div class="demo">
-<h2>Try it — search any topic</h2>
-<p>Type a keyword. HashTrend searches 34 platforms and returns trends with engagement metrics.</p>
+<h2>Dene — herhangi bir konu ara</h2>
+<p>Bir anahtar kelime yaz. HashTrend 34 platformda arar ve etkileşim metrikleriyle trendleri getirir.</p>
 <div class="demo-search">
-<input type="text" id="dq" placeholder='Try "machine learning", "crypto", "MMA", "education"...' />
-<button onclick="demoSearch()">Search</button>
+<input type="text" id="dq" placeholder='Dene: "yapay zeka", "ekonomi", "burç", "eğitim"...' />
+<button onclick="demoSearch()">Ara</button>
 </div>
 <div class="demo-filters">
   <div class="filter-group">
-    <select id="f-country" title="Country filter">
-      <option value="">🌍 All</option>
+    <select id="f-country" title="Ülke filtresi">
+      <option value="">🌍 Tüm ülkeler</option>
       <option value="GLOBAL">🌐 Global</option>
-      <option value="TR">🇹🇷 Turkey</option>
-      <option value="US">🇺🇸 USA</option>
-      <option value="GB">🇬🇧 UK</option>
-      <option value="DE">🇩🇪 Germany</option>
-      <option value="FR">🇫🇷 France</option>
-      <option value="JP">🇯🇵 Japan</option>
-      <option value="KR">🇰🇷 Korea</option>
-      <option value="IN">🇮🇳 India</option>
-      <option value="BR">🇧🇷 Brazil</option>
+      <option value="TR">🇹🇷 Türkiye</option>
+      <option value="US">🇺🇸 ABD</option>
+      <option value="GB">🇬🇧 İngiltere</option>
+      <option value="DE">🇩🇪 Almanya</option>
+      <option value="FR">🇫🇷 Fransa</option>
+      <option value="JP">🇯🇵 Japonya</option>
+      <option value="KR">🇰🇷 Kore</option>
+      <option value="IN">🇮🇳 Hindistan</option>
+      <option value="BR">🇧🇷 Brezilya</option>
     </select>
   </div>
   <div class="filter-group">
-    <select id="f-time" title="Time range">
-      <option value="">⏰ All time</option>
-      <option value="1">Last 1h</option>
-      <option value="6">Last 6h</option>
-      <option value="24">Last 24h</option>
-      <option value="168" selected>Last 7d</option>
+    <select id="f-time" title="Zaman aralığı">
+      <option value="">⏰ Tümü</option>
+      <option value="1">Son 1 saat</option>
+      <option value="6">Son 6 saat</option>
+      <option value="24">Son 24 saat</option>
+      <option value="168" selected>Son 7 gün</option>
     </select>
   </div>
   <div class="filter-group">
-    <select id="f-source" title="Source filter">
-      <option value="">📡 All sources</option>
-      <optgroup label="Sosyal">
+    <select id="f-source" title="Kaynak filtresi">
+      <option value="">📡 Tüm kaynaklar</option>
+      <optgroup label="Sosyal Medya">
         <option value="bluesky">🦋 Bluesky</option>
         <option value="reddit">🔴 Reddit</option>
         <option value="fediverse">🐘 Mastodon</option>
         <option value="hackernews">📰 Hacker News</option>
       </optgroup>
-      <optgroup label="Search & News">
+      <optgroup label="Arama & Haber">
         <option value="google_trends">📈 Google Trends</option>
         <option value="newsapi">📰 NewsAPI</option>
-        <option value="global_news">🌐 Global News</option>
-        <option value="search_trends">🔍 Search Trends</option>
+        <option value="global_news">🌐 Dünya Haberleri</option>
+        <option value="search_trends">🔍 Arama Trendleri</option>
       </optgroup>
-      <optgroup label="Tech & Dev">
+      <optgroup label="Teknoloji & Geliştirici">
         <option value="github">💻 GitHub</option>
         <option value="stackoverflow">📚 Stack Overflow</option>
         <option value="devto">✍️ Dev.to</option>
-        <option value="arxiv">🔬 Arxiv</option>
+        <option value="arxiv">🔬 Arxiv (bilim)</option>
       </optgroup>
-      <optgroup label="Media & Charts">
+      <optgroup label="Medya & Listeler">
         <option value="youtube">▶️ YouTube</option>
         <option value="medium">📝 Medium</option>
         <option value="twitch">🎮 Twitch</option>
-        <option value="apptrends">📱 App Trends</option>
-        <option value="spotify">🎵 Music Charts</option>
+        <option value="apptrends">📱 Uygulama Listeleri</option>
+        <option value="spotify">🎵 Müzik Listeleri</option>
       </optgroup>
       <optgroup label="🇹🇷 Türkiye">
         <option value="eksisozluk">Ekşi Sözlük</option>
@@ -340,23 +362,23 @@ footer{padding:20px 0;border-top:1px solid var(--border);text-align:center;font-
     </select>
   </div>
   <div class="cts-slider">
-    <label for="f-cts">Min CTS</label>
+    <label for="f-cts">Min CTS <span class="info-tip" data-tip="Composite Trend Score (0-100). Bir konunun ne kadar güçlü trend olduğu — kaynak çeşitliliği, hız, hacim ve tazelikten hesaplanır">?</span></label>
     <input type="range" id="f-cts" min="0" max="100" value="0" step="5" />
     <span class="cts-value" id="f-cts-val">0</span>
   </div>
   <label class="burst-toggle" id="f-burst-label">
-    <input type="checkbox" id="f-burst" /> 🔥 Bursts only
+    <input type="checkbox" id="f-burst" /> 🔥 Sadece patlamalar <span class="info-tip" data-tip="Anormal hızlı büyüyen trendler (z-score > 2)">?</span>
   </label>
-  <button class="filter-reset" onclick="resetFilters()" title="Filtreleri temizle">Reset</button>
+  <button class="filter-reset" onclick="resetFilters()" title="Filtreleri temizle">Sıfırla</button>
 </div>
-<div class="demo-results" id="dr"><div class="demo-loading">Loading live trends…</div></div>
+<div class="demo-results" id="dr"><div class="demo-loading">Canlı trendler yükleniyor…</div></div>
 </div>
 </section>
 
 <section class="container" id="sources">
 <div class="sources">
-<h2>34 sources. One unified score.</h2>
-<p>We aggregate trends from search engines, social media, developer platforms, news, finance, entertainment, and science — so you don't have to.</p>
+<h2>34 kaynak. Tek birleşik skor.</h2>
+<p>Arama motorları, sosyal medya, geliştirici platformları, haberler, finans, eğlence ve bilimden trendleri biz topluyoruz — sen toplama derdine düşme.</p>
 <div class="src-grid">
 <div class="src-tag active">Google Trends</div>
 <div class="src-tag active">Reddit</div>
@@ -385,72 +407,72 @@ footer{padding:20px 0;border-top:1px solid var(--border);text-align:center;font-
 <div class="src-tag">Telegram</div>
 <div class="src-tag">Spotify</div>
 </div>
-<p style="margin-top:12px;font-size:0.72rem;color:var(--dim2);text-align:center">Cyan = live now. Gray = coming this month.</p>
+<p style="margin-top:12px;font-size:0.72rem;color:var(--dim2);text-align:center">Cyan = şu an aktif · Gri = bu ay geliyor (Apify entegrasyonuyla)</p>
 </div>
 </section>
 
 <section class="container" id="compare">
 <div class="compare">
-<h2>HashTrend vs. the competition</h2>
+<h2>HashTrend vs. Rakipler</h2>
 <table class="compare-table">
-<tr><th>Feature</th><th class="ht">HashTrend</th><th>Exploding Topics</th><th>SparkToro</th><th>Brandwatch</th></tr>
-<tr><td>Sources</td><td class="ht">34 (→50)</td><td>Search + social</td><td>Social only</td><td>Social only</td></tr>
-<tr><td>Dynamic keyword feed</td><td class="ht"><span class="check">✓</span></td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td></tr>
-<tr><td>Platform-specific metrics</td><td class="ht"><span class="check">✓</span> upvotes, views, stars</td><td><span class="cross">✗</span></td><td>Partial</td><td><span class="check">✓</span></td></tr>
-<tr><td>Country filtering</td><td class="ht"><span class="check">✓</span> 20 countries</td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td></tr>
-<tr><td>REST API</td><td class="ht"><span class="check">✓</span> Free tier</td><td>Business only ($249)</td><td>On request</td><td>Enterprise only</td></tr>
-<tr><td>AI categorization</td><td class="ht"><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td></tr>
-<tr><td>Education potential scoring</td><td class="ht"><span class="check">✓</span></td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td></tr>
-<tr><td>Burst detection</td><td class="ht"><span class="check">✓</span> z-score</td><td><span class="check">✓</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td></tr>
-<tr><td>Starting price</td><td class="ht">Free</td><td>$39/mo</td><td>$50/mo</td><td>$800+/mo</td></tr>
+<tr><th>Özellik</th><th class="ht">HashTrend</th><th>Exploding Topics</th><th>SparkToro</th><th>Brandwatch</th></tr>
+<tr><td>Kaynak</td><td class="ht">34 (→50)</td><td>Arama + sosyal</td><td>Sadece sosyal</td><td>Sadece sosyal</td></tr>
+<tr><td>Dinamik anahtar kelime arama</td><td class="ht"><span class="check">✓</span></td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td></tr>
+<tr><td>Platforma özel metrikler</td><td class="ht"><span class="check">✓</span> oy, izlenme, yıldız</td><td><span class="cross">✗</span></td><td>Kısmen</td><td><span class="check">✓</span></td></tr>
+<tr><td>Ülke filtresi</td><td class="ht"><span class="check">✓</span> 20 ülke</td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td></tr>
+<tr><td>REST API</td><td class="ht"><span class="check">✓</span> Ücretsiz tier</td><td>Sadece Business ($249)</td><td>Talep üzerine</td><td>Sadece Enterprise</td></tr>
+<tr><td>AI kategorizasyon</td><td class="ht"><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td></tr>
+<tr><td>Eğitim potansiyel skoru</td><td class="ht"><span class="check">✓</span></td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td></tr>
+<tr><td>Patlama tespiti</td><td class="ht"><span class="check">✓</span> z-score</td><td><span class="check">✓</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td></tr>
+<tr><td>Başlangıç fiyatı</td><td class="ht">Ücretsiz</td><td>$39/ay</td><td>$50/ay</td><td>$800+/ay</td></tr>
 </table>
 </div>
 </section>
 
 <section class="container" id="pricing">
 <div class="pricing">
-<h2>Simple pricing. Start free.</h2>
+<h2>Basit fiyatlama. Ücretsiz başla.</h2>
 <div class="price-grid">
 <div class="price-card">
-<div class="price-name">Free</div>
-<div class="price-amount">$0 <span>/mo</span></div>
-<div class="price-desc">Perfect for trying out</div>
+<div class="price-name">Ücretsiz</div>
+<div class="price-amount">$0 <span>/ay</span></div>
+<div class="price-desc">Denemek için ideal</div>
 <ul class="price-features">
-<li>100 API requests / day</li>
-<li>All 34 sources</li>
-<li>Dynamic feed search</li>
-<li>CTS score + categories</li>
-<li>Community support</li>
+<li>Günde 100 API isteği</li>
+<li>34 kaynağın hepsi</li>
+<li>Dinamik feed araması</li>
+<li>CTS skoru + kategoriler</li>
+<li>Topluluk desteği</li>
 </ul>
-<a href="#signup" class="price-btn">Get Free Key</a>
+<a href="#signup" class="price-btn">Ücretsiz Anahtar Al</a>
 </div>
 <div class="price-card pop">
 <div class="price-name">Pro</div>
-<div class="price-amount">$29 <span>/mo</span></div>
-<div class="price-desc">For professionals and teams</div>
+<div class="price-amount">$29 <span>/ay</span></div>
+<div class="price-desc">Profesyoneller ve ekipler için</div>
 <ul class="price-features">
-<li>10,000 API requests / day</li>
-<li>Dynamic feed + saved searches</li>
-<li>Engagement metrics (upvotes, views)</li>
-<li>Education potential scoring</li>
-<li>Webhook alerts</li>
-<li>Priority support</li>
+<li>Günde 10.000 API isteği</li>
+<li>Dinamik feed + kayıtlı aramalar</li>
+<li>Etkileşim metrikleri (oy, izlenme)</li>
+<li>Eğitim potansiyel skoru</li>
+<li>Webhook bildirimleri</li>
+<li>Öncelikli destek</li>
 </ul>
-<a href="#signup" class="price-btn">Start Pro</a>
+<a href="#signup" class="price-btn">Pro'ya Başla</a>
 </div>
 <div class="price-card">
 <div class="price-name">Business</div>
-<div class="price-amount">$99 <span>/mo</span></div>
-<div class="price-desc">For agencies and enterprises</div>
+<div class="price-amount">$99 <span>/ay</span></div>
+<div class="price-desc">Ajans ve kurumlar için</div>
 <ul class="price-features">
-<li>Unlimited API requests</li>
-<li>All Pro features</li>
-<li>Custom feeds + white-label</li>
-<li>50+ sources (when available)</li>
-<li>Dedicated support + SLA</li>
-<li>Custom integrations</li>
+<li>Sınırsız API isteği</li>
+<li>Tüm Pro özellikleri</li>
+<li>Özel feed + white-label</li>
+<li>50+ kaynak (eklendikçe)</li>
+<li>Özel destek + SLA</li>
+<li>Özel entegrasyonlar</li>
 </ul>
-<a href="#signup" class="price-btn">Contact Us</a>
+<a href="#signup" class="price-btn">Bize Ulaş</a>
 </div>
 </div>
 </div>
@@ -458,26 +480,66 @@ footer{padding:20px 0;border-top:1px solid var(--border);text-align:center;font-
 
 <section class="container" id="signup">
 <div class="signup">
-<h2>Get your free API key</h2>
-<p>100 requests/day. No credit card. Instant key.</p>
+<h2>Ücretsiz API anahtarını al</h2>
+<p>Günde 100 istek. Kredi kartı yok. Anlık anahtar.</p>
 <div class="sf">
-<input type="email" id="se" placeholder="you@company.com" />
-<button onclick="doSignup()">Get Key</button>
+<input type="email" id="se" placeholder="sen@sirketin.com" />
+<button onclick="doSignup()">Anahtar Al</button>
 </div>
 <div id="sres">
-<div style="font-size:0.72rem;color:var(--dim);margin-bottom:6px">Your API Key:</div>
+<div style="font-size:0.72rem;color:var(--dim);margin-bottom:6px">API Anahtarın:</div>
 <div id="sk"></div>
 </div>
 </div>
 </section>
 
-<footer><div class="container">HashTrend Analytics — Built by Batuhan Sen · 34 sources, 20 countries, updated every 2 hours · <a href="https://hashtrend-analytics-production.up.railway.app/docs" target="_blank">API Docs</a></div></footer>
+<!-- Glossary modal — tüm metriklerin Türkçe açıklaması -->
+<div class="glossary-modal" id="glossary" onclick="if(event.target===this)closeGlossary()">
+  <div class="glossary-content">
+    <button class="glossary-close" onclick="closeGlossary()" aria-label="Kapat">×</button>
+    <h2>HashTrend nasıl çalışır?</h2>
+    <p>Her 2 saatte bir <strong>34 kaynaktan</strong> ham veri toplanır, normalize edilir, kategorize edilir ve <strong>CTS</strong> (Composite Trend Score) ile puanlanır.</p>
+
+    <h3>📊 CTS Skoru (0-100)</h3>
+    <p>Bir konunun <strong>ne kadar güçlü trend olduğunu</strong> ölçer. 4 metriğin ağırlıklı ortalaması:</p>
+    <p><span class="formula">CTS = 35 × kapsam + 25 × hız + 20 × hacim + 20 × tazelik</span></p>
+
+    <h3>🌐 Platform Kapsamı</h3>
+    <p>Konu <strong>kaç farklı kaynakta</strong> görünüyor (1-34). 5+ kaynak = "viral", 1 kaynak = "niş".</p>
+
+    <h3>🚀 Hız (Velocity)</h3>
+    <p>Konunun <strong>büyüme oranı</strong> — şimdiki mention sayısı / önceki snapshot. Yeni veya hızla büyüyen konular için yüksek.</p>
+
+    <h3>📈 Hacim</h3>
+    <p>Toplam <strong>mention/upvote/izlenme/yıldız sayısı</strong> (logaritmik normalize). 1M görüntülenen YouTube videosu = 1K upvote'lu Reddit post'undan farklı ölçekte.</p>
+
+    <h3>⏰ Tazelik (Recency)</h3>
+    <p>Son görülme zamanından <strong>0-24 saat</strong> içinde puan. 1 saat önce = 1.0, 24 saat = 0.0.</p>
+
+    <h3>🔥 Patlama (Burst)</h3>
+    <p>Z-score bazlı anomali tespiti. Konunun mention sayısı, geçmiş ortalamasının <strong>standart sapma × 2</strong> üstüneyse "patlama" işaretlenir.</p>
+
+    <h3>🎓 Eğitim Skoru</h3>
+    <p>0-10 arası. AI bir konunun <strong>kurs/içerik üretimi için</strong> ne kadar uygun olduğunu değerlendirir. Yüksek skor = derinlik var, kısa ömürlü meme değil.</p>
+
+    <h3>🌍 Ülke Filtresi</h3>
+    <p>20 ülke desteklenir. Her trend, en güçlü ilişkili ülkeye (veya GLOBAL) atanır. Reddit r/turkey + Webrazzi gibi kaynaklar otomatik TR olarak işaretlenir.</p>
+
+    <h3>📡 25 Aktif Kaynak (canlı)</h3>
+    <p>Google Trends, Reddit, Hacker News, Bluesky, YouTube, GitHub, NewsAPI, Wikipedia, Medium, Mastodon, Stack Overflow, Dev.to, Arxiv, Twitch, Yahoo Finance, Global News, Apple App Store, Apple Music, Ekşi Sözlük, Webrazzi, GDELT (TR), trends24, TR Gündem RSS, Search Trends, Commerce.</p>
+
+    <h3>🔜 Geliyor (v1.1)</h3>
+    <p>TikTok, Instagram, X (Twitter), LinkedIn, Pinterest — Apify entegrasyonu ile.</p>
+  </div>
+</div>
+
+<footer><div class="container">HashTrend Analytics — Batuhan Şen tarafından geliştirildi · 34 kaynak, 20 ülke, her 2 saatte bir güncellenir · <a href="https://hashtrend-analytics-production.up.railway.app/docs" target="_blank">API Dokümanı</a> · <a href="#glossary" onclick="openGlossary();return false;">Sözlük</a></div></footer>
 
 <script>
 const API='https://hashtrend-analytics-production.up.railway.app',KEY='ht_live_81b0a73385734642970237f6';
 
 function fn(n){if(n>=1e9)return(n/1e9).toFixed(1)+'B';if(n>=1e6)return(n/1e6).toFixed(1)+'M';if(n>=1e3)return(n/1e3).toFixed(n>=1e4?0:1)+'K';return n.toString()}
-function ta(d){var s=Math.floor((new Date()-new Date(d))/1000);if(s<60)return'just now';if(s<3600)return Math.floor(s/60)+'m ago';if(s<86400)return Math.floor(s/3600)+'h ago';return Math.floor(s/86400)+'d ago'}
+function ta(d){var s=Math.floor((new Date()-new Date(d))/1000);if(s<60)return'az önce';if(s<3600)return Math.floor(s/60)+' dk önce';if(s<86400)return Math.floor(s/3600)+' sa önce';return Math.floor(s/86400)+' g önce'}
 function srcClass(s){return'src-pill src-'+(s||'').toLowerCase().replace(/[^a-z]/g,'')}
 
 // Sayı count-up animasyonu — 0'dan hedef değere kadar yumuşak geçiş
@@ -515,7 +577,7 @@ function loadTicker(items){
   var track=document.getElementById('ticker-track');
   var loading=document.getElementById('ticker-loading');
   if(!track||!loading)return;
-  if(!items||!items.length){loading.textContent='No live trends yet';return}
+  if(!items||!items.length){loading.textContent='Henüz canlı trend yok';return}
   var top=items.slice(0,5);
   // Aynı listeyi 2 kez render et — keyframe %50 translate'ta seamless loop
   var renderItem=function(t){
@@ -541,17 +603,17 @@ if(v.length>=2)searchTimer=setTimeout(function(){demoSearch()},600);
 });
 document.getElementById('dq').addEventListener('keydown',function(e){if(e.key==='Enter')demoSearch()});
 
-// Sayfa açıldığında default trends — kullanıcı keyword yazmadan top 50 görsün
+// Sayfa açıldığında default trends — sort=recent ile bugünün taze trendleri
 async function loadDefaultTrends(){
   var dr=document.getElementById('dr');
-  dr.innerHTML='<div class="demo-loading">Loading live trends…</div>';
+  dr.innerHTML='<div class="demo-loading">Canlı trendler yükleniyor…</div>';
   try{
-    var r=await fetch(API+'/api/v1/trends?limit=50',{headers:{'X-API-Key':KEY}});
+    var r=await fetch(API+'/api/v1/trends?limit=100&sort=recent',{headers:{'X-API-Key':KEY}});
     var j=await r.json();var d=j.data||[];
     lastResults=d;
-    if(!d.length){dr.innerHTML='<div class="demo-empty">No trends yet — pipeline running…</div>';return}
+    if(!d.length){dr.innerHTML='<div class="demo-empty">Henüz trend yok — pipeline çalışıyor…</div>';return}
     renderResults(applyFilters(d));
-  }catch(e){dr.innerHTML='<div class="demo-empty">API error. Retrying…</div>'}
+  }catch(e){dr.innerHTML='<div class="demo-empty">API hatası. Tekrar deniyor…</div>'}
 }
 
 // Filter event listeners — değişince son arama sonuçlarını re-filter et
@@ -609,11 +671,16 @@ function buildCardHTML(t){
 }
 function renderResults(items){
   var dr=document.getElementById('dr');
-  if(!items.length){dr.innerHTML='<div class="demo-empty">No results match filters. <a href="javascript:resetFilters()">Reset filters</a>.</div>';return}
+  if(!items.length){dr.innerHTML='<div class="demo-empty">Filtrelere uyan sonuç yok. <a href="javascript:resetFilters()">Filtreleri sıfırla</a>.</div>';return}
   var h='';
   items.forEach(function(t){h+=buildCardHTML(t);});
   dr.innerHTML=h;
 }
+
+// Glossary modal aç/kapa — kullanıcıya tüm metriklerin TR açıklamasını gösterir
+function openGlossary(){document.getElementById('glossary').classList.add('open');document.body.style.overflow='hidden'}
+function closeGlossary(){document.getElementById('glossary').classList.remove('open');document.body.style.overflow=''}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeGlossary()});
 function rerender(){renderResults(applyFilters(lastResults));}
 bindFilter('f-country',rerender);
 bindFilter('f-time',rerender);
@@ -640,16 +707,16 @@ function resetFilters(){
 async function demoSearch(){
 var q=document.getElementById('dq').value.trim();
 var dr=document.getElementById('dr');
-// Boş arama → default trends'a dön (otomatik gösterim, "type at least" göstermeyiz)
+// Boş arama → default trends'a dön (otomatik gösterim)
 if(!q||q.length<2){loadDefaultTrends();return}
-dr.innerHTML='<div class="demo-loading">Searching 34 platforms for &quot;'+q+'&quot;…</div>';
+dr.innerHTML='<div class="demo-loading">"'+q+'" için 34 platformda aranıyor…</div>';
 try{
 var r=await fetch(API+'/api/v2/feed?q='+encodeURIComponent(q)+'&limit=50',{headers:{'X-API-Key':KEY}});
 var j=await r.json();var d=j.data||[];
 lastResults=d;
-if(!d.length){dr.innerHTML='<div class="demo-empty">No results for "'+q+'". Try "AI", "crypto", or "education".</div>';return}
+if(!d.length){dr.innerHTML='<div class="demo-empty">"'+q+'" için sonuç yok. Dene: "yapay zeka", "kripto", "eğitim".</div>';return}
 renderResults(applyFilters(d));
-}catch(e){dr.innerHTML='<div class="demo-empty">API error. Try again.</div>'}}
+}catch(e){dr.innerHTML='<div class="demo-empty">API hatası. Tekrar dene.</div>'}}
 
 async function doSignup(){
 var em=document.getElementById('se').value.trim();
