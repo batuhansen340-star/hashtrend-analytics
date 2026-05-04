@@ -54,8 +54,13 @@ class AppTrendsCollector(BaseCollector):
             logger.warning(f"[apptrends] {code} JSON parse fail: {e}")
             return []
         entries = (data.get("feed") or {}).get("entry") or []
+        # iTunes RSS bazen entry'yi tek dict olarak döndürür (array değil)
+        if isinstance(entries, dict):
+            entries = [entries]
         mentions = []
         for rank, entry in enumerate(entries, start=1):
+            if not isinstance(entry, dict):
+                continue  # defensive: bazı entries str olabilir
             name = ((entry.get("im:name") or {}).get("label") or "").strip()
             if not name:
                 continue
