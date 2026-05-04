@@ -28,7 +28,7 @@ class GDELTCollector(BaseCollector):
     COLLECT_INTERVAL_MINUTES = 15
 
     API = "https://api.gdeltproject.org/api/v2/doc/doc"
-    MAX_RECORDS = 250
+    MAX_RECORDS = 100  # 250'den indirildi — CI runner IP'si 429 yiyordu
     MIN_PHRASE_OCCURRENCE = 3
 
     def _phrases(self, title: str) -> list[str]:
@@ -43,18 +43,28 @@ class GDELTCollector(BaseCollector):
 
     def collect(self) -> list[RawMention]:
         try:
-            time.sleep(1.0)
             params = {
                 "query": "sourcecountry:TU",
                 "mode": "artlist",
                 "format": "json",
-                "timespan": "4h",
+                "timespan": "2h",  # 4h'tan indirildi — daha küçük query, daha az 429
                 "maxrecords": self.MAX_RECORDS,
                 "sort": "hybridrel",
             }
-            resp = requests.get(self.API, params=params, timeout=30)
-            if resp.status_code != 200:
+            # 429 retry — GitHub Actions runner IP'si paylaşımlı, rate limit yiyor.
+            # Exponential backoff ile 3 dene.
+            resp = None
+            for attempt in range(3):
+                time.sleep(2 * (attempt + 1))
+                resp = requests.get(self.API, params=params, timeout=30)
+                if resp.status_code == 200:
+                    break
+                if resp.status_code == 429:
+                    logger.warning(f"[gdelt] 429 rate limit, attempt {attempt+1}/3")
+                    continue
                 logger.warning(f"[gdelt] status {resp.status_code}")
+                return []
+            if resp is None or resp.status_code != 200:
                 return []
 
             articles = resp.json().get("articles", []) or []

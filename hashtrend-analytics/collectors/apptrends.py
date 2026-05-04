@@ -1,71 +1,94 @@
-"""App Trends Collector — App Store ve Google Play trending uygulamalar."""
+"""
+App Trends Collector v2 — iTunes RSS Top Free Apps.
+
+Eski v1 (play.google.com/store/apps/trending) endpoint kapanmıştı (404).
+v2 Apple'ın iTunes RSS feed'ini kullanır — public, JSON, auth yok.
+
+Endpoint: itunes.apple.com/<country>/rss/topfreeapplications/limit=N/json
+Country: US (global proxy) + TR (yerel pazar)
+"""
 
 import requests
-from datetime import datetime
 from loguru import logger
 from collectors.base import BaseCollector
 from core.models import RawMention
 
 
+COUNTRIES = [("us", "GLOBAL"), ("tr", "TR")]
+LIMIT_PER_COUNTRY = 25
+
+
 class AppTrendsCollector(BaseCollector):
     SOURCE_NAME = "apptrends"
-    COLLECT_INTERVAL_MINUTES = 120
+    COLLECT_INTERVAL_MINUTES = 240
 
-    def collect(self) -> list[RawMention]:
-        mentions = []
-        session = requests.Session()
-        session.headers.update({
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+    def __init__(self):
+        super().__init__()
+        self.session = requests.Session()
+        self.session.headers.update({
+            "User-Agent": "HashTrendAnalytics/2.0 (https://hashtrend.app)",
+            "Accept": "application/json",
         })
 
-        # 1. Google Play Store Trending (RSS/scrape)
-        try:
-            resp = session.get("https://play.google.com/store/apps/trending", timeout=15)
-            if resp.status_code == 200:
-                from bs4 import BeautifulSoup
-                soup = BeautifulSoup(resp.text, "html.parser")
-                apps = soup.select("div.Vpfmgd, span.DdYX5, c-wiz a[href*='/store/apps/details']")
-                titles = set()
-                for app in apps[:20]:
-                    title = app.text.strip()
-                    if title and len(title) > 2 and title not in titles:
-                        titles.add(title)
-                        mentions.append(RawMention(
-                            topic=f"App: {title}",
-                            source=self.SOURCE_NAME,
-                            mention_count=2000,
-                            url="https://play.google.com/store/apps",
-                            collected_at=self.collected_at,
-                            country="GLOBAL",
-                        ))
-                logger.debug(f"[{self.SOURCE_NAME}] Play Store: {len(titles)} app")
-        except Exception as e:
-            logger.debug(f"[{self.SOURCE_NAME}] Play Store hata: {e}")
-
-        # 2. AlternativeTo trending (what people are searching for)
-        try:
-            resp = session.get("https://alternativeto.net/trending/", timeout=15)
-            if resp.status_code == 200:
-                from bs4 import BeautifulSoup
-                soup = BeautifulSoup(resp.text, "html.parser")
-                items = soup.select("a.app-card-link, h2.app-card-name, [data-testid='app-name']")
-                if not items:
-                    items = soup.select("a[href*='/software/'] h2, a[href*='/software/'] span.name")
-                seen = set()
-                for item in items[:15]:
-                    name = item.text.strip()
-                    if name and len(name) > 2 and name not in seen:
-                        seen.add(name)
-                        mentions.append(RawMention(
-                            topic=f"Software: {name}",
-                            source=self.SOURCE_NAME,
-                            mention_count=1000,
-                            url=f"https://alternativeto.net/software/{name.lower().replace(' ', '-')}/",
-                            collected_at=self.collected_at,
-                            country="GLOBAL",
-                        ))
-                logger.debug(f"[{self.SOURCE_NAME}] AlternativeTo: {len(seen)} software")
-        except Exception as e:
-            logger.debug(f"[{self.SOURCE_NAME}] AlternativeTo hata: {e}")
-
+    def collect(self) -> list[RawMention]:
+        mentions: list[RawMention] = []
+        for code, label in COUNTRIES:
+            try:
+                mentions.extend(self._fetch_country(code, label))
+            except Exception as e:
+                logger.warning(f"[apptrends] {code} fetch hatası: {e}")
         return mentions
+
+    def _fetch_country(self, code: str, label: str) -> list[RawMention]:
+        url = (
+            f"https://itunes.apple.com/{code}/rss/topfreeapplications/"
+            f"limit={LIMIT_PER_COUNTRY}/json"
+        )
+        resp = self.session.get(url, timeout=15)
+        if resp.status_code != 200:
+            logger.warning(f"[apptrends] {code} HTTP {resp.status_code}")
+            return []
+        try:
+            data = resp.json()
+        except Exception as e:
+            logger.warning(f"[apptrends] {code} JSON parse fail: {e}")
+            return []
+        entries = (data.get("feed") or {}).get("entry") or []
+        mentions = []
+        for rank, entry in enumerate(entries, start=1):
+            name = ((entry.get("im:name") or {}).get("label") or "").strip()
+            if not name:
+                continue
+            cat = ((entry.get("category") or {}).get("attributes") or {}).get("label", "")
+            artist = ((entry.get("im:artist") or {}).get("label") or "").strip()
+            link = ""
+            for link_entry in entry.get("link") or []:
+                attrs = link_entry.get("attributes") or {}
+                if attrs.get("rel") == "alternate":
+                    link = attrs.get("href") or ""
+                    break
+            mentions.append(RawMention(
+                source=self.SOURCE_NAME,
+                topic=name,
+                mention_count=LIMIT_PER_COUNTRY - rank + 1,
+                country=label,
+                url=link or None,
+                raw_data={
+                    "type": "app_chart",
+                    "rank": rank,
+                    "category": cat,
+                    "developer": artist,
+                    "country_code": code,
+                },
+            ))
+        logger.info(f"[apptrends] {code}: {len(mentions)} app")
+        return mentions
+
+
+if __name__ == "__main__":
+    collector = AppTrendsCollector()
+    mentions = collector.run()
+    print(f"Toplam {len(mentions)} app trend")
+    for m in mentions[:10]:
+        rank = m.raw_data.get("rank", "?")
+        print(f"  [#{rank:>2} {m.country}] {m.topic[:60]}")
