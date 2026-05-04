@@ -13,12 +13,19 @@ Ek iyileştirmeler:
 """
 
 import re
-from collections import defaultdict
+from collections import Counter, defaultdict
 from datetime import datetime
 from typing import Optional
 from loguru import logger
 
 from core.models import RawMention, NormalizedTopic
+
+
+# TR-spesifik kaynaklar — bu kaynaklardan gelen mention TR olarak yorumlanır.
+# Bluesky için ayrı TR sorgu detection bluesky.py içinde yapılır.
+TR_SPECIFIC_SOURCES = frozenset({
+    "eksisozluk", "webrazzi", "gdelt", "tr_news_rss", "trends24",
+})
 
 
 class Normalizer:
@@ -194,7 +201,7 @@ class Normalizer:
             first_seen=min(timestamps),
             last_seen=max(timestamps),
             total_mentions=total,
-            country=next((m.country for m, _ in group if m.country and m.country != 'GLOBAL' and m.country is not None), best[0].country),
+            country=self._resolve_country(group),
             sources=sources,
         )
 
@@ -205,6 +212,44 @@ class Normalizer:
         topic._source_mentions = source_mentions  # type: ignore
 
         return topic
+
+    @staticmethod
+    def _resolve_country(
+        group: list[tuple[RawMention, set[str]]]
+    ) -> Optional[str]:
+        """
+        Group'taki mention'lardan dominant country'yi belirle.
+
+        Eski mantık: `next()` + ilk non-GLOBAL — group iteration order'a bağlı,
+        rastgele country atıyordu (Chuck Norris=KR, Tim Cook=TR vs.).
+
+        Yeni mantık:
+        1. TR-spesifik kaynak mention'ları toplam'ın %30+'ı ise → 'TR'
+        2. Aksi halde mention_count ağırlıklı çoğunluk (en çok bahsedilen country)
+        3. Hiç non-GLOBAL country yoksa → 'GLOBAL'
+        """
+        if not group:
+            return "GLOBAL"
+
+        total = sum(m.mention_count for m, _ in group) or 1
+
+        tr_weight = sum(
+            m.mention_count for m, _ in group
+            if (m.source in TR_SPECIFIC_SOURCES) or (m.country == "TR")
+        )
+        if tr_weight / total >= 0.30:
+            return "TR"
+
+        # mention_count ağırlıklı country sayımı
+        country_weights: Counter[str] = Counter()
+        for m, _ in group:
+            c = (m.country or "").strip().upper()
+            if c and c != "GLOBAL":
+                country_weights[c] += m.mention_count
+
+        if country_weights:
+            return country_weights.most_common(1)[0][0]
+        return "GLOBAL"
 
     @staticmethod
     def _make_slug(text: str) -> str:

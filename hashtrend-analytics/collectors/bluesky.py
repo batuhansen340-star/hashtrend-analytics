@@ -27,6 +27,9 @@ PROBE_QUERIES = [
     "trump", "ukraine", "climate",
 ]
 
+# TR sinyali veren query'ler — bu sorgularla bulunan post'lar country='TR' işaretlenir.
+TR_QUERIES = frozenset({"türkiye", "istanbul", "spor"})
+
 
 class BlueskyCollector(BaseCollector):
     SOURCE_NAME = "bluesky"
@@ -82,10 +85,12 @@ class BlueskyCollector(BaseCollector):
             # İlk 200 karakter topic — uzun post'larda öz alır
             topic = text[:200].replace("\n", " ").strip()
             handle = (p.get("author") or {}).get("handle", "")
+            country = "TR" if query in TR_QUERIES else None
             mentions.append(RawMention(
                 source=self.SOURCE_NAME,
                 topic=topic,
                 mention_count=engagement,
+                country=country,
                 url=f"https://bsky.app/profile/{handle}/post/{(p.get('uri') or '').rsplit('/', 1)[-1]}" if handle else None,
                 raw_data={
                     "query": query,
