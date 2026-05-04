@@ -160,8 +160,44 @@ h1 em{font-style:normal;background:linear-gradient(135deg,var(--cyan),var(--cyan
 #sk{font-family:var(--mono);color:var(--cyan);font-size:0.9rem;word-break:break-all}
 
 footer{padding:20px 0;border-top:1px solid var(--border);text-align:center;font-size:0.7rem;color:var(--dim2)}
-@media(max-width:768px){.numbers{grid-template-columns:repeat(3,1fr)}.price-grid{grid-template-columns:1fr}.demo-search{flex-direction:column}}
-@media(max-width:480px){.numbers{grid-template-columns:repeat(2,1fr)}.hero-actions{flex-direction:column;align-items:center}}
+@media(max-width:768px){
+  .numbers{grid-template-columns:repeat(3,1fr)}
+  .price-grid{grid-template-columns:1fr}
+  .demo-search{flex-direction:column}
+  .demo-search input{font-size:16px}  /* iOS auto-zoom önlemi */
+  .demo-filters{flex-direction:column;align-items:stretch}
+  .demo-filters .filter-group,.demo-filters .cts-slider,.demo-filters .burst-toggle{width:100%}
+  .demo-filters select{width:100%}
+  .demo-filters input[type=range]{flex:1;width:auto}
+  .demo-filters .filter-reset{margin-left:0;width:100%;text-align:center}
+  .demo{padding:18px 14px}
+  .compare-table{font-size:0.7rem}
+  .compare-table th,.compare-table td{padding:6px 8px}
+  h1{font-size:2.1rem!important}
+  .hero-sub{font-size:0.92rem}
+  nav .container{flex-wrap:wrap;gap:8px}
+  .nav-r{gap:12px;flex-wrap:wrap;justify-content:flex-end}
+  .nav-r a{font-size:0.78rem}
+}
+@media(max-width:560px){
+  .demo-card{flex-direction:column;align-items:flex-start;gap:8px}
+  .demo-card-right{text-align:left;align-self:flex-start;display:flex;align-items:center;gap:10px}
+  .demo-card-cat{margin-top:0}
+  .demo-card-meta{font-size:0.66rem}
+}
+@media(max-width:480px){
+  .numbers{grid-template-columns:repeat(2,1fr)}
+  .hero-actions{flex-direction:column;align-items:center;width:100%}
+  .hero-actions a{width:100%;text-align:center;max-width:280px}
+  .hero{padding:36px 0 28px}
+  h1{font-size:1.85rem!important;line-height:1.18}
+  .num-val{font-size:1.3rem}
+  .num{padding:12px 8px}
+  .container{padding:0 16px}
+  .src-grid{gap:4px}
+  .src-tag{font-size:0.7rem;padding:4px 8px}
+  .pricing h2,.compare h2,.sources h2{font-size:1.1rem}
+}
 
 /* ━━ HERO LIVE TICKER — şu an trend olan 5 konuyu kayan band'da göster ━━ */
 .hero-ticker{margin:24px auto 0;max-width:760px;background:linear-gradient(135deg,rgba(6,214,224,0.04),rgba(149,128,255,0.03));border:1px solid var(--cyan-border);border-radius:10px;padding:10px 14px;overflow:hidden;position:relative;backdrop-filter:blur(12px)}
