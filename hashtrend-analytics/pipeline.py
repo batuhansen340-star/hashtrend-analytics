@@ -50,6 +50,9 @@ from collectors.eksisozluk import EksiSozlukCollector
 from collectors.gdelt import GDELTCollector
 from collectors.webrazzi import WebrazziCollector
 from collectors.trends24 import Trends24Collector
+# ── Free X-alternatif + TR derinlik (v2) ──
+from collectors.bluesky import BlueskyCollector
+from collectors.tr_news_rss import TRNewsRSSCollector
 from core.normalizer import Normalizer
 from core.scorer import TrendScorer
 from core.categorizer import Categorizer
@@ -122,13 +125,12 @@ class Pipeline:
             ("GDELT (TR)", GDELTCollector),
             ("Webrazzi", WebrazziCollector),
             ("trends24 (TR)", Trends24Collector),
+            # ── Free X-alternatif + TR gündem (v2) ──
+            ("Bluesky", BlueskyCollector),  # X'in modern alternatifi (free AT Protocol)
+            ("TR News RSS", TRNewsRSSCollector),  # Hürriyet + Onedio gündem
+            # Reddit OAuth bypass — r/popular.json public, key gerektirmez
+            ("Reddit", RedditCollector),
         ]
-
-        # Reddit sadece credentials varsa çalış
-        if settings.REDDIT_CLIENT_ID:
-            collectors.append(("Reddit", RedditCollector))
-        else:
-            logger.warning("Reddit credentials yok — atlanıyor")
 
         for name, CollectorClass in collectors:
             try:
