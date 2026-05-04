@@ -74,6 +74,23 @@ h1 em{font-style:normal;background:linear-gradient(135deg,var(--cyan),var(--cyan
 .demo-empty{text-align:center;color:var(--dim);padding:40px;font-size:0.84rem}
 .demo-loading{text-align:center;color:var(--dim);padding:40px}
 
+/* DEMO FILTERS — country/time/CTS/burst */
+.demo-filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;align-items:center;padding:10px 12px;background:var(--bg3);border:1px solid var(--border);border-radius:8px}
+.demo-filters select{background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:6px 10px;color:var(--text);font-size:0.78rem;font-family:var(--sans);outline:none;cursor:pointer;transition:border-color .15s}
+.demo-filters select:hover,.demo-filters select:focus{border-color:var(--cyan)}
+.demo-filters .filter-group{display:flex;align-items:center;gap:6px}
+.demo-filters label{font-size:0.74rem;color:var(--dim);user-select:none}
+.demo-filters .cts-slider{display:flex;align-items:center;gap:8px;font-size:0.74rem;color:var(--dim)}
+.demo-filters input[type=range]{accent-color:var(--cyan);width:90px;cursor:pointer}
+.demo-filters .cts-value{color:var(--cyan);font-family:var(--mono);font-weight:600;min-width:24px;text-align:right}
+.demo-filters .burst-toggle{display:flex;align-items:center;gap:6px;font-size:0.78rem;color:var(--dim);cursor:pointer;padding:6px 10px;border-radius:6px;border:1px solid transparent;transition:all .15s}
+.demo-filters .burst-toggle:hover{color:var(--text)}
+.demo-filters .burst-toggle.act{color:var(--orange);border-color:rgba(255,158,68,0.3);background:rgba(255,158,68,0.08)}
+.demo-filters input[type=checkbox]{accent-color:var(--orange);cursor:pointer}
+.demo-filters .filter-reset{margin-left:auto;background:transparent;border:1px solid var(--border);color:var(--dim);font-size:0.7rem;padding:5px 10px;border-radius:6px;cursor:pointer;font-family:var(--sans)}
+.demo-filters .filter-reset:hover{color:var(--text);border-color:var(--border2)}
+@media(max-width:600px){.demo-filters{padding:8px}.demo-filters select,.demo-filters .burst-toggle{font-size:0.72rem;padding:5px 8px}}
+
 /* SOURCES */
 .sources{margin:50px 0}
 .sources h2{font-size:1.3rem;font-weight:700;letter-spacing:-0.5px;text-align:center;margin-bottom:6px}
@@ -165,6 +182,41 @@ footer{padding:20px 0;border-top:1px solid var(--border);text-align:center;font-
 <div class="demo-search">
 <input type="text" id="dq" placeholder='Try "machine learning", "crypto", "MMA", "education"...' />
 <button onclick="demoSearch()">Search</button>
+</div>
+<div class="demo-filters">
+  <div class="filter-group">
+    <select id="f-country" title="Country filter">
+      <option value="">🌍 All</option>
+      <option value="GLOBAL">🌐 Global</option>
+      <option value="TR">🇹🇷 Turkey</option>
+      <option value="US">🇺🇸 USA</option>
+      <option value="GB">🇬🇧 UK</option>
+      <option value="DE">🇩🇪 Germany</option>
+      <option value="FR">🇫🇷 France</option>
+      <option value="JP">🇯🇵 Japan</option>
+      <option value="KR">🇰🇷 Korea</option>
+      <option value="IN">🇮🇳 India</option>
+      <option value="BR">🇧🇷 Brazil</option>
+    </select>
+  </div>
+  <div class="filter-group">
+    <select id="f-time" title="Time range">
+      <option value="">⏰ All time</option>
+      <option value="1">Last 1h</option>
+      <option value="6">Last 6h</option>
+      <option value="24">Last 24h</option>
+      <option value="168">Last 7d</option>
+    </select>
+  </div>
+  <div class="cts-slider">
+    <label for="f-cts">Min CTS</label>
+    <input type="range" id="f-cts" min="0" max="100" value="0" step="5" />
+    <span class="cts-value" id="f-cts-val">0</span>
+  </div>
+  <label class="burst-toggle" id="f-burst-label">
+    <input type="checkbox" id="f-burst" /> 🔥 Bursts only
+  </label>
+  <button class="filter-reset" onclick="resetFilters()" title="Filtreleri temizle">Reset</button>
 </div>
 <div class="demo-results" id="dr"><div class="demo-empty">Type a keyword above to search 34 platforms in real-time</div></div>
 </div>
@@ -315,40 +367,93 @@ if(v.length>=2)searchTimer=setTimeout(function(){demoSearch()},600);
 });
 document.getElementById('dq').addEventListener('keydown',function(e){if(e.key==='Enter')demoSearch()});
 
+// Filter event listeners — değişince son arama sonuçlarını re-filter et
+var lastResults=[];
+function bindFilter(id,onChange){
+  var el=document.getElementById(id);
+  el.addEventListener('change',onChange);
+  if(el.type==='range')el.addEventListener('input',onChange);
+}
+function applyFilters(items){
+  var country=document.getElementById('f-country').value;
+  var hours=parseInt(document.getElementById('f-time').value||'0',10);
+  var minCts=parseFloat(document.getElementById('f-cts').value||'0');
+  var burstOnly=document.getElementById('f-burst').checked;
+  return items.filter(function(t){
+    if(country&&(t.country||'GLOBAL')!==country)return false;
+    if(hours>0){
+      var ageH=(Date.now()-new Date(t.scoredAt).getTime())/3600000;
+      if(ageH>hours)return false;
+    }
+    if((t.ctsScore||0)<minCts)return false;
+    if(burstOnly&&!t.isBurst)return false;
+    return true;
+  });
+}
+function buildCardHTML(t){
+  var sp='';var s=t.sources||{};
+  for(var k in s){
+    var label=k==='hackernews'?'HN':k==='google_trends'?'GT':k==='yahoo_finance'?'Finance':k==='global_news'?'News':k==='search_trends'?'Search':k;
+    sp+='<span class="src-pill src-'+k+'">'+label+' '+fn(s[k])+'</span> ';
+  }
+  var eng=t.engagement||{};
+  var metrics='';
+  for(var k2 in eng){metrics+=eng[k2].metric+': '+fn(eng[k2].count)+' · ';}
+  metrics=metrics.slice(0,-3);
+  var burstBadge=t.isBurst?'<span class="src-pill" style="background:rgba(255,158,68,0.12);color:var(--orange)">🔥 BURST</span> ':'';
+  var country=t.country&&t.country!=='GLOBAL'?'<span class="src-pill" style="background:rgba(149,128,255,0.08);color:var(--purple)">'+t.country+'</span> ':'';
+  var h='<div class="demo-card">';
+  h+='<div class="demo-card-left">';
+  h+='<div class="demo-card-title">'+(t.topicName||'').substring(0,80)+'</div>';
+  h+='<div class="demo-card-meta">';
+  if(metrics)h+='<span>'+metrics+'</span>';
+  h+='<span>'+ta(t.scoredAt)+'</span> '+burstBadge+country+sp;
+  h+='</div></div>';
+  h+='<div class="demo-card-right">';
+  h+='<div class="demo-card-cts">'+(t.ctsScore||0).toFixed(1)+'</div>';
+  h+='<div class="demo-card-cat">'+(t.category||'')+'</div>';
+  h+='</div></div>';
+  return h;
+}
+function renderResults(items){
+  var dr=document.getElementById('dr');
+  if(!items.length){dr.innerHTML='<div class="demo-empty">No results match filters. <a href="javascript:resetFilters()">Reset filters</a>.</div>';return}
+  var h='';
+  items.forEach(function(t){h+=buildCardHTML(t);});
+  dr.innerHTML=h;
+}
+function rerender(){renderResults(applyFilters(lastResults));}
+bindFilter('f-country',rerender);
+bindFilter('f-time',rerender);
+bindFilter('f-cts',function(){
+  document.getElementById('f-cts-val').textContent=document.getElementById('f-cts').value;
+  rerender();
+});
+bindFilter('f-burst',function(){
+  document.getElementById('f-burst-label').classList.toggle('act',this.checked);
+  rerender();
+});
+function resetFilters(){
+  document.getElementById('f-country').value='';
+  document.getElementById('f-time').value='';
+  document.getElementById('f-cts').value='0';
+  document.getElementById('f-cts-val').textContent='0';
+  document.getElementById('f-burst').checked=false;
+  document.getElementById('f-burst-label').classList.remove('act');
+  rerender();
+}
+
 async function demoSearch(){
 var q=document.getElementById('dq').value.trim();
 var dr=document.getElementById('dr');
 if(!q||q.length<2){dr.innerHTML='<div class="demo-empty">Type at least 2 characters</div>';return}
 dr.innerHTML='<div class="demo-loading">Searching 34 platforms...</div>';
 try{
-var r=await fetch(API+'/api/v2/feed?q='+encodeURIComponent(q)+'&limit=10',{headers:{'X-API-Key':KEY}});
+var r=await fetch(API+'/api/v2/feed?q='+encodeURIComponent(q)+'&limit=50',{headers:{'X-API-Key':KEY}});
 var j=await r.json();var d=j.data||[];
+lastResults=d;
 if(!d.length){dr.innerHTML='<div class="demo-empty">No results for "'+q+'". Try "AI", "crypto", or "education".</div>';return}
-var h='';
-d.forEach(function(t){
-var sp='';var s=t.sources||{};
-for(var k in s){
-var label=k==='hackernews'?'HN':k==='google_trends'?'GT':k==='yahoo_finance'?'Finance':k==='global_news'?'News':k==='search_trends'?'Search':k;
-sp+='<span class="src-pill src-'+k+'">'+label+' '+fn(s[k])+'</span> ';
-}
-var eng=t.engagement||{};
-var metrics='';
-for(var k in eng){metrics+=eng[k].metric+': '+fn(eng[k].count)+' · ';}
-metrics=metrics.slice(0,-3);
-
-h+='<div class="demo-card">';
-h+='<div class="demo-card-left">';
-h+='<div class="demo-card-title">'+t.topicName.substring(0,80)+'</div>';
-h+='<div class="demo-card-meta">';
-if(metrics)h+='<span>'+metrics+'</span>';
-h+='<span>'+ta(t.scoredAt)+'</span> '+sp;
-h+='</div></div>';
-h+='<div class="demo-card-right">';
-h+='<div class="demo-card-cts">'+t.ctsScore.toFixed(1)+'</div>';
-h+='<div class="demo-card-cat">'+t.category+'</div>';
-h+='</div></div>';
-});
-dr.innerHTML=h;
+renderResults(applyFilters(d));
 }catch(e){dr.innerHTML='<div class="demo-empty">API error. Try again.</div>'}}
 
 async function doSignup(){
