@@ -254,7 +254,7 @@ footer{padding:20px 0;border-top:1px solid var(--border);text-align:center;font-
   </label>
   <button class="filter-reset" onclick="resetFilters()" title="Filtreleri temizle">Reset</button>
 </div>
-<div class="demo-results" id="dr"><div class="demo-empty">Type a keyword above to search 34 platforms in real-time</div></div>
+<div class="demo-results" id="dr"><div class="demo-loading">Loading live trends…</div></div>
 </div>
 </section>
 
@@ -422,9 +422,23 @@ var searchTimer;
 document.getElementById('dq').addEventListener('input',function(){
 clearTimeout(searchTimer);
 var v=this.value;
+if(v.length===0){loadDefaultTrends();return}
 if(v.length>=2)searchTimer=setTimeout(function(){demoSearch()},600);
 });
 document.getElementById('dq').addEventListener('keydown',function(e){if(e.key==='Enter')demoSearch()});
+
+// Sayfa açıldığında default trends — kullanıcı keyword yazmadan top 50 görsün
+async function loadDefaultTrends(){
+  var dr=document.getElementById('dr');
+  dr.innerHTML='<div class="demo-loading">Loading live trends…</div>';
+  try{
+    var r=await fetch(API+'/api/v1/trends?limit=50',{headers:{'X-API-Key':KEY}});
+    var j=await r.json();var d=j.data||[];
+    lastResults=d;
+    if(!d.length){dr.innerHTML='<div class="demo-empty">No trends yet — pipeline running…</div>';return}
+    renderResults(applyFilters(d));
+  }catch(e){dr.innerHTML='<div class="demo-empty">API error. Retrying…</div>'}
+}
 
 // Filter event listeners — değişince son arama sonuçlarını re-filter et
 var lastResults=[];
@@ -505,8 +519,9 @@ function resetFilters(){
 async function demoSearch(){
 var q=document.getElementById('dq').value.trim();
 var dr=document.getElementById('dr');
-if(!q||q.length<2){dr.innerHTML='<div class="demo-empty">Type at least 2 characters</div>';return}
-dr.innerHTML='<div class="demo-loading">Searching 34 platforms...</div>';
+// Boş arama → default trends'a dön (otomatik gösterim, "type at least" göstermeyiz)
+if(!q||q.length<2){loadDefaultTrends();return}
+dr.innerHTML='<div class="demo-loading">Searching 34 platforms for &quot;'+q+'&quot;…</div>';
 try{
 var r=await fetch(API+'/api/v2/feed?q='+encodeURIComponent(q)+'&limit=50',{headers:{'X-API-Key':KEY}});
 var j=await r.json();var d=j.data||[];
@@ -526,6 +541,10 @@ else alert(j.detail||'Error');
 }catch(e){alert('Network error')}}
 
 loadNumbers();
+// Sayfa açılır açılmaz live trend'ler ve filter UX hazır olsun
+loadDefaultTrends();
+// Her 5 dakikada bir API'dan taze veriyi çek (filter state korunur)
+setInterval(loadDefaultTrends, 5 * 60 * 1000);
 </script>
 </body>
 </html>
