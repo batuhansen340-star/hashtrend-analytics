@@ -249,6 +249,13 @@ footer{padding:20px 0;border-top:1px solid var(--border);text-align:center;font-
 .how-link{position:relative}
 .how-link::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:1px;background:var(--cyan);transform:scaleX(0);transition:transform .15s;transform-origin:left}
 .how-link:hover::after{transform:scaleX(1)}
+
+/* Lang toggle (TR/EN) */
+.lang-toggle{display:inline-flex;align-items:center;gap:0;background:var(--bg3);border:1px solid var(--border2);border-radius:6px;overflow:hidden;font-family:var(--mono)}
+.lang-toggle button{background:transparent;border:none;color:var(--dim);padding:4px 9px;font-size:0.7rem;font-weight:600;cursor:pointer;font-family:var(--mono);letter-spacing:0.3px}
+.lang-toggle button.act{background:var(--cyan);color:#000}
+.lang-toggle button:hover:not(.act){color:var(--text)}
+@media (max-width:560px){.lang-toggle button{padding:3px 7px;font-size:0.66rem}}
 </style>
 </head>
 <body>
@@ -256,122 +263,126 @@ footer{padding:20px 0;border-top:1px solid var(--border);text-align:center;font-
 <nav><div class="container">
 <div class="logo"><div class="logo-icon">H</div>Hash<span>Trend</span></div>
 <div class="nav-r">
-<a href="#demo">Canlı Demo</a>
-<a href="#sources">Kaynaklar</a>
-<a href="#pricing">Fiyatlar</a>
-<a href="https://hashtrend-analytics-production.up.railway.app/docs" target="_blank">API Dokümanı</a>
-<a href="#how" class="how-link" onclick="openGlossary();return false;">Nasıl Çalışır?</a>
-<a href="#signup" class="nav-cta">Ücretsiz Anahtar Al</a>
+<a href="#demo" data-i18n="nav.demo">Canlı Demo</a>
+<a href="#sources" data-i18n="nav.sources">Kaynaklar</a>
+<a href="#pricing" data-i18n="nav.pricing">Fiyatlar</a>
+<a href="https://hashtrend-analytics-production.up.railway.app/docs" target="_blank" data-i18n="nav.docs">API Dokümanı</a>
+<a href="#how" class="how-link" onclick="openGlossary();return false;" data-i18n="nav.how">Nasıl Çalışır?</a>
+<div class="lang-toggle" role="group" aria-label="Language">
+  <button type="button" id="lang-tr" onclick="setLang('tr')" class="act" title="Türkçe">TR</button>
+  <button type="button" id="lang-en" onclick="setLang('en')" title="English">EN</button>
+</div>
+<a href="#signup" class="nav-cta" data-i18n="nav.cta">Ücretsiz Anahtar Al</a>
 </div>
 </div></nav>
 
 <section class="hero"><div class="container">
-<div class="hero-badge"><span class="dot"></span> Canlı — 34 kaynak, 20 ülke, her 2 saatte bir güncellenir</div>
-<h1>İnternetin <em>şu an</em><br>konuştuğu her şey</h1>
-<p class="hero-sub">34 kaynaktan platform-üstü trend istihbaratı. Dinamik akış, etkileşim metrikleri, AI kategorizasyon. Tek API.</p>
+<div class="hero-badge"><span class="dot"></span> <span data-i18n="hero.badge">Canlı — 34 kaynak, 20 ülke, her 2 saatte bir güncellenir</span></div>
+<h1 data-i18n-html="hero.title">İnternetin <em>şu an</em><br>konuştuğu her şey</h1>
+<p class="hero-sub" data-i18n="hero.sub">34 kaynaktan platform-üstü trend istihbaratı. Dinamik akış, etkileşim metrikleri, AI kategorizasyon. Tek API.</p>
 <div class="hero-actions">
-<a href="#signup" class="btn-primary">Ücretsiz API Anahtarı Al</a>
-<a href="#demo" class="btn-secondary">Canlı Demo'yu Dene ↓</a>
+<a href="#signup" class="btn-primary" data-i18n="hero.cta1">Ücretsiz API Anahtarı Al</a>
+<a href="#demo" class="btn-secondary" data-i18n="hero.cta2">Canlı Demo'yu Dene ↓</a>
 </div>
 <!-- Live trend ticker — şu an gerçekten trend olan top 5 konu kayar -->
 <div class="hero-ticker" id="hero-ticker">
-  <div class="hero-ticker-label"><span class="pulse"></span> Şu an trend</div>
-  <div class="hero-ticker-loading" id="ticker-loading">Canlı trendler yükleniyor…</div>
+  <div class="hero-ticker-label"><span class="pulse"></span> <span data-i18n="hero.ticker">Şu an trend</span></div>
+  <div class="hero-ticker-loading" id="ticker-loading" data-i18n="hero.ticker_loading">Canlı trendler yükleniyor…</div>
   <div class="hero-ticker-track" id="ticker-track" style="display:none"></div>
 </div>
 </div></section>
 
 <div class="container">
 <div class="numbers">
-<div class="num"><div class="num-val c1" id="n-topics">—</div><div class="num-label">Konular <span class="info-tip" data-tip="Şu an aktif olarak takip edilen benzersiz trend sayısı">?</span></div></div>
-<div class="num"><div class="num-val c2" id="n-mentions">—</div><div class="num-label">Toplam Bahsetme <span class="info-tip" data-tip="34 kaynaktan toplanan tüm post/yorum/aramalar">?</span></div></div>
-<div class="num"><div class="num-val c3" id="n-bursts">—</div><div class="num-label">Patlamalar <span class="info-tip" data-tip="Anormal hızlı büyüyen trend (z-score>2)">?</span></div></div>
-<div class="num"><div class="num-val c4" id="n-sources">34</div><div class="num-label">Kaynaklar</div></div>
-<div class="num"><div class="num-val c5" id="n-countries">20</div><div class="num-label">Ülkeler</div></div>
+<div class="num"><div class="num-val c1" id="n-topics">—</div><div class="num-label"><span data-i18n="num.topics">Konular</span> <span class="info-tip" data-i18n-tip="num.topics_tip" data-tip="Şu an aktif olarak takip edilen benzersiz trend sayısı">?</span></div></div>
+<div class="num"><div class="num-val c2" id="n-mentions">—</div><div class="num-label"><span data-i18n="num.mentions">Toplam Bahsetme</span> <span class="info-tip" data-i18n-tip="num.mentions_tip" data-tip="34 kaynaktan toplanan tüm post/yorum/aramalar">?</span></div></div>
+<div class="num"><div class="num-val c3" id="n-bursts">—</div><div class="num-label"><span data-i18n="num.bursts">Patlamalar</span> <span class="info-tip" data-i18n-tip="num.bursts_tip" data-tip="Anormal hızlı büyüyen trend (z-score>2)">?</span></div></div>
+<div class="num"><div class="num-val c4" id="n-sources">34</div><div class="num-label" data-i18n="num.sources">Kaynaklar</div></div>
+<div class="num"><div class="num-val c5" id="n-countries">20</div><div class="num-label" data-i18n="num.countries">Ülkeler</div></div>
 </div>
 </div>
 
 <section class="container" id="demo">
 <div class="demo">
-<h2>Dene — herhangi bir konu ara</h2>
-<p>Bir anahtar kelime yaz. HashTrend 34 platformda arar ve etkileşim metrikleriyle trendleri getirir.</p>
+<h2 data-i18n="demo.h2">Dene — herhangi bir konu ara</h2>
+<p data-i18n="demo.sub">Bir anahtar kelime yaz. HashTrend 34 platformda arar ve etkileşim metrikleriyle trendleri getirir.</p>
 <div class="demo-search">
-<input type="text" id="dq" placeholder='Dene: "yapay zeka", "ekonomi", "burç", "eğitim"...' />
-<button onclick="demoSearch()">Ara</button>
+<input type="text" id="dq" data-i18n-placeholder="demo.placeholder" placeholder='Dene: "yapay zeka", "ekonomi", "burç", "eğitim"...' />
+<button onclick="demoSearch()" data-i18n="demo.search">Ara</button>
 </div>
 <div class="demo-filters">
   <div class="filter-group">
-    <select id="f-country" title="Ülke filtresi">
-      <option value="">🌍 Tüm ülkeler</option>
-      <option value="GLOBAL">🌐 Global</option>
-      <option value="TR">🇹🇷 Türkiye</option>
-      <option value="US">🇺🇸 ABD</option>
-      <option value="GB">🇬🇧 İngiltere</option>
-      <option value="DE">🇩🇪 Almanya</option>
-      <option value="FR">🇫🇷 Fransa</option>
-      <option value="JP">🇯🇵 Japonya</option>
-      <option value="KR">🇰🇷 Kore</option>
-      <option value="IN">🇮🇳 Hindistan</option>
-      <option value="BR">🇧🇷 Brezilya</option>
+    <select id="f-country" data-i18n-title="filter.country_title" title="Ülke filtresi">
+      <option value="" data-i18n="filter.country_all">🌍 Tüm ülkeler</option>
+      <option value="GLOBAL" data-i18n="filter.country_global">🌐 Global</option>
+      <option value="TR" data-i18n="filter.country_tr">🇹🇷 Türkiye</option>
+      <option value="US" data-i18n="filter.country_us">🇺🇸 ABD</option>
+      <option value="GB" data-i18n="filter.country_gb">🇬🇧 İngiltere</option>
+      <option value="DE" data-i18n="filter.country_de">🇩🇪 Almanya</option>
+      <option value="FR" data-i18n="filter.country_fr">🇫🇷 Fransa</option>
+      <option value="JP" data-i18n="filter.country_jp">🇯🇵 Japonya</option>
+      <option value="KR" data-i18n="filter.country_kr">🇰🇷 Kore</option>
+      <option value="IN" data-i18n="filter.country_in">🇮🇳 Hindistan</option>
+      <option value="BR" data-i18n="filter.country_br">🇧🇷 Brezilya</option>
     </select>
   </div>
   <div class="filter-group">
-    <select id="f-time" title="Zaman aralığı">
-      <option value="">⏰ Tümü</option>
-      <option value="1">Son 1 saat</option>
-      <option value="6">Son 6 saat</option>
-      <option value="24">Son 24 saat</option>
-      <option value="168" selected>Son 7 gün</option>
+    <select id="f-time" data-i18n-title="filter.time_title" title="Zaman aralığı">
+      <option value="" data-i18n="filter.time_all">⏰ Tümü</option>
+      <option value="1" data-i18n="filter.time_1">Son 1 saat</option>
+      <option value="6" data-i18n="filter.time_6">Son 6 saat</option>
+      <option value="24" data-i18n="filter.time_24">Son 24 saat</option>
+      <option value="168" selected data-i18n="filter.time_168">Son 7 gün</option>
     </select>
   </div>
   <div class="filter-group">
-    <select id="f-source" title="Kaynak filtresi">
-      <option value="">📡 Tüm kaynaklar</option>
-      <optgroup label="Sosyal Medya">
+    <select id="f-source" data-i18n-title="filter.source_title" title="Kaynak filtresi">
+      <option value="" data-i18n="filter.source_all">📡 Tüm kaynaklar</option>
+      <optgroup label="Sosyal Medya" data-i18n-label="filter.group_social">
         <option value="bluesky">🦋 Bluesky</option>
         <option value="reddit">🔴 Reddit</option>
         <option value="fediverse">🐘 Mastodon</option>
         <option value="hackernews">📰 Hacker News</option>
       </optgroup>
-      <optgroup label="Arama & Haber">
+      <optgroup label="Arama & Haber" data-i18n-label="filter.group_news">
         <option value="google_trends">📈 Google Trends</option>
         <option value="newsapi">📰 NewsAPI</option>
-        <option value="global_news">🌐 Dünya Haberleri</option>
-        <option value="search_trends">🔍 Arama Trendleri</option>
+        <option value="global_news" data-i18n="filter.src_global_news">🌐 Dünya Haberleri</option>
+        <option value="search_trends" data-i18n="filter.src_search_trends">🔍 Arama Trendleri</option>
       </optgroup>
-      <optgroup label="Teknoloji & Geliştirici">
+      <optgroup label="Teknoloji & Geliştirici" data-i18n-label="filter.group_tech">
         <option value="github">💻 GitHub</option>
         <option value="stackoverflow">📚 Stack Overflow</option>
         <option value="devto">✍️ Dev.to</option>
-        <option value="arxiv">🔬 Arxiv (bilim)</option>
+        <option value="arxiv" data-i18n="filter.src_arxiv">🔬 Arxiv (bilim)</option>
       </optgroup>
-      <optgroup label="Medya & Listeler">
+      <optgroup label="Medya & Listeler" data-i18n-label="filter.group_media">
         <option value="youtube">▶️ YouTube</option>
         <option value="medium">📝 Medium</option>
         <option value="twitch">🎮 Twitch</option>
-        <option value="apptrends">📱 Uygulama Listeleri</option>
-        <option value="spotify">🎵 Müzik Listeleri</option>
+        <option value="apptrends" data-i18n="filter.src_apptrends">📱 Uygulama Listeleri</option>
+        <option value="spotify" data-i18n="filter.src_spotify">🎵 Müzik Listeleri</option>
       </optgroup>
-      <optgroup label="🇹🇷 Türkiye">
+      <optgroup label="🇹🇷 Türkiye" data-i18n-label="filter.group_tr">
         <option value="eksisozluk">Ekşi Sözlük</option>
         <option value="webrazzi">Webrazzi</option>
         <option value="trends24">trends24</option>
         <option value="gdelt">GDELT</option>
-        <option value="tr_news_rss">TR Gündem RSS</option>
+        <option value="tr_news_rss" data-i18n="filter.src_tr_news_rss">TR Gündem RSS</option>
       </optgroup>
     </select>
   </div>
   <div class="cts-slider">
-    <label for="f-cts">Min CTS <span class="info-tip" data-tip="Composite Trend Score (0-100). Bir konunun ne kadar güçlü trend olduğu — kaynak çeşitliliği, hız, hacim ve tazelikten hesaplanır">?</span></label>
+    <label for="f-cts"><span data-i18n="filter.min_cts">Min CTS</span> <span class="info-tip" data-i18n-tip="filter.min_cts_tip" data-tip="Composite Trend Score (0-100). Bir konunun ne kadar güçlü trend olduğu — kaynak çeşitliliği, hız, hacim ve tazelikten hesaplanır">?</span></label>
     <input type="range" id="f-cts" min="0" max="100" value="0" step="5" autocomplete="off" />
     <span class="cts-value" id="f-cts-val">0</span>
   </div>
   <label class="burst-toggle" id="f-burst-label">
-    <input type="checkbox" id="f-burst" /> 🔥 Sadece patlamalar <span class="info-tip" data-tip="Anormal hızlı büyüyen trendler (z-score > 2)">?</span>
+    <input type="checkbox" id="f-burst" /> <span data-i18n="filter.burst">🔥 Sadece patlamalar</span> <span class="info-tip" data-i18n-tip="filter.burst_tip" data-tip="Anormal hızlı büyüyen trendler (z-score > 2)">?</span>
   </label>
-  <button class="filter-reset" onclick="resetFilters()" title="Filtreleri temizle">Sıfırla</button>
+  <button class="filter-reset" onclick="resetFilters()" data-i18n-title="filter.reset_title" data-i18n="filter.reset" title="Filtreleri temizle">Sıfırla</button>
 </div>
-<div class="demo-results" id="dr"><div class="demo-loading">Canlı trendler yükleniyor…</div></div>
+<div class="demo-results" id="dr"><div class="demo-loading" data-i18n="demo.loading">Canlı trendler yükleniyor…</div></div>
 </div>
 </section>
 
@@ -538,8 +549,162 @@ footer{padding:20px 0;border-top:1px solid var(--border);text-align:center;font-
 <script>
 const API='https://hashtrend-analytics-production.up.railway.app',KEY='ht_live_81b0a73385734642970237f6';
 
+// ─── i18n (TR/EN) ─────────────────────────────────────────────────────────
+// Sadece nav, hero, numbers, demo, filter bölümleri i18n'lenir.
+// Pricing/compare/glossary TR-merkezli kaldı — full EN sürümü v1.1.
+const I18N = {
+  tr: {
+    'nav.demo':'Canlı Demo','nav.sources':'Kaynaklar','nav.pricing':'Fiyatlar',
+    'nav.docs':'API Dokümanı','nav.how':'Nasıl Çalışır?','nav.cta':'Ücretsiz Anahtar Al',
+    'hero.badge':'Canlı — 34 kaynak, 20 ülke, her 2 saatte bir güncellenir',
+    'hero.title':'İnternetin <em>şu an</em><br>konuştuğu her şey',
+    'hero.sub':'34 kaynaktan platform-üstü trend istihbaratı. Dinamik akış, etkileşim metrikleri, AI kategorizasyon. Tek API.',
+    'hero.cta1':'Ücretsiz API Anahtarı Al','hero.cta2':"Canlı Demo'yu Dene ↓",
+    'hero.ticker':'Şu an trend','hero.ticker_loading':'Canlı trendler yükleniyor…',
+    'num.topics':'Konular','num.topics_tip':'Şu an aktif olarak takip edilen benzersiz trend sayısı',
+    'num.mentions':'Toplam Bahsetme','num.mentions_tip':'34 kaynaktan toplanan tüm post/yorum/aramalar',
+    'num.bursts':'Patlamalar','num.bursts_tip':'Anormal hızlı büyüyen trend (z-score>2)',
+    'num.sources':'Kaynaklar','num.countries':'Ülkeler',
+    'demo.h2':'Dene — herhangi bir konu ara',
+    'demo.sub':'Bir anahtar kelime yaz. HashTrend 34 platformda arar ve etkileşim metrikleriyle trendleri getirir.',
+    'demo.placeholder':'Dene: "yapay zeka", "ekonomi", "burç", "eğitim"...',
+    'demo.search':'Ara','demo.loading':'Canlı trendler yükleniyor…',
+    'filter.country_title':'Ülke filtresi',
+    'filter.country_all':'🌍 Tüm ülkeler','filter.country_global':'🌐 Global',
+    'filter.country_tr':'🇹🇷 Türkiye','filter.country_us':'🇺🇸 ABD',
+    'filter.country_gb':'🇬🇧 İngiltere','filter.country_de':'🇩🇪 Almanya',
+    'filter.country_fr':'🇫🇷 Fransa','filter.country_jp':'🇯🇵 Japonya',
+    'filter.country_kr':'🇰🇷 Kore','filter.country_in':'🇮🇳 Hindistan',
+    'filter.country_br':'🇧🇷 Brezilya',
+    'filter.time_title':'Zaman aralığı','filter.time_all':'⏰ Tümü',
+    'filter.time_1':'Son 1 saat','filter.time_6':'Son 6 saat',
+    'filter.time_24':'Son 24 saat','filter.time_168':'Son 7 gün',
+    'filter.source_title':'Kaynak filtresi','filter.source_all':'📡 Tüm kaynaklar',
+    'filter.group_social':'Sosyal Medya','filter.group_news':'Arama & Haber',
+    'filter.group_tech':'Teknoloji & Geliştirici','filter.group_media':'Medya & Listeler',
+    'filter.group_tr':'🇹🇷 Türkiye',
+    'filter.src_global_news':'🌐 Dünya Haberleri','filter.src_search_trends':'🔍 Arama Trendleri',
+    'filter.src_arxiv':'🔬 Arxiv (bilim)','filter.src_apptrends':'📱 Uygulama Listeleri',
+    'filter.src_spotify':'🎵 Müzik Listeleri','filter.src_tr_news_rss':'TR Gündem RSS',
+    'filter.min_cts':'Min CTS','filter.min_cts_tip':'Composite Trend Score (0-100). Bir konunun ne kadar güçlü trend olduğu — kaynak çeşitliliği, hız, hacim ve tazelikten hesaplanır',
+    'filter.burst':'🔥 Sadece patlamalar','filter.burst_tip':'Anormal hızlı büyüyen trendler (z-score > 2)',
+    'filter.reset':'Sıfırla','filter.reset_title':'Filtreleri temizle',
+    'time.now':'az önce','time.min':'dk önce','time.hour':'sa önce','time.day':'g önce',
+    'card.cat_other':'Diğer','card.score_label':'CTS',
+    'demo.empty':'Bu filtrelerle eşleşen sonuç yok. Filtreleri sıfırlayıp yeniden dene.',
+    'demo.error':'Bağlantı hatası. Birkaç saniye sonra yeniden dene.',
+  },
+  en: {
+    'nav.demo':'Live Demo','nav.sources':'Sources','nav.pricing':'Pricing',
+    'nav.docs':'API Docs','nav.how':'How it works?','nav.cta':'Get Free API Key',
+    'hero.badge':'Live — 34 sources, 20 countries, refreshed every 2 hours',
+    'hero.title':"What the internet is <em>talking about</em><br>right now",
+    'hero.sub':'Cross-platform trend intelligence from 34 sources. Dynamic feed, engagement metrics, AI categorization. One API.',
+    'hero.cta1':'Get Free API Key','hero.cta2':'Try Live Demo ↓',
+    'hero.ticker':'Trending now','hero.ticker_loading':'Loading live trends…',
+    'num.topics':'Topics','num.topics_tip':'Unique trends actively tracked right now',
+    'num.mentions':'Total Mentions','num.mentions_tip':'All posts/comments/searches collected from 34 sources',
+    'num.bursts':'Bursts','num.bursts_tip':'Abnormally fast-growing trends (z-score>2)',
+    'num.sources':'Sources','num.countries':'Countries',
+    'demo.h2':'Try it — search any topic',
+    'demo.sub':'Type a keyword. HashTrend searches 34 platforms and returns trends with engagement metrics.',
+    'demo.placeholder':'Try: "AI", "crypto", "election", "startup"...',
+    'demo.search':'Search','demo.loading':'Loading live trends…',
+    'filter.country_title':'Country filter',
+    'filter.country_all':'🌍 All countries','filter.country_global':'🌐 Global',
+    'filter.country_tr':'🇹🇷 Turkey','filter.country_us':'🇺🇸 USA',
+    'filter.country_gb':'🇬🇧 UK','filter.country_de':'🇩🇪 Germany',
+    'filter.country_fr':'🇫🇷 France','filter.country_jp':'🇯🇵 Japan',
+    'filter.country_kr':'🇰🇷 Korea','filter.country_in':'🇮🇳 India',
+    'filter.country_br':'🇧🇷 Brazil',
+    'filter.time_title':'Time range','filter.time_all':'⏰ All',
+    'filter.time_1':'Last 1 hour','filter.time_6':'Last 6 hours',
+    'filter.time_24':'Last 24 hours','filter.time_168':'Last 7 days',
+    'filter.source_title':'Source filter','filter.source_all':'📡 All sources',
+    'filter.group_social':'Social Media','filter.group_news':'Search & News',
+    'filter.group_tech':'Tech & Developer','filter.group_media':'Media & Charts',
+    'filter.group_tr':'🇹🇷 Turkey',
+    'filter.src_global_news':'🌐 Global News','filter.src_search_trends':'🔍 Search Trends',
+    'filter.src_arxiv':'🔬 Arxiv (science)','filter.src_apptrends':'📱 App Charts',
+    'filter.src_spotify':'🎵 Music Charts','filter.src_tr_news_rss':'TR News RSS',
+    'filter.min_cts':'Min CTS','filter.min_cts_tip':'Composite Trend Score (0-100). How strong a trend is — calculated from source diversity, velocity, volume, and recency',
+    'filter.burst':'🔥 Only bursts','filter.burst_tip':'Abnormally fast-growing trends (z-score > 2)',
+    'filter.reset':'Reset','filter.reset_title':'Clear filters',
+    'time.now':'just now','time.min':'min ago','time.hour':'h ago','time.day':'d ago',
+    'card.cat_other':'Other','card.score_label':'CTS',
+    'demo.empty':'No results match these filters. Reset filters and try again.',
+    'demo.error':'Connection error. Try again in a few seconds.',
+  },
+};
+
+function getLang(){
+  try{var s=localStorage.getItem('ht_lang');if(s==='tr'||s==='en')return s;}catch(e){}
+  // Otomatik: tarayıcı dili tr* ise TR, aksi halde EN.
+  var nav=(navigator.language||'').toLowerCase();
+  return nav.indexOf('tr')===0 ? 'tr' : 'en';
+}
+
+function t(key){
+  var lang=getLang();
+  return (I18N[lang] && I18N[lang][key]) || (I18N.tr[key]) || key;
+}
+
+function applyI18n(){
+  var lang=getLang();
+  document.documentElement.setAttribute('lang', lang);
+  // Toggle butonlarının active state'ini güncelle
+  var btr=document.getElementById('lang-tr'),ben=document.getElementById('lang-en');
+  if(btr)btr.classList.toggle('act',lang==='tr');
+  if(ben)ben.classList.toggle('act',lang==='en');
+
+  // Tüm data-i18n etiketlerini doldur
+  document.querySelectorAll('[data-i18n]').forEach(function(el){
+    var v=t(el.getAttribute('data-i18n'));
+    if(v) el.textContent=v;
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach(function(el){
+    var v=t(el.getAttribute('data-i18n-html'));
+    if(v) el.innerHTML=v;
+  });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(function(el){
+    var v=t(el.getAttribute('data-i18n-placeholder'));
+    if(v) el.setAttribute('placeholder',v);
+  });
+  document.querySelectorAll('[data-i18n-title]').forEach(function(el){
+    var v=t(el.getAttribute('data-i18n-title'));
+    if(v) el.setAttribute('title',v);
+  });
+  document.querySelectorAll('[data-i18n-tip]').forEach(function(el){
+    var v=t(el.getAttribute('data-i18n-tip'));
+    if(v) el.setAttribute('data-tip',v);
+  });
+  document.querySelectorAll('optgroup[data-i18n-label]').forEach(function(el){
+    var v=t(el.getAttribute('data-i18n-label'));
+    if(v) el.setAttribute('label',v);
+  });
+}
+
+function setLang(lang){
+  if(lang!=='tr' && lang!=='en') return;
+  try{localStorage.setItem('ht_lang',lang);}catch(e){}
+  applyI18n();
+  // Demo sonuçlarını yeniden render et (ta() zaman ve empty hint dilini günceller)
+  if(typeof rerender==='function' && lastResults && lastResults.length) rerender();
+  // Ticker'da loading mesajı dilini değiştir
+  var tloading=document.getElementById('ticker-loading');
+  if(tloading && tloading.style.display!=='none'){
+    tloading.textContent=t('hero.ticker_loading');
+  }
+}
+
 function fn(n){if(n>=1e9)return(n/1e9).toFixed(1)+'B';if(n>=1e6)return(n/1e6).toFixed(1)+'M';if(n>=1e3)return(n/1e3).toFixed(n>=1e4?0:1)+'K';return n.toString()}
-function ta(d){var s=Math.floor((new Date()-new Date(d))/1000);if(s<60)return'az önce';if(s<3600)return Math.floor(s/60)+' dk önce';if(s<86400)return Math.floor(s/3600)+' sa önce';return Math.floor(s/86400)+' g önce'}
+function ta(d){
+  var s=Math.floor((new Date()-new Date(d))/1000);
+  if(s<60)return t('time.now');
+  if(s<3600)return Math.floor(s/60)+' '+t('time.min');
+  if(s<86400)return Math.floor(s/3600)+' '+t('time.hour');
+  return Math.floor(s/86400)+' '+t('time.day');
+}
 function srcClass(s){return'src-pill src-'+(s||'').toLowerCase().replace(/[^a-z]/g,'')}
 
 // Sayı count-up animasyonu — 0'dan hedef değere kadar yumuşak geçiş
@@ -577,7 +742,7 @@ function loadTicker(items){
   var track=document.getElementById('ticker-track');
   var loading=document.getElementById('ticker-loading');
   if(!track||!loading)return;
-  if(!items||!items.length){loading.textContent='Henüz canlı trend yok';return}
+  if(!items||!items.length){loading.textContent=getLang()==='en'?'No live trends yet':'Henüz canlı trend yok';return}
   var top=items.slice(0,5);
   // Aynı listeyi 2 kez render et — keyframe %50 translate'ta seamless loop
   var renderItem=function(t){
@@ -606,14 +771,14 @@ document.getElementById('dq').addEventListener('keydown',function(e){if(e.key===
 // Sayfa açıldığında default trends — sort=recent ile bugünün taze trendleri
 async function loadDefaultTrends(){
   var dr=document.getElementById('dr');
-  dr.innerHTML='<div class="demo-loading">Canlı trendler yükleniyor…</div>';
+  dr.innerHTML='<div class="demo-loading">'+t('demo.loading')+'</div>';
   try{
     var r=await fetch(API+'/api/v1/trends?limit=100&sort=recent',{headers:{'X-API-Key':KEY}});
     var j=await r.json();var d=j.data||[];
     lastResults=d;
-    if(!d.length){dr.innerHTML='<div class="demo-empty">Henüz trend yok — pipeline çalışıyor…</div>';return}
+    if(!d.length){dr.innerHTML='<div class="demo-empty">'+t('demo.empty')+'</div>';return}
     renderResults(applyFilters(d));
-  }catch(e){dr.innerHTML='<div class="demo-empty">API hatası. Tekrar deniyor…</div>'}
+  }catch(e){dr.innerHTML='<div class="demo-empty">'+t('demo.error')+'</div>'}
 }
 
 // Filter event listeners — değişince son arama sonuçlarını re-filter et
@@ -672,21 +837,27 @@ function buildCardHTML(t){
 function renderResults(items){
   var dr=document.getElementById('dr');
   if(!items.length){
+    var lang=getLang();
+    var EN=lang==='en';
     // Hangi filter'ı sıkı, akıllı ipucu üret
     var hints=[];
     var minCts=parseFloat((document.getElementById('f-cts')||{}).value||'0');
-    if(minCts>=50)hints.push('Min CTS '+minCts+' çok yüksek');
+    if(minCts>=50)hints.push(EN?('Min CTS '+minCts+' is too high'):('Min CTS '+minCts+' çok yüksek'));
     var country=(document.getElementById('f-country')||{}).value;
-    if(country)hints.push('"'+country+'" ülke filtresini kaldırmayı dene');
+    if(country)hints.push(EN?('Try removing "'+country+'" country filter'):('"'+country+'" ülke filtresini kaldırmayı dene'));
     var src=(document.getElementById('f-source')||{}).value;
-    if(src)hints.push('"'+src+'" kaynak filtresini kaldır');
+    if(src)hints.push(EN?('Remove "'+src+'" source filter'):('"'+src+'" kaynak filtresini kaldır'));
     var burst=(document.getElementById('f-burst')||{}).checked;
-    if(burst)hints.push('Patlama filtresini kapatmayı dene');
+    if(burst)hints.push(EN?'Try turning off the burst filter':'Patlama filtresini kapatmayı dene');
     var hours=parseInt((document.getElementById('f-time')||{}).value||'0',10);
-    if(hours>0&&hours<24)hints.push('Zaman aralığını "Son 7 gün"e çek');
-    var hintHTML=hints.length?'<div style="font-size:0.74rem;color:var(--dim2);margin-top:8px">İpucu: '+hints.join(' · ')+'</div>':'';
+    if(hours>0&&hours<24)hints.push(EN?'Switch time range to "Last 7 days"':'Zaman aralığını "Son 7 gün"e çek');
+    var L_HINT=EN?'Tip':'İpucu';
+    var L_NO=EN?'No results match these filters':'Filtrelere uyan sonuç yok';
     var totalAvail=lastResults?lastResults.length:0;
-    dr.innerHTML='<div class="demo-empty"><div style="font-size:0.92rem;color:var(--text);margin-bottom:6px">Filtrelere uyan sonuç yok</div><div style="font-size:0.78rem;color:var(--dim);margin-bottom:8px">'+totalAvail+' trend yüklü, hepsini filtrelendi.</div>'+hintHTML+'<div style="margin-top:14px"><button onclick="resetFilters()" class="filter-reset" style="display:inline-block;padding:8px 16px;font-size:0.84rem">Tüm filtreleri sıfırla</button></div></div>';
+    var L_LOADED=EN?(totalAvail+' trends loaded, all filtered out.'):(totalAvail+' trend yüklü, hepsi filtrelendi.');
+    var L_RESET_ALL=EN?'Reset all filters':'Tüm filtreleri sıfırla';
+    var hintHTML=hints.length?'<div style="font-size:0.74rem;color:var(--dim2);margin-top:8px">'+L_HINT+': '+hints.join(' · ')+'</div>':'';
+    dr.innerHTML='<div class="demo-empty"><div style="font-size:0.92rem;color:var(--text);margin-bottom:6px">'+L_NO+'</div><div style="font-size:0.78rem;color:var(--dim);margin-bottom:8px">'+L_LOADED+'</div>'+hintHTML+'<div style="margin-top:14px"><button onclick="resetFilters()" class="filter-reset" style="display:inline-block;padding:8px 16px;font-size:0.84rem">'+L_RESET_ALL+'</button></div></div>';
     return;
   }
   var h='';
@@ -726,14 +897,17 @@ var q=document.getElementById('dq').value.trim();
 var dr=document.getElementById('dr');
 // Boş arama → default trends'a dön (otomatik gösterim)
 if(!q||q.length<2){loadDefaultTrends();return}
-dr.innerHTML='<div class="demo-loading">"'+q+'" için 34 platformda aranıyor…</div>';
+var EN=getLang()==='en';
+var L_SEARCHING=EN?('Searching "'+q+'" across 34 platforms…'):('"'+q+'" için 34 platformda aranıyor…');
+var L_NORES=EN?('No results for "'+q+'". Try: "AI", "crypto", "election".'):('"'+q+'" için sonuç yok. Dene: "yapay zeka", "kripto", "eğitim".');
+dr.innerHTML='<div class="demo-loading">'+L_SEARCHING+'</div>';
 try{
 var r=await fetch(API+'/api/v2/feed?q='+encodeURIComponent(q)+'&limit=50',{headers:{'X-API-Key':KEY}});
 var j=await r.json();var d=j.data||[];
 lastResults=d;
-if(!d.length){dr.innerHTML='<div class="demo-empty">"'+q+'" için sonuç yok. Dene: "yapay zeka", "kripto", "eğitim".</div>';return}
+if(!d.length){dr.innerHTML='<div class="demo-empty">'+L_NORES+'</div>';return}
 renderResults(applyFilters(d));
-}catch(e){dr.innerHTML='<div class="demo-empty">API hatası. Tekrar dene.</div>'}}
+}catch(e){dr.innerHTML='<div class="demo-empty">'+t('demo.error')+'</div>'}}
 
 async function doSignup(){
 var em=document.getElementById('se').value.trim();
@@ -758,9 +932,11 @@ function ensureDefaultFilters(){
   var s=document.getElementById('f-source');if(s)s.value='';
 }
 ensureDefaultFilters();
+// Sayfa load'da dil ayarını uygula (HTML lang attr + tüm i18n etiketleri)
+applyI18n();
 // Browser'ın slider state'i restore etmesini engelle: pageshow event'inde tekrar zorla
-window.addEventListener('pageshow', ensureDefaultFilters);
-window.addEventListener('load', ensureDefaultFilters);
+window.addEventListener('pageshow', function(){ ensureDefaultFilters(); applyI18n(); });
+window.addEventListener('load', function(){ ensureDefaultFilters(); applyI18n(); });
 loadDefaultTrends();
 // Daha "anlık" his — 60 saniyede bir polling (önceden 5 dk idi)
 setInterval(loadDefaultTrends, 60 * 1000);
@@ -769,4 +945,4 @@ setInterval(loadNumbers, 60 * 1000);
 </script>
 </body>
 </html>
-<!-- cdn-bust 1777912057 -->
+<!-- cdn-bust 1778012057 i18n-tr-en -->
