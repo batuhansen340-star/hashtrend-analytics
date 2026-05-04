@@ -1,8 +1,20 @@
+import os
 import time
 import requests
 from loguru import logger
 from collectors.base import BaseCollector
 from core.models import RawMention
+
+
+# Reddit GitHub Actions runner IP'lerini bot listesine almış (şu an public JSON
+# bile 0 mention çekiyordu). Cloudflare Worker proxy üzerinden istek atarak
+# datacenter IP block'unu bypass ediyoruz.
+# Worker code: collectors/reddit.py docs altındaki cloudflare-worker.js
+# Override için env: REDDIT_PROXY_URL
+REDDIT_BASE_URL = os.environ.get(
+    "REDDIT_PROXY_URL",
+    "https://reddit-proxy.batuhansen340.workers.dev",
+).rstrip("/")
 
 
 class RedditCollector(BaseCollector):
@@ -22,8 +34,8 @@ class RedditCollector(BaseCollector):
     def __init__(self):
         super().__init__()
         self.session = requests.Session()
-        # Reddit policy: descriptive User-Agent zorunlu. Generic Chrome UA bot
-        # detection'a takılıyor. Format: <platform>:<app>:<version> (by /u/<owner>)
+        # User-Agent yine Reddit-policy uyumlu (Worker fallback header da koyar
+        # ama bizim de göndermemiz tutarlılık için).
         self.session.headers.update({
             "User-Agent": "web:HashTrendAnalytics:2.0 (by /u/hashtrend_bot; contact@hashtrend.app)",
             "Accept": "application/json",
@@ -52,7 +64,7 @@ class RedditCollector(BaseCollector):
         params = "limit=30"
         if geo:
             params += f"&geo_filter={geo}"
-        url = f"https://www.reddit.com/r/popular.json?{params}"
+        url = f"{REDDIT_BASE_URL}/r/popular.json?{params}"
         mentions = []
         try:
             resp = self.session.get(url, timeout=15)
@@ -86,7 +98,7 @@ class RedditCollector(BaseCollector):
         return mentions
 
     def _fetch_subreddit(self, subreddit):
-        url = f"https://www.reddit.com/r/{subreddit}/hot/.json?limit=10&t=day"
+        url = f"{REDDIT_BASE_URL}/r/{subreddit}/hot/.json?limit=10&t=day"
         mentions = []
         try:
             resp = self.session.get(url, timeout=15)
