@@ -86,11 +86,13 @@ class TrendScorer:
         # Burst detection
         is_burst = self._detect_burst(topic)
 
-        # Kaynak bazlı dağılım
-        source_breakdown = {}
-        # Not: Gerçek implementasyonda her kaynak için ayrı mention_count tutulacak
-        for src in topic.sources:
-            source_breakdown[src] = topic.total_mentions // len(topic.sources)
+        # Kaynak bazlı dağılım — normalizer her source için gerçek mention sayısını
+        # `_source_mentions` private attr'ında attach ediyor (normalizer.py:205).
+        # Yoksa fallback: total'ı kaynaklara eşit dağıt (eski davranış).
+        source_breakdown = getattr(topic, "_source_mentions", None) or {}
+        if not source_breakdown and topic.sources:
+            even = topic.total_mentions // max(1, len(topic.sources))
+            source_breakdown = {s: even for s in topic.sources}
 
         # Country override: TR-spesifik kaynak ağırlıklı topic'leri TR olarak işaretle
         # (normalizer bazen GLOBAL'de bırakıyor, burada garanti)

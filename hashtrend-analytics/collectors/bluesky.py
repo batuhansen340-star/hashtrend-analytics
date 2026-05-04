@@ -19,16 +19,24 @@ from core.models import RawMention
 # Trending probe keyword'leri — Bluesky'da popüler post bulmak için sorgular.
 # Çeşitlilik: tech, kültür, gündem, TR, eğlence.
 PROBE_QUERIES = [
+    # Global tech/gündem
     "ai", "crypto", "election",
     "openai", "google", "apple",
     "startup", "design",
     "tech", "music", "movie",
-    "türkiye", "istanbul", "spor",
     "trump", "ukraine", "climate",
+    # TR sinyali veren query'ler — TR_QUERIES ile çakışır, country='TR' set edilir
+    "türkiye", "istanbul", "ankara", "izmir",
+    "gündem", "ekonomi", "spor", "magazin",
+    "galatasaray", "fenerbahçe",
 ]
 
 # TR sinyali veren query'ler — bu sorgularla bulunan post'lar country='TR' işaretlenir.
-TR_QUERIES = frozenset({"türkiye", "istanbul", "spor"})
+TR_QUERIES = frozenset({
+    "türkiye", "istanbul", "ankara", "izmir",
+    "gündem", "ekonomi", "spor", "magazin",
+    "galatasaray", "fenerbahçe",
+})
 
 
 class BlueskyCollector(BaseCollector):
