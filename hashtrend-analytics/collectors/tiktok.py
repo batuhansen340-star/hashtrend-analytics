@@ -1,10 +1,28 @@
-"""TikTok Collector — Trending hashtag ve videolar."""
+"""
+TikTok Collector v2 — TikTokApi (David Teather) ile reverse engineered access.
 
-import requests
-from datetime import datetime
+Eski v1 (basit requests + regex) 0 mention çekiyordu çünkü TikTok client-side
+render eder (SPA), HTML'de hashtag yok. v2 TikTokApi'nin Playwright tabanlı
+signature generation'ı ile mobile API endpoint'lerine erişir.
+
+Bakım maliyeti: TikTok signature algoritması her güncellediğinde TikTokApi
+maintainer patch atar (genelde 2-3 haftada bir). Bu collector graceful fail
+yapar — TikTokApi import edilmezse veya çağrı patlasa pipeline durmaz, sadece
+0 mention döner.
+
+GitHub: https://github.com/davidteather/TikTok-Api
+"""
+
+import asyncio
 from loguru import logger
 from collectors.base import BaseCollector
 from core.models import RawMention
+
+
+# Trending fetch parametreleri
+VIDEO_COUNT = 30          # TikTok trending feed'inden kaç video al
+MIN_PLAY_COUNT = 10_000   # Aşağısı noise sayılır, atlanır
+TOPIC_MAX_LEN = 200       # video açıklamasını kırp
 
 
 class TikTokCollector(BaseCollector):
@@ -12,89 +30,110 @@ class TikTokCollector(BaseCollector):
     COLLECT_INTERVAL_MINUTES = 120
 
     def collect(self) -> list[RawMention]:
-        mentions = []
-        session = requests.Session()
-        session.headers.update({
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
-            "Accept": "text/html,application/xhtml+xml",
-            "Accept-Language": "en-US,en;q=0.9",
-        })
-
-        # 1. TikTok Discover page (trending hashtags)
+        """
+        Senkron BaseCollector.collect() interface'ini sağla.
+        İçeride asyncio.run() ile async TikTokApi'yi sar.
+        Hata yutar — pipeline'ı durdurmaz.
+        """
         try:
-            resp = session.get("https://www.tiktok.com/discover", timeout=15)
-            if resp.status_code == 200:
-                import re
-                # Extract trending topics from page
-                hashtags = re.findall(r'"title":"(#?[^"]{2,60})"[^}]*"subTitle":"(\d+[^"]*)"', resp.text)
-                for tag, views in hashtags[:20]:
-                    view_num = 0
-                    v = views.replace(",", "").upper()
-                    if "B" in v:
-                        view_num = int(float(v.replace("B", "").strip()) * 1e9)
-                    elif "M" in v:
-                        view_num = int(float(v.replace("M", "").strip()) * 1e6)
-                    elif "K" in v:
-                        view_num = int(float(v.replace("K", "").strip()) * 1e3)
-                    else:
-                        nums = "".join(c for c in v if c.isdigit())
-                        view_num = int(nums) if nums else 1000
-
-                    mentions.append(RawMention(
-                        topic=tag,
-                        source=self.SOURCE_NAME,
-                        mention_count=max(view_num, 1000),
-                        url=f"https://www.tiktok.com/tag/{tag.lstrip('#')}",
-                        collected_at=self.collected_at,
-                        country="GLOBAL",
-                    ))
-                logger.debug(f"[{self.SOURCE_NAME}] discover: {len(hashtags[:20])} hashtag")
+            return asyncio.run(self._collect_async())
         except Exception as e:
-            logger.debug(f"[{self.SOURCE_NAME}] discover hata: {e}")
+            logger.warning(f"[tiktok] async run hatası ({type(e).__name__}): {e}")
+            return []
 
-        # 2. TikTok Creative Center (trending keywords - public)
+    async def _collect_async(self) -> list[RawMention]:
+        """TikTokApi async session — trending feed'den video çek."""
         try:
-            resp = session.get("https://ads.tiktok.com/business/creativecenter/inspiration/popular/hashtag/pc/en", timeout=15)
-            if resp.status_code == 200:
-                import re
-                tags = re.findall(r'"hashtag_name":"([^"]{2,50})"[^}]*"publish_cnt":(\d+)', resp.text)
-                for tag, cnt in tags[:15]:
-                    if not any(m.topic.lstrip("#").lower() == tag.lower() for m in mentions):
-                        mentions.append(RawMention(
-                            topic=f"#{tag}",
-                            source=self.SOURCE_NAME,
-                            mention_count=int(cnt) if cnt else 1000,
-                            url=f"https://www.tiktok.com/tag/{tag}",
-                            collected_at=self.collected_at,
-                            country="GLOBAL",
-                        ))
-                logger.debug(f"[{self.SOURCE_NAME}] creative center: {len(tags[:15])} hashtag")
-        except Exception as e:
-            logger.debug(f"[{self.SOURCE_NAME}] creative center hata: {e}")
+            from TikTokApi import TikTokApi  # noqa: F401  (lazy import)
+        except ImportError:
+            logger.warning("[tiktok] TikTokApi kütüphanesi yüklü değil — atlanıyor")
+            return []
 
-        # 3. Fallback: tokboard.com (public TikTok analytics)
-        if not mentions:
+        from TikTokApi import TikTokApi
+        mentions: list[RawMention] = []
+
+        async with TikTokApi() as api:
             try:
-                resp = session.get("https://tokboard.com/trending", timeout=10)
-                if resp.status_code == 200:
-                    from bs4 import BeautifulSoup
-                    soup = BeautifulSoup(resp.text, "html.parser")
-                    items = soup.select("a[href*='tiktok.com']")
-                    seen = set()
-                    for item in items[:15]:
-                        text = item.text.strip()
-                        if text and len(text) > 2 and text not in seen:
-                            seen.add(text)
-                            mentions.append(RawMention(
-                                topic=text,
-                                source=self.SOURCE_NAME,
-                                mention_count=5000,
-                                url=item.get("href", ""),
-                                collected_at=self.collected_at,
-                                country="GLOBAL",
-                            ))
-                    logger.debug(f"[{self.SOURCE_NAME}] tokboard: {len(seen)} trend")
+                # Headless chromium session aç + ms_token + signature gen
+                await api.create_sessions(
+                    num_sessions=1,
+                    sleep_after=3,
+                    headless=True,
+                    browser="chromium",
+                )
             except Exception as e:
-                logger.debug(f"[{self.SOURCE_NAME}] tokboard hata: {e}")
+                logger.warning(f"[tiktok] session oluşturulamadı: {e}")
+                return []
 
+            try:
+                async for video in api.trending.videos(count=VIDEO_COUNT):
+                    mention = self._video_to_mention(video)
+                    if mention is not None:
+                        mentions.append(mention)
+            except Exception as e:
+                logger.warning(f"[tiktok] trending fetch hatası: {e}")
+
+        logger.info(f"[tiktok] {len(mentions)} trending video toplandı")
         return mentions
+
+    def _video_to_mention(self, video) -> RawMention | None:
+        """TikTokApi Video objesini RawMention'a çevir. Geçersizse None."""
+        try:
+            info = getattr(video, "as_dict", None) or {}
+        except Exception:
+            return None
+
+        desc = (info.get("desc") or "").strip()
+        if not desc or len(desc) < 5:
+            return None
+
+        stats = info.get("stats") or info.get("statsV2") or {}
+        # statsV2 string olarak döndürebilir, int'e çevir
+        try:
+            play_count = int(stats.get("playCount") or 0)
+        except (TypeError, ValueError):
+            play_count = 0
+
+        if play_count < MIN_PLAY_COUNT:
+            return None
+
+        topic = desc[:TOPIC_MAX_LEN].replace("\n", " ").strip()
+        author_id = ((info.get("author") or {}).get("uniqueId") or "").strip()
+        video_id = (info.get("id") or "").strip()
+        url = (
+            f"https://www.tiktok.com/@{author_id}/video/{video_id}"
+            if author_id and video_id else None
+        )
+
+        def _safe_int(v):
+            try:
+                return int(v or 0)
+            except (TypeError, ValueError):
+                return 0
+
+        return RawMention(
+            source=self.SOURCE_NAME,
+            topic=topic,
+            mention_count=play_count,
+            country="GLOBAL",
+            url=url,
+            raw_data={
+                "type": "tiktok_trending",
+                "play_count": play_count,
+                "like_count": _safe_int(stats.get("diggCount")),
+                "comment_count": _safe_int(stats.get("commentCount")),
+                "share_count": _safe_int(stats.get("shareCount")),
+                "video_id": video_id,
+                "author": author_id,
+            },
+        )
+
+
+if __name__ == "__main__":
+    collector = TikTokCollector()
+    mentions = collector.run()
+    print(f"Toplam {len(mentions)} TikTok video")
+    for m in mentions[:10]:
+        play = m.raw_data.get("play_count", 0)
+        author = m.raw_data.get("author", "?")
+        print(f"  [{play:>10,}] @{author}: {m.topic[:80]}")
