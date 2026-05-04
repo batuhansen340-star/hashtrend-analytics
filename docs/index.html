@@ -140,6 +140,36 @@ h1 em{font-style:normal;background:linear-gradient(135deg,var(--cyan),var(--cyan
 footer{padding:20px 0;border-top:1px solid var(--border);text-align:center;font-size:0.7rem;color:var(--dim2)}
 @media(max-width:768px){.numbers{grid-template-columns:repeat(3,1fr)}.price-grid{grid-template-columns:1fr}.demo-search{flex-direction:column}}
 @media(max-width:480px){.numbers{grid-template-columns:repeat(2,1fr)}.hero-actions{flex-direction:column;align-items:center}}
+
+/* ━━ HERO LIVE TICKER — şu an trend olan 5 konuyu kayan band'da göster ━━ */
+.hero-ticker{margin:24px auto 0;max-width:760px;background:linear-gradient(135deg,rgba(6,214,224,0.04),rgba(149,128,255,0.03));border:1px solid var(--cyan-border);border-radius:10px;padding:10px 14px;overflow:hidden;position:relative;backdrop-filter:blur(12px)}
+.hero-ticker-label{display:inline-flex;align-items:center;gap:5px;font-size:0.66rem;color:var(--cyan);text-transform:uppercase;letter-spacing:1.5px;font-weight:600;margin-bottom:6px}
+.hero-ticker-label .pulse{width:6px;height:6px;background:var(--cyan);border-radius:50%;animation:pulse 2s infinite}
+.hero-ticker-track{display:flex;gap:18px;animation:tickerScroll 50s linear infinite;white-space:nowrap}
+.hero-ticker-track:hover{animation-play-state:paused}
+.hero-ticker-item{display:inline-flex;align-items:center;gap:8px;font-size:0.84rem;color:var(--text);flex-shrink:0}
+.hero-ticker-item .cts{font-family:var(--mono);font-weight:700;color:var(--cyan);font-size:0.78rem;background:var(--bg3);padding:2px 7px;border-radius:4px}
+.hero-ticker-item .topic{color:var(--text);max-width:260px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hero-ticker-item .burst{font-size:0.7rem;color:var(--orange)}
+.hero-ticker-loading{font-size:0.78rem;color:var(--dim);text-align:center;padding:4px}
+@keyframes tickerScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ━━ Glassmorphism polish — kartlara yumuşak cam efekti ━━ */
+.demo,.numbers,.compare-table{backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.num{background:linear-gradient(135deg,var(--bg2),rgba(255,255,255,0.02));border:1px solid var(--border);transition:border-color .2s,transform .15s}
+.num:hover{border-color:var(--border2);transform:translateY(-1px)}
+.demo{background:linear-gradient(180deg,var(--bg2),rgba(255,255,255,0.01));box-shadow:0 0 0 1px var(--border) inset,0 12px 32px -16px rgba(6,214,224,0.08)}
+.demo-card{transition:border-color .15s,transform .12s,background .15s}
+.demo-card:hover{border-color:var(--cyan-border);transform:translateY(-1px);background:rgba(6,214,224,0.02)}
+
+/* ━━ Hero gradient enhance — radial spotlight'ı yumuşat ━━ */
+.hero::before{width:800px;height:800px;background:radial-gradient(circle,rgba(6,214,224,0.08) 0%,rgba(149,128,255,0.04) 30%,transparent 65%)}
+
+@media(max-width:600px){
+  .hero-ticker{margin:16px 12px 0;padding:8px 10px}
+  .hero-ticker-item{font-size:0.78rem}
+  .hero-ticker-item .topic{max-width:180px}
+}
 </style>
 </head>
 <body>
@@ -162,6 +192,12 @@ footer{padding:20px 0;border-top:1px solid var(--border);text-align:center;font-
 <div class="hero-actions">
 <a href="#signup" class="btn-primary">Get Free API Key</a>
 <a href="#demo" class="btn-secondary">Try Live Demo ↓</a>
+</div>
+<!-- Live trend ticker — şu an gerçekten trend olan top 5 konu kayar -->
+<div class="hero-ticker" id="hero-ticker">
+  <div class="hero-ticker-label"><span class="pulse"></span> Trending now</div>
+  <div class="hero-ticker-loading" id="ticker-loading">Loading live trends…</div>
+  <div class="hero-ticker-track" id="ticker-track" style="display:none"></div>
 </div>
 </div></section>
 
@@ -357,7 +393,30 @@ document.getElementById('n-topics').textContent=d.length;
 var tm=0;d.forEach(function(t){var s=t.sources||{};for(var k in s)if(typeof s[k]==='number')tm+=s[k]});
 document.getElementById('n-mentions').textContent=fn(tm);
 document.getElementById('n-bursts').textContent=d.filter(function(t){return t.isBurst}).length;
+// Live trend ticker — top 5 CTS skoru en yüksek konu, 2x copy ile sürekli kayma
+loadTicker(d);
 }catch(e){}}
+
+function loadTicker(items){
+  var track=document.getElementById('ticker-track');
+  var loading=document.getElementById('ticker-loading');
+  if(!track||!loading)return;
+  if(!items||!items.length){loading.textContent='No live trends yet';return}
+  var top=items.slice(0,5);
+  // Aynı listeyi 2 kez render et — keyframe %50 translate'ta seamless loop
+  var renderItem=function(t){
+    var topic=(t.topicName||'').replace(/[<>]/g,'').substring(0,55);
+    var cts=(t.ctsScore||0).toFixed(1);
+    var burst=t.isBurst?'<span class="burst">🔥</span>':'';
+    return '<div class="hero-ticker-item">'+burst+'<span class="cts">'+cts+'</span><span class="topic">'+topic+'</span></div>';
+  };
+  var html='';
+  top.forEach(function(t){html+=renderItem(t)});
+  top.forEach(function(t){html+=renderItem(t)});  // 2nd copy for loop
+  track.innerHTML=html;
+  loading.style.display='none';
+  track.style.display='flex';
+}
 
 var searchTimer;
 document.getElementById('dq').addEventListener('input',function(){
