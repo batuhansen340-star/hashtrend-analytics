@@ -198,6 +198,9 @@ class Pipeline:
                 db.insert_raw_mentions(all_mentions)
                 db.insert_trend_scores(scores)
                 logger.info("  ✓ Veritabanına kaydedildi")
+                # Mat view'ı yenile — yoksa API hep ilk snapshot'ı görür (28 gün
+                # bayat sorunu). RPC fail olursa pipeline crash etmez, log'a düşer.
+                db.refresh_latest_trend_scores()
             except Exception as e:
                 logger.error(f"  ✗ DB kayıt hatası: {e}")
 
