@@ -30,21 +30,22 @@ from collectors.devto import DevtoCollector
 from collectors.arxiv import ArxivCollector
 from collectors.medium import MediumCollector
 from collectors.twitch import TwitchCollector
-from collectors.imdb import IMDbCollector
 from collectors.fediverse import FediverseCollector
-from collectors.spotify import SpotifyCollector
+from collectors.spotify import SpotifyCollector  # v2 → Apple Music charts
 from collectors.search_trends import SearchTrendsCollector
 from collectors.commerce import CommerceCollector
-from collectors.apptrends import AppTrendsCollector
-from collectors.tiktok import TikTokCollector
-from collectors.instagram import InstagramCollector
-from collectors.linkedin import LinkedInCollector
-from collectors.pinterest import PinterestCollector
-from collectors.quora import QuoraCollector
+from collectors.apptrends import AppTrendsCollector  # v2 → iTunes RSS apps
+from collectors.tiktok import TikTokCollector  # v2 → TikTokApi
 from collectors.yahoo_finance import YahooFinanceCollector
 from collectors.global_news import GlobalNewsCollector
-from collectors.regional_search import RegionalSearchCollector
-from collectors.telegram_trends import TelegramCollector
+# Deprecated (v1.1'de Apify ile geri eklenecek):
+# from collectors.imdb import IMDbCollector       # scraping bozuk
+# from collectors.instagram import InstagramCollector  # anti-bot
+# from collectors.linkedin import LinkedInCollector    # anti-bot
+# from collectors.pinterest import PinterestCollector  # endpoint kapalı
+# from collectors.quora import QuoraCollector          # anti-bot
+# from collectors.regional_search import RegionalSearchCollector  # Naver kapalı
+# from collectors.telegram_trends import TelegramCollector        # tgstat 403
 # ── TR-spesifik collectors (Trend Radar'dan port) ──
 from collectors.eksisozluk import EksiSozlukCollector
 from collectors.gdelt import GDELTCollector
@@ -111,15 +112,14 @@ class Pipeline:
             ("Commerce", CommerceCollector),
             ("Yahoo Finance", YahooFinanceCollector),
             ("Global News", GlobalNewsCollector),
-            # ── Hayalet collector'lar — import vardı, listede yoktu (FIX) ──
-            ("TikTok", TikTokCollector),
-            ("Instagram", InstagramCollector),
-            ("LinkedIn", LinkedInCollector),
-            ("Pinterest", PinterestCollector),
-            ("Quora", QuoraCollector),
-            ("App Trends", AppTrendsCollector),
-            ("Regional Search", RegionalSearchCollector),
-            ("Telegram", TelegramCollector),
+            # ── Sosyal / charts (v2 düzeltildi) ──
+            ("TikTok", TikTokCollector),  # v2 TikTokApi
+            ("App Trends", AppTrendsCollector),  # v2 iTunes RSS apps
+            ("Music Charts", SpotifyCollector),  # v2 iTunes RSS songs
+            # ── Deprecated (v1.1'de Apify ile geri gelecek) ──
+            # Instagram/LinkedIn/Pinterest/Quora: anti-bot, free yol yok
+            # Regional Search/Telegram/IMDb: endpoint kapalı/blocked
+            # Pipeline'dan çıkarıldı — her run 0 mention döndürüp süreyi uzatıyordu
             # ── TR pazarı için 4 ek kaynak (Trend Radar'dan port) ──
             ("Ekşi Sözlük", EksiSozlukCollector),
             ("GDELT (TR)", GDELTCollector),

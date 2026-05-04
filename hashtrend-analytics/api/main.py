@@ -1254,16 +1254,17 @@ async def get_sources(
             {"name": "commerce", "displayName": "E-commerce Trends", "status": "active", "category": "commerce"},
             {"name": "yahoo_finance", "displayName": "Yahoo Finance", "status": "active", "category": "finance"},
 
-            # Tier C — scraping / niche (kırılma riski)
-            {"name": "tiktok", "displayName": "TikTok", "status": "scraping", "category": "social"},
-            {"name": "instagram", "displayName": "Instagram", "status": "scraping", "category": "social"},
-            {"name": "linkedin", "displayName": "LinkedIn", "status": "scraping", "category": "professional"},
-            {"name": "pinterest", "displayName": "Pinterest", "status": "scraping", "category": "visual"},
-            {"name": "quora", "displayName": "Quora", "status": "scraping", "category": "qa"},
-            {"name": "apptrends", "displayName": "App Trends", "status": "active", "category": "mobile"},
-            {"name": "regional_search", "displayName": "Regional Search", "status": "active", "category": "search"},
-            {"name": "telegram_trends", "displayName": "Telegram Trends", "status": "active", "category": "messaging"},
-            {"name": "spotify", "displayName": "Spotify", "status": "active", "category": "audio"},
+            # Tier C — sosyal/scraping/charts
+            {"name": "tiktok", "displayName": "TikTok", "status": "active", "category": "social"},  # TikTokApi v2 (Playwright)
+            {"name": "instagram", "displayName": "Instagram", "status": "deprecated", "category": "social"},  # anti-bot, v1.1 Apify
+            {"name": "linkedin", "displayName": "LinkedIn", "status": "deprecated", "category": "professional"},  # anti-bot, v1.1 Apify
+            {"name": "pinterest", "displayName": "Pinterest", "status": "deprecated", "category": "visual"},  # endpoint kapalı
+            {"name": "quora", "displayName": "Quora", "status": "deprecated", "category": "qa"},  # anti-bot
+            {"name": "apptrends", "displayName": "App Trends (Apple)", "status": "active", "category": "mobile"},  # iTunes RSS v2
+            {"name": "regional_search", "displayName": "Regional Search", "status": "deprecated", "category": "search"},  # Naver endpoint kapalı
+            {"name": "telegram_trends", "displayName": "Telegram Trends", "status": "deprecated", "category": "messaging"},  # tgstat 403
+            {"name": "spotify", "displayName": "Music Charts (Apple)", "status": "active", "category": "audio"},  # iTunes top songs v2
+            {"name": "imdb", "displayName": "IMDb", "status": "deprecated", "category": "entertainment"},  # scraping bozuk
 
             # TR-spesifik (Trend Radar'dan port)
             {"name": "eksisozluk", "displayName": "Ekşi Sözlük", "status": "tr_specific", "category": "tr_pulse"},
@@ -1277,10 +1278,10 @@ async def get_sources(
         ],
         "meta": {
             **make_meta(request_id=auth["request_id"]),
-            "total": 34,
-            "active_count": 25,  # 23 + Reddit (oauth bypass) + Bluesky
-            "tr_specific_count": 5,  # +TR News RSS
-            "scraping_count": 5,  # değişmedi (TikTok et al hala scraping)
+            "total": 35,  # +imdb explicit listed
+            "active_count": 24,  # TikTok v2 + Apple Apps + Apple Music aktif sayıldı
+            "tr_specific_count": 5,
+            "deprecated_count": 6,  # IG/LI/Pinterest/Quora/RegionalSearch/Telegram/IMDb (v1.1)
         },
     }
 
