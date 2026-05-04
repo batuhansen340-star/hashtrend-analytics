@@ -106,7 +106,6 @@ class Pipeline:
             ("Arxiv", ArxivCollector),
             ("Medium", MediumCollector),
             ("Twitch", TwitchCollector),
-            ("IMDb", IMDbCollector),
             ("Fediverse", FediverseCollector),
             ("Search Trends", SearchTrendsCollector),
             ("Commerce", CommerceCollector),
