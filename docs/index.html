@@ -363,7 +363,7 @@ footer{padding:20px 0;border-top:1px solid var(--border);text-align:center;font-
   </div>
   <div class="cts-slider">
     <label for="f-cts">Min CTS <span class="info-tip" data-tip="Composite Trend Score (0-100). Bir konunun ne kadar güçlü trend olduğu — kaynak çeşitliliği, hız, hacim ve tazelikten hesaplanır">?</span></label>
-    <input type="range" id="f-cts" min="0" max="100" value="0" step="5" />
+    <input type="range" id="f-cts" min="0" max="100" value="0" step="5" autocomplete="off" />
     <span class="cts-value" id="f-cts-val">0</span>
   </div>
   <label class="burst-toggle" id="f-burst-label">
@@ -751,13 +751,16 @@ loadNumbers();
 function ensureDefaultFilters(){
   var c=document.getElementById('f-country');if(c)c.value='';
   var t=document.getElementById('f-time');if(t)t.value='168';
-  var cts=document.getElementById('f-cts');if(cts)cts.value='0';
+  var cts=document.getElementById('f-cts');if(cts){cts.value='0';cts.setAttribute('value','0')}
   var ctsv=document.getElementById('f-cts-val');if(ctsv)ctsv.textContent='0';
   var b=document.getElementById('f-burst');if(b)b.checked=false;
   var bl=document.getElementById('f-burst-label');if(bl)bl.classList.remove('act');
   var s=document.getElementById('f-source');if(s)s.value='';
 }
 ensureDefaultFilters();
+// Browser'ın slider state'i restore etmesini engelle: pageshow event'inde tekrar zorla
+window.addEventListener('pageshow', ensureDefaultFilters);
+window.addEventListener('load', ensureDefaultFilters);
 loadDefaultTrends();
 // Daha "anlık" his — 60 saniyede bir polling (önceden 5 dk idi)
 setInterval(loadDefaultTrends, 60 * 1000);
