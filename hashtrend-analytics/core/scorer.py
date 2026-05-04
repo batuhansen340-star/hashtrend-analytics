@@ -92,6 +92,18 @@ class TrendScorer:
         for src in topic.sources:
             source_breakdown[src] = topic.total_mentions // len(topic.sources)
 
+        # Country override: TR-spesifik kaynak ağırlıklı topic'leri TR olarak işaretle
+        # (normalizer bazen GLOBAL'de bırakıyor, burada garanti)
+        TR_SPECIFIC = {"eksisozluk", "webrazzi", "gdelt", "tr_news_rss", "trends24"}
+        tr_sources = [s for s in topic.sources if s in TR_SPECIFIC]
+        if tr_sources and (
+            topic.country in (None, "GLOBAL", "")
+            or len(tr_sources) >= len(topic.sources) / 2
+        ):
+            resolved_country = "TR"
+        else:
+            resolved_country = topic.country or "GLOBAL"
+
         return TrendScore(
             topic_id=topic.id,
             topic_name=topic.canonical_name,
@@ -103,7 +115,7 @@ class TrendScorer:
             recency=round(recency, 2),
             is_burst=is_burst,
             source_breakdown=source_breakdown,
-            country=topic.country,
+            country=resolved_country,
             summary=getattr(topic, "summary", ""),
         )
 
