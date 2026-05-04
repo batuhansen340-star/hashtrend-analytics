@@ -153,7 +153,7 @@ footer{padding:20px 0;border-top:1px solid var(--border);text-align:center;font-
 <div class="num"><div class="num-val c1" id="n-topics">—</div><div class="num-label">Topics</div></div>
 <div class="num"><div class="num-val c2" id="n-mentions">—</div><div class="num-label">Total Mentions</div></div>
 <div class="num"><div class="num-val c3" id="n-bursts">—</div><div class="num-label">Bursts</div></div>
-<div class="num"><div class="num-val c4" id="n-sources">19</div><div class="num-label">Sources</div></div>
+<div class="num"><div class="num-val c4" id="n-sources">32</div><div class="num-label">Sources</div></div>
 <div class="num"><div class="num-val c5" id="n-countries">20</div><div class="num-label">Countries</div></div>
 </div>
 </div>
@@ -161,12 +161,12 @@ footer{padding:20px 0;border-top:1px solid var(--border);text-align:center;font-
 <section class="container" id="demo">
 <div class="demo">
 <h2>Try it — search any topic</h2>
-<p>Type a keyword. HashTrend searches 19 platforms and returns trends with engagement metrics.</p>
+<p>Type a keyword. HashTrend searches 32 platforms and returns trends with engagement metrics.</p>
 <div class="demo-search">
 <input type="text" id="dq" placeholder='Try "machine learning", "crypto", "MMA", "education"...' />
 <button onclick="demoSearch()">Search</button>
 </div>
-<div class="demo-results" id="dr"><div class="demo-empty">Type a keyword above to search 19 platforms in real-time</div></div>
+<div class="demo-results" id="dr"><div class="demo-empty">Type a keyword above to search 32 platforms in real-time</div></div>
 </div>
 </section>
 
@@ -211,7 +211,7 @@ footer{padding:20px 0;border-top:1px solid var(--border);text-align:center;font-
 <h2>HashTrend vs. the competition</h2>
 <table class="compare-table">
 <tr><th>Feature</th><th class="ht">HashTrend</th><th>Exploding Topics</th><th>SparkToro</th><th>Brandwatch</th></tr>
-<tr><td>Sources</td><td class="ht">19 (→50)</td><td>Search + social</td><td>Social only</td><td>Social only</td></tr>
+<tr><td>Sources</td><td class="ht">32 (→50)</td><td>Search + social</td><td>Social only</td><td>Social only</td></tr>
 <tr><td>Dynamic keyword feed</td><td class="ht"><span class="check">✓</span></td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td></tr>
 <tr><td>Platform-specific metrics</td><td class="ht"><span class="check">✓</span> upvotes, views, stars</td><td><span class="cross">✗</span></td><td>Partial</td><td><span class="check">✓</span></td></tr>
 <tr><td>Country filtering</td><td class="ht"><span class="check">✓</span> 20 countries</td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td></tr>
@@ -319,7 +319,7 @@ async function demoSearch(){
 var q=document.getElementById('dq').value.trim();
 var dr=document.getElementById('dr');
 if(!q||q.length<2){dr.innerHTML='<div class="demo-empty">Type at least 2 characters</div>';return}
-dr.innerHTML='<div class="demo-loading">Searching 19 platforms...</div>';
+dr.innerHTML='<div class="demo-loading">Searching 32 platforms...</div>';
 try{
 var r=await fetch(API+'/api/v2/feed?q='+encodeURIComponent(q)+'&limit=10',{headers:{'X-API-Key':KEY}});
 var j=await r.json();var d=j.data||[];
