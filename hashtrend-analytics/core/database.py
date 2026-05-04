@@ -50,6 +50,22 @@ class Database:
             for m in mentions
         ]
 
+        # Batch insert — 1500+ satır tek istekte PostgREST 60s timeout aşıyor (kod 57014).
+        # 200'lük chunk'larda yazarak her HTTP call <60s'de biter.
+        BATCH_SIZE = 200
+        total = 0
+        for i in range(0, len(rows), BATCH_SIZE):
+            batch = rows[i:i + BATCH_SIZE]
+            try:
+                result = self.client.table("raw_mentions").insert(batch).execute()
+                total += len(result.data) if result.data else 0
+            except Exception as e:
+                logger.error(f"raw_mentions batch [{i}:{i+BATCH_SIZE}] hatası: {e}")
+        logger.info(f"{total}/{len(rows)} raw mention kaydedildi (batch={BATCH_SIZE})")
+        return total
+
+    def _legacy_insert_raw_unused(self, rows):
+        """Eski tek-batch insert — 57014 timeout sebebiyle batched'e geçildi."""
         try:
             result = self.client.table("raw_mentions").insert(rows).execute()
             count = len(result.data) if result.data else 0
@@ -194,14 +210,18 @@ class Database:
             for s in scores
         ]
 
-        try:
-            result = self.client.table("trend_scores").insert(rows).execute()
-            count = len(result.data) if result.data else 0
-            logger.info(f"{count} trend skoru kaydedildi")
-            return count
-        except Exception as e:
-            logger.error(f"trend_scores insert hatası: {e}")
-            return 0
+        # Batch insert — 1300+ satır tek istekte PostgREST 60s timeout aşıyor (kod 57014).
+        BATCH_SIZE = 200
+        total = 0
+        for i in range(0, len(rows), BATCH_SIZE):
+            batch = rows[i:i + BATCH_SIZE]
+            try:
+                result = self.client.table("trend_scores").insert(batch).execute()
+                total += len(result.data) if result.data else 0
+            except Exception as e:
+                logger.error(f"trend_scores batch [{i}:{i+BATCH_SIZE}] hatası: {e}")
+        logger.info(f"{total}/{len(rows)} trend skoru kaydedildi (batch={BATCH_SIZE})")
+        return total
 
     def get_latest_scores(
         self,
