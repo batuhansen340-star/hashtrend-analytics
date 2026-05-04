@@ -266,6 +266,43 @@ footer{padding:20px 0;border-top:1px solid var(--border);text-align:center;font-
       <option value="168" selected>Last 7d</option>
     </select>
   </div>
+  <div class="filter-group">
+    <select id="f-source" title="Source filter">
+      <option value="">📡 All sources</option>
+      <optgroup label="Sosyal">
+        <option value="bluesky">🦋 Bluesky</option>
+        <option value="reddit">🔴 Reddit</option>
+        <option value="fediverse">🐘 Mastodon</option>
+        <option value="hackernews">📰 Hacker News</option>
+      </optgroup>
+      <optgroup label="Search & News">
+        <option value="google_trends">📈 Google Trends</option>
+        <option value="newsapi">📰 NewsAPI</option>
+        <option value="global_news">🌐 Global News</option>
+        <option value="search_trends">🔍 Search Trends</option>
+      </optgroup>
+      <optgroup label="Tech & Dev">
+        <option value="github">💻 GitHub</option>
+        <option value="stackoverflow">📚 Stack Overflow</option>
+        <option value="devto">✍️ Dev.to</option>
+        <option value="arxiv">🔬 Arxiv</option>
+      </optgroup>
+      <optgroup label="Media & Charts">
+        <option value="youtube">▶️ YouTube</option>
+        <option value="medium">📝 Medium</option>
+        <option value="twitch">🎮 Twitch</option>
+        <option value="apptrends">📱 App Trends</option>
+        <option value="spotify">🎵 Music Charts</option>
+      </optgroup>
+      <optgroup label="🇹🇷 Türkiye">
+        <option value="eksisozluk">Ekşi Sözlük</option>
+        <option value="webrazzi">Webrazzi</option>
+        <option value="trends24">trends24</option>
+        <option value="gdelt">GDELT</option>
+        <option value="tr_news_rss">TR Gündem RSS</option>
+      </optgroup>
+    </select>
+  </div>
   <div class="cts-slider">
     <label for="f-cts">Min CTS</label>
     <input type="range" id="f-cts" min="0" max="100" value="0" step="5" />
@@ -493,6 +530,7 @@ function applyFilters(items){
   var hours=parseInt(document.getElementById('f-time').value||'0',10);
   var minCts=parseFloat(document.getElementById('f-cts').value||'0');
   var burstOnly=document.getElementById('f-burst').checked;
+  var sourceFilter=(document.getElementById('f-source')||{}).value||'';
   return items.filter(function(t){
     if(country&&(t.country||'GLOBAL')!==country)return false;
     if(hours>0){
@@ -501,6 +539,10 @@ function applyFilters(items){
     }
     if((t.ctsScore||0)<minCts)return false;
     if(burstOnly&&!t.isBurst)return false;
+    if(sourceFilter){
+      var srcs=t.sources||{};
+      if(!(sourceFilter in srcs))return false;
+    }
     return true;
   });
 }
@@ -539,6 +581,7 @@ function renderResults(items){
 function rerender(){renderResults(applyFilters(lastResults));}
 bindFilter('f-country',rerender);
 bindFilter('f-time',rerender);
+bindFilter('f-source',rerender);
 bindFilter('f-cts',function(){
   document.getElementById('f-cts-val').textContent=document.getElementById('f-cts').value;
   rerender();
@@ -549,11 +592,12 @@ bindFilter('f-burst',function(){
 });
 function resetFilters(){
   document.getElementById('f-country').value='';
-  document.getElementById('f-time').value='';
+  document.getElementById('f-time').value='168'; // default 7d kalsın
   document.getElementById('f-cts').value='0';
   document.getElementById('f-cts-val').textContent='0';
   document.getElementById('f-burst').checked=false;
   document.getElementById('f-burst-label').classList.remove('act');
+  var fs=document.getElementById('f-source');if(fs)fs.value='';
   rerender();
 }
 
