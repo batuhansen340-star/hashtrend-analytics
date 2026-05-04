@@ -1221,19 +1221,19 @@ async def get_categories(
 async def get_sources(
     auth: dict = Depends(verify_api_key),
 ):
-    """Aktif veri kaynakları listesi (32 toplam — pipeline.py registry).
+    """Aktif veri kaynakları listesi (34 toplam — pipeline.py registry).
 
     Status:
     - active: pipeline'da çağrılır + DB'ye yazılır
     - tr_specific: TR pazarı kaynağı (Trend Radar'dan port)
-    - scraping: Playwright/HTTP scraping, kırılma riski var
-    - oauth_optional: REDDIT_CLIENT_ID gibi env varsa aktif
+    - scraping: HTTP scraping (TikTok/Instagram/LinkedIn/Pinterest/Quora) —
+      anti-bot blokuyor, şu an 0 mention. v1.1'de Apify entegrasyonu planlı.
     """
     return {
         "data": [
             # Tier A — büyük platformlar, API'lar
             {"name": "google_trends", "displayName": "Google Trends", "status": "active", "category": "search"},
-            {"name": "reddit", "displayName": "Reddit", "status": "oauth_optional", "category": "social"},
+            {"name": "reddit", "displayName": "Reddit", "status": "active", "category": "social"},
             {"name": "hackernews", "displayName": "Hacker News", "status": "active", "category": "tech"},
             {"name": "wikipedia", "displayName": "Wikipedia", "status": "active", "category": "knowledge"},
             {"name": "github_trending", "displayName": "GitHub Trending", "status": "active", "category": "tech"},
@@ -1270,13 +1270,17 @@ async def get_sources(
             {"name": "gdelt", "displayName": "GDELT (TR)", "status": "tr_specific", "category": "tr_news"},
             {"name": "webrazzi", "displayName": "Webrazzi", "status": "tr_specific", "category": "tr_startup"},
             {"name": "trends24", "displayName": "trends24 (TR)", "status": "tr_specific", "category": "tr_social"},
+
+            # v2 free X-alternatif + TR derinlik (2026-05-04)
+            {"name": "bluesky", "displayName": "Bluesky", "status": "active", "category": "social"},
+            {"name": "tr_news_rss", "displayName": "TR Gündem RSS", "status": "tr_specific", "category": "tr_news"},
         ],
         "meta": {
             **make_meta(request_id=auth["request_id"]),
-            "total": 32,
-            "active_count": 23,
-            "tr_specific_count": 4,
-            "scraping_count": 5,
+            "total": 34,
+            "active_count": 25,  # 23 + Reddit (oauth bypass) + Bluesky
+            "tr_specific_count": 5,  # +TR News RSS
+            "scraping_count": 5,  # değişmedi (TikTok et al hala scraping)
         },
     }
 
