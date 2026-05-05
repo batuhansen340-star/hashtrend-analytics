@@ -21,7 +21,7 @@ from collectors.base import BaseCollector
 from core.models import RawMention
 
 
-APIFY_ACTOR = "clockworks~tiktok-scraper"
+APIFY_ACTOR = "apidojo~tiktok-scraper"
 APIFY_BASE = "https://api.apify.com/v2"
 
 # TR Tiktok'ta popüler keşfet hashtag'leri
