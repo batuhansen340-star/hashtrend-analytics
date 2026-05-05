@@ -1,18 +1,17 @@
 """
 Twitter / X Collector — Apify üzerinden apidojo/twitter-scraper-lite actor'u.
 
-X (Twitter) resmi API'sı $100/ay basic tier'a çıktı (free tier kapatıldı 2023).
-snscrape deprecated. Apify Twitter scraper actor'u $0.25/1000 tweet, free
-$5/ay = ~20K tweet, scrape proxy/IP rotation Apify tarafında çözülüyor.
+⚠ MALİYET KONTROLÜ: Apify Pay-per-event modu çok pahalı. Test sırasında 2 run
+$2.40/$5 free tier yedi. Bu collector aşırı kısıtlı çalışır:
+  • Sadece 3 TR sinyali query (en yoğun TR audience)
+  • 10 tweet/query maksimum
+  • Günde 1 kez (1440 dk interval)
+  • Toplam: ~30 tweet/gün ≈ 900/ay → free tier'da $1-2/ay
 
-Strateji: TR + global trend keyword'leri için Top tweet'leri çek (engagement
-filter Apify tarafında 'sort=Top' ile yapılıyor). Her tweet bir RawMention.
+X verisinin hacmi düşük ama TR Twitter trend sinyali korunmuş olur.
+İleride flat-rate actor (microworlds) bulunursa volume artırılabilir.
 
-Env: APIFY_TOKEN (Railway → Variables; .env'e koymak yerine production'da
-secret manager kullan).
-
-Maliyet: 12 keyword × 50 tweet × 12 run/gün ≈ 7K tweet/gün ≈ $1.75/ay (free
-tier'da kalır).
+Env: APIFY_TOKEN (GHA secret olarak Railway değil GitHub Actions'a konulur).
 """
 
 import os
@@ -26,32 +25,25 @@ from core.models import RawMention
 APIFY_ACTOR = "apidojo~twitter-scraper-lite"
 APIFY_BASE = "https://api.apify.com/v2"
 
-# Probe keyword'leri — global tech + TR sinyali
+# Probe keyword'leri — sadece en güçlü TR sinyalleri (maliyet için)
 PROBE_QUERIES = [
-    # Global tech / gündem
-    "#AI", "#crypto", "#openai",
-    # TR sinyali (TR_QUERIES ile çakışır → country='TR')
-    "türkiye", "ekonomi", "gündem",
-    "galatasaray", "fenerbahçe",
-    "istanbul", "ankara",
+    "türkiye", "gündem", "ekonomi",
 ]
 
-# country='TR' işaretlenecek query'ler (Bluesky pattern)
-TR_QUERIES = frozenset({
-    "türkiye", "ekonomi", "gündem",
-    "galatasaray", "fenerbahçe",
-    "istanbul", "ankara",
-})
+# country='TR' işaretlenecek query'ler — hepsi TR
+TR_QUERIES = frozenset(PROBE_QUERIES)
 
-# Run başına kaç tweet
-MAX_PER_QUERY = 50
-# Engagement minimum (like + retweet + reply)
+# Run başına query başına kaç tweet (10 × 3 = 30 tweet/run max)
+MAX_PER_QUERY = 10
+# Engagement minimum
 MIN_ENGAGEMENT = 5
 
 
 class TwitterCollector(BaseCollector):
     SOURCE_NAME = "twitter"
-    COLLECT_INTERVAL_MINUTES = 120
+    # 24 saat — günde 1 kez. Pipeline 2 saatte bir çalışsa bile bu collector
+    # son 24h'de çalışmadıysa atlanır (BaseCollector.run rate limit kontrolü).
+    COLLECT_INTERVAL_MINUTES = 1440
 
     def __init__(self):
         super().__init__()
@@ -70,13 +62,15 @@ class TwitterCollector(BaseCollector):
     def _run_apify(self) -> list[RawMention]:
         """
         Tek Apify run ile tüm query'leri batch olarak çağır.
-        run-sync-get-dataset-items: actor'ü çalıştırır, dataset'i döner.
+        Kesin maliyet kontrolü: maxItems = 30 hard limit.
         """
         url = f"{APIFY_BASE}/acts/{APIFY_ACTOR}/run-sync-get-dataset-items"
         params = {"token": self.token, "timeout": 120}
         body = {
             "searchTerms": list(PROBE_QUERIES),
             "sort": "Top",
+            # HARD CAP: 30 tweet — Pay-per-event maliyet kontrolü.
+            # 3 query × 10 = 30 tweet/run → ~$0.10/run × 30 run/ay = $3/ay max
             "maxItems": MAX_PER_QUERY * len(PROBE_QUERIES),
         }
         resp = requests.post(url, params=params, json=body, timeout=180)
