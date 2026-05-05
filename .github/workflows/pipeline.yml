@@ -30,6 +30,8 @@ jobs:
           OLLAMA_EDU_MODEL: gpt-oss:120b
           # Legacy Anthropic fallback (Ollama 429 olursa)
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          # Apify (X/Twitter scraper — apidojo/twitter-scraper-lite)
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
           ENVIRONMENT: production
         run: python pipeline.py --no-telegram
       # NOT: Mat view refresh PostgREST üzerinden 60s statement_timeout'a
