@@ -54,6 +54,8 @@ from collectors.trends24 import Trends24Collector
 # ── Free X-alternatif + TR derinlik (v2) ──
 from collectors.bluesky import BlueskyCollector
 from collectors.tr_news_rss import TRNewsRSSCollector
+# ── X (Twitter) via Apify — actor: apidojo/twitter-scraper-lite ──
+from collectors.twitter import TwitterCollector
 from core.normalizer import Normalizer
 from core.scorer import TrendScorer
 from core.categorizer import Categorizer
@@ -126,7 +128,9 @@ class Pipeline:
             ("trends24 (TR)", Trends24Collector),
             # ── Free X-alternatif + TR gündem (v2) ──
             ("Bluesky", BlueskyCollector),  # X'in modern alternatifi (free AT Protocol)
-            ("TR News RSS", TRNewsRSSCollector),  # Hürriyet + Onedio gündem
+            ("TR News RSS", TRNewsRSSCollector),  # Hürriyet + 7 ana akım
+            # X (Twitter) — Apify; APIFY_TOKEN yoksa graceful skip
+            ("Twitter / X", TwitterCollector),
             # Reddit OAuth bypass — r/popular.json public, key gerektirmez
             ("Reddit", RedditCollector),
         ]
