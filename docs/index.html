@@ -779,8 +779,19 @@ document.getElementById('dq').addEventListener('keydown',function(e){if(e.key===
 async function loadDefaultTrends(){
   var dr=document.getElementById('dr');
   dr.innerHTML='<div class="demo-loading">'+t('demo.loading')+'</div>';
+  // Server-side filter'ları API'ya geçir — sadece client-side limit=100 ile
+  // hep Reddit GLOBAL dönüyordu, TR/source filter sonrası 0.
+  var country=(document.getElementById('f-country')||{}).value||'';
+  var source=(document.getElementById('f-source')||{}).value||'';
+  var burstOnly=(document.getElementById('f-burst')||{}).checked;
+  var minCts=parseFloat((document.getElementById('f-cts')||{}).value||'0');
+  var qs='limit=100&sort=recent';
+  if(country) qs+='&country='+encodeURIComponent(country);
+  if(source) qs+='&source='+encodeURIComponent(source);
+  if(burstOnly) qs+='&burstOnly=true';
+  if(minCts>0) qs+='&minScore='+minCts;
   try{
-    var r=await fetch(API+'/api/v1/trends?limit=100&sort=recent',{headers:{'X-API-Key':KEY}});
+    var r=await fetch(API+'/api/v1/trends?'+qs,{headers:{'X-API-Key':KEY}});
     var j=await r.json();var d=j.data||[];
     lastResults=d;
     if(!d.length){dr.innerHTML='<div class="demo-empty">'+t('demo.empty')+'</div>';return}
@@ -877,16 +888,17 @@ function openGlossary(){document.getElementById('glossary').classList.add('open'
 function closeGlossary(){document.getElementById('glossary').classList.remove('open');document.body.style.overflow=''}
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeGlossary()});
 function rerender(){renderResults(applyFilters(lastResults));}
-bindFilter('f-country',rerender);
+// country/source/burst/cts → server-side filter (reload); time → client-side
+bindFilter('f-country',loadDefaultTrends);
+bindFilter('f-source',loadDefaultTrends);
 bindFilter('f-time',rerender);
-bindFilter('f-source',rerender);
 bindFilter('f-cts',function(){
   document.getElementById('f-cts-val').textContent=document.getElementById('f-cts').value;
-  rerender();
+  loadDefaultTrends();
 });
 bindFilter('f-burst',function(){
   document.getElementById('f-burst-label').classList.toggle('act',this.checked);
-  rerender();
+  loadDefaultTrends();
 });
 function resetFilters(){
   document.getElementById('f-country').value='';
@@ -896,7 +908,7 @@ function resetFilters(){
   document.getElementById('f-burst').checked=false;
   document.getElementById('f-burst-label').classList.remove('act');
   var fs=document.getElementById('f-source');if(fs)fs.value='';
-  rerender();
+  loadDefaultTrends();  // server-side reload (filter'lar sıfırlandı)
 }
 
 async function demoSearch(){
@@ -952,4 +964,4 @@ setInterval(loadNumbers, 60 * 1000);
 </script>
 </body>
 </html>
-<!-- cdn-bust 1778020000 sources-grid -->
+<!-- cdn-bust 1778030000 server-side-filter -->
