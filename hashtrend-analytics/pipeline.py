@@ -54,8 +54,11 @@ from collectors.trends24 import Trends24Collector
 # ── Free X-alternatif + TR derinlik (v2) ──
 from collectors.bluesky import BlueskyCollector
 from collectors.tr_news_rss import TRNewsRSSCollector
-# ── X (Twitter) via Apify — actor: apidojo/twitter-scraper-lite ──
-from collectors.twitter import TwitterCollector
+# ── Apify-based collectors (TikTok + Instagram) ──
+# Twitter Apify pasifleştirildi — trends24 (zaten aktif) yeterli, $0
+# from collectors.twitter import TwitterCollector
+from collectors.instagram import InstagramCollector
+# TikTok yeniden Apify-based — eski TikTokApi kütüphanesi GHA'da timeout
 from core.normalizer import Normalizer
 from core.scorer import TrendScorer
 from core.categorizer import Categorizer
@@ -114,7 +117,8 @@ class Pipeline:
             ("Yahoo Finance", YahooFinanceCollector),
             ("Global News", GlobalNewsCollector),
             # ── Sosyal / charts (v2 düzeltildi) ──
-            ("TikTok", TikTokCollector),  # v2 TikTokApi
+            ("TikTok", TikTokCollector),  # v3 Apify clockworks/tiktok-scraper, ~$0.45/ay
+            ("Instagram", InstagramCollector),  # Apify hashtag-scraper, ~$3.45/ay
             ("App Trends", AppTrendsCollector),  # v2 iTunes RSS apps
             ("Music Charts", SpotifyCollector),  # v2 iTunes RSS songs
             # ── Deprecated (v1.1'de Apify ile geri gelecek) ──
@@ -129,11 +133,9 @@ class Pipeline:
             # ── Free X-alternatif + TR gündem (v2) ──
             ("Bluesky", BlueskyCollector),  # X'in modern alternatifi (free AT Protocol)
             ("TR News RSS", TRNewsRSSCollector),  # Hürriyet + 7 ana akım
-            # X (Twitter) via Apify — aşırı throttle: günde 1 run, 30 tweet max.
-            # 24h interval BaseCollector tarafından enforce edilir (son run kayıtlı).
-            # Aylık maliyet ~$1-3 free tier'da. Bluesky+trends24'le birlikte X
-            # sinyali korunur.
-            ("Twitter / X", TwitterCollector),
+            # X (Twitter) — trends24 collector hashtag listesini RSS'le getiriyor ($0).
+            # Apify Twitter scraper Pay-per-event çok pahalı, pasifleştirildi.
+            # ("Twitter / X", TwitterCollector),
             # Reddit OAuth bypass — r/popular.json public, key gerektirmez
             ("Reddit", RedditCollector),
         ]
