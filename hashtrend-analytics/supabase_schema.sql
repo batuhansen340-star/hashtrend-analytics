@@ -273,9 +273,12 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- ─── 11. MATERIALIZED VIEW: EN SON SKORLAR ─────────────────
--- API'nin ana endpoint'i bu view'ı okur (cache katmanı)
--- Her pipeline run'ında REFRESH MATERIALIZED VIEW CONCURRENTLY çalışır
+-- ─── 11. MATERIALIZED VIEW: SON 24 SAATTEKİ EN GÜNCEL SKORLAR ───────
+-- API'nin ana endpoint'i bu view'ı okur (cache katmanı).
+-- Her pipeline run'ında public.refresh_latest_trend_scores() RPC tetiklenir.
+-- 24h filter: pipeline her run'da yeni topic_id (UUID) üretiyor; eski
+-- topic'lerin biriktirmemesi için scored_at son 24h'de olanları al.
+-- Migration: migrations/2026-05-05-mat-view-24h-fix.sql
 CREATE MATERIALIZED VIEW IF NOT EXISTS latest_trend_scores AS
 SELECT DISTINCT ON (topic_id)
     ts.id,
@@ -291,8 +294,15 @@ SELECT DISTINCT ON (topic_id)
     ts.is_burst,
     ts.source_count,
     ts.source_breakdown,
+    ts.country,
+    ts.summary,
+    ts.edu_score,
+    ts.edu_category,
+    ts.edu_reason,
+    ts.course_idea,
     ts.scored_at
 FROM trend_scores ts
+WHERE ts.scored_at > NOW() - INTERVAL '24 hours'
 ORDER BY topic_id, scored_at DESC;
 
 -- Unique index (CONCURRENTLY refresh için gerekli)
