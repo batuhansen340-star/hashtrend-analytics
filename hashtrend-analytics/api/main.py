@@ -559,11 +559,17 @@ async def get_trends(
         offset = (page - 1) * limit
         if source:
             # source filter post-filter olduğu için, range önce uygulanırsa ilk
-            # sayfada matching yoksa boş döner. Daha geniş bir set çek (1000),
-            # source-filter sonrası limit/offset uygula.
-            big = query.range(0, 999).execute()
-            all_rows = big.data or []
+            # sayfada matching yoksa boş döner. Mat view ~12K row; en yeni 5000
+            # window içinde her source en az 5-50 topic bulur. PostgREST max
+            # range 1000 olduğundan iki sayfa fetch (0-999 + 1000-1999 + ...).
             src_key = source.strip().lower()
+            all_rows = []
+            for chunk_start in (0, 1000, 2000, 3000, 4000):
+                chunk = query.range(chunk_start, chunk_start + 999).execute()
+                got = chunk.data or []
+                all_rows.extend(got)
+                if len(got) < 1000:
+                    break
             filtered = [r for r in all_rows if src_key in (r.get("source_breakdown") or {})]
             rows = filtered[offset:offset + limit]
         else:
