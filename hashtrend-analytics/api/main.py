@@ -556,19 +556,21 @@ async def get_trends(
         if country:
             query = query.eq("country", country.upper())
 
-        # Pagination (offset-based — materialized view küçük)
         offset = (page - 1) * limit
-        query = query.range(offset, offset + limit - 1)
-
-        result = query.execute()
-        rows = result.data or []
-
-        # source filter: source_breakdown JSON içinde post-filter
-        # (Supabase JSONB has-key sorgusu PostgREST'te `?` operatörüyle yapılır,
-        # ama python-supabase client expose etmiyor — küçük mat view'da güvenli)
         if source:
+            # source filter post-filter olduğu için, range önce uygulanırsa ilk
+            # sayfada matching yoksa boş döner. Daha geniş bir set çek (1000),
+            # source-filter sonrası limit/offset uygula.
+            big = query.range(0, 999).execute()
+            all_rows = big.data or []
             src_key = source.strip().lower()
-            rows = [r for r in rows if src_key in (r.get("source_breakdown") or {})]
+            filtered = [r for r in all_rows if src_key in (r.get("source_breakdown") or {})]
+            rows = filtered[offset:offset + limit]
+        else:
+            # Pagination (offset-based — materialized view küçük)
+            query = query.range(offset, offset + limit - 1)
+            result = query.execute()
+            rows = result.data or []
 
     except Exception as e:
         logger.error(f"Trends sorgu hatası: {e}")
