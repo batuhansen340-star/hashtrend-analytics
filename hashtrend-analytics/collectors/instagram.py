@@ -11,7 +11,8 @@ Strateji:
   • Günde 1 run (24h interval)
   • Her post bir mention; hashtag = topic clusterı için sinyal
 
-Maliyet: 50 post/gün × 30 × $0.0023 = ~$3.45/ay (Apify free tier'da)
+Maliyet: 50 post/gün × 30 × $0.0005 = ~$0.75/ay (Apify free tier'da)
+Actor: apidojo/instagram-scraper — $0.50/1000 post, en ucuz Instagram actor
 Env: APIFY_TOKEN (GHA secret).
 """
 
@@ -22,7 +23,7 @@ from collectors.base import BaseCollector
 from core.models import RawMention
 
 
-APIFY_ACTOR = "apify~instagram-hashtag-scraper"
+APIFY_ACTOR = "apidojo~instagram-scraper"
 APIFY_BASE = "https://api.apify.com/v2"
 
 # TR pazarında popüler sabit hashtag'ler — engagement değişkenleri trend sinyali
