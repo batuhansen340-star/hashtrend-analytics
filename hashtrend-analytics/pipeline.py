@@ -129,8 +129,10 @@ class Pipeline:
             # ── Free X-alternatif + TR gündem (v2) ──
             ("Bluesky", BlueskyCollector),  # X'in modern alternatifi (free AT Protocol)
             ("TR News RSS", TRNewsRSSCollector),  # Hürriyet + 7 ana akım
-            # X (Twitter) — Apify; APIFY_TOKEN yoksa graceful skip
-            ("Twitter / X", TwitterCollector),
+            # X (Twitter) via Apify — devre dışı (Pay-per-event çok pahalı:
+            # 2 test run'da $2.40/$5 free tier yedi). Bluesky + trends24 X'in
+            # ikamesi olarak yeterli. İleride flat-rate actor'la geri açılabilir.
+            # ("Twitter / X", TwitterCollector),
             # Reddit OAuth bypass — r/popular.json public, key gerektirmez
             ("Reddit", RedditCollector),
         ]
