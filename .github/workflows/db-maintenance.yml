@@ -1,0 +1,33 @@
+name: DB Maintenance (manual)
+
+# Manuel tetiklenir — Supabase'de SQL çalıştırma yetkisi olmadan tek seferlik
+# bakım işleri için. workflow_dispatch input ile hangi script çalışacak seçilir.
+
+on:
+  workflow_dispatch:
+    inputs:
+      script:
+        description: 'Hangi maintenance scripti?'
+        required: true
+        default: 'cleanup_orphan_tr'
+        type: choice
+        options:
+          - cleanup_orphan_tr
+
+jobs:
+  run-maintenance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install deps
+        working-directory: hashtrend-analytics
+        run: pip install supabase loguru
+      - name: Run maintenance script
+        working-directory: hashtrend-analytics
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+        run: python scripts/${{ inputs.script }}.py
