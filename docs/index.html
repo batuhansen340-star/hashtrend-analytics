@@ -250,6 +250,48 @@ footer{padding:20px 0;border-top:1px solid var(--border);text-align:center;font-
 .how-link::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:1px;background:var(--cyan);transform:scaleX(0);transition:transform .15s;transform-origin:left}
 .how-link:hover::after{transform:scaleX(1)}
 
+/* AI buttons + Idea/Viral modal */
+.ai-btns{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
+.ai-btn{background:linear-gradient(135deg,rgba(6,214,224,0.12),rgba(149,128,255,0.12));border:1px solid var(--cyan-border);color:var(--cyan);font-family:var(--mono);font-size:0.66rem;font-weight:600;padding:4px 10px;border-radius:5px;cursor:pointer;transition:all .15s;letter-spacing:.3px}
+.ai-btn:hover{background:linear-gradient(135deg,rgba(6,214,224,0.22),rgba(149,128,255,0.22));border-color:var(--cyan)}
+.ai-btn-viral{color:var(--purple);border-color:rgba(149,128,255,0.3)}
+.ai-btn-viral:hover{background:linear-gradient(135deg,rgba(149,128,255,0.22),rgba(255,107,107,0.18));border-color:var(--purple)}
+.ai-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);backdrop-filter:blur(8px);z-index:1100;align-items:flex-start;justify-content:center;padding:40px 20px;overflow-y:auto}
+.ai-modal.open{display:flex}
+.ai-content{background:var(--bg2);border:1px solid var(--border2);border-radius:14px;padding:24px;max-width:760px;width:100%;box-shadow:0 24px 64px rgba(0,0,0,.7);position:relative}
+.ai-content h2{font-size:1.3rem;margin:0 0 6px;background:linear-gradient(90deg,var(--cyan),var(--purple));-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:700}
+.ai-content .ai-sub{font-size:0.78rem;color:var(--dim);margin-bottom:14px}
+.ai-close{position:absolute;top:14px;right:18px;background:transparent;border:none;color:var(--dim);font-size:1.4rem;cursor:pointer}
+.ai-close:hover{color:var(--text)}
+.ai-loading{padding:40px;text-align:center;color:var(--dim);font-size:0.88rem}
+.ai-country-sel{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+.ai-country-sel button{background:var(--bg3);border:1px solid var(--border);color:var(--dim);font-family:var(--mono);font-size:0.7rem;padding:5px 10px;border-radius:4px;cursor:pointer}
+.ai-country-sel button.act{background:var(--cyan);color:#000;border-color:var(--cyan)}
+.ai-country-sel button:hover:not(.act){color:var(--text)}
+.ai-context{font-size:0.82rem;color:var(--dim);background:var(--bg3);padding:10px 14px;border-radius:8px;border-left:3px solid var(--cyan);margin-bottom:14px}
+.ai-idea{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:12px}
+.ai-idea-head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:8px}
+.ai-idea-name{font-size:1.05rem;font-weight:700;color:var(--text)}
+.ai-idea-tagline{font-size:0.8rem;color:var(--cyan);margin-top:2px;font-style:italic}
+.ai-scores{display:flex;flex-direction:column;gap:4px;min-width:130px;text-align:right}
+.ai-score{font-family:var(--mono);font-size:0.74rem;color:var(--dim);display:flex;justify-content:flex-end;gap:8px;align-items:center}
+.ai-score-bar{width:80px;height:5px;background:var(--bg);border-radius:3px;overflow:hidden}
+.ai-score-fill{height:100%;background:linear-gradient(90deg,var(--green),var(--cyan));transition:width .4s}
+.ai-score-fill.viral{background:linear-gradient(90deg,var(--orange),var(--red))}
+.ai-score-val{font-weight:700;color:var(--text);min-width:34px}
+.ai-idea-body{font-size:0.84rem;color:var(--text);line-height:1.55}
+.ai-idea-body p{margin:6px 0}
+.ai-idea-body .label{color:var(--dim2);font-size:0.7rem;text-transform:uppercase;letter-spacing:0.5px;margin-top:8px}
+.ai-tag{display:inline-block;background:var(--bg);color:var(--dim);font-family:var(--mono);font-size:0.66rem;padding:2px 7px;border-radius:3px;margin:2px 4px 2px 0}
+.ai-confidence{display:inline-block;font-size:0.62rem;padding:1px 6px;border-radius:3px;margin-left:6px}
+.ai-confidence.high{background:rgba(61,220,132,0.15);color:var(--green)}
+.ai-confidence.medium{background:rgba(255,158,68,0.15);color:var(--orange)}
+.ai-confidence.low{background:rgba(255,95,95,0.15);color:var(--red)}
+.ai-platform-sel{display:flex;gap:6px;margin-bottom:14px}
+.ai-platform-sel button{background:var(--bg3);border:1px solid var(--border);color:var(--dim);font-family:var(--mono);font-size:0.72rem;padding:5px 12px;border-radius:4px;cursor:pointer}
+.ai-platform-sel button.act{background:var(--purple);color:#fff;border-color:var(--purple)}
+.ai-disclaimer{font-size:0.7rem;color:var(--dim2);margin-top:14px;padding-top:12px;border-top:1px solid var(--border)}
+
 /* Lang toggle (TR/EN) */
 .lang-toggle{display:inline-flex;align-items:center;gap:0;background:var(--bg3);border:1px solid var(--border2);border-radius:6px;overflow:hidden;font-family:var(--mono)}
 .lang-toggle button{background:transparent;border:none;color:var(--dim);padding:4px 9px;font-size:0.7rem;font-weight:600;cursor:pointer;font-family:var(--mono);letter-spacing:0.3px}
@@ -510,6 +552,17 @@ footer{padding:20px 0;border-top:1px solid var(--border);text-align:center;font-
 </div>
 </div>
 </section>
+
+<!-- AI Idea/Viral modal — trend kartından açılır -->
+<div class="ai-modal" id="ai-modal" onclick="if(event.target===this)closeAi()">
+  <div class="ai-content" id="ai-content">
+    <button class="ai-close" onclick="closeAi()" aria-label="Kapat">×</button>
+    <h2 id="ai-title">—</h2>
+    <div class="ai-sub" id="ai-sub">—</div>
+    <div id="ai-body"><div class="ai-loading">Yükleniyor…</div></div>
+    <div class="ai-disclaimer" id="ai-disclaimer"></div>
+  </div>
+</div>
 
 <!-- Glossary modal — tüm metriklerin Türkçe açıklaması -->
 <div class="glossary-modal" id="glossary" onclick="if(event.target===this)closeGlossary()">
@@ -839,13 +892,19 @@ function buildCardHTML(t){
   metrics=metrics.slice(0,-3);
   var burstBadge=t.isBurst?'<span class="src-pill" style="background:rgba(255,158,68,0.12);color:var(--orange)">🔥 BURST</span> ':'';
   var country=t.country&&t.country!=='GLOBAL'?'<span class="src-pill" style="background:rgba(149,128,255,0.08);color:var(--purple)">'+t.country+'</span> ':'';
+  var idea=getLang()==='en'?'💡 App Idea':'💡 Uygulama Fikri';
+  var viral=getLang()==='en'?'🎬 Viral Content':'🎬 Viral İçerik';
+  var aiBtns='<div class="ai-btns"><button class="ai-btn" onclick="openIdea(\''+(t.id||'')+'\',\''+(t.country||'GLOBAL')+'\')">'+idea+'</button>'+
+             ' <button class="ai-btn ai-btn-viral" onclick="openViral(\''+(t.id||'')+'\',\''+(t.country||'GLOBAL')+'\')">'+viral+'</button></div>';
   var h='<div class="demo-card'+(t.isBurst?' is-burst':'')+'">';
   h+='<div class="demo-card-left">';
   h+='<div class="demo-card-title">'+(t.topicName||'').substring(0,80)+'</div>';
   h+='<div class="demo-card-meta">';
   if(metrics)h+='<span>'+metrics+'</span>';
   h+='<span>'+ta(t.scoredAt)+'</span> '+burstBadge+country+sp;
-  h+='</div></div>';
+  h+='</div>';
+  h+=aiBtns;
+  h+='</div>';
   h+='<div class="demo-card-right">';
   h+='<div class="demo-card-cts">'+(t.ctsScore||0).toFixed(1)+'</div>';
   h+='<div class="demo-card-cat">'+(t.category||'')+'</div>';
@@ -886,7 +945,177 @@ function renderResults(items){
 // Glossary modal aç/kapa — kullanıcıya tüm metriklerin TR açıklamasını gösterir
 function openGlossary(){document.getElementById('glossary').classList.add('open');document.body.style.overflow='hidden'}
 function closeGlossary(){document.getElementById('glossary').classList.remove('open');document.body.style.overflow=''}
-document.addEventListener('keydown',function(e){if(e.key==='Escape')closeGlossary()});
+function closeAi(){document.getElementById('ai-modal').classList.remove('open');document.body.style.overflow=''}
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeGlossary();closeAi();}});
+
+// ─── AI: App Idea Generator ──────────────────────────────────
+var aiState={topicId:'',mode:'',country:'GLOBAL',platform:'tiktok'};
+
+function openIdea(topicId, country){
+  if(!topicId){return}
+  aiState={topicId:topicId,mode:'idea',country:country||'GLOBAL',platform:'tiktok'};
+  document.getElementById('ai-modal').classList.add('open');
+  document.body.style.overflow='hidden';
+  renderIdeaShell();
+  loadAppIdeas();
+}
+function openViral(topicId, country){
+  if(!topicId){return}
+  aiState={topicId:topicId,mode:'viral',country:country||'GLOBAL',platform:'tiktok'};
+  document.getElementById('ai-modal').classList.add('open');
+  document.body.style.overflow='hidden';
+  renderViralShell();
+  loadViralIdeas();
+}
+function renderIdeaShell(){
+  var EN=getLang()==='en';
+  document.getElementById('ai-title').textContent=EN?'💡 App Ideas (AI)':'💡 Uygulama Fikri (AI)';
+  document.getElementById('ai-sub').textContent=EN?'Trend → app idea + retention score + market fit (powered by Claude/Ollama)':'Trend → uygulama fikri + retention skoru + pazar uyumu (Claude/Ollama destekli)';
+  var sel='<div class="ai-country-sel">'+countryButtons('idea')+'</div>';
+  document.getElementById('ai-body').innerHTML=sel+'<div class="ai-loading">'+(EN?'Generating ideas (~5-10s)…':'Fikirler üretiliyor (~5-10sn)…')+'</div>';
+  document.getElementById('ai-disclaimer').innerHTML=EN
+    ? 'Disclaimer: AI-generated, not financial/business advice. Verify competitors and market data before deciding.'
+    : 'Yasal uyarı: AI ile üretildi, finansal/iş tavsiyesi değildir. Karar vermeden önce rakipleri ve pazar verilerini doğrulayın.';
+}
+function renderViralShell(){
+  var EN=getLang()==='en';
+  document.getElementById('ai-title').textContent=EN?'🎬 Viral Content (Influencer Factory)':'🎬 Viral İçerik (Influencer Fabrikası)';
+  document.getElementById('ai-sub').textContent=EN?'Trend → 3 video ideas + viral score + hook/audio suggestion':'Trend → 3 video fikri + viral skoru + hook/ses önerisi';
+  var psel='<div class="ai-platform-sel">'+platformButtons()+'</div>';
+  var csel='<div class="ai-country-sel">'+countryButtons('viral')+'</div>';
+  document.getElementById('ai-body').innerHTML=psel+csel+'<div class="ai-loading">'+(EN?'Generating viral video ideas (~5-10s)…':'Viral video fikirleri üretiliyor (~5-10sn)…')+'</div>';
+  document.getElementById('ai-disclaimer').innerHTML=EN
+    ? 'Disclaimer: AI-generated content suggestions. Viral score is heuristic, not guaranteed. Always follow platform guidelines.'
+    : 'Yasal uyarı: AI ile üretilmiş içerik önerileri. Viral skoru sezgiseldir, garanti değildir. Platform kurallarına uy.';
+}
+function countryButtons(mode){
+  var list=[['GLOBAL','🌐 Global'],['TR','🇹🇷 TR'],['US','🇺🇸 US'],['GB','🇬🇧 UK'],['DE','🇩🇪 DE']];
+  var html='';
+  list.forEach(function(c){
+    var act=c[0]===aiState.country?' act':'';
+    html+='<button class="'+act+'" onclick="setAiCountry(\''+c[0]+'\')">'+c[1]+'</button>';
+  });
+  return html;
+}
+function platformButtons(){
+  var list=[['tiktok','🎵 TikTok'],['instagram','📸 Instagram'],['youtube_shorts','▶️ YT Shorts']];
+  var html='';
+  list.forEach(function(p){
+    var act=p[0]===aiState.platform?' act':'';
+    html+='<button class="'+act+'" onclick="setAiPlatform(\''+p[0]+'\')">'+p[1]+'</button>';
+  });
+  return html;
+}
+function setAiCountry(c){
+  if(c===aiState.country)return;
+  aiState.country=c;
+  if(aiState.mode==='idea'){renderIdeaShell();loadAppIdeas();}else{renderViralShell();loadViralIdeas();}
+}
+function setAiPlatform(p){
+  if(p===aiState.platform)return;
+  aiState.platform=p;
+  renderViralShell();loadViralIdeas();
+}
+
+async function loadAppIdeas(){
+  var qs='country='+encodeURIComponent(aiState.country);
+  try{
+    var r=await fetch(API+'/api/v1/trends/'+aiState.topicId+'/app-ideas?'+qs,{headers:{'X-API-Key':KEY}});
+    var j=await r.json();
+    renderAppIdeas(j);
+  }catch(e){
+    document.getElementById('ai-body').innerHTML+='<div class="ai-loading">'+(getLang()==='en'?'Connection error':'Bağlantı hatası')+'</div>';
+  }
+}
+async function loadViralIdeas(){
+  var qs='country='+encodeURIComponent(aiState.country)+'&platform='+aiState.platform;
+  try{
+    var r=await fetch(API+'/api/v1/trends/'+aiState.topicId+'/viral-ideas?'+qs,{headers:{'X-API-Key':KEY}});
+    var j=await r.json();
+    renderViralIdeas(j);
+  }catch(e){
+    document.getElementById('ai-body').innerHTML+='<div class="ai-loading">'+(getLang()==='en'?'Connection error':'Bağlantı hatası')+'</div>';
+  }
+}
+function renderAppIdeas(j){
+  var ideas=(j&&j.data)||[];
+  var ctx=j&&j.country_context;
+  var EN=getLang()==='en';
+  var sel='<div class="ai-country-sel">'+countryButtons('idea')+'</div>';
+  if(!ideas.length){
+    document.getElementById('ai-body').innerHTML=sel+'<div class="ai-loading">'+(EN?'No ideas generated. Trend metadata may be too sparse.':'Fikir üretilemedi. Trend metadata yetersiz olabilir.')+'</div>';
+    return;
+  }
+  var html=sel;
+  if(ctx) html+='<div class="ai-context">📍 '+ctx+'</div>';
+  ideas.forEach(function(i){
+    var rs=Math.round((i.retention_score||0)*100);
+    var fs=Math.round((i.feasibility_score||0)*100);
+    var conf=i.confidence||'medium';
+    html+='<div class="ai-idea">';
+    html+='<div class="ai-idea-head">';
+    html+='<div><div class="ai-idea-name">'+escapeHtml(i.name||'')+'<span class="ai-confidence '+conf+'">'+conf+'</span></div>';
+    html+='<div class="ai-idea-tagline">'+escapeHtml(i.tagline||'')+'</div></div>';
+    html+='<div class="ai-scores">';
+    html+='<div class="ai-score">'+(EN?'Retention':'Tutma')+' <div class="ai-score-bar"><div class="ai-score-fill" style="width:'+rs+'%"></div></div> <span class="ai-score-val">'+rs+'%</span></div>';
+    html+='<div class="ai-score">'+(EN?'Feasibility':'Yapılab.')+' <div class="ai-score-bar"><div class="ai-score-fill" style="width:'+fs+'%"></div></div> <span class="ai-score-val">'+fs+'%</span></div>';
+    html+='<div class="ai-score">MVP <span class="ai-score-val">'+(i.mvp_days||30)+(EN?'d':'g')+'</span></div>';
+    html+='</div></div>';
+    html+='<div class="ai-idea-body">';
+    if(i.problem) html+='<p><span class="label">'+(EN?'Problem':'Sorun')+'</span><br>'+escapeHtml(i.problem)+'</p>';
+    if(i.solution) html+='<p><span class="label">'+(EN?'Solution':'Çözüm')+'</span><br>'+escapeHtml(i.solution)+'</p>';
+    if(i.tech_stack&&i.tech_stack.length){
+      html+='<p><span class="label">Stack</span><br>';
+      i.tech_stack.forEach(function(s){html+='<span class="ai-tag">'+escapeHtml(s)+'</span>';});
+      html+='</p>';
+    }
+    if(i.competitors&&i.competitors.length){
+      html+='<p><span class="label">'+(EN?'Competitors':'Rakipler')+'</span><br>';
+      i.competitors.forEach(function(c){html+='<span class="ai-tag">'+escapeHtml(c)+'</span>';});
+      html+='</p>';
+    }
+    if(i.differentiation) html+='<p><span class="label">'+(EN?'Differentiation':'Farklılaşma')+'</span><br>'+escapeHtml(i.differentiation)+'</p>';
+    if(i.market_size_estimate) html+='<p><span class="label">'+(EN?'Market':'Pazar')+'</span><br>'+escapeHtml(i.market_size_estimate)+'</p>';
+    html+='</div></div>';
+  });
+  document.getElementById('ai-body').innerHTML=html;
+}
+function renderViralIdeas(j){
+  var ideas=(j&&j.data)||[];
+  var ctx=j&&j.platform_context;
+  var EN=getLang()==='en';
+  var psel='<div class="ai-platform-sel">'+platformButtons()+'</div>';
+  var csel='<div class="ai-country-sel">'+countryButtons('viral')+'</div>';
+  if(!ideas.length){
+    document.getElementById('ai-body').innerHTML=psel+csel+'<div class="ai-loading">'+(EN?'No video ideas generated.':'Video fikri üretilemedi.')+'</div>';
+    return;
+  }
+  var html=psel+csel;
+  if(ctx) html+='<div class="ai-context">📍 '+ctx+'</div>';
+  ideas.forEach(function(i){
+    var vs=Math.round((i.viral_score||0)*100);
+    var conf=i.confidence||'medium';
+    html+='<div class="ai-idea">';
+    html+='<div class="ai-idea-head">';
+    html+='<div><div class="ai-idea-name">"'+escapeHtml((i.hook||'').substring(0,120))+'"<span class="ai-confidence '+conf+'">'+conf+'</span></div>';
+    html+='<div class="ai-idea-tagline">'+escapeHtml(i.format||'')+(i.expected_engagement?' · '+escapeHtml(i.expected_engagement):'')+'</div></div>';
+    html+='<div class="ai-scores">';
+    html+='<div class="ai-score">Viral <div class="ai-score-bar"><div class="ai-score-fill viral" style="width:'+vs+'%"></div></div> <span class="ai-score-val">'+vs+'%</span></div>';
+    html+='</div></div>';
+    html+='<div class="ai-idea-body">';
+    if(i.description) html+='<p>'+escapeHtml(i.description)+'</p>';
+    if(i.audio_suggestion) html+='<p><span class="label">'+(EN?'Audio':'Ses')+'</span><br>'+escapeHtml(i.audio_suggestion)+'</p>';
+    if(i.visual_style) html+='<p><span class="label">'+(EN?'Visual style':'Görsel tarz')+'</span><br>'+escapeHtml(i.visual_style)+'</p>';
+    if(i.hashtags&&i.hashtags.length){
+      html+='<p><span class="label">Hashtags</span><br>';
+      i.hashtags.forEach(function(h){html+='<span class="ai-tag">'+escapeHtml(h)+'</span>';});
+      html+='</p>';
+    }
+    html+='</div></div>';
+  });
+  document.getElementById('ai-body').innerHTML=html;
+}
+function escapeHtml(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 function rerender(){renderResults(applyFilters(lastResults));}
 // country/source/burst/cts → server-side filter (reload); time → client-side
 bindFilter('f-country',loadDefaultTrends);
@@ -964,4 +1193,4 @@ setInterval(loadNumbers, 60 * 1000);
 </script>
 </body>
 </html>
-<!-- cdn-bust 1778030000 server-side-filter -->
+<!-- cdn-bust 1778040000 ai-idea-viral -->

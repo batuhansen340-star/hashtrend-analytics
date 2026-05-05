@@ -1133,6 +1133,233 @@ async def generate_idea(
     return response
 
 
+# ─── APP IDEA + VIRAL CONTENT (AI Layer) ──────────────────────
+# HashTrend'i Exploding Topics'ten ayıran katman. Trend → uygulama fikri
+# (retention skoru) + influencer video önerisi (viral skoru).
+# Country-aware: ?country=TR / ?country=GLOBAL
+
+
+@app.get("/api/v1/trends/{topic_id}/app-ideas", tags=["AI Layer"])
+async def get_app_ideas(
+    topic_id: str,
+    auth: dict = Depends(verify_api_key),
+    country: str = Query("GLOBAL", description="ISO alpha-2 veya GLOBAL"),
+):
+    """
+    Bir trend için 3 uygulama fikri + retention/feasibility skoru.
+
+    Cache: app_ideas tablosunda topic_id+country için kayıt varsa direkt dön.
+    Yoksa: Ollama Cloud (gpt-oss:120b) ile üret, kaydet, dön.
+
+    Country-aware: TR pazarı (Faladdin fırsatı, retail yatırımcı) vs GLOBAL.
+    """
+    cache_key = make_cache_key("app_ideas", topic_id=topic_id, country=country)
+    cached = cache.get(cache_key)
+    if cached:
+        return cached
+
+    try:
+        from core.database import db
+
+        # 1. DB cache check
+        existing = (
+            db.client.table("app_ideas")
+            .select("*")
+            .eq("topic_id", topic_id)
+            .eq("country", country.upper())
+            .order("retention_score", desc=True)
+            .execute()
+        )
+        if existing.data and len(existing.data) >= 3:
+            response = {
+                "data": existing.data[:3],
+                "cached": True,
+                "country": country.upper(),
+            }
+            cache.set(cache_key, response, ttl=3600)
+            return response
+
+        # 2. Trend metadata çek
+        trend_row = (
+            db.client.table("latest_trend_scores")
+            .select("*")
+            .eq("topic_id", topic_id)
+            .limit(1)
+            .execute()
+        )
+        if not trend_row.data:
+            return api_error(
+                404, ErrorCode.NOT_FOUND, f"Trend not found: {topic_id}",
+                auth.get("request_id", "")
+            )
+        trend = trend_row.data[0]
+
+        # 3. LLM rate limit
+        allowed, current, limit = check_llm_rate_limit(
+            auth.get("api_key", ""), auth.get("tier", "free")
+        )
+        if not allowed:
+            return api_error(
+                429, ErrorCode.RATE_LIMIT_EXCEEDED,
+                f"LLM saatlik kota aşıldı ({current}/{limit})",
+                auth.get("request_id", "")
+            )
+
+        # 4. Generate
+        from core.app_idea_generator import AppIdeaGenerator
+        gen = AppIdeaGenerator()
+        result = gen.generate(trend, country=country.upper())
+
+        # 5. Save to DB
+        ideas = result.get("ideas", [])
+        if ideas:
+            rows = [
+                {
+                    "topic_id": topic_id,
+                    "country": country.upper(),
+                    "name": i["name"],
+                    "tagline": i.get("tagline", ""),
+                    "problem": i.get("problem", ""),
+                    "solution": i.get("solution", ""),
+                    "tech_stack": i.get("tech_stack", []),
+                    "mvp_days": i.get("mvp_days", 30),
+                    "retention_score": i.get("retention_score", 0.5),
+                    "feasibility_score": i.get("feasibility_score", 0.5),
+                    "market_size_estimate": i.get("market_size_estimate", ""),
+                    "competitors": i.get("competitors", []),
+                    "differentiation": i.get("differentiation", ""),
+                    "confidence": i.get("confidence", "medium"),
+                }
+                for i in ideas
+            ]
+            try:
+                db.client.table("app_ideas").upsert(
+                    rows, on_conflict="topic_id,country,name"
+                ).execute()
+            except Exception as e:
+                logger.warning(f"app_ideas save fail: {e}")
+
+        response = {
+            "data": ideas,
+            "country_context": result.get("country_context", ""),
+            "cached": False,
+            "country": country.upper(),
+        }
+        cache.set(cache_key, response, ttl=3600)
+        return response
+    except Exception as e:
+        logger.error(f"app-ideas hata: {e}")
+        return api_error(500, ErrorCode.INTERNAL_ERROR, str(e), auth.get("request_id", ""))
+
+
+@app.get("/api/v1/trends/{topic_id}/viral-ideas", tags=["AI Layer"])
+async def get_viral_ideas(
+    topic_id: str,
+    auth: dict = Depends(verify_api_key),
+    platform: str = Query("tiktok", description="tiktok | instagram | youtube_shorts"),
+    country: str = Query("GLOBAL", description="ISO alpha-2 veya GLOBAL"),
+):
+    """
+    Bir trend için 3 viral video fikri (Influencer Fabrikası).
+    Country + platform aware. Cache: viral_ideas tablosu.
+    """
+    cache_key = make_cache_key(
+        "viral_ideas", topic_id=topic_id, platform=platform, country=country
+    )
+    cached = cache.get(cache_key)
+    if cached:
+        return cached
+
+    try:
+        from core.database import db
+
+        existing = (
+            db.client.table("viral_ideas")
+            .select("*")
+            .eq("topic_id", topic_id)
+            .eq("country", country.upper())
+            .eq("platform", platform.lower())
+            .order("viral_score", desc=True)
+            .execute()
+        )
+        if existing.data and len(existing.data) >= 3:
+            response = {
+                "data": existing.data[:3],
+                "cached": True,
+                "platform": platform,
+                "country": country.upper(),
+            }
+            cache.set(cache_key, response, ttl=3600)
+            return response
+
+        trend_row = (
+            db.client.table("latest_trend_scores")
+            .select("*")
+            .eq("topic_id", topic_id)
+            .limit(1)
+            .execute()
+        )
+        if not trend_row.data:
+            return api_error(
+                404, ErrorCode.NOT_FOUND, f"Trend not found: {topic_id}",
+                auth.get("request_id", "")
+            )
+        trend = trend_row.data[0]
+
+        allowed, current, limit = check_llm_rate_limit(
+            auth.get("api_key", ""), auth.get("tier", "free")
+        )
+        if not allowed:
+            return api_error(
+                429, ErrorCode.RATE_LIMIT_EXCEEDED,
+                f"LLM saatlik kota aşıldı ({current}/{limit})",
+                auth.get("request_id", "")
+            )
+
+        from core.viral_content_generator import ViralContentGenerator
+        gen = ViralContentGenerator()
+        result = gen.generate(trend, platform=platform.lower(), country=country.upper())
+
+        ideas = result.get("video_ideas", [])
+        if ideas:
+            rows = [
+                {
+                    "topic_id": topic_id,
+                    "country": country.upper(),
+                    "platform": platform.lower(),
+                    "hook": i["hook"],
+                    "format": i.get("format", ""),
+                    "description": i.get("description", ""),
+                    "viral_score": i.get("viral_score", 0.5),
+                    "expected_engagement": i.get("expected_engagement", ""),
+                    "audio_suggestion": i.get("audio_suggestion", ""),
+                    "hashtags": i.get("hashtags", []),
+                    "visual_style": i.get("visual_style", ""),
+                    "confidence": i.get("confidence", "medium"),
+                }
+                for i in ideas
+            ]
+            try:
+                db.client.table("viral_ideas").upsert(
+                    rows, on_conflict="topic_id,country,platform,hook"
+                ).execute()
+            except Exception as e:
+                logger.warning(f"viral_ideas save fail: {e}")
+
+        response = {
+            "data": ideas,
+            "platform_context": result.get("platform_context", ""),
+            "cached": False,
+            "platform": platform,
+            "country": country.upper(),
+        }
+        cache.set(cache_key, response, ttl=3600)
+        return response
+    except Exception as e:
+        logger.error(f"viral-ideas hata: {e}")
+        return api_error(500, ErrorCode.INTERNAL_ERROR, str(e), auth.get("request_id", ""))
+
+
 # ─── SEARCH ──────────────────────────────────────────────────
 
 @app.get("/api/v1/search", tags=["Search"])
