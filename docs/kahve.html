@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Kahve &amp; Tatlı Trend Radarı — HashTrend</title>
+<style>
+/* Görsel dil: dashboard.html ile birebir aynı palet/token'lar. Fontlar CDN'siz,
+   sistem fallback'li (dashboard'daki Instrument Sans / JetBrains Mono yüklüyse kullanılır). */
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#05050a;--bg2:#0c0d14;--bg3:#13141d;--bg4:#1a1b26;--border:rgba(255,255,255,0.06);--border2:rgba(255,255,255,0.1);--border3:rgba(255,255,255,0.15);--text:#ebebf0;--dim:#8b8d9e;--dim2:#5c5e6e;--cyan:#06d6e0;--cyan2:#08f0fb;--cyan-bg:rgba(6,214,224,0.04);--cyan-border:rgba(6,214,224,0.12);--purple:#9580ff;--orange:#ff9e44;--green:#3ddc84;--red:#ff5f5f;--pink:#ff79c6;--yellow:#f1fa8c;--mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;--sans:'Instrument Sans',system-ui,-apple-system,'Segoe UI',sans-serif;--radius:10px}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:var(--cyan);text-decoration:none}
+.container{max-width:1320px;margin:0 auto;padding:0 24px}
+nav{padding:12px 0;border-bottom:1px solid var(--border);position:sticky;top:0;background:rgba(5,5,10,0.9);backdrop-filter:blur(20px);z-index:100}
+nav .container{display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:1.15rem;font-weight:700;letter-spacing:-0.3px;display:flex;align-items:center;gap:8px}
+.logo-icon{width:26px;height:26px;background:linear-gradient(135deg,var(--cyan),var(--purple));border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#000}
+.logo span{color:var(--cyan)}
+.nav-r{display:flex;align-items:center;gap:18px}
+.nav-r a{color:var(--dim);font-size:0.82rem;font-weight:500}
+.nav-r a:hover{color:var(--text)}
+.live-badge{display:flex;align-items:center;gap:5px;font-size:0.72rem;color:var(--green)}
+.live-badge .dot{width:5px;height:5px;background:var(--green);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.15}}
+
+.ub{padding:6px 0;border-bottom:1px solid var(--border);background:var(--bg2)}
+.ub .container{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:0.72rem;color:var(--dim2)}
+
+.radar-head{padding:22px 0 4px}
+.radar-head h1{font-size:1.55rem;font-weight:700;letter-spacing:-0.5px}
+.radar-head h1 em{font-style:normal;color:var(--cyan)}
+.radar-head .sub{color:var(--dim);font-size:0.84rem;margin-top:2px}
+
+.fb{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:10px 12px;margin:14px 0;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.cg{display:flex;gap:3px;flex-wrap:wrap}
+.cg-label{font-size:0.6rem;color:var(--dim2);text-transform:uppercase;letter-spacing:1.2px;align-self:center;margin-right:4px}
+.ch{background:var(--bg);border:1px solid var(--border);color:var(--dim);padding:5px 12px;border-radius:6px;font-size:0.74rem;cursor:pointer;font-family:var(--sans);font-weight:500;transition:all .15s;white-space:nowrap}
+.ch:hover{border-color:var(--border2);color:var(--text)}
+.ch.act{color:var(--cyan);background:var(--cyan-bg);border-color:var(--cyan-border)}
+
+.panels{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
+@media(max-width:880px){.panels{grid-template-columns:1fr}}
+.panel{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+.panel-h{padding:12px 14px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.panel-h h2{font-size:0.95rem;font-weight:700}
+.panel-h small{font-size:0.68rem;color:var(--dim2)}
+.tblwrap{overflow-x:auto}
+.tbl{width:100%;min-width:430px;border-collapse:collapse}
+.tbl th{font-size:0.6rem;color:var(--dim2);text-transform:uppercase;letter-spacing:1.2px;padding:8px 10px;text-align:left;border-bottom:1px solid var(--border);white-space:nowrap}
+.tbl th.num,.tbl td.num{text-align:right}
+.tbl td{padding:9px 10px;border-bottom:1px solid var(--border);vertical-align:middle}
+.tbl tbody tr.row{cursor:pointer;transition:background .15s}
+.tbl tbody tr.row:hover{background:var(--bg3)}
+.tbl tbody tr.row.expanded{background:var(--bg3);border-left:2px solid var(--cyan)}
+.tbl tbody tr.nosig{cursor:default}
+.tbl tbody tr.nosig td{opacity:.4}
+.t-rank{font-family:var(--mono);font-size:0.7rem;color:var(--dim2);width:28px}
+.t-name{font-size:0.84rem;font-weight:600;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.t-en{font-size:0.66rem;color:var(--dim2);font-weight:400}
+.grp-pill{font-size:0.56rem;padding:1px 6px;border-radius:4px;font-weight:600;letter-spacing:.5px;text-transform:uppercase}
+.grp-kahve{background:rgba(255,158,68,0.1);color:var(--orange)}
+.grp-tatli{background:rgba(255,121,198,0.1);color:var(--pink)}
+.t-mentions{font-family:var(--mono);font-size:0.84rem;font-weight:700;color:var(--text);white-space:nowrap}
+.t-cts{font-family:var(--mono);font-size:0.7rem;color:var(--dim);white-space:nowrap}
+.d-up{color:var(--green);font-family:var(--mono);font-size:0.72rem;font-weight:600;white-space:nowrap}
+.d-down{color:var(--red);font-family:var(--mono);font-size:0.72rem;font-weight:600;white-space:nowrap}
+.d-neu{color:var(--dim2);font-family:var(--mono);font-size:0.72rem;white-space:nowrap}
+.nosig-tag{font-size:0.6rem;color:var(--dim2);border:1px solid var(--border);padding:2px 7px;border-radius:4px;white-space:nowrap}
+
+tr.detail-row td{padding:0;border-bottom:1px solid var(--border)}
+.detail{padding:12px 14px 14px;background:var(--bg3)}
+.detail-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(96px,1fr));gap:6px;margin-bottom:10px}
+.detail-item{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:7px;text-align:center}
+.detail-item .dl{font-size:0.54rem;color:var(--dim2);text-transform:uppercase;letter-spacing:1px;margin-bottom:2px}
+.detail-item .dv{font-family:var(--mono);font-size:0.78rem;font-weight:600}
+.topics-label{font-size:0.6rem;color:var(--dim2);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:5px}
+.topics{display:flex;flex-wrap:wrap;gap:5px}
+.topic-chip{font-size:0.7rem;padding:3px 9px;border-radius:5px;background:var(--bg2);border:1px solid var(--border2);color:var(--dim);max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.no-topics{font-size:0.72rem;color:var(--dim2)}
+
+.empty{text-align:center;padding:40px 20px;color:var(--dim);font-size:0.82rem}
+.err{text-align:center;padding:50px 20px;color:var(--dim);font-size:0.84rem;background:var(--bg2);border:1px solid rgba(255,95,95,0.15);border-radius:var(--radius);margin:14px 0}
+.err strong{color:var(--red)}
+.err .hint{font-size:0.72rem;color:var(--dim2);margin-top:6px}
+.retry-btn{margin-top:12px;background:var(--bg3);border:1px solid var(--border2);color:var(--dim);padding:6px 14px;border-radius:6px;font-size:0.76rem;cursor:pointer;font-family:var(--sans)}
+.retry-btn:hover{color:var(--text);border-color:var(--border3)}
+.ld{text-align:center;padding:50px;color:var(--dim);font-size:0.8rem}
+.ld .sp{width:22px;height:22px;border:2.5px solid var(--border2);border-top-color:var(--cyan);border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 10px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+footer{margin-top:24px;padding:16px 0;border-top:1px solid var(--border);text-align:center;font-size:0.68rem;color:var(--dim2)}
+</style>
+</head>
+<body>
+
+<nav><div class="container">
+<div class="logo"><div class="logo-icon">H</div>Hash<span>Trend</span></div>
+<div class="nav-r">
+<div class="live-badge"><span class="dot"></span> Radar</div>
+<a href="./index.html">Ana Sayfa</a>
+<a href="./dashboard.html">Dashboard</a>
+</div>
+</div></nav>
+
+<div class="ub"><div class="container">
+<span id="ubLeft">Pencere: —</span>
+<span id="ubRight">Son güncelleme: yükleniyor…</span>
+</div></div>
+
+<div class="container">
+
+<div class="radar-head">
+<h1>☕ Kahve &amp; Tatlı <em>Trend Radarı</em></h1>
+<div class="sub">İzleme listesindeki kahve ve tatlı akımlarının dünya &amp; Türkiye sinyalleri — HashTrend pipeline verisi.</div>
+</div>
+
+<div class="fb">
+<div class="cg" id="winTabs">
+<span class="cg-label">Pencere</span>
+<div class="ch act" data-win="daily">Günlük</div>
+<div class="ch" data-win="weekly">Haftalık</div>
+<div class="ch" data-win="monthly">Aylık</div>
+</div>
+<div class="cg" id="grpTabs">
+<span class="cg-label">Grup</span>
+<div class="ch act" data-grp="all">Tümü</div>
+<div class="ch" data-grp="kahve">Kahve</div>
+<div class="ch" data-grp="tatli">Tatlı</div>
+</div>
+</div>
+
+<div id="content"><div class="ld"><div class="sp"></div>Radar verisi yükleniyor…</div></div>
+
+</div>
+
+<footer><div class="container">Veri: HashTrend pipeline • 2 saatte bir güncellenir<span id="footGen"></span></div></footer>
+
+<script>
+// Kahve & Tatlı Trend Radarı — veri kaynağı YALNIZ ./data/kahve.json (rollup üretir).
+// Railway API'ye istek ATILMAZ (backend kapalı).
+var DATA=null;           // kahve.json içeriği
+var win='daily';         // 'daily' | 'weekly' | 'monthly'
+var grp='all';           // 'all' | 'kahve' | 'tatli'
+var expanded={world:null,tr:null}; // panel başına açık satırın item id'si
+
+// Attribute bağlamında da güvenli olsun diye tırnaklar DA escape edilir
+// (topic'ler ham sosyal medya metni — title="..." içine giriyor).
+function esc(s){return(s==null?'':String(s)).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;')}
+function fn(n){n=Number(n)||0;if(n>=1e9)return(n/1e9).toFixed(1)+'B';if(n>=1e6)return(n/1e6).toFixed(1)+'M';if(n>=1e3)return(n/1e3).toFixed(n>=1e4?0:1)+'K';return String(n)}
+function fmtDT(iso){
+  if(!iso)return'?';
+  var d=new Date(iso);
+  if(isNaN(d))return esc(iso);
+  try{return d.toLocaleString('tr-TR',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'})}
+  catch(e){return d.toISOString().slice(0,16).replace('T',' ')}
+}
+function ctsStr(x){return x==null?'–':Number(x).toFixed(1)}
+
+// Seçili pencere+bölge metriği: item.metrics.{daily|weekly|monthly}.{world|tr}
+function metricsFor(item,region){
+  var mw=item.metrics&&item.metrics[win];
+  return(mw&&mw[region])||null;
+}
+
+// Değişim oku: delta_pct>0 ↑ yeşil, <0 ↓ kırmızı, 0/null − nötr.
+// Önceki dönem 0 iken bu dönem sinyal varsa yüzde saçmalar (%450000 gibi) —
+// onun yerine YENİ rozeti göster.
+function deltaHtml(m){
+  if(!m||m.delta_pct==null)return'<span class="d-neu">−</span>';
+  if((m.prev_mentions|0)===0&&(m.mentions|0)>0)return'<span class="d-up">YENİ</span>';
+  var d=Number(m.delta_pct);
+  if(!isFinite(d))return'<span class="d-neu">−</span>';
+  var a=Math.abs(d);
+  var v=(a>=100?Math.round(a).toString():a.toFixed(1)).replace('.',',');
+  if(d>0)return'<span class="d-up">↑ '+v+'%</span>';
+  if(d<0)return'<span class="d-down">↓ '+v+'%</span>';
+  return'<span class="d-neu">− 0%</span>';
+}
+
+// Sıralama: mentions DESC, eşitse avg_cts DESC; mentions=0 olanlar en sona (ad sırasıyla).
+function sortedItems(region){
+  var items=(DATA.items||[]).filter(function(it){return grp==='all'||it.group===grp});
+  var withM=[],zero=[];
+  items.forEach(function(it){
+    var m=metricsFor(it,region);
+    ((m&&m.mentions>0)?withM:zero).push(it);
+  });
+  withM.sort(function(a,b){
+    var ma=metricsFor(a,region),mb=metricsFor(b,region);
+    if(mb.mentions!==ma.mentions)return mb.mentions-ma.mentions;
+    var ca=ma.avg_cts==null?-Infinity:ma.avg_cts;
+    var cb=mb.avg_cts==null?-Infinity:mb.avg_cts;
+    return cb-ca;
+  });
+  zero.sort(function(a,b){return String(a.name_tr).localeCompare(String(b.name_tr),'tr')});
+  return withM.concat(zero);
+}
+
+function panelHtml(region,title,note){
+  var items=sortedItems(region);
+  var h='<div class="panel"><div class="panel-h"><h2>'+title+'</h2><small>'+note+'</small></div>';
+  if(!items.length){
+    h+='<div class="empty">Bu filtrede kavram yok.</div></div>';
+    return h;
+  }
+  h+='<div class="tblwrap"><table class="tbl"><thead><tr>'+
+     '<th>#</th><th>Kavram</th><th class="num">Bahsetme</th><th class="num">Değişim</th><th class="num">CTS</th>'+
+     '</tr></thead><tbody>';
+  var rank=0;
+  items.forEach(function(it){
+    var m=metricsFor(it,region);
+    var mm=m?(Number(m.mentions)||0):0;
+    var zero=!(mm>0);
+    var isExp=!zero&&expanded[region]===it.id;
+    var burst=m&&m.burst>0;
+    if(!zero)rank++;
+    h+='<tr class="'+(zero?'nosig':'row'+(isExp?' expanded':''))+'"'+
+       (zero?'':' onclick="toggleRow(\''+region+'\',\''+esc(it.id)+'\')"')+'>';
+    h+='<td class="t-rank">'+(zero?'–':rank)+'</td>';
+    h+='<td><div class="t-name">'+esc(it.name_tr)+(burst?' <span title="Burst">🔥</span>':'')+
+       ' <span class="grp-pill grp-'+esc(it.group)+'">'+(it.group==='kahve'?'kahve':'tatlı')+'</span></div>'+
+       '<div class="t-en">'+esc(it.name_en)+'</div></td>';
+    if(zero){
+      h+='<td class="num"><span class="nosig-tag">sinyal yok</span></td>';
+      h+='<td class="num"><span class="d-neu">−</span></td>';
+      h+='<td class="num"><span class="t-cts">–</span></td>';
+    }else{
+      h+='<td class="num"><span class="t-mentions">'+fn(mm)+'</span></td>';
+      h+='<td class="num">'+deltaHtml(m)+'</td>';
+      h+='<td class="num"><span class="t-cts">'+ctsStr(m.avg_cts)+'</span></td>';
+    }
+    h+='</tr>';
+    if(isExp){
+      h+='<tr class="detail-row"><td colspan="5"><div class="detail">';
+      h+='<div class="detail-grid">'+
+         '<div class="detail-item"><div class="dl">Görünme</div><div class="dv">'+fn(m.appearances)+'</div></div>'+
+         '<div class="detail-item"><div class="dl">Ort. CTS</div><div class="dv" style="color:var(--cyan)">'+ctsStr(m.avg_cts)+'</div></div>'+
+         '<div class="detail-item"><div class="dl">Maks CTS</div><div class="dv">'+ctsStr(m.max_cts)+'</div></div>'+
+         '<div class="detail-item"><div class="dl">Burst</div><div class="dv" style="color:var(--orange)">'+fn(m.burst)+'</div></div>'+
+         '<div class="detail-item"><div class="dl">Önceki dönem</div><div class="dv">'+fn(m.prev_mentions)+'</div></div>'+
+         '</div>';
+      var topics=it.sample_topics||[];
+      h+='<div class="topics-label">Örnek başlıklar</div>';
+      if(topics.length){
+        h+='<div class="topics">'+topics.map(function(t){return'<span class="topic-chip" title="'+esc(t)+'">'+esc(t)+'</span>'}).join('')+'</div>';
+      }else{
+        h+='<div class="no-topics">Örnek başlık yok.</div>';
+      }
+      h+='</div></td></tr>';
+    }
+  });
+  h+='</tbody></table></div></div>';
+  return h;
+}
+
+function render(){
+  if(!DATA)return;
+  var w=DATA.windows&&DATA.windows[win];
+  var winName={daily:'Günlük',weekly:'Haftalık',monthly:'Aylık'}[win]||win;
+  document.getElementById('ubLeft').textContent=
+    'Pencere: '+winName+(w?' • '+fmtDT(w.since)+' → '+fmtDT(w.until):'');
+  document.getElementById('ubRight').textContent='Son güncelleme: '+fmtDT(DATA.generated_at);
+  document.getElementById('footGen').textContent=' • Üretim: '+fmtDT(DATA.generated_at);
+  document.getElementById('content').innerHTML=
+    '<div class="panels">'+
+    panelHtml('world','🌍 Dünya','tüm ülkeler + global')+
+    panelHtml('tr','🇹🇷 Türkiye','yalnız TR verisi')+
+    '</div>';
+}
+
+function toggleRow(region,id){
+  expanded[region]=(expanded[region]===id)?null:id;
+  render();
+}
+
+function bindTabs(){
+  document.querySelectorAll('#winTabs .ch').forEach(function(c){
+    c.addEventListener('click',function(){
+      document.querySelectorAll('#winTabs .ch').forEach(function(x){x.classList.remove('act')});
+      c.classList.add('act');win=c.dataset.win;expanded={world:null,tr:null};render();
+    });
+  });
+  document.querySelectorAll('#grpTabs .ch').forEach(function(c){
+    c.addEventListener('click',function(){
+      document.querySelectorAll('#grpTabs .ch').forEach(function(x){x.classList.remove('act')});
+      c.classList.add('act');grp=c.dataset.grp;expanded={world:null,tr:null};render();
+    });
+  });
+}
+
+async function load(){
+  var el=document.getElementById('content');
+  el.innerHTML='<div class="ld"><div class="sp"></div>Radar verisi yükleniyor…</div>';
+  try{
+    var r=await fetch('./data/kahve.json?t='+Date.now());
+    if(!r.ok)throw new Error('HTTP '+r.status);
+    var j=await r.json();
+    if(!j||!Array.isArray(j.items))throw new Error('Beklenmeyen veri biçimi');
+    if(j.schema_version!==1)console.warn('kahve.json: beklenmeyen schema_version →',j.schema_version);
+    DATA=j;
+    render();
+  }catch(e){
+    el.innerHTML='<div class="err"><strong>Radar verisi yüklenemedi.</strong><br>'+
+      'data/kahve.json okunamadı ('+esc(e.message||e)+').'+
+      '<div class="hint">Pipeline\'ın bir sonraki rollup çalışmasından sonra tekrar deneyin — veri 2 saatte bir üretilir.</div>'+
+      '<button class="retry-btn" onclick="load()">Tekrar dene</button></div>';
+  }
+}
+
+bindTabs();
+load();
+</script>
+</body>
+</html>

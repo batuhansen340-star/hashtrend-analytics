@@ -4,6 +4,9 @@ on:
     - cron: '0 */2 * * *'
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   run-pipeline:
     runs-on: ubuntu-latest
@@ -34,6 +37,25 @@ jobs:
           APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
           ENVIRONMENT: production
         run: python pipeline.py --no-telegram
+      - name: Kahve radar rollup
+        # Watchlist eşleşmelerini docs/data/kahve.json'a yazar.
+        # Rollup hatası pipeline'ı düşürmesin diye continue-on-error.
+        continue-on-error: true
+        working-directory: hashtrend-analytics
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+        run: python rollup_food.py
+      - name: Kahve rollup commit
+        # docs/data/kahve.json değiştiyse commit + push.
+        continue-on-error: true
+        run: |
+          git config user.name "hashtrend-bot"
+          git config user.email "hashtrend-bot@users.noreply.github.com"
+          git add docs/data/kahve.json
+          # Pipeline sürerken branch'e push gelirse düz push reddedilir →
+          # önce rebase'li tekrar dene (yalnız kahve.json commit'i replay edilir).
+          git diff --staged --quiet || (git commit -m "chore(data): kahve radar rollup [skip ci]" && (git push || (git pull --rebase && git push)))
       # NOT: Mat view refresh PostgREST üzerinden 60s statement_timeout'a
       # takılıyordu (kod 57014). Refresh artık Supabase tarafında pg_cron
       # ile DB-side schedule edilmiş durumda (her 2 saatte bir, *:15 UTC).
