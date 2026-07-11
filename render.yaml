@@ -1,0 +1,21 @@
+# Render Blueprint — HashTrend API (ücretsiz plan)
+# Kullanım: render.com → New → Blueprint → bu repo'yu seç → Apply.
+# Railway'in yerini alır; Dockerfile olduğu gibi kullanılır, kod değişikliği yok.
+services:
+  - type: web
+    name: hashtrend-api
+    runtime: docker
+    rootDir: hashtrend-analytics
+    dockerfilePath: ./Dockerfile
+    plan: free
+    healthCheckPath: /
+    autoDeploy: true          # main'e her merge → otomatik deploy
+    envVars:
+      - key: SUPABASE_URL
+        sync: false           # değeri Render panelinde SEN gireceksin (repo'da tutulmaz)
+      - key: SUPABASE_KEY
+        sync: false
+      - key: ENVIRONMENT
+        value: production
+      - key: LOG_LEVEL
+        value: INFO

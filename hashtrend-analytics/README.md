@@ -51,4 +51,4 @@ uvicorn api.main:app --reload
 
 ## Lisans
 
-Private — Batuhan Şen & Zelimkhan Bey
+Private — Batuhan Şen

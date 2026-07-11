@@ -25,10 +25,19 @@ PROBE_QUERIES = [
     "startup", "design",
     "tech", "music", "movie",
     "trump", "ukraine", "climate",
+    # Kahve & tatlı radarı — global (EN) sorgular
+    "matcha", "dubai chocolate", "pistachio latte", "cold brew",
+    "tiramisu", "croissant", "cheesecake", "iced coffee",
+    "specialty coffee", "boba", "crookie", "banana pudding", "tanghulu",
+    # "san sebastian" TR sorgusu DEĞİL (İspanya şehri) — nitelikli EN kalıp
+    "san sebastian cheesecake",
     # TR sinyali veren query'ler — TR_QUERIES ile çakışır, country='TR' set edilir
     "türkiye", "istanbul", "ankara", "izmir",
     "gündem", "ekonomi", "spor", "magazin",
     "galatasaray", "fenerbahçe",
+    # Kahve & tatlı radarı — TR sorguları
+    "kahve", "tatlı", "künefe", "trileçe",
+    "dubai çikolatası", "türk kahvesi",
 ]
 
 # TR sinyali veren query'ler — bu sorgularla bulunan post'lar country='TR' işaretlenir.
@@ -36,6 +45,9 @@ TR_QUERIES = frozenset({
     "türkiye", "istanbul", "ankara", "izmir",
     "gündem", "ekonomi", "spor", "magazin",
     "galatasaray", "fenerbahçe",
+    # Kahve & tatlı radarı — TR sorguları
+    "kahve", "tatlı", "künefe", "trileçe",
+    "dubai çikolatası", "türk kahvesi",
 })
 
 
