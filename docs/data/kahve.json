@@ -1,18 +1,18 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-12T09:59:38+00:00",
+  "generated_at": "2026-07-12T11:20:00+00:00",
   "windows": {
     "daily": {
-      "since": "2026-07-11T09:59:38+00:00",
-      "until": "2026-07-12T09:59:38+00:00"
+      "since": "2026-07-11T11:20:00+00:00",
+      "until": "2026-07-12T11:20:00+00:00"
     },
     "weekly": {
-      "since": "2026-07-05T09:59:38+00:00",
-      "until": "2026-07-12T09:59:38+00:00"
+      "since": "2026-07-05T11:20:00+00:00",
+      "until": "2026-07-12T11:20:00+00:00"
     },
     "monthly": {
-      "since": "2026-06-12T09:59:38+00:00",
-      "until": "2026-07-12T09:59:38+00:00"
+      "since": "2026-06-12T11:20:00+00:00",
+      "until": "2026-07-12T11:20:00+00:00"
     }
   },
   "items": [
@@ -165,6 +165,77 @@
       ]
     },
     {
+      "id": "specialty-coffee",
+      "name_tr": "3. Dalga / Specialty",
+      "name_en": "Specialty Coffee",
+      "group": "kahve",
+      "metrics": {
+        "daily": {
+          "world": {
+            "mentions": 1000,
+            "appearances": 1,
+            "avg_cts": 30.85,
+            "max_cts": 30.85,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 100000.0
+          },
+          "tr": {
+            "mentions": 0,
+            "appearances": 0,
+            "avg_cts": null,
+            "max_cts": null,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": null
+          }
+        },
+        "weekly": {
+          "world": {
+            "mentions": 1000,
+            "appearances": 1,
+            "avg_cts": 30.85,
+            "max_cts": 30.85,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 100000.0
+          },
+          "tr": {
+            "mentions": 0,
+            "appearances": 0,
+            "avg_cts": null,
+            "max_cts": null,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": null
+          }
+        },
+        "monthly": {
+          "world": {
+            "mentions": 1000,
+            "appearances": 1,
+            "avg_cts": 30.85,
+            "max_cts": 30.85,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 100000.0
+          },
+          "tr": {
+            "mentions": 0,
+            "appearances": 0,
+            "avg_cts": null,
+            "max_cts": null,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": null
+          }
+        }
+      },
+      "sample_topics": [
+        "How Specialty Coffee Became a $185 Billion Reckoning With Its Own Success"
+      ]
+    },
+    {
       "id": "turk-kahvesi",
       "name_tr": "Türk Kahvesi",
       "name_en": "Turkish Coffee",
@@ -269,7 +340,7 @@
             "avg_cts": null,
             "max_cts": null,
             "burst": 0,
-            "prev_mentions": 6,
+            "prev_mentions": 5,
             "delta_pct": -100.0
           },
           "tr": {
@@ -278,7 +349,7 @@
             "avg_cts": null,
             "max_cts": null,
             "burst": 0,
-            "prev_mentions": 6,
+            "prev_mentions": 5,
             "delta_pct": -100.0
           }
         },
@@ -3301,75 +3372,6 @@
       "id": "spanish-latte",
       "name_tr": "Spanish Latte",
       "name_en": "Spanish Latte",
-      "group": "kahve",
-      "metrics": {
-        "daily": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        },
-        "weekly": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        },
-        "monthly": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        }
-      },
-      "sample_topics": []
-    },
-    {
-      "id": "specialty-coffee",
-      "name_tr": "3. Dalga / Specialty",
-      "name_en": "Specialty Coffee",
       "group": "kahve",
       "metrics": {
         "daily": {
