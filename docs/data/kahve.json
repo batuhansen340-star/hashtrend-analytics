@@ -1,18 +1,18 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-13T03:01:55+00:00",
+  "generated_at": "2026-07-13T07:03:49+00:00",
   "windows": {
     "daily": {
-      "since": "2026-07-12T03:01:55+00:00",
-      "until": "2026-07-13T03:01:55+00:00"
+      "since": "2026-07-12T07:03:49+00:00",
+      "until": "2026-07-13T07:03:49+00:00"
     },
     "weekly": {
-      "since": "2026-07-06T03:01:55+00:00",
-      "until": "2026-07-13T03:01:55+00:00"
+      "since": "2026-07-06T07:03:49+00:00",
+      "until": "2026-07-13T07:03:49+00:00"
     },
     "monthly": {
-      "since": "2026-06-13T03:01:55+00:00",
-      "until": "2026-07-13T03:01:55+00:00"
+      "since": "2026-06-13T07:03:49+00:00",
+      "until": "2026-07-13T07:03:49+00:00"
     }
   },
   "items": [
@@ -24,13 +24,13 @@
       "metrics": {
         "daily": {
           "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
+            "mentions": 1800,
+            "appearances": 1,
+            "avg_cts": 31.49,
+            "max_cts": 31.49,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": null
+            "delta_pct": 180000.0
           },
           "tr": {
             "mentions": 0,
@@ -44,13 +44,13 @@
         },
         "weekly": {
           "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
+            "mentions": 1800,
+            "appearances": 1,
+            "avg_cts": 31.49,
+            "max_cts": 31.49,
             "burst": 0,
             "prev_mentions": 5850,
-            "delta_pct": -100.0
+            "delta_pct": -69.2
           },
           "tr": {
             "mentions": 0,
@@ -64,13 +64,13 @@
         },
         "monthly": {
           "world": {
-            "mentions": 9235,
-            "appearances": 7,
-            "avg_cts": 30.92,
+            "mentions": 11035,
+            "appearances": 8,
+            "avg_cts": 30.99,
             "max_cts": 31.64,
             "burst": 0,
             "prev_mentions": 12,
-            "delta_pct": 76858.3
+            "delta_pct": 91858.3
           },
           "tr": {
             "mentions": 0,
