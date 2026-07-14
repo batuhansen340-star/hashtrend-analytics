@@ -1,18 +1,18 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-14T15:32:04+00:00",
+  "generated_at": "2026-07-14T17:23:56+00:00",
   "windows": {
     "daily": {
-      "since": "2026-07-13T15:32:04+00:00",
-      "until": "2026-07-14T15:32:04+00:00"
+      "since": "2026-07-13T17:23:56+00:00",
+      "until": "2026-07-14T17:23:56+00:00"
     },
     "weekly": {
-      "since": "2026-07-07T15:32:04+00:00",
-      "until": "2026-07-14T15:32:04+00:00"
+      "since": "2026-07-07T17:23:56+00:00",
+      "until": "2026-07-14T17:23:56+00:00"
     },
     "monthly": {
-      "since": "2026-06-14T15:32:04+00:00",
-      "until": "2026-07-14T15:32:04+00:00"
+      "since": "2026-06-14T17:23:56+00:00",
+      "until": "2026-07-14T17:23:56+00:00"
     }
   },
   "items": [
@@ -24,13 +24,13 @@
       "metrics": {
         "daily": {
           "world": {
-            "mentions": 1800,
-            "appearances": 1,
-            "avg_cts": 31.52,
+            "mentions": 3000,
+            "appearances": 2,
+            "avg_cts": 31.38,
             "max_cts": 31.52,
             "burst": 0,
             "prev_mentions": 1800,
-            "delta_pct": 0.0
+            "delta_pct": 66.7
           },
           "tr": {
             "mentions": 0,
@@ -44,13 +44,13 @@
         },
         "weekly": {
           "world": {
-            "mentions": 3600,
-            "appearances": 2,
-            "avg_cts": 31.5,
+            "mentions": 4800,
+            "appearances": 3,
+            "avg_cts": 31.41,
             "max_cts": 31.52,
             "burst": 0,
             "prev_mentions": 4200,
-            "delta_pct": -14.3
+            "delta_pct": 14.3
           },
           "tr": {
             "mentions": 0,
@@ -64,13 +64,13 @@
         },
         "monthly": {
           "world": {
-            "mentions": 12835,
-            "appearances": 9,
-            "avg_cts": 31.05,
+            "mentions": 14035,
+            "appearances": 10,
+            "avg_cts": 31.07,
             "max_cts": 31.64,
             "burst": 0,
             "prev_mentions": 12,
-            "delta_pct": 106858.3
+            "delta_pct": 116858.3
           },
           "tr": {
             "mentions": 0,
@@ -461,62 +461,62 @@
       "metrics": {
         "daily": {
           "world": {
-            "mentions": 2,
-            "appearances": 1,
-            "avg_cts": 24.75,
-            "max_cts": 24.75,
+            "mentions": 4,
+            "appearances": 2,
+            "avg_cts": 24.76,
+            "max_cts": 24.77,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": 200.0
+            "delta_pct": 400.0
           },
           "tr": {
-            "mentions": 2,
-            "appearances": 1,
-            "avg_cts": 24.75,
-            "max_cts": 24.75,
+            "mentions": 4,
+            "appearances": 2,
+            "avg_cts": 24.76,
+            "max_cts": 24.77,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": 200.0
+            "delta_pct": 400.0
           }
         },
         "weekly": {
           "world": {
-            "mentions": 2,
-            "appearances": 1,
-            "avg_cts": 24.75,
-            "max_cts": 24.75,
+            "mentions": 4,
+            "appearances": 2,
+            "avg_cts": 24.76,
+            "max_cts": 24.77,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": 200.0
+            "delta_pct": 400.0
           },
           "tr": {
-            "mentions": 2,
-            "appearances": 1,
-            "avg_cts": 24.75,
-            "max_cts": 24.75,
+            "mentions": 4,
+            "appearances": 2,
+            "avg_cts": 24.76,
+            "max_cts": 24.77,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": 200.0
+            "delta_pct": 400.0
           }
         },
         "monthly": {
           "world": {
-            "mentions": 2,
-            "appearances": 1,
-            "avg_cts": 24.75,
-            "max_cts": 24.75,
+            "mentions": 4,
+            "appearances": 2,
+            "avg_cts": 24.76,
+            "max_cts": 24.77,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": 200.0
+            "delta_pct": 400.0
           },
           "tr": {
-            "mentions": 2,
-            "appearances": 1,
-            "avg_cts": 24.75,
-            "max_cts": 24.75,
+            "mentions": 4,
+            "appearances": 2,
+            "avg_cts": 24.76,
+            "max_cts": 24.77,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": 200.0
+            "delta_pct": 400.0
           }
         }
       },
