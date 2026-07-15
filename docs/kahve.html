@@ -79,6 +79,48 @@ tr.detail-row td{padding:0;border-bottom:1px solid var(--border)}
 .topic-chip{font-size:0.7rem;padding:3px 9px;border-radius:5px;background:var(--bg2);border:1px solid var(--border2);color:var(--dim);max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .no-topics{font-size:0.72rem;color:var(--dim2)}
 
+.zshow{display:block;width:100%;text-align:left;background:none;border:none;border-top:1px solid var(--border);color:var(--dim2);font-size:0.7rem;padding:8px 14px;cursor:pointer;font-family:var(--sans);transition:color .15s}
+.zshow:hover{color:var(--dim)}
+
+/* Metodoloji (şeffaflık) kutusu */
+.method{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);margin:12px 0 0;font-size:0.78rem}
+.method summary{cursor:pointer;padding:9px 14px;color:var(--dim);font-weight:600;list-style:none}
+.method summary::-webkit-details-marker{display:none}
+.method summary::before{content:'▸';display:inline-block;margin-right:7px;color:var(--cyan);transition:transform .15s}
+.method[open] summary::before{transform:rotate(90deg)}
+.method[open] summary{border-bottom:1px solid var(--border);color:var(--text)}
+.method .mbody{padding:10px 14px 12px;color:var(--dim);line-height:1.65}
+.method .mbody b{color:var(--text)}
+.method .mrow{margin-bottom:8px}
+.method .mrow:last-child{margin-bottom:0}
+
+/* Dünya haritası (choropleth) — yalnız v2 JSON (countries) + assets/world.svg varsa görünür */
+.map-sec{margin:0 0 14px;display:none}
+.map-sec.on{display:block}
+.map-scroll{overflow-x:auto}
+.map-host{min-width:640px;padding:10px 12px 4px;opacity:0;transition:opacity .6s ease}
+.map-host.in{opacity:1}
+.map-host svg{width:100%;height:auto;display:block}
+.map-host svg .cty{transition:filter .15s}
+.map-host svg .cty.has{cursor:pointer}
+.map-host svg .cty:hover{filter:brightness(1.55) drop-shadow(0 0 6px rgba(6,214,224,0.5))}
+.map-host svg .cty.sel{stroke:var(--cyan);stroke-width:1.1;filter:drop-shadow(0 0 7px rgba(6,214,224,0.55))}
+.map-legend{display:flex;align-items:center;gap:8px;padding:6px 14px 10px;font-size:0.62rem;color:var(--dim2)}
+.map-grad{width:110px;height:6px;border-radius:3px;background:linear-gradient(90deg,#13141d,#0c3a42,#08f0fb)}
+.map-hint{margin-left:auto}
+.map-tip{position:fixed;pointer-events:none;background:var(--bg4);border:1px solid var(--border3);border-radius:6px;padding:5px 9px;font-size:0.72rem;z-index:200;display:none;white-space:nowrap;box-shadow:0 4px 14px rgba(0,0,0,0.5)}
+.map-tip b{color:var(--cyan)}
+
+/* Ülke kartı (haritada tıklanan ülkenin top kavramları) */
+.ccard{border-top:1px solid var(--border)}
+.ccard-h{display:flex;justify-content:space-between;align-items:baseline;gap:8px;padding:11px 14px 0}
+.ccard-h h3{font-size:0.88rem;font-weight:700}
+.ccard-h h3 em{font-style:normal;color:var(--cyan)}
+.ccard-h small{font-size:0.66rem;color:var(--dim2)}
+.ccard-close{background:none;border:none;color:var(--dim2);font-size:1rem;cursor:pointer;line-height:1;padding:2px 4px;font-family:var(--sans)}
+.ccard-close:hover{color:var(--text)}
+.ccard-empty{padding:10px 14px 14px;font-size:0.76rem;color:var(--dim2)}
+
 .empty{text-align:center;padding:40px 20px;color:var(--dim);font-size:0.82rem}
 .err{text-align:center;padding:50px 20px;color:var(--dim);font-size:0.84rem;background:var(--bg2);border:1px solid rgba(255,95,95,0.15);border-radius:var(--radius);margin:14px 0}
 .err strong{color:var(--red)}
@@ -115,6 +157,15 @@ footer{margin-top:24px;padding:16px 0;border-top:1px solid var(--border);text-al
 <div class="sub">İzleme listesindeki kahve ve tatlı akımlarının dünya &amp; Türkiye sinyalleri — HashTrend pipeline verisi.</div>
 </div>
 
+<details class="method">
+<summary>ⓘ Bu sayılar nasıl hesaplanıyor?</summary>
+<div class="mbody">
+<div class="mrow"><b>Bahsetme</b> — seçili penceredeki (günlük / haftalık / aylık) toplam bahsetme sayısı. Kaynaklar: Bluesky, haber RSS'leri, Ekşi Sözlük, YouTube, Google Trends ve Wikipedia dahil ~28 kaynaklı HashTrend pipeline'ı. Veri 2 saatte bir tazelenir.</div>
+<div class="mrow"><b>Değişim</b> — bir önceki <b>eşit uzunluktaki</b> döneme göre: Günlük → önceki 24 saat, Haftalık → önceki 7 gün, Aylık → önceki 30 gün. Gösterim kuralları: önceki dönem 0 iken şimdi sinyal varsa <span class="d-up">YENİ</span>; artış 10 kat ve üzerindeyse <span class="d-up">↑ ×N</span> (N = bu dönem ÷ önceki dönem, yuvarlanır; 100'ü aşarsa <span class="d-up">↑ ×100+</span>); bu dönem 0'a düştüyse <span class="d-down">↓ %100</span>; iki dönem de 0 ise <span class="d-neu">−</span>; diğer tüm durumlarda <span class="d-up">↑</span>/<span class="d-down">↓</span> %X,X (ondalık virgülle).</div>
+<div class="mrow"><b>CTS</b> — HashTrend trend gücü skoru (0–100): kaynak çeşitliliği %35 + hız %30 + hacim %20 + tazelik %15.</div>
+</div>
+</details>
+
 <div class="fb">
 <div class="cg" id="winTabs">
 <span class="cg-label">Pencere</span>
@@ -130,9 +181,20 @@ footer{margin-top:24px;padding:16px 0;border-top:1px solid var(--border);text-al
 </div>
 </div>
 
+<div class="map-sec" id="mapSec">
+<div class="panel">
+<div class="panel-h"><h2>🗺️ Ülkelere Göre Sinyal</h2><small>seçili pencere • tüm gruplar</small></div>
+<div class="map-scroll"><div class="map-host" id="mapHost"></div></div>
+<div class="map-legend"><span>az</span><span class="map-grad"></span><span>çok</span><span class="map-hint">ülkeye tıkla → top kavramlar</span></div>
+<div id="ccardWrap"></div>
+</div>
+</div>
+
 <div id="content"><div class="ld"><div class="sp"></div>Radar verisi yükleniyor…</div></div>
 
 </div>
+
+<div class="map-tip" id="mapTip"></div>
 
 <footer><div class="container">Veri: HashTrend pipeline • 2 saatte bir güncellenir<span id="footGen"></span></div></footer>
 
@@ -143,6 +205,7 @@ var DATA=null;           // kahve.json içeriği
 var win='daily';         // 'daily' | 'weekly' | 'monthly'
 var grp='all';           // 'all' | 'kahve' | 'tatli'
 var expanded={world:null,tr:null}; // panel başına açık satırın item id'si
+var showZero={world:false,tr:false}; // 'sinyal yok' satırları varsayılan gizli
 
 // Attribute bağlamında da güvenli olsun diye tırnaklar DA escape edilir
 // (topic'ler ham sosyal medya metni — title="..." içine giriyor).
@@ -163,19 +226,27 @@ function metricsFor(item,region){
   return(mw&&mw[region])||null;
 }
 
-// Değişim oku: delta_pct>0 ↑ yeşil, <0 ↓ kırmızı, 0/null − nötr.
-// Önceki dönem 0 iken bu dönem sinyal varsa yüzde saçmalar (%450000 gibi) —
-// onun yerine YENİ rozeti göster.
+// TEK değişim formatter'ı — tablolar VE harita ülke kartı AYNI fonksiyonu kullanır.
+// JSON'daki delta_pct OKUNMAZ; her şey mentions/prev_mentions'tan hesaplanır.
+// Kurallar (metodoloji kutusundakiyle birebir):
+//   prev==0 && m>0        → YENİ (yeşil)
+//   prev>0 && m/prev>=10  → ↑ ×N (N=round(m/prev); 100'ü aşarsa ×100+)
+//   m==0  && prev>0       → ↓ %100
+//   m==0  && prev==0      → −
+//   diğer                 → ↑/↓ %X,X (TR ondalık virgül; referans: önceki eşit dönem)
 function deltaHtml(m){
-  if(!m||m.delta_pct==null)return'<span class="d-neu">−</span>';
-  if((m.prev_mentions|0)===0&&(m.mentions|0)>0)return'<span class="d-up">YENİ</span>';
-  var d=Number(m.delta_pct);
-  if(!isFinite(d))return'<span class="d-neu">−</span>';
-  var a=Math.abs(d);
-  var v=(a>=100?Math.round(a).toString():a.toFixed(1)).replace('.',',');
-  if(d>0)return'<span class="d-up">↑ '+v+'%</span>';
-  if(d<0)return'<span class="d-down">↓ '+v+'%</span>';
-  return'<span class="d-neu">− 0%</span>';
+  if(!m)return'<span class="d-neu">−</span>';
+  var cur=Number(m.mentions)||0,prev=Number(m.prev_mentions)||0;
+  if(prev<=0&&cur>0)return'<span class="d-up">YENİ</span>';
+  if(prev<=0)return'<span class="d-neu">−</span>';
+  if(cur<=0)return'<span class="d-down">↓ %100</span>';
+  var r=cur/prev;
+  if(r>=10){var n=Math.round(r);return'<span class="d-up">↑ ×'+(n>100?'100+':n)+'</span>'}
+  var d=(cur-prev)/prev*100,a=Math.abs(d);
+  var v=a.toFixed(1).replace('.',',');
+  if(d>0)return'<span class="d-up">↑ %'+v+'</span>';
+  if(d<0)return'<span class="d-down">↓ %'+v+'</span>';
+  return'<span class="d-neu">− %0</span>';
 }
 
 // Sıralama: mentions DESC, eşitse avg_cts DESC; mentions=0 olanlar en sona (ad sırasıyla).
@@ -202,6 +273,17 @@ function panelHtml(region,title,note){
   var h='<div class="panel"><div class="panel-h"><h2>'+title+'</h2><small>'+note+'</small></div>';
   if(!items.length){
     h+='<div class="empty">Bu filtrede kavram yok.</div></div>';
+    return h;
+  }
+  // 'sinyal yok' satırları varsayılan gizli — panel altındaki toggle ile açılır.
+  var zeroCount=items.filter(function(it){
+    var m=metricsFor(it,region);
+    return!(m&&Number(m.mentions)>0);
+  }).length;
+  if(!showZero[region]&&zeroCount)items=items.slice(0,items.length-zeroCount);
+  if(!items.length){
+    h+='<div class="empty">Bu pencerede henüz sinyal yok.</div>';
+    h+=zeroToggleHtml(region,zeroCount)+'</div>';
     return h;
   }
   h+='<div class="tblwrap"><table class="tbl"><thead><tr>'+
@@ -250,16 +332,29 @@ function panelHtml(region,title,note){
       h+='</div></td></tr>';
     }
   });
-  h+='</tbody></table></div></div>';
+  h+='</tbody></table></div>'+zeroToggleHtml(region,zeroCount)+'</div>';
   return h;
 }
+
+// Panel altı toggle: sinyalsiz kavramları göster/gizle
+function zeroToggleHtml(region,zeroCount){
+  if(!zeroCount)return'';
+  return'<button class="zshow" onclick="toggleZero(\''+region+'\')">· Sinyalsiz '+zeroCount+
+    ' kavramı '+(showZero[region]?'gizle':'göster')+'</button>';
+}
+
+function toggleZero(region){
+  showZero[region]=!showZero[region];
+  render();
+}
+
+function winName(){return{daily:'Günlük',weekly:'Haftalık',monthly:'Aylık'}[win]||win}
 
 function render(){
   if(!DATA)return;
   var w=DATA.windows&&DATA.windows[win];
-  var winName={daily:'Günlük',weekly:'Haftalık',monthly:'Aylık'}[win]||win;
   document.getElementById('ubLeft').textContent=
-    'Pencere: '+winName+(w?' • '+fmtDT(w.since)+' → '+fmtDT(w.until):'');
+    'Pencere: '+winName()+(w?' • '+fmtDT(w.since)+' → '+fmtDT(w.until):'');
   document.getElementById('ubRight').textContent='Son güncelleme: '+fmtDT(DATA.generated_at);
   document.getElementById('footGen').textContent=' • Üretim: '+fmtDT(DATA.generated_at);
   document.getElementById('content').innerHTML=
@@ -267,6 +362,150 @@ function render(){
     panelHtml('world','🌍 Dünya','tüm ülkeler + global')+
     panelHtml('tr','🇹🇷 Türkiye','yalnız TR verisi')+
     '</div>';
+  updateMap(); // harita seçili pencereye göre yeniden boyanır (yoksa no-op)
+}
+
+/* ─── Dünya haritası (choropleth) ───────────────────────────────────────────
+   Veri: DATA.countries (schema v2). world.svg ya da countries alanı yoksa
+   bölüm hiç açılmaz — sayfa v1 gibi çalışmaya devam eder.
+   SVG sözleşmesi: ülke path/g'leri 2 harfli ISO id ('US'/'us') ya da data-iso. */
+var MAP={svg:null,nodes:null,sel:null,tried:false};
+var BYID={}; // kavram id → items[] kaydı (ülke kartındaki isim/grup için)
+
+function hasCountries(){
+  return!!(DATA&&DATA.countries&&typeof DATA.countries==='object'&&
+    Object.keys(DATA.countries).length);
+}
+
+async function initMap(){
+  if(MAP.tried||!hasCountries())return;
+  MAP.tried=true;
+  try{
+    var r=await fetch('./assets/world.svg');
+    if(!r.ok)throw new Error('HTTP '+r.status);
+    var doc=new DOMParser().parseFromString(await r.text(),'image/svg+xml');
+    if(doc.querySelector('parsererror')||doc.documentElement.nodeName.toLowerCase()!=='svg')
+      throw new Error('SVG değil');
+    var host=document.getElementById('mapHost');
+    host.appendChild(document.importNode(doc.documentElement,true));
+    MAP.svg=host.querySelector('svg');
+    prepMap();
+    document.getElementById('mapSec').classList.add('on');
+    requestAnimationFrame(function(){host.classList.add('in')}); // hafif fade-in
+    updateMap();
+  }catch(e){ /* harita yoksa sessizce v1 görünümünde kal */ }
+}
+
+// Ülke düğümlerini topla + hover/tıklama bağla
+function prepMap(){
+  MAP.nodes={};
+  MAP.svg.querySelectorAll('path,g,polygon,rect').forEach(function(el){
+    var iso=el.getAttribute('data-iso')||el.getAttribute('id')||'';
+    if(!/^[A-Za-z]{2}$/.test(iso))return;
+    iso=iso.toUpperCase();
+    el.__iso=iso;
+    el.classList.add('cty');
+    (MAP.nodes[iso]=MAP.nodes[iso]||[]).push(el);
+  });
+  var tip=document.getElementById('mapTip');
+  function ctyOf(t){
+    while(t&&t!==MAP.svg){if(t.__iso)return t;t=t.parentNode}
+    return null;
+  }
+  MAP.svg.addEventListener('mousemove',function(e){
+    var el=ctyOf(e.target);
+    if(!el){tip.style.display='none';return}
+    var c=DATA.countries[el.__iso];
+    var ww=c&&c.windows&&c.windows[win];
+    var total=ww?(Number(ww.total_mentions)||0):0;
+    tip.innerHTML='<b>'+esc(c?c.name_tr:el.__iso)+'</b> • '+
+      (total>0?fn(total)+' bahsetme':'sinyal yok');
+    tip.style.display='block';
+    var x=Math.min(e.clientX+14,window.innerWidth-tip.offsetWidth-8);
+    tip.style.left=x+'px';
+    tip.style.top=(e.clientY+14)+'px';
+  });
+  MAP.svg.addEventListener('mouseleave',function(){tip.style.display='none'});
+  MAP.svg.addEventListener('click',function(e){
+    var el=ctyOf(e.target);
+    if(el)selectCountry(el.__iso);
+  });
+}
+
+// Log ölçekli cyan yoğunluğu; 0/veri yok → koyu #13141d
+function mapColor(m,max){
+  if(!(m>0))return'#13141d';
+  var t=Math.log(1+m)/Math.log(1+Math.max(max,1));
+  var lo=[12,58,66],hi=[8,240,251]; // #0c3a42 → #08f0fb (tek renk, koyu→parlak)
+  var c=lo.map(function(l,i){return Math.round(l+(hi[i]-l)*t)});
+  return'rgb('+c[0]+','+c[1]+','+c[2]+')';
+}
+
+function setFill(el,color){
+  el.style.fill=color;
+  // <g> tabanlı ülkelerde alt path'lerin kendi fill attribute'u inline stili ezmesin
+  if(el.querySelectorAll)el.querySelectorAll('path,polygon,rect').forEach(function(ch){ch.style.fill=color});
+}
+
+// Seçili pencereye göre haritayı boya + seçili ülke kartını tazele
+function updateMap(){
+  if(!MAP.svg||!MAP.nodes)return;
+  var totals={},max=0;
+  Object.keys(DATA.countries).forEach(function(iso){
+    if(iso==='GLOBAL')return; // GLOBAL haritaya girmez (Dünya panelinin içinde zaten)
+    var ww=DATA.countries[iso].windows&&DATA.countries[iso].windows[win];
+    var t=ww?(Number(ww.total_mentions)||0):0;
+    totals[iso]=t;
+    if(t>max)max=t;
+  });
+  Object.keys(MAP.nodes).forEach(function(iso){
+    var t=totals[iso]||0;
+    MAP.nodes[iso].forEach(function(el){
+      setFill(el,mapColor(t,max));
+      el.classList.toggle('has',t>0);
+      el.classList.toggle('sel',MAP.sel===iso);
+    });
+  });
+  renderCcard();
+}
+
+function selectCountry(iso){
+  MAP.sel=(MAP.sel===iso)?null:iso;
+  updateMap();
+}
+
+// Tıklanan ülkenin top kavram kartı — TAMAMEN countries verisinden
+function renderCcard(){
+  var wrap=document.getElementById('ccardWrap');
+  if(!wrap)return;
+  if(!MAP.sel){wrap.innerHTML='';return}
+  var iso=MAP.sel;
+  var c=DATA.countries[iso];
+  var ww=c&&c.windows&&c.windows[win];
+  var total=ww?(Number(ww.total_mentions)||0):0;
+  var concepts=(ww&&ww.concepts)||[];
+  var h='<div class="ccard"><div class="ccard-h"><h3><em>'+esc(c?c.name_tr:iso)+'</em></h3>'+
+    '<small>'+(total>0?fn(total)+' bahsetme • '+winName():winName())+'</small>'+
+    '<button class="ccard-close" onclick="selectCountry(\''+esc(iso)+'\')" title="Kapat">×</button></div>';
+  if(!(total>0)||!concepts.length){
+    h+='<div class="ccard-empty">Bu ülkede henüz sinyal yok.</div></div>';
+    wrap.innerHTML=h;
+    return;
+  }
+  h+='<div class="tblwrap"><table class="tbl" style="min-width:340px"><thead><tr>'+
+     '<th>#</th><th>Kavram</th><th class="num">Bahsetme</th><th class="num">Değişim</th>'+
+     '</tr></thead><tbody>';
+  concepts.forEach(function(cc,i){
+    var it=BYID[cc.id];
+    h+='<tr><td class="t-rank">'+(i+1)+'</td>'+
+       '<td><div class="t-name">'+esc(it?it.name_tr:cc.id)+
+       (it?' <span class="grp-pill grp-'+esc(it.group)+'">'+(it.group==='kahve'?'kahve':'tatlı')+'</span>':'')+
+       '</div>'+(it?'<div class="t-en">'+esc(it.name_en)+'</div>':'')+'</td>'+
+       '<td class="num"><span class="t-mentions">'+fn(cc.mentions)+'</span></td>'+
+       '<td class="num">'+deltaHtml(cc)+'</td></tr>'; // AYNI delta formatter'ı
+  });
+  h+='</tbody></table></div></div>';
+  wrap.innerHTML=h;
 }
 
 function toggleRow(region,id){
@@ -297,9 +536,12 @@ async function load(){
     if(!r.ok)throw new Error('HTTP '+r.status);
     var j=await r.json();
     if(!j||!Array.isArray(j.items))throw new Error('Beklenmeyen veri biçimi');
-    if(j.schema_version!==1)console.warn('kahve.json: beklenmeyen schema_version →',j.schema_version);
+    if(j.schema_version!==1&&j.schema_version!==2)console.warn('kahve.json: beklenmeyen schema_version →',j.schema_version);
     DATA=j;
+    BYID={};
+    (DATA.items||[]).forEach(function(it){BYID[it.id]=it});
     render();
+    initMap(); // v2 (countries) + world.svg varsa haritayı aç; yoksa sessiz no-op
   }catch(e){
     el.innerHTML='<div class="err"><strong>Radar verisi yüklenemedi.</strong><br>'+
       'data/kahve.json okunamadı ('+esc(e.message||e)+').'+
