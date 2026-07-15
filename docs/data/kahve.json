@@ -1,18 +1,18 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-15T15:37:16+00:00",
+  "generated_at": "2026-07-15T17:26:53+00:00",
   "windows": {
     "daily": {
-      "since": "2026-07-14T15:37:16+00:00",
-      "until": "2026-07-15T15:37:16+00:00"
+      "since": "2026-07-14T17:26:53+00:00",
+      "until": "2026-07-15T17:26:53+00:00"
     },
     "weekly": {
-      "since": "2026-07-08T15:37:16+00:00",
-      "until": "2026-07-15T15:37:16+00:00"
+      "since": "2026-07-08T17:26:53+00:00",
+      "until": "2026-07-15T17:26:53+00:00"
     },
     "monthly": {
-      "since": "2026-06-15T15:37:16+00:00",
-      "until": "2026-07-15T15:37:16+00:00"
+      "since": "2026-06-15T17:26:53+00:00",
+      "until": "2026-07-15T17:26:53+00:00"
     }
   },
   "items": [
@@ -24,13 +24,13 @@
       "metrics": {
         "daily": {
           "world": {
-            "mentions": 1200,
-            "appearances": 1,
-            "avg_cts": 31.23,
-            "max_cts": 31.23,
+            "mentions": 0,
+            "appearances": 0,
+            "avg_cts": null,
+            "max_cts": null,
             "burst": 0,
-            "prev_mentions": 1800,
-            "delta_pct": -33.3
+            "prev_mentions": 3000,
+            "delta_pct": -100.0
           },
           "tr": {
             "mentions": 0,
@@ -315,22 +315,22 @@
       "metrics": {
         "daily": {
           "world": {
-            "mentions": 6,
-            "appearances": 5,
-            "avg_cts": 24.74,
-            "max_cts": 24.77,
+            "mentions": 4,
+            "appearances": 4,
+            "avg_cts": 24.73,
+            "max_cts": 24.74,
             "burst": 0,
-            "prev_mentions": 2,
-            "delta_pct": 200.0
+            "prev_mentions": 4,
+            "delta_pct": 0.0
           },
           "tr": {
-            "mentions": 6,
-            "appearances": 5,
-            "avg_cts": 24.74,
-            "max_cts": 24.77,
+            "mentions": 4,
+            "appearances": 4,
+            "avg_cts": 24.73,
+            "max_cts": 24.74,
             "burst": 0,
-            "prev_mentions": 2,
-            "delta_pct": 200.0
+            "prev_mentions": 4,
+            "delta_pct": 0.0
           }
         },
         "weekly": {
