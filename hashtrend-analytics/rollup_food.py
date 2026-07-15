@@ -8,10 +8,17 @@ pencerelerinde world/TR agregasyonu yapar ve docs/data/kahve.json üretir.
 Şema v2: v1 alanları aynen korunur; ek olarak ülke-bazlı "countries" bloğu
 üretilir (yalnız gerçek verisi olan ISO2 ülkeler; GLOBAL harita dışıdır).
 
-LLM çağrısı YOK — salt REST (PostgREST) agregasyon.
+Şema v3: v2 alanları aynen korunur; ek olarak Google Trends
+interest_by_region tabanlı "geo" bloğu üretilir. Her çalıştırmada en bayat
+GEO_BATCH kavram tazelenir (rotasyon), kalanlar ve her tür hata durumunda
+mevcut kahve.json'daki geo verisi AYNEN taşınır (carry-forward) — geo
+katmanı rollup'ı asla düşürmez.
+
+LLM çağrısı YOK — REST (PostgREST) agregasyon + pytrends.
 
 Kullanım:
     python3 rollup_food.py [--out PATH]
+    python3 rollup_food.py --self-test   # ağ gerektirmeyen birim testler
 """
 
 from __future__ import annotations
@@ -19,6 +26,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+import time
 from collections import Counter
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -354,7 +362,7 @@ def build_rollup(now: datetime) -> dict:
     logger.info(f"countries: {len(countries)} ülke → {', '.join(sorted(countries))}")
 
     return {
-        "schema_version": 2,
+        "schema_version": 3,
         "generated_at": now.isoformat(),
         "windows": {
             w: {"since": v["since"].isoformat(), "until": v["until"].isoformat()}
@@ -365,11 +373,234 @@ def build_rollup(now: datetime) -> dict:
     }
 
 
+# ── v3: Google Trends geo katmanı ───────────────────────────────────────
+GEO_NOTE = ("Google Trends interest_by_region • timeframe: now 7-d • "
+            "0-100 göreli ilgi endeksi")
+GEO_TIMEFRAME = "now 7-d"
+GEO_BATCH = 12   # her çalıştırmada tazelenecek en bayat/eksik kavram sayısı
+GEO_SLEEP = 3    # istekler arası bekleme (saniye) — rate-limit güvenliği
+
+
+def geo_term_for(concept: dict) -> str:
+    """Kavramın Google Trends sorgu terimini seç.
+
+    Öncelik: watchlist'teki opsiyonel "geo_term" alanı. Yoksa İngilizce-uygun
+    (ASCII) ilk varyant kullanılır ('*' ek-toleransı işareti soyulmuş);
+    hiç ASCII varyant yoksa ilk varyanta düşülür.
+    """
+    term = concept.get("geo_term")
+    if term:
+        return term
+    variants = [v.rstrip("*").strip() for v in concept["variants"]]
+    for v in variants:
+        if v.isascii():
+            return v
+    return variants[0]
+
+
+def _df_to_interest(df, term: str) -> dict[str, int]:
+    """interest_by_region DataFrame'ini {ISO2: endeks>0} sözlüğüne çevir.
+
+    inc_geo_code=True çıktısında 'geoCode' kolonu ISO2 ülke kodu, `term`
+    kolonu 0-100 göreli ilgi endeksidir. Yalnız endeksi >0 olan ve geçerli
+    ISO2 kodu taşıyan satırlar alınır; bozuk satırlar sessizce atlanır.
+    """
+    out: dict[str, int] = {}
+    if df is None or getattr(df, "empty", True):
+        return out
+    if "geoCode" not in df.columns or term not in df.columns:
+        return out
+    for code, value in zip(df["geoCode"], df[term]):
+        iso = _norm_country(code if isinstance(code, str) else None)
+        if iso is None:
+            continue
+        try:
+            val = int(value)
+        except (TypeError, ValueError):
+            continue  # NaN / sayı olmayan değer
+        if val > 0:
+            out[iso] = val
+    return out
+
+
+def _load_previous_geo(path: Path) -> dict:
+    """Mevcut kahve.json'dan geo bloğunu oku (carry-forward tabanı).
+
+    Dosya yoksa / bozuksa / geo alanı yoksa boş iskelet döner — asla exception
+    fırlatmaz (v2→v3 geçişinde geo alanı henüz yok).
+    """
+    try:
+        prev = json.loads(path.read_text(encoding="utf-8"))
+        concepts = (prev.get("geo") or {}).get("concepts")
+        if isinstance(concepts, dict):
+            return {"note": GEO_NOTE, "concepts": dict(concepts)}
+    except FileNotFoundError:
+        pass
+    except Exception as e:
+        logger.warning(f"Önceki geo bloğu okunamadı ({path}): {e}")
+    return {"note": GEO_NOTE, "concepts": {}}
+
+
+def _stalest_concepts(prev_concepts: dict, batch: int = GEO_BATCH) -> list[dict]:
+    """Bu turda tazelenecek kavramları seç (rotasyon).
+
+    Sıralama: geo verisi hiç olmayanlar önce, sonra updated_at'i en eski
+    olanlar (ISO8601 string'ler kronolojik sıralanır). En bayat `batch`
+    kavram döner → ~10 saatte tüm watchlist bir tur tazelenmiş olur.
+    """
+    def staleness(c: dict) -> str:
+        entry = prev_concepts.get(c["id"])
+        if not isinstance(entry, dict):
+            return ""  # eksik/bozuk kayıt → en bayat
+        val = entry.get("updated_at")
+        # str değilse (bozuk/elle düzenlenmiş dosya) sorted() TypeError'la
+        # patlayıp geo tazelemeyi kalıcı öldürmesin → en bayat say
+        return val if isinstance(val, str) else ""
+    return sorted(WATCHLIST, key=staleness)[:batch]
+
+
+def build_geo(prev_geo: dict, now: datetime) -> dict:
+    """Google Trends "geo" bloğunu üret (rotasyon + carry-forward).
+
+    En bayat GEO_BATCH kavram pytrends ile tazelenir; kalanlar ve başarısız
+    çekimler (429/timeout/bağlantı/boş sonuç) önceki değerleriyle AYNEN
+    taşınır. pytrends import edilemiyor ya da Trends'e ulaşılamıyorsa blok
+    olduğu gibi döner — bu fonksiyon rollup'ı asla düşürmez.
+    """
+    geo = {"note": GEO_NOTE, "concepts": dict(prev_geo.get("concepts") or {})}
+
+    try:
+        from pytrends.request import TrendReq
+    except Exception as e:
+        logger.warning(f"geo: pytrends import edilemedi — carry-forward: {e}")
+        return geo
+
+    try:
+        pt = TrendReq(hl="en-US", tz=0, timeout=(10, 25))
+    except Exception as e:
+        logger.warning(f"geo: TrendReq kurulamadı — carry-forward: {e}")
+        return geo
+
+    targets = _stalest_concepts(geo["concepts"])
+    logger.info(f"geo: {len(targets)} kavram tazelenecek → "
+                f"{', '.join(c['id'] for c in targets)}")
+    refreshed = 0
+    for i, c in enumerate(targets):
+        if i:
+            time.sleep(GEO_SLEEP)
+        term = geo_term_for(c)
+        try:
+            pt.build_payload([term], timeframe=GEO_TIMEFRAME)
+            df = pt.interest_by_region(
+                resolution="COUNTRY", inc_low_vol=True, inc_geo_code=True)
+        except Exception as e:
+            logger.warning(f"geo: {c['id']} ({term!r}) çekilemedi, atlandı: {e}")
+            continue  # eski veri carry-forward ile korunur
+        interest = _df_to_interest(df, term)
+        if not interest:
+            logger.warning(f"geo: {c['id']} ({term!r}) boş sonuç — eski veri korunuyor")
+            continue
+        geo["concepts"][c["id"]] = {
+            "term": term,
+            "updated_at": now.isoformat(),
+            "interest": interest,
+        }
+        refreshed += 1
+    logger.info(f"geo: {refreshed}/{len(targets)} kavram tazelendi, "
+                f"toplam {len(geo['concepts'])} kavramda geo verisi var")
+    return geo
+
+
+def _self_test() -> None:
+    """Ağ gerektirmeyen birim testler — pytrends mock'lanmaz, sahte DataFrame
+    ile df→interest dönüşümü + terim seçimi + rotasyon + carry-forward tabanı
+    doğrulanır."""
+    import tempfile
+
+    import pandas as pd
+
+    # ── _df_to_interest: interest_by_region(inc_geo_code=True) örnek kopyası ─
+    df = pd.DataFrame(
+        {"geoCode": ["US", "JP", "tr", "XKX", "", None],
+         "matcha": [87, 72, 5, 50, 10, 3]},
+        index=pd.Index(["United States", "Japan", "Türkiye",
+                        "Kosovo", "?", "?"], name="geoName"),
+    )
+    assert _df_to_interest(df, "matcha") == {"US": 87, "JP": 72, "TR": 5}, \
+        "geçerli ISO2 + >0 satırlar alınmalı, küçük harf normalize edilmeli"
+    df0 = pd.DataFrame({"geoCode": ["US", "JP"], "salep": [0, 0]})
+    assert _df_to_interest(df0, "salep") == {}, "0 endeksli satırlar elenmeli"
+    dfnan = pd.DataFrame({"geoCode": ["US"], "salep": [float("nan")]})
+    assert _df_to_interest(dfnan, "salep") == {}, "NaN sessizce atlanmalı"
+    assert _df_to_interest(df, "yok-boyle-kolon") == {}, "term kolonu yoksa boş"
+    assert _df_to_interest(pd.DataFrame({"matcha": [5]}), "matcha") == {}, \
+        "geoCode kolonu yoksa boş"
+    assert _df_to_interest(pd.DataFrame(), "matcha") == {}
+    assert _df_to_interest(None, "matcha") == {}
+
+    # ── geo_term_for: opsiyonel geo_term > ASCII ilk varyant ────────────
+    by_id = {c["id"]: c for c in WATCHLIST}
+    assert geo_term_for(by_id["magnolia"]) == "magnolia dessert"
+    assert geo_term_for(by_id["turk-kahvesi"]) == "turkish coffee"
+    assert geo_term_for(by_id["sutlac"]) == "rice pudding"
+    assert geo_term_for(by_id["matcha"]) == "matcha"
+    assert geo_term_for(by_id["baklava"]) == "baklava"       # '*' soyulur
+    assert geo_term_for(by_id["creme-brulee"]) == "creme brulee"  # ASCII ilk
+    assert all(geo_term_for(c).strip() for c in WATCHLIST)
+
+    # ── _stalest_concepts: eksikler önce, sonra en eski updated_at ──────
+    ids = [c["id"] for c in WATCHLIST]
+    # İlk 4 kavramın geo verisi yok; kalanların updated_at'i liste sırasıyla artar
+    prev = {cid: {"updated_at": f"2026-07-15T00:{n:02d}:00+00:00", "term": "x",
+                  "interest": {"US": 1}}
+            for n, cid in enumerate(ids[4:])}
+    picked = [c["id"] for c in _stalest_concepts(prev)]
+    assert len(picked) == GEO_BATCH
+    assert picked[:4] == ids[:4], "geo verisi olmayanlar önce tazelenmeli"
+    assert picked[4:] == ids[4:GEO_BATCH], \
+        "kalan slotlar en eski updated_at sırasıyla dolmalı"
+    # Bozuk carry-forward kaydı (dict değil / updated_at str değil) rotasyonu
+    # düşürmemeli — 'hiç veri yok' gibi en bayat sayılır
+    corrupt = dict(prev)
+    corrupt[ids[4]] = "bozuk-kayit"
+    corrupt[ids[5]] = {"updated_at": 12345}
+    picked2 = [c["id"] for c in _stalest_concepts(corrupt)]
+    assert picked2[:6] == ids[:6], \
+        "bozuk kayıtlar en bayat sayılmalı (exception yok, rotasyon sürer)"
+
+    # ── _load_previous_geo: yok/bozuk/geo'suz dosya → boş iskelet ───────
+    assert _load_previous_geo(Path("/yok/boyle/bir/kahve.json")) == \
+        {"note": GEO_NOTE, "concepts": {}}
+    with tempfile.NamedTemporaryFile("w", suffix=".json", delete=False) as f:
+        f.write("{bozuk json")
+        broken = Path(f.name)
+    assert _load_previous_geo(broken) == {"note": GEO_NOTE, "concepts": {}}
+    broken.write_text(json.dumps({"schema_version": 2, "items": []}), encoding="utf-8")
+    assert _load_previous_geo(broken) == {"note": GEO_NOTE, "concepts": {}}
+    sample = {"matcha": {"term": "matcha",
+                         "updated_at": "2026-07-15T00:00:00+00:00",
+                         "interest": {"US": 87, "JP": 72}}}
+    broken.write_text(json.dumps({"schema_version": 3,
+                                  "geo": {"note": "eski not", "concepts": sample}}),
+                      encoding="utf-8")
+    assert _load_previous_geo(broken)["concepts"] == sample, \
+        "mevcut geo.concepts AYNEN taşınmalı"
+    broken.unlink()
+
+    print("self-test OK — geo katmanı birim testleri geçti")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Kahve & Tatlı radar rollup → kahve.json")
     parser.add_argument("--out", type=Path, default=DEFAULT_OUT,
                         help=f"Çıktı JSON yolu (varsayılan: {DEFAULT_OUT})")
+    parser.add_argument("--self-test", action="store_true",
+                        help="Ağ gerektirmeyen geo birim testlerini çalıştır ve çık")
     args = parser.parse_args()
+
+    if args.self_test:
+        _self_test()
+        return
 
     now = datetime.now(timezone.utc).replace(microsecond=0)
     logger.info(f"Rollup başlıyor — {len(WATCHLIST)} kavram, {len(all_variants())} varyant")
@@ -379,6 +610,15 @@ def main() -> None:
     except Exception as e:
         logger.error(f"Rollup başarısız: {e}")
         sys.exit(1)
+
+    # ── v3: geo katmanı — hangi hata olursa olsun rollup düşmez,
+    # mevcut kahve.json'daki geo bloğu asla silinmez/boşaltılmaz.
+    prev_geo = _load_previous_geo(args.out)
+    try:
+        payload["geo"] = build_geo(prev_geo, now)
+    except Exception as e:
+        logger.warning(f"geo: beklenmedik hata — carry-forward: {e}")
+        payload["geo"] = prev_geo
 
     try:
         args.out.parent.mkdir(parents=True, exist_ok=True)

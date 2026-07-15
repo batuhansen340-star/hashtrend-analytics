@@ -9,6 +9,9 @@ Her kavram (concept) bir dict:
     variants  : trend_scores.topic_name / raw_mentions.topic içinde aranan
                 küçük-harf alt dizgiler. TEK KELİMELİK muğlak terimler yerine
                 nitelikli kalıplar kullan ("magnolia" değil "magnolia tatlısı*").
+    geo_term  : (OPSİYONEL) Google Trends interest_by_region sorgusunda
+                kullanılacak terim. Yoksa rollup, İngilizce-uygun (ASCII)
+                ilk varyanttan otomatik türetir.
 
 Kullanım:
     from config.food_watchlist import WATCHLIST, all_variants
@@ -41,7 +44,8 @@ WATCHLIST: list[dict] = [
     {"id": "freddo", "name_tr": "Freddo", "name_en": "Freddo",
      "group": "kahve", "variants": ["freddo espresso", "freddo cappuccino"]},
     {"id": "einspanner", "name_tr": "Einspänner (Viyana)", "name_en": "Einspänner",
-     "group": "kahve", "variants": ["einspanner", "einspänner", "viyana kahvesi*"]},
+     "group": "kahve", "variants": ["einspanner", "einspänner", "viyana kahvesi*"],
+     "geo_term": "einspanner"},
     {"id": "dirty-chai", "name_tr": "Dirty Chai", "name_en": "Dirty Chai",
      "group": "kahve", "variants": ["dirty chai"]},
     {"id": "chai-latte", "name_tr": "Chai Latte", "name_en": "Chai Latte",
@@ -53,13 +57,17 @@ WATCHLIST: list[dict] = [
     {"id": "iced-americano", "name_tr": "Buzlu Americano", "name_en": "Iced Americano",
      "group": "kahve", "variants": ["iced americano", "buzlu americano*"]},
     {"id": "turk-kahvesi", "name_tr": "Türk Kahvesi", "name_en": "Turkish Coffee",
-     "group": "kahve", "variants": ["türk kahvesi*", "turkish coffee"]},
+     "group": "kahve", "variants": ["türk kahvesi*", "turkish coffee"],
+     "geo_term": "turkish coffee"},
     {"id": "filtre-kahve", "name_tr": "Filtre / Demleme", "name_en": "Filter / Pour Over",
-     "group": "kahve", "variants": ["filtre kahve*", "filter coffee", "pour over", "v60 "]},
+     "group": "kahve", "variants": ["filtre kahve*", "filter coffee", "pour over", "v60 "],
+     "geo_term": "filter coffee"},
     {"id": "specialty-coffee", "name_tr": "3. Dalga / Specialty", "name_en": "Specialty Coffee",
-     "group": "kahve", "variants": ["specialty coffee", "nitelikli kahve*", "third wave coffee"]},
+     "group": "kahve", "variants": ["specialty coffee", "nitelikli kahve*", "third wave coffee"],
+     "geo_term": "specialty coffee"},
     {"id": "salep", "name_tr": "Salep", "name_en": "Salep",
-     "group": "kahve", "variants": ["salep*", "sahlep*"]},
+     "group": "kahve", "variants": ["salep*", "sahlep*"],
+     "geo_term": "salep"},
     {"id": "ube-latte", "name_tr": "Ube Latte", "name_en": "Ube Latte",
      "group": "kahve", "variants": ["ube latte", "ube coffee"]},
     {"id": "brown-sugar", "name_tr": "Brown Sugar", "name_en": "Brown Sugar Latte/Boba",
@@ -75,9 +83,11 @@ WATCHLIST: list[dict] = [
 
     # ─── Tatlı ──────────────────────────────────────────────────────────────
     {"id": "dubai-cikolatasi", "name_tr": "Dubai Çikolatası", "name_en": "Dubai Chocolate",
-     "group": "tatli", "variants": ["dubai chocolate", "dubai çikolatası", "dubai cikolatasi"]},
+     "group": "tatli", "variants": ["dubai chocolate", "dubai çikolatası", "dubai cikolatasi"],
+     "geo_term": "dubai chocolate"},
     {"id": "kunefe", "name_tr": "Künefe / Kunafa", "name_en": "Kunafa",
-     "group": "tatli", "variants": ["künefe*", "kunefe*", "kunafa", "knafeh"]},
+     "group": "tatli", "variants": ["künefe*", "kunefe*", "kunafa", "knafeh"],
+     "geo_term": "kunafa"},
     # NOT: çıplak "san sebastian" KULLANMA — İspanya'daki şehir/film festivali
     # haberleriyle çakışıyor; yalnız nitelikli kalıplar.
     {"id": "san-sebastian", "name_tr": "San Sebastian", "name_en": "Basque Cheesecake",
@@ -114,7 +124,8 @@ WATCHLIST: list[dict] = [
     {"id": "baklava", "name_tr": "Baklava", "name_en": "Baklava",
      "group": "tatli", "variants": ["baklava*"]},
     {"id": "trilece", "name_tr": "Trileçe", "name_en": "Tres Leches",
-     "group": "tatli", "variants": ["trileçe*", "trilece*", "tres leches"]},
+     "group": "tatli", "variants": ["trileçe*", "trilece*", "tres leches"],
+     "geo_term": "tres leches"},
     # NOT: çıplak "ekler" KULLANMA — Türkçe çoğul eki (-ekler: erkekler,
     # bebekler...) ve "eklemek" fiiliyle çakışıp ~%100 yanlış-pozitif üretiyor.
     # Çıplak "eclair/éclair" de KULLANMA — Fransızca hava durumu haberleri
@@ -122,11 +133,14 @@ WATCHLIST: list[dict] = [
     {"id": "ekler", "name_tr": "Ekler", "name_en": "Éclair",
      "group": "tatli", "variants": ["ekler tatlısı*", "ekler pasta*",
                                     "çikolatalı ekler*", "chocolate eclair",
-                                    "eclair cake", "eclair recipe"]},
+                                    "eclair cake", "eclair recipe"],
+     "geo_term": "eclair"},
     {"id": "magnolia", "name_tr": "Magnolia", "name_en": "Magnolia Dessert",
-     "group": "tatli", "variants": ["magnolia tatlısı*", "magnolia dessert", "magnolia banana"]},
+     "group": "tatli", "variants": ["magnolia tatlısı*", "magnolia dessert", "magnolia banana"],
+     "geo_term": "magnolia dessert"},
     {"id": "sutlac", "name_tr": "Sütlaç", "name_en": "Rice Pudding",
-     "group": "tatli", "variants": ["sütlaç*", "sutlac*", "rice pudding"]},
+     "group": "tatli", "variants": ["sütlaç*", "sutlac*", "rice pudding"],
+     "geo_term": "rice pudding"},
     {"id": "kazandibi", "name_tr": "Kazandibi", "name_en": "Kazandibi",
      "group": "tatli", "variants": ["kazandibi*"]},
     {"id": "katmer", "name_tr": "Katmer", "name_en": "Katmer",
@@ -138,9 +152,11 @@ WATCHLIST: list[dict] = [
     {"id": "brownie", "name_tr": "Brownie", "name_en": "Brownie",
      "group": "tatli", "variants": ["brownie"]},
     {"id": "pistachio-wave", "name_tr": "Fıstık Akımı", "name_en": "Pistachio (wave)",
-     "group": "tatli", "variants": ["pistachio", "antep fıstıklı", "fıstıklı"]},
+     "group": "tatli", "variants": ["pistachio", "antep fıstıklı", "fıstıklı"],
+     "geo_term": "pistachio"},
     {"id": "mille-crepe", "name_tr": "Krep Pasta", "name_en": "Mille Crêpe",
-     "group": "tatli", "variants": ["mille crepe", "crepe cake", "krep pasta*"]},
+     "group": "tatli", "variants": ["mille crepe", "crepe cake", "krep pasta*"],
+     "geo_term": "crepe cake"},
     {"id": "swedish-candy", "name_tr": "İsveç Şekeri", "name_en": "Swedish Candy",
      "group": "tatli", "variants": ["swedish candy"]},
     {"id": "gelato", "name_tr": "Gelato / Dondurma", "name_en": "Gelato",
@@ -219,6 +235,16 @@ def concept_for(text: str) -> str | None:
 if __name__ == "__main__":
     print(f"{len(WATCHLIST)} kavram, {len(all_variants())} varyant")
     assert len({c['id'] for c in WATCHLIST}) == len(WATCHLIST), "id çakışması!"
+    # id'ler kahve.html'de onclick="toggleRow('...','ID')" içine gömülüyor →
+    # yalnız güvenli slug karakterleri ([a-z0-9-]) kullanılabilir.
+    assert all(_re.fullmatch(r"[a-z0-9-]+", c["id"]) for c in WATCHLIST), \
+        "id yalnız [a-z0-9-] içermeli (HTML onclick'e gömülüyor)"
+    # geo_term (varsa) Google Trends sorgusuna gidecek → boş olmayan ASCII string
+    assert all(
+        isinstance(c["geo_term"], str) and c["geo_term"].strip()
+        and c["geo_term"].isascii()
+        for c in WATCHLIST if "geo_term" in c
+    ), "geo_term boş olmayan ASCII string olmalı"
     # Spesifik kavram genel olandan önce eşleşmeli (liste sırası kritik)
     assert concept_for("Strawberry Matcha Latte at home") == "strawberry-matcha"
     assert concept_for("matcha latte art") == "matcha"
