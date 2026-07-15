@@ -1,18 +1,18 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-15T13:53:13+00:00",
+  "generated_at": "2026-07-15T15:37:16+00:00",
   "windows": {
     "daily": {
-      "since": "2026-07-14T13:53:13+00:00",
-      "until": "2026-07-15T13:53:13+00:00"
+      "since": "2026-07-14T15:37:16+00:00",
+      "until": "2026-07-15T15:37:16+00:00"
     },
     "weekly": {
-      "since": "2026-07-08T13:53:13+00:00",
-      "until": "2026-07-15T13:53:13+00:00"
+      "since": "2026-07-08T15:37:16+00:00",
+      "until": "2026-07-15T15:37:16+00:00"
     },
     "monthly": {
-      "since": "2026-06-15T13:53:13+00:00",
-      "until": "2026-07-15T13:53:13+00:00"
+      "since": "2026-06-15T15:37:16+00:00",
+      "until": "2026-07-15T15:37:16+00:00"
     }
   },
   "items": [
@@ -315,22 +315,22 @@
       "metrics": {
         "daily": {
           "world": {
-            "mentions": 8,
-            "appearances": 6,
+            "mentions": 6,
+            "appearances": 5,
             "avg_cts": 24.74,
             "max_cts": 24.77,
             "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": 800.0
+            "prev_mentions": 2,
+            "delta_pct": 200.0
           },
           "tr": {
-            "mentions": 8,
-            "appearances": 6,
+            "mentions": 6,
+            "appearances": 5,
             "avg_cts": 24.74,
             "max_cts": 24.77,
             "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": 800.0
+            "prev_mentions": 2,
+            "delta_pct": 200.0
           }
         },
         "weekly": {
@@ -1067,7 +1067,7 @@
             "avg_cts": null,
             "max_cts": null,
             "burst": 0,
-            "prev_mentions": 39584,
+            "prev_mentions": 39530,
             "delta_pct": -100.0
           },
           "tr": {
@@ -1082,8 +1082,7 @@
         }
       },
       "sample_topics": [
-        "Made carrot cake with cheesecake in the middle",
-        "Tiramisu Brownies Profiterole Crème brûlée  Apple turnover Strawberry cheesecake"
+        "Made carrot cake with cheesecake in the middle"
       ]
     },
     {
