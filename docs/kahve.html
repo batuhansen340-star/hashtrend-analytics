@@ -105,7 +105,7 @@ tr.detail-row td{padding:0;border-bottom:1px solid var(--border)}
 .map-host svg .cty.has{cursor:pointer}
 .map-host svg .cty:hover{filter:brightness(1.55) drop-shadow(0 0 6px rgba(6,214,224,0.5))}
 .map-host svg .cty.sel{stroke:var(--cyan);stroke-width:1.1;filter:drop-shadow(0 0 7px rgba(6,214,224,0.55))}
-.map-legend{display:flex;align-items:center;gap:8px;padding:6px 14px 10px;font-size:0.62rem;color:var(--dim2)}
+.map-legend{display:flex;align-items:center;gap:8px;padding:6px 14px 10px;font-size:0.62rem;color:var(--dim2);flex-wrap:wrap}
 .map-grad{width:110px;height:6px;border-radius:3px;background:linear-gradient(90deg,#13141d,#0c3a42,#08f0fb)}
 .map-hint{margin-left:auto}
 .map-tip{position:fixed;pointer-events:none;background:var(--bg4);border:1px solid var(--border3);border-radius:6px;padding:5px 9px;font-size:0.72rem;z-index:200;display:none;white-space:nowrap;box-shadow:0 4px 14px rgba(0,0,0,0.5)}
@@ -120,6 +120,23 @@ tr.detail-row td{padding:0;border-bottom:1px solid var(--border)}
 .ccard-close{background:none;border:none;color:var(--dim2);font-size:1rem;cursor:pointer;line-height:1;padding:2px 4px;font-family:var(--sans)}
 .ccard-close:hover{color:var(--text)}
 .ccard-empty{padding:10px 14px 14px;font-size:0.76rem;color:var(--dim2)}
+
+/* v3: harita mod çipi (kavram modu / 'geo verisi yok' uyarısı) */
+.map-chip{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:9px 14px 0}
+.map-chip:empty{display:none;padding:0}
+.mchip{display:inline-flex;align-items:center;gap:6px;background:var(--cyan-bg);border:1px solid var(--cyan-border);color:var(--cyan);padding:4px 10px;border-radius:6px;font-size:0.72rem;max-width:100%}
+.mchip.warn{background:var(--bg3);border-color:var(--border2);color:var(--dim)}
+.mback{background:none;border:1px solid var(--border2);color:var(--dim);padding:4px 10px;border-radius:6px;font-size:0.72rem;cursor:pointer;font-family:var(--sans);white-space:nowrap}
+.mback:hover{color:var(--text);border-color:var(--border3)}
+
+/* v3: ülke kartı bölümleri + Google Trends 0-100 mini barları */
+.csec{padding:10px 14px 4px;font-size:0.6rem;color:var(--dim2);text-transform:uppercase;letter-spacing:1.2px}
+.gsec{padding-bottom:12px}
+.grow{display:flex;align-items:center;gap:8px;padding:4px 14px}
+.grow .gname{font-size:0.74rem;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:0 1 auto;max-width:45%}
+.grow .gtrack{flex:1;min-width:50px;height:6px;border-radius:3px;background:var(--bg4);overflow:hidden}
+.grow .gfill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--cyan),var(--cyan2))}
+.grow .gval{font-family:var(--mono);font-size:0.68rem;color:var(--cyan);min-width:26px;text-align:right}
 
 .empty{text-align:center;padding:40px 20px;color:var(--dim);font-size:0.82rem}
 .err{text-align:center;padding:50px 20px;color:var(--dim);font-size:0.84rem;background:var(--bg2);border:1px solid rgba(255,95,95,0.15);border-radius:var(--radius);margin:14px 0}
@@ -163,6 +180,7 @@ footer{margin-top:24px;padding:16px 0;border-top:1px solid var(--border);text-al
 <div class="mrow"><b>Bahsetme</b> — seçili penceredeki (günlük / haftalık / aylık) toplam bahsetme sayısı. Kaynaklar: Bluesky, haber RSS'leri, Ekşi Sözlük, YouTube, Google Trends ve Wikipedia dahil ~28 kaynaklı HashTrend pipeline'ı. Veri 2 saatte bir tazelenir.</div>
 <div class="mrow"><b>Değişim</b> — bir önceki <b>eşit uzunluktaki</b> döneme göre: Günlük → önceki 24 saat, Haftalık → önceki 7 gün, Aylık → önceki 30 gün. Gösterim kuralları: önceki dönem 0 iken şimdi sinyal varsa <span class="d-up">YENİ</span>; artış 10 kat ve üzerindeyse <span class="d-up">↑ ×N</span> (N = bu dönem ÷ önceki dönem, yuvarlanır; 100'ü aşarsa <span class="d-up">↑ ×100+</span>); bu dönem 0'a düştüyse <span class="d-down">↓ %100</span>; iki dönem de 0 ise <span class="d-neu">−</span>; diğer tüm durumlarda <span class="d-up">↑</span>/<span class="d-down">↓</span> %X,X (ondalık virgülle).</div>
 <div class="mrow"><b>CTS</b> — HashTrend trend gücü skoru (0–100): kaynak çeşitliliği %35 + hız %30 + hacim %20 + tazelik %15.</div>
+<div class="mrow"><b>Google Trends ilgisi</b> — Harita ayrıca Google Trends ülke ilgi endeksi (0-100, son 7 gün, göreli) kullanır — bahsetme sayısı değildir, o ülkedeki arama ilgisinin görece gücüdür. Genel görünümde ülke rengi, bahsetme yoğunluğu ile bu ilgi endeksinden yüksek olanıdır; tablodan bir kavrama tıklayınca harita yalnız o kavramın ilgi endeksini gösterir.</div>
 </div>
 </details>
 
@@ -184,8 +202,9 @@ footer{margin-top:24px;padding:16px 0;border-top:1px solid var(--border);text-al
 <div class="map-sec" id="mapSec">
 <div class="panel">
 <div class="panel-h"><h2>🗺️ Ülkelere Göre Sinyal</h2><small>seçili pencere • tüm gruplar</small></div>
+<div class="map-chip" id="mapChip"></div>
 <div class="map-scroll"><div class="map-host" id="mapHost"></div></div>
-<div class="map-legend"><span>az</span><span class="map-grad"></span><span>çok</span><span class="map-hint">ülkeye tıkla → top kavramlar</span></div>
+<div class="map-legend"><span>az</span><span class="map-grad"></span><span>çok</span><span id="mapLegendLbl"></span><span class="map-hint">ülkeye tıkla → top kavramlar</span></div>
 <div id="ccardWrap"></div>
 </div>
 </div>
@@ -200,7 +219,10 @@ footer{margin-top:24px;padding:16px 0;border-top:1px solid var(--border);text-al
 
 <script>
 // Kahve & Tatlı Trend Radarı — veri kaynağı YALNIZ ./data/kahve.json (rollup üretir).
-// Railway API'ye istek ATILMAZ (backend kapalı).
+// Railway API'ye istek ATILMAZ (backend kapalı). Dış istek yok (world.svg lokal asset).
+// v3: DATA.geo (Google Trends ülke ilgi endeksi) varsa harita Genel modda
+// bahsetme+ilgi karışımı boyar, tablo satırına tıklayınca kavram moduna geçer.
+// geo alanı yoksa (schema 1/2) sayfa v2 gibi çalışır.
 var DATA=null;           // kahve.json içeriği
 var win='daily';         // 'daily' | 'weekly' | 'monthly'
 var grp='all';           // 'all' | 'kahve' | 'tatli'
@@ -249,13 +271,17 @@ function deltaHtml(m){
   return'<span class="d-neu">− %0</span>';
 }
 
-// Sıralama: mentions DESC, eşitse avg_cts DESC; mentions=0 olanlar en sona (ad sırasıyla).
+// TEK sinyal koşulu — 'sinyal yok' etiketi, sıralama, varsayılan gizleme
+// (zero-collapse) VE toggle sayacı HEP bu fonksiyona bakar. Koşullar ayrışırsa
+// 'sinyal yok' satırları varsayılanda görünür kalabiliyordu (bug fix).
+function hasSignal(m){return!!(m&&Number(m.mentions)>0)}
+
+// Sıralama: mentions DESC, eşitse avg_cts DESC; sinyalsizler en sona (ad sırasıyla).
 function sortedItems(region){
   var items=(DATA.items||[]).filter(function(it){return grp==='all'||it.group===grp});
   var withM=[],zero=[];
   items.forEach(function(it){
-    var m=metricsFor(it,region);
-    ((m&&m.mentions>0)?withM:zero).push(it);
+    (hasSignal(metricsFor(it,region))?withM:zero).push(it);
   });
   withM.sort(function(a,b){
     var ma=metricsFor(a,region),mb=metricsFor(b,region);
@@ -276,11 +302,10 @@ function panelHtml(region,title,note){
     return h;
   }
   // 'sinyal yok' satırları varsayılan gizli — panel altındaki toggle ile açılır.
-  var zeroCount=items.filter(function(it){
-    var m=metricsFor(it,region);
-    return!(m&&Number(m.mentions)>0);
-  }).length;
-  if(!showZero[region]&&zeroCount)items=items.slice(0,items.length-zeroCount);
+  // Gizleme, sayaç ve satır etiketi AYNI hasSignal koşulunu kullanır: satırda
+  // 'sinyal yok' görünen HER kavram collapse kapsamındadır (sıra varsayımı yok).
+  var zeroCount=items.filter(function(it){return!hasSignal(metricsFor(it,region))}).length;
+  if(!showZero[region])items=items.filter(function(it){return hasSignal(metricsFor(it,region))});
   if(!items.length){
     h+='<div class="empty">Bu pencerede henüz sinyal yok.</div>';
     h+=zeroToggleHtml(region,zeroCount)+'</div>';
@@ -293,7 +318,7 @@ function panelHtml(region,title,note){
   items.forEach(function(it){
     var m=metricsFor(it,region);
     var mm=m?(Number(m.mentions)||0):0;
-    var zero=!(mm>0);
+    var zero=!hasSignal(m); // etiket = gizleme koşulu (tek kaynak)
     var isExp=!zero&&expanded[region]===it.id;
     var burst=m&&m.burst>0;
     if(!zero)rank++;
@@ -366,10 +391,14 @@ function render(){
 }
 
 /* ─── Dünya haritası (choropleth) ───────────────────────────────────────────
-   Veri: DATA.countries (schema v2). world.svg ya da countries alanı yoksa
-   bölüm hiç açılmaz — sayfa v1 gibi çalışmaya devam eder.
+   Veri: DATA.countries (schema v2) + DATA.geo (schema v3, opsiyonel).
+   world.svg ya da veri yoksa bölüm hiç açılmaz — sayfa v1 gibi çalışır.
    SVG sözleşmesi: ülke path/g'leri 2 harfli ISO id ('US'/'us') ya da data-iso. */
-var MAP={svg:null,nodes:null,sel:null,tried:false};
+var MAP={svg:null,nodes:null,sel:null,tried:false,
+  concept:null,   // v3: kavram modu — haritada gösterilen concept id (null=Genel)
+  notice:null,    // v3: 'geo verisi yok' çipindeki kavram adı
+  totals:{},      // son boyamadaki iso→bahsetme (tooltip için önbellek)
+  tipInterest:{}};// son boyamadaki iso→ilgi 0-100 (tooltip için önbellek)
 var BYID={}; // kavram id → items[] kaydı (ülke kartındaki isim/grup için)
 
 function hasCountries(){
@@ -377,8 +406,32 @@ function hasCountries(){
     Object.keys(DATA.countries).length);
 }
 
+/* v3 geo yardımcıları — DATA.geo.concepts: {cid:{term,updated_at,interest:{ISO2:0-100}}}
+   geo alanı yoksa hepsi boş/null döner → tüm geo yolları no-op (v2 davranışı). */
+function geoConcepts(){
+  var g=DATA&&DATA.geo&&DATA.geo.concepts;
+  return(g&&typeof g==='object')?g:null;
+}
+function hasGeo(){var g=geoConcepts();return!!(g&&Object.keys(g).length)}
+function geoFor(id){ // kavramın geo kaydı (gerçek interest'i varsa), yoksa null
+  var g=geoConcepts();var e=g&&g[id];
+  return(e&&e.interest&&typeof e.interest==='object'&&Object.keys(e.interest).length)?e:null;
+}
+function geoMaxByCountry(){ // iso → tüm kavramlardaki maks ilgi (Genel karışım için)
+  var g=geoConcepts(),out={};
+  if(!g)return out;
+  Object.keys(g).forEach(function(cid){
+    var e=g[cid];if(!(e&&e.interest))return;
+    Object.keys(e.interest).forEach(function(iso){
+      var v=Math.min(Number(e.interest[iso])||0,100);
+      if(v>(out[iso]||0))out[iso]=v;
+    });
+  });
+  return out;
+}
+
 async function initMap(){
-  if(MAP.tried||!hasCountries())return;
+  if(MAP.tried||!(hasCountries()||hasGeo()))return;
   MAP.tried=true;
   try{
     var r=await fetch('./assets/world.svg');
@@ -415,11 +468,16 @@ function prepMap(){
   MAP.svg.addEventListener('mousemove',function(e){
     var el=ctyOf(e.target);
     if(!el){tip.style.display='none';return}
-    var c=DATA.countries[el.__iso];
-    var ww=c&&c.windows&&c.windows[win];
-    var total=ww?(Number(ww.total_mentions)||0):0;
-    tip.innerHTML='<b>'+esc(c?c.name_tr:el.__iso)+'</b> • '+
-      (total>0?fn(total)+' bahsetme':'sinyal yok');
+    // Tooltip: name_tr • N bahsetme • ilgi X/100 (hangisi varsa)
+    var iso=el.__iso;
+    var c=(DATA.countries||{})[iso];
+    var total=Number(MAP.totals[iso])||0;
+    var gi=Math.min(Number(MAP.tipInterest[iso])||0,100);
+    var parts=['<b>'+esc(c?c.name_tr:iso)+'</b>'];
+    if(total>0)parts.push(fn(total)+' bahsetme');
+    if(gi>0)parts.push('ilgi '+Math.round(gi)+'/100');
+    if(parts.length===1)parts.push('sinyal yok');
+    tip.innerHTML=parts.join(' • ');
     tip.style.display='block';
     var x=Math.min(e.clientX+14,window.innerWidth-tip.offsetWidth-8);
     tip.style.left=x+'px';
@@ -432,13 +490,51 @@ function prepMap(){
   });
 }
 
-// Log ölçekli cyan yoğunluğu; 0/veri yok → koyu #13141d
-function mapColor(m,max){
-  if(!(m>0))return'#13141d';
-  var t=Math.log(1+m)/Math.log(1+Math.max(max,1));
+// 0-1 yoğunluk → cyan; 0/veri yok → koyu #13141d
+function mapColor(t){
+  if(!(t>0))return'#13141d';
+  t=Math.min(t,1);
   var lo=[12,58,66],hi=[8,240,251]; // #0c3a42 → #08f0fb (tek renk, koyu→parlak)
   var c=lo.map(function(l,i){return Math.round(l+(hi[i]-l)*t)});
   return'rgb('+c[0]+','+c[1]+','+c[2]+')';
+}
+
+// iso → seçili penceredeki toplam bahsetme (GLOBAL harita dışı)
+function mentionTotals(){
+  var out={},ctys=(DATA&&DATA.countries)||{};
+  Object.keys(ctys).forEach(function(iso){
+    if(iso==='GLOBAL')return;
+    var ww=ctys[iso].windows&&ctys[iso].windows[win];
+    var t=ww?(Number(ww.total_mentions)||0):0;
+    if(t>0)out[iso]=t;
+  });
+  return out;
+}
+
+// Harita yoğunlukları (iso → 0-1).
+// Kavram modu: yalnız o kavramın Google Trends ilgisi / 100 (mutlak 0-100 ölçek).
+// Genel mod : max( log-normalize(bahsetme), geo maks ilgi / 100 ).
+function mapValues(totals){
+  var vals={};
+  if(MAP.concept){
+    var e=geoFor(MAP.concept);
+    if(e)Object.keys(e.interest).forEach(function(iso){
+      var v=Math.min(Number(e.interest[iso])||0,100);
+      if(v>0)vals[iso]=v/100;
+    });
+    return vals;
+  }
+  var max=0;
+  Object.keys(totals).forEach(function(iso){if(totals[iso]>max)max=totals[iso]});
+  Object.keys(totals).forEach(function(iso){
+    vals[iso]=Math.log(1+totals[iso])/Math.log(1+Math.max(max,1));
+  });
+  var gmax=geoMaxByCountry();
+  Object.keys(gmax).forEach(function(iso){
+    var t=gmax[iso]/100;
+    if(t>(vals[iso]||0))vals[iso]=t;
+  });
+  return vals;
 }
 
 function setFill(el,color){
@@ -447,69 +543,143 @@ function setFill(el,color){
   if(el.querySelectorAll)el.querySelectorAll('path,polygon,rect').forEach(function(ch){ch.style.fill=color});
 }
 
-// Seçili pencereye göre haritayı boya + seçili ülke kartını tazele
+// Seçili pencere + moda göre haritayı boya; çip, legend ve ülke kartını tazele
 function updateMap(){
+  renderMapChip();
   if(!MAP.svg||!MAP.nodes)return;
-  var totals={},max=0;
-  Object.keys(DATA.countries).forEach(function(iso){
-    if(iso==='GLOBAL')return; // GLOBAL haritaya girmez (Dünya panelinin içinde zaten)
-    var ww=DATA.countries[iso].windows&&DATA.countries[iso].windows[win];
-    var t=ww?(Number(ww.total_mentions)||0):0;
-    totals[iso]=t;
-    if(t>max)max=t;
-  });
+  var totals=mentionTotals();
+  var vals=mapValues(totals);
+  MAP.totals=totals;
+  // Tooltip'teki 'ilgi X/100': kavram modunda o kavramın endeksi,
+  // Genel modda kavramlar içindeki maks endeks.
+  if(MAP.concept){var ge=geoFor(MAP.concept);MAP.tipInterest=ge?ge.interest:{}}
+  else MAP.tipInterest=geoMaxByCountry();
   Object.keys(MAP.nodes).forEach(function(iso){
-    var t=totals[iso]||0;
+    var t=vals[iso]||0;
     MAP.nodes[iso].forEach(function(el){
-      setFill(el,mapColor(t,max));
-      el.classList.toggle('has',t>0);
+      setFill(el,mapColor(t));
+      el.classList.toggle('has',t>0||(totals[iso]||0)>0);
       el.classList.toggle('sel',MAP.sel===iso);
     });
   });
+  var lbl=document.getElementById('mapLegendLbl');
+  if(lbl)lbl.textContent=mapLegendText();
   renderCcard();
 }
+
+// Legend dürüstlüğü: haritanın o an GERÇEKTEN neyi boyadığını söyler
+function mapLegendText(){
+  if(MAP.concept)return'Google Trends ilgisi 0-100 (son 7 gün)';
+  return hasGeo()?'bahsetme + Google Trends ilgisi (7g)':'bahsetme yoğunluğu';
+}
+
+/* v3: harita başlık çipi — kavram modu / 'geo verisi yok' uyarısı */
+function mapChipHtml(){
+  if(MAP.concept){
+    var it=BYID[MAP.concept],e=geoFor(MAP.concept);
+    var nm=it?it.name_tr:((e&&e.term)||MAP.concept);
+    return'<span class="mchip">🗺 '+esc(nm)+' — Google Trends ilgisi (son 7 gün)</span>'+
+      '<button class="mback" onclick="mapGeneral()">× Genel görünüme dön</button>';
+  }
+  if(MAP.notice){
+    return'<span class="mchip warn">'+esc(MAP.notice)+' — bu kavram için henüz geo verisi yok</span>'+
+      '<button class="mback" onclick="mapGeneral()" title="Kapat">×</button>';
+  }
+  return'';
+}
+function renderMapChip(){
+  var el=document.getElementById('mapChip');
+  if(el)el.innerHTML=mapChipHtml();
+}
+function mapGeneral(){MAP.concept=null;MAP.notice=null;updateMap()}
 
 function selectCountry(iso){
   MAP.sel=(MAP.sel===iso)?null:iso;
   updateMap();
 }
 
-// Tıklanan ülkenin top kavram kartı — TAMAMEN countries verisinden
+// v3: ülkenin Google Trends satırları — [{name,val 1-100}] ilgi DESC (yalnız gerçek değerler)
+function ccardGeoRows(iso){
+  var g=geoConcepts(),rows=[];
+  if(!g)return rows;
+  Object.keys(g).forEach(function(cid){
+    var e=g[cid];
+    var v=(e&&e.interest)?Math.min(Number(e.interest[iso])||0,100):0;
+    if(v>0){
+      var it=BYID[cid];
+      rows.push({name:it?it.name_tr:String((e&&e.term)||cid),val:Math.round(v)});
+    }
+  });
+  rows.sort(function(a,b){return b.val-a.val||String(a.name).localeCompare(String(b.name),'tr')});
+  return rows;
+}
+
+// Tıklanan ülkenin kartı: '💬 Bahsetmeler' (countries) + '📈 Google Trends ilgisi' (geo).
+// Verisi olmayan bölüm hiç çizilmez; ikisi de yoksa 'sinyal yok'.
 function renderCcard(){
   var wrap=document.getElementById('ccardWrap');
   if(!wrap)return;
   if(!MAP.sel){wrap.innerHTML='';return}
   var iso=MAP.sel;
-  var c=DATA.countries[iso];
+  var c=(DATA.countries||{})[iso];
   var ww=c&&c.windows&&c.windows[win];
   var total=ww?(Number(ww.total_mentions)||0):0;
   var concepts=(ww&&ww.concepts)||[];
+  var geoRows=ccardGeoRows(iso);
+  var hasM=total>0&&concepts.length>0;
   var h='<div class="ccard"><div class="ccard-h"><h3><em>'+esc(c?c.name_tr:iso)+'</em></h3>'+
     '<small>'+(total>0?fn(total)+' bahsetme • '+winName():winName())+'</small>'+
     '<button class="ccard-close" onclick="selectCountry(\''+esc(iso)+'\')" title="Kapat">×</button></div>';
-  if(!(total>0)||!concepts.length){
+  if(!hasM&&!geoRows.length){
     h+='<div class="ccard-empty">Bu ülkede henüz sinyal yok.</div></div>';
     wrap.innerHTML=h;
     return;
   }
-  h+='<div class="tblwrap"><table class="tbl" style="min-width:340px"><thead><tr>'+
-     '<th>#</th><th>Kavram</th><th class="num">Bahsetme</th><th class="num">Değişim</th>'+
-     '</tr></thead><tbody>';
-  concepts.forEach(function(cc,i){
-    var it=BYID[cc.id];
-    h+='<tr><td class="t-rank">'+(i+1)+'</td>'+
-       '<td><div class="t-name">'+esc(it?it.name_tr:cc.id)+
-       (it?' <span class="grp-pill grp-'+esc(it.group)+'">'+(it.group==='kahve'?'kahve':'tatlı')+'</span>':'')+
-       '</div>'+(it?'<div class="t-en">'+esc(it.name_en)+'</div>':'')+'</td>'+
-       '<td class="num"><span class="t-mentions">'+fn(cc.mentions)+'</span></td>'+
-       '<td class="num">'+deltaHtml(cc)+'</td></tr>'; // AYNI delta formatter'ı
-  });
-  h+='</tbody></table></div></div>';
+  if(hasM){
+    h+='<div class="csec">💬 Bahsetmeler</div>';
+    h+='<div class="tblwrap"><table class="tbl" style="min-width:340px"><thead><tr>'+
+       '<th>#</th><th>Kavram</th><th class="num">Bahsetme</th><th class="num">Değişim</th>'+
+       '</tr></thead><tbody>';
+    concepts.forEach(function(cc,i){
+      var it=BYID[cc.id];
+      h+='<tr><td class="t-rank">'+(i+1)+'</td>'+
+         '<td><div class="t-name">'+esc(it?it.name_tr:cc.id)+
+         (it?' <span class="grp-pill grp-'+esc(it.group)+'">'+(it.group==='kahve'?'kahve':'tatlı')+'</span>':'')+
+         '</div>'+(it?'<div class="t-en">'+esc(it.name_en)+'</div>':'')+'</td>'+
+         '<td class="num"><span class="t-mentions">'+fn(cc.mentions)+'</span></td>'+
+         '<td class="num">'+deltaHtml(cc)+'</td></tr>'; // AYNI delta formatter'ı
+    });
+    h+='</tbody></table></div>';
+  }
+  if(geoRows.length){
+    h+='<div class="csec">📈 Google Trends ilgisi</div><div class="gsec">';
+    geoRows.forEach(function(r){
+      h+='<div class="grow"><span class="gname" title="'+esc(r.name)+'">'+esc(r.name)+'</span>'+
+         '<div class="gtrack"><div class="gfill" style="width:'+r.val+'%"></div></div>'+
+         '<span class="gval">'+r.val+'</span></div>';
+    });
+    h+='</div>';
+  }
+  h+='</div>';
   wrap.innerHTML=h;
 }
 
 function toggleRow(region,id){
-  expanded[region]=(expanded[region]===id)?null:id;
+  var opening=expanded[region]!==id;
+  expanded[region]=opening?id:null;
+  if(hasGeo()){ // v3: detay açılırken harita o kavramın geo görünümüne geçer
+    if(opening){
+      if(geoFor(id)){MAP.concept=id;MAP.notice=null}
+      else{ // geo verisi olmayan kavram: harita Genel'de kalır, çip uyarır
+        MAP.concept=null;
+        var it=BYID[id];
+        MAP.notice=it?it.name_tr:id;
+      }
+    }else{
+      if(MAP.concept===id)MAP.concept=null;
+      MAP.notice=null;
+    }
+  }
   render();
 }
 
@@ -517,13 +687,17 @@ function bindTabs(){
   document.querySelectorAll('#winTabs .ch').forEach(function(c){
     c.addEventListener('click',function(){
       document.querySelectorAll('#winTabs .ch').forEach(function(x){x.classList.remove('act')});
-      c.classList.add('act');win=c.dataset.win;expanded={world:null,tr:null};render();
+      c.classList.add('act');win=c.dataset.win;
+      expanded={world:null,tr:null};MAP.concept=null;MAP.notice=null; // detay kapandı → Genel
+      render();
     });
   });
   document.querySelectorAll('#grpTabs .ch').forEach(function(c){
     c.addEventListener('click',function(){
       document.querySelectorAll('#grpTabs .ch').forEach(function(x){x.classList.remove('act')});
-      c.classList.add('act');grp=c.dataset.grp;expanded={world:null,tr:null};render();
+      c.classList.add('act');grp=c.dataset.grp;
+      expanded={world:null,tr:null};MAP.concept=null;MAP.notice=null; // detay kapandı → Genel
+      render();
     });
   });
 }
@@ -536,12 +710,12 @@ async function load(){
     if(!r.ok)throw new Error('HTTP '+r.status);
     var j=await r.json();
     if(!j||!Array.isArray(j.items))throw new Error('Beklenmeyen veri biçimi');
-    if(j.schema_version!==1&&j.schema_version!==2)console.warn('kahve.json: beklenmeyen schema_version →',j.schema_version);
+    if(j.schema_version!==1&&j.schema_version!==2&&j.schema_version!==3)console.warn('kahve.json: beklenmeyen schema_version →',j.schema_version);
     DATA=j;
     BYID={};
     (DATA.items||[]).forEach(function(it){BYID[it.id]=it});
     render();
-    initMap(); // v2 (countries) + world.svg varsa haritayı aç; yoksa sessiz no-op
+    initMap(); // v2 countries / v3 geo + world.svg varsa haritayı aç; yoksa sessiz no-op
   }catch(e){
     el.innerHTML='<div class="err"><strong>Radar verisi yüklenemedi.</strong><br>'+
       'data/kahve.json okunamadı ('+esc(e.message||e)+').'+

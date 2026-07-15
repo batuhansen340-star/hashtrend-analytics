@@ -1,0 +1,120 @@
+{
+  "_comment": "kahve.json v3 el yapımı test fixture'ı — test_kahve_dom.js kullanır. Senaryolar: matcha=sinyal+geo, dubai-cikolatasi=yalnız world sinyali+geo YOK, sutlac=mentions=0 ama prev/appearances>0 (bug regresyonu), cortado=hiç sinyal yok. JP=yalnız geo ülkesi, GB=yalnız bahsetme ülkesi.",
+  "schema_version": 3,
+  "generated_at": "2026-07-16T09:00:00+00:00",
+  "windows": {
+    "daily": {"since": "2026-07-15T09:00:00+00:00", "until": "2026-07-16T09:00:00+00:00"},
+    "weekly": {"since": "2026-07-09T09:00:00+00:00", "until": "2026-07-16T09:00:00+00:00"},
+    "monthly": {"since": "2026-06-16T09:00:00+00:00", "until": "2026-07-16T09:00:00+00:00"}
+  },
+  "items": [
+    {
+      "id": "matcha", "name_tr": "Matcha", "name_en": "Matcha", "group": "kahve",
+      "metrics": {
+        "daily": {
+          "world": {"mentions": 50, "appearances": 2, "avg_cts": 40.0, "max_cts": 45.0, "burst": 0, "prev_mentions": 10, "delta_pct": 400.0},
+          "tr": {"mentions": 10, "appearances": 1, "avg_cts": 30.0, "max_cts": 30.0, "burst": 0, "prev_mentions": 5, "delta_pct": 100.0}
+        },
+        "weekly": {
+          "world": {"mentions": 500, "appearances": 9, "avg_cts": 42.5, "max_cts": 61.0, "burst": 1, "prev_mentions": 250, "delta_pct": 100.0},
+          "tr": {"mentions": 120, "appearances": 4, "avg_cts": 35.0, "max_cts": 50.0, "burst": 0, "prev_mentions": 60, "delta_pct": 100.0}
+        },
+        "monthly": {
+          "world": {"mentions": 2000, "appearances": 30, "avg_cts": 41.0, "max_cts": 70.0, "burst": 2, "prev_mentions": 1500, "delta_pct": 33.3},
+          "tr": {"mentions": 400, "appearances": 12, "avg_cts": 33.0, "max_cts": 55.0, "burst": 0, "prev_mentions": 300, "delta_pct": 33.3}
+        }
+      },
+      "sample_topics": ["matcha latte art", "iced matcha tarifi"]
+    },
+    {
+      "id": "dubai-cikolatasi", "name_tr": "Dubai Çikolatası", "name_en": "Dubai Chocolate", "group": "tatli",
+      "metrics": {
+        "daily": {
+          "world": {"mentions": 0, "appearances": 0, "avg_cts": null, "max_cts": null, "burst": 0, "prev_mentions": 0, "delta_pct": null},
+          "tr": {"mentions": 0, "appearances": 0, "avg_cts": null, "max_cts": null, "burst": 0, "prev_mentions": 0, "delta_pct": null}
+        },
+        "weekly": {
+          "world": {"mentions": 50, "appearances": 3, "avg_cts": 28.0, "max_cts": 33.0, "burst": 0, "prev_mentions": 100, "delta_pct": -50.0},
+          "tr": {"mentions": 0, "appearances": 0, "avg_cts": null, "max_cts": null, "burst": 0, "prev_mentions": 0, "delta_pct": null}
+        },
+        "monthly": {
+          "world": {"mentions": 300, "appearances": 10, "avg_cts": 30.0, "max_cts": 44.0, "burst": 0, "prev_mentions": 200, "delta_pct": 50.0},
+          "tr": {"mentions": 0, "appearances": 0, "avg_cts": null, "max_cts": null, "burst": 0, "prev_mentions": 0, "delta_pct": null}
+        }
+      },
+      "sample_topics": ["dubai chocolate bar"]
+    },
+    {
+      "id": "sutlac", "name_tr": "Sütlaç", "name_en": "Rice Pudding", "group": "tatli",
+      "metrics": {
+        "daily": {
+          "world": {"mentions": 0, "appearances": 0, "avg_cts": null, "max_cts": null, "burst": 0, "prev_mentions": 0, "delta_pct": null},
+          "tr": {"mentions": 0, "appearances": 0, "avg_cts": null, "max_cts": null, "burst": 0, "prev_mentions": 0, "delta_pct": null}
+        },
+        "weekly": {
+          "world": {"mentions": 0, "appearances": 2, "avg_cts": 22.0, "max_cts": 25.0, "burst": 0, "prev_mentions": 40, "delta_pct": -100.0},
+          "tr": {"mentions": 0, "appearances": 2, "avg_cts": 22.0, "max_cts": 25.0, "burst": 0, "prev_mentions": 40, "delta_pct": -100.0}
+        },
+        "monthly": {
+          "world": {"mentions": 60, "appearances": 5, "avg_cts": 24.0, "max_cts": 30.0, "burst": 0, "prev_mentions": 80, "delta_pct": -25.0},
+          "tr": {"mentions": 60, "appearances": 5, "avg_cts": 24.0, "max_cts": 30.0, "burst": 0, "prev_mentions": 80, "delta_pct": -25.0}
+        }
+      },
+      "sample_topics": ["fırın sütlaç tarifi"]
+    },
+    {
+      "id": "cortado", "name_tr": "Cortado", "name_en": "Cortado", "group": "kahve",
+      "metrics": {
+        "daily": {
+          "world": {"mentions": 0, "appearances": 0, "avg_cts": null, "max_cts": null, "burst": 0, "prev_mentions": 0, "delta_pct": null},
+          "tr": {"mentions": 0, "appearances": 0, "avg_cts": null, "max_cts": null, "burst": 0, "prev_mentions": 0, "delta_pct": null}
+        },
+        "weekly": {
+          "world": {"mentions": 0, "appearances": 0, "avg_cts": null, "max_cts": null, "burst": 0, "prev_mentions": 0, "delta_pct": null},
+          "tr": {"mentions": 0, "appearances": 0, "avg_cts": null, "max_cts": null, "burst": 0, "prev_mentions": 0, "delta_pct": null}
+        },
+        "monthly": {
+          "world": {"mentions": 0, "appearances": 0, "avg_cts": null, "max_cts": null, "burst": 0, "prev_mentions": 0, "delta_pct": null},
+          "tr": {"mentions": 0, "appearances": 0, "avg_cts": null, "max_cts": null, "burst": 0, "prev_mentions": 0, "delta_pct": null}
+        }
+      },
+      "sample_topics": []
+    }
+  ],
+  "countries": {
+    "TR": {
+      "name_tr": "Türkiye",
+      "windows": {
+        "daily": {"total_mentions": 10, "concepts": [{"id": "matcha", "mentions": 10, "prev_mentions": 5}]},
+        "weekly": {"total_mentions": 120, "concepts": [{"id": "matcha", "mentions": 120, "prev_mentions": 60}]},
+        "monthly": {"total_mentions": 400, "concepts": [{"id": "matcha", "mentions": 400, "prev_mentions": 300}]}
+      }
+    },
+    "US": {
+      "name_tr": "Amerika",
+      "windows": {
+        "daily": {"total_mentions": 0, "concepts": []},
+        "weekly": {"total_mentions": 30, "concepts": [{"id": "dubai-cikolatasi", "mentions": 30, "prev_mentions": 60}]},
+        "monthly": {"total_mentions": 200, "concepts": [{"id": "dubai-cikolatasi", "mentions": 200, "prev_mentions": 150}]}
+      }
+    },
+    "GB": {
+      "name_tr": "İngiltere",
+      "windows": {
+        "daily": {"total_mentions": 0, "concepts": []},
+        "weekly": {"total_mentions": 20, "concepts": [{"id": "dubai-cikolatasi", "mentions": 20, "prev_mentions": 0}]},
+        "monthly": {"total_mentions": 20, "concepts": [{"id": "dubai-cikolatasi", "mentions": 20, "prev_mentions": 0}]}
+      }
+    }
+  },
+  "geo": {
+    "note": "Google Trends interest_by_region • timeframe: now 7-d • 0-100 göreli ilgi endeksi",
+    "concepts": {
+      "matcha": {
+        "term": "matcha",
+        "updated_at": "2026-07-16T08:55:00+00:00",
+        "interest": {"JP": 95, "TR": 41, "US": 87}
+      }
+    }
+  }
+}
