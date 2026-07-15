@@ -119,7 +119,7 @@ footer{padding:24px 0;border-top:1px solid var(--border);text-align:center;color
 </style>
 </head>
 <body>
-<nav><div class="container"><div class="logo"><div class="logo-icon">H</div>Hash<span>Trend</span></div><div class="nav-r"><a href="#dashboard">Dashboard</a><a href="#how">How it works</a><a href="https://hashtrend-analytics-production.up.railway.app/docs" target="_blank">API Docs</a><a href="#signup" class="nav-cta">Get Free Key</a></div></div></nav>
+<nav><div class="container"><div class="logo"><div class="logo-icon">H</div>Hash<span>Trend</span></div><div class="nav-r"><a href="#dashboard">Dashboard</a><a href="#how">How it works</a><a href="https://hashtrend-api.onrender.com/docs" target="_blank">API Docs</a><a href="#signup" class="nav-cta">Get Free Key</a></div></div></nav>
 <div class="updated-bar"><div class="container"><div class="live"><span class="dot"></span> Live — 4 sources active</div><div id="last-updated">Last updated: loading...</div></div></div>
 <section class="hero"><div class="container"><h1>What the internet is<br>talking about <em>right now</em></h1><p>Cross-platform trend intelligence from Google Trends, Reddit, Hacker News & Wikipedia — unified with a single CTS score.</p></div></section>
 <section id="dashboard"><div class="container">
@@ -137,9 +137,9 @@ footer{padding:24px 0;border-top:1px solid var(--border);text-align:center;color
 </div></section>
 <section class="how" id="how"><div class="container"><h2>Start in 30 seconds</h2><p class="sub">One API, all platforms combined. Free forever tier included.</p><div class="how-grid"><div class="how-card"><div class="how-step">01 — Sign up</div><h3>Get your API key</h3><p>Enter your email below. Instant key generation, no credit card required.</p><code>POST /api/v1/signup<br>{"email": "you@company.com"}</code></div><div class="how-card"><div class="how-step">02 — Fetch</div><h3>Query trends</h3><p>One endpoint returns all sources combined. Filter by category, country, or minimum score.</p><code>curl hashtrend.io/api/v1/trends \<br>&nbsp;&nbsp;-H "X-API-Key: ht_live_xxx"</code></div><div class="how-card"><div class="how-step">03 — Build</div><h3>Integrate anywhere</h3><p>Power your newsletter, dashboard, automation pipeline, or AI agent with real-time trend data.</p><code>{"topicName": "Vite 8.0",<br>&nbsp;"ctsScore": 58.3,<br>&nbsp;"sources": {"reddit":546,"hn":546},<br>&nbsp;"isBurst": true}</code></div></div></div></section>
 <section class="signup" id="signup"><div class="container"><h2>Get your free API key</h2><p>100 requests/day. No credit card. Upgrade anytime.</p><div class="signup-form"><input type="email" id="signup-email" placeholder="your@email.com"><button onclick="doSignup()">Get Key</button></div><div class="signup-result" id="signup-result"><div style="font-size:0.78rem;color:var(--dim);margin-bottom:4px">Your API key (save it!):</div><div class="key" id="signup-key"></div><div style="font-size:0.75rem;color:var(--dim);margin-top:8px">Header: <code style="color:var(--cyan);background:var(--bg);padding:2px 6px;border-radius:4px;font-size:0.72rem">X-API-Key: your_key</code></div></div></div></section>
-<footer><div class="container">HashTrend Analytics &middot; Built by Batuhan Sen &middot; <a href="https://hashtrend-analytics-production.up.railway.app/docs">API Docs</a></div></footer>
+<footer><div class="container">HashTrend Analytics &middot; Built by Batuhan Sen &middot; <a href="https://hashtrend-api.onrender.com/docs">API Docs</a></div></footer>
 <script>
-const API='https://hashtrend-analytics-production.up.railway.app',KEY='ht_live_81b0a73385734642970237f6';
+const API='https://hashtrend-api.onrender.com',KEY='ht_live_81b0a73385734642970237f6';
 let allData=[],filtered=[],catFilter='all',countryFilter='all',burstOnly=false,searchTerm='',page=1,perPage=25,expandedRow=null;
 function fmtNum(n){if(n>=1e6)return(n/1e6).toFixed(1)+'M';if(n>=1e3)return(n/1e3).toFixed(n>=1e4?0:1)+'K';return n.toString()}
 function totalM(t){return t.sources?Object.values(t.sources).reduce((a,b)=>a+b,0):0}
