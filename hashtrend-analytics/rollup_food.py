@@ -5,6 +5,9 @@ Canlı Supabase'deki raw_mentions + trend_scores tablolarından watchlist
 (config/food_watchlist.py) kavramlarını çeker, daily/weekly/monthly
 pencerelerinde world/TR agregasyonu yapar ve docs/data/kahve.json üretir.
 
+Şema v2: v1 alanları aynen korunur; ek olarak ülke-bazlı "countries" bloğu
+üretilir (yalnız gerçek verisi olan ISO2 ülkeler; GLOBAL harita dışıdır).
+
 LLM çağrısı YOK — salt REST (PostgREST) agregasyon.
 
 Kullanım:
@@ -44,6 +47,26 @@ WINDOW_DELTAS = {
     "daily": timedelta(days=1),
     "weekly": timedelta(days=7),
     "monthly": timedelta(days=30),
+}
+
+# Harita paneli için ülke başına en fazla kaç kavram listelensin
+COUNTRY_TOP_N = 10
+
+# ISO2 → Türkçe ülke adı (listede yoksa ISO kodu gösterilir)
+COUNTRY_NAMES_TR = {
+    "TR": "Türkiye", "US": "Amerika", "GB": "İngiltere", "JP": "Japonya",
+    "DE": "Almanya", "ES": "İspanya", "BR": "Brezilya", "FR": "Fransa",
+    "IN": "Hindistan", "AU": "Avustralya", "IT": "İtalya", "KR": "Güney Kore",
+    "CA": "Kanada", "MX": "Meksika", "NL": "Hollanda", "SA": "Suudi Arabistan",
+    "AE": "Birleşik Arap Emirlikleri", "RU": "Rusya", "CN": "Çin", "EG": "Mısır",
+    "ID": "Endonezya", "PH": "Filipinler", "TH": "Tayland", "VN": "Vietnam",
+    "MY": "Malezya", "SG": "Singapur", "PK": "Pakistan", "AZ": "Azerbaycan",
+    "GR": "Yunanistan", "PT": "Portekiz", "PL": "Polonya", "SE": "İsveç",
+    "NO": "Norveç", "DK": "Danimarka", "FI": "Finlandiya", "CH": "İsviçre",
+    "AT": "Avusturya", "BE": "Belçika", "IE": "İrlanda", "UA": "Ukrayna",
+    "AR": "Arjantin", "CL": "Şili", "CO": "Kolombiya", "ZA": "Güney Afrika",
+    "NZ": "Yeni Zelanda", "IL": "İsrail", "QA": "Katar", "KW": "Kuveyt",
+    "MA": "Fas", "NG": "Nijerya",
 }
 
 
@@ -143,6 +166,53 @@ def _fetch_matching(table: str, select_cols: str, topic_col: str,
     return list(rows_by_id.values())
 
 
+def _norm_country(value) -> str | None:
+    """country kolonunu ISO2'ye normalize et; None/boş/'GLOBAL'/ISO2-dışı → None (harita dışı).
+
+    ISO2 biçimi (2 ASCII harf) zorunlu: countries bloğu sözleşmesi "yalnız ISO2"
+    der ve kahve.html anahtarı onclick attribute'una gömer — çöp değer sızmasın.
+    """
+    c = (value or "").strip().upper()
+    if len(c) != 2 or not c.isascii() or not c.isalpha():
+        return None  # boş, "GLOBAL" ve diğer ISO2-dışı değerler harita dışı
+    return c
+
+
+def _build_countries(country_counts: dict[str, dict[str, dict[str, dict[str, int]]]]) -> dict:
+    """
+    Ülke bazlı sayaçları v2 "countries" bloğuna çevir.
+
+    Girdi: iso2 → pencere → concept_id → {"mentions", "prev_mentions"}.
+    Kurallar: kavramlar mentions>0 + mentions DESC + en çok COUNTRY_TOP_N;
+    ülke ancak en az bir penceresinde total_mentions>0 ise listeye girer.
+    total_mentions = penceredeki TÜM kavram mention'larının toplamı (top-N değil).
+    """
+    countries: dict = {}
+    for iso in sorted(country_counts):
+        windows_out = {}
+        has_data = False
+        for wname in WINDOW_DELTAS:
+            per_cid = country_counts[iso][wname]
+            total = sum(e["mentions"] for e in per_cid.values())
+            concepts = sorted(
+                (
+                    {"id": cid, "mentions": e["mentions"], "prev_mentions": e["prev_mentions"]}
+                    for cid, e in per_cid.items()
+                    if e["mentions"] > 0
+                ),
+                key=lambda c: (-c["mentions"], c["id"]),
+            )[:COUNTRY_TOP_N]
+            windows_out[wname] = {"total_mentions": total, "concepts": concepts}
+            if total > 0:
+                has_data = True
+        if has_data:
+            countries[iso] = {
+                "name_tr": COUNTRY_NAMES_TR.get(iso, iso),
+                "windows": windows_out,
+            }
+    return countries
+
+
 def _empty_metric() -> dict:
     return {
         "mentions": 0, "appearances": 0,
@@ -184,6 +254,8 @@ def build_rollup(now: datetime) -> dict:
     # sample_topics: kavram başına gerçek topic adları (küçük-harf dedup)
     topic_counter: dict[str, Counter] = {c["id"]: Counter() for c in WATCHLIST}
     topic_display: dict[str, dict[str, str]] = {c["id"]: {} for c in WATCHLIST}
+    # v2: iso2 → pencere → concept_id → {"mentions", "prev_mentions"}
+    country_counts: dict[str, dict[str, dict[str, dict[str, int]]]] = {}
 
     def _note_topic(cid: str, name: str, weight: int) -> None:
         key = name.strip().lower()
@@ -199,7 +271,8 @@ def build_rollup(now: datetime) -> dict:
             continue  # ilike kaba eşleşti ama kesin eşleşme yok
         ts = _parse_ts(row["collected_at"])
         count = int(row.get("mention_count") or 0)
-        is_tr = (row.get("country") or "").strip().upper() == "TR"
+        iso = _norm_country(row.get("country"))
+        is_tr = iso == "TR"
         _note_topic(cid, row.get("topic") or "", count)
 
         for wname, delta in WINDOW_DELTAS.items():
@@ -207,11 +280,19 @@ def build_rollup(now: datetime) -> dict:
             prev_since = since - delta
             scopes = ["world"] + (["tr"] if is_tr else [])
             if since <= ts < now:
-                for s in scopes:
-                    metrics[cid][wname][s]["mentions"] += count
+                bucket = "mentions"
             elif prev_since <= ts < since:
-                for s in scopes:
-                    metrics[cid][wname][s]["prev_mentions"] += count
+                bucket = "prev_mentions"
+            else:
+                continue
+            for s in scopes:
+                metrics[cid][wname][s][bucket] += count
+            if iso is not None:
+                per_win = country_counts.setdefault(
+                    iso, {w: {} for w in WINDOW_DELTAS})
+                entry = per_win[wname].setdefault(
+                    cid, {"mentions": 0, "prev_mentions": 0})
+                entry[bucket] += count
 
     # ── trend_scores → appearances / avg_cts / max_cts / burst ─────────
     for row in score_rows:
@@ -268,14 +349,19 @@ def build_rollup(now: datetime) -> dict:
         })
     items.sort(key=lambda it: (-it["metrics"]["monthly"]["world"]["mentions"], it["id"]))
 
+    # ── v2: ülke-bazlı harita bloğu ─────────────────────────────────────
+    countries = _build_countries(country_counts)
+    logger.info(f"countries: {len(countries)} ülke → {', '.join(sorted(countries))}")
+
     return {
-        "schema_version": 1,
+        "schema_version": 2,
         "generated_at": now.isoformat(),
         "windows": {
             w: {"since": v["since"].isoformat(), "until": v["until"].isoformat()}
             for w, v in windows.items()
         },
         "items": items,
+        "countries": countries,
     }
 
 
