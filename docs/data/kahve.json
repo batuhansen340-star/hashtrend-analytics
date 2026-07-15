@@ -1,18 +1,18 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-07-15T22:25:53+00:00",
+  "generated_at": "2026-07-15T23:07:48+00:00",
   "windows": {
     "daily": {
-      "since": "2026-07-14T22:25:53+00:00",
-      "until": "2026-07-15T22:25:53+00:00"
+      "since": "2026-07-14T23:07:48+00:00",
+      "until": "2026-07-15T23:07:48+00:00"
     },
     "weekly": {
-      "since": "2026-07-08T22:25:53+00:00",
-      "until": "2026-07-15T22:25:53+00:00"
+      "since": "2026-07-08T23:07:48+00:00",
+      "until": "2026-07-15T23:07:48+00:00"
     },
     "monthly": {
-      "since": "2026-06-15T22:25:53+00:00",
-      "until": "2026-07-15T22:25:53+00:00"
+      "since": "2026-06-15T23:07:48+00:00",
+      "until": "2026-07-15T23:07:48+00:00"
     }
   },
   "items": [
@@ -315,22 +315,22 @@
       "metrics": {
         "daily": {
           "world": {
-            "mentions": 2,
-            "appearances": 2,
+            "mentions": 0,
+            "appearances": 1,
             "avg_cts": 24.73,
             "max_cts": 24.73,
             "burst": 0,
-            "prev_mentions": 6,
-            "delta_pct": -66.7
+            "prev_mentions": 8,
+            "delta_pct": -100.0
           },
           "tr": {
-            "mentions": 2,
-            "appearances": 2,
+            "mentions": 0,
+            "appearances": 1,
             "avg_cts": 24.73,
             "max_cts": 24.73,
             "burst": 0,
-            "prev_mentions": 6,
-            "delta_pct": -66.7
+            "prev_mentions": 8,
+            "delta_pct": -100.0
           }
         },
         "weekly": {
@@ -3998,14 +3998,8 @@
       "name_tr": "Türkiye",
       "windows": {
         "daily": {
-          "total_mentions": 2,
-          "concepts": [
-            {
-              "id": "brownie",
-              "mentions": 2,
-              "prev_mentions": 6
-            }
-          ]
+          "total_mentions": 0,
+          "concepts": []
         },
         "weekly": {
           "total_mentions": 10,
