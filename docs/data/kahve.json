@@ -1,36 +1,43 @@
 {
   "schema_version": 3,
-  "generated_at": "2026-07-15T23:22:53+00:00",
+  "generated_at": "2026-07-16T00:40:56+00:00",
   "windows": {
     "daily": {
-      "since": "2026-07-14T23:22:53+00:00",
-      "until": "2026-07-15T23:22:53+00:00"
+      "since": "2026-07-15T00:40:56+00:00",
+      "until": "2026-07-16T00:40:56+00:00"
     },
     "weekly": {
-      "since": "2026-07-08T23:22:53+00:00",
-      "until": "2026-07-15T23:22:53+00:00"
+      "since": "2026-07-09T00:40:56+00:00",
+      "until": "2026-07-16T00:40:56+00:00"
     },
     "monthly": {
-      "since": "2026-06-15T23:22:53+00:00",
-      "until": "2026-07-15T23:22:53+00:00"
+      "since": "2026-06-16T00:40:56+00:00",
+      "until": "2026-07-16T00:40:56+00:00"
     }
   },
+  "coverage_gaps": [
+    {
+      "from": "2026-07-04",
+      "to": "2026-07-11",
+      "note": "pipeline kesintisi"
+    }
+  ],
   "items": [
     {
-      "id": "pistachio-wave",
-      "name_tr": "Fıstık Akımı",
-      "name_en": "Pistachio (wave)",
+      "id": "cheesecake",
+      "name_tr": "Cheesecake (genel)",
+      "name_en": "Cheesecake",
       "group": "tatli",
       "metrics": {
         "daily": {
           "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
+            "mentions": 81896,
+            "appearances": 33,
+            "avg_cts": 29.57,
+            "max_cts": 34.39,
             "burst": 0,
-            "prev_mentions": 3000,
-            "delta_pct": -100.0
+            "prev_mentions": 0,
+            "delta_pct": 8189600.0
           },
           "tr": {
             "mentions": 0,
@@ -44,13 +51,13 @@
         },
         "weekly": {
           "world": {
-            "mentions": 4800,
-            "appearances": 3,
-            "avg_cts": 31.41,
-            "max_cts": 31.52,
+            "mentions": 81896,
+            "appearances": 33,
+            "avg_cts": 29.57,
+            "max_cts": 34.39,
             "burst": 0,
-            "prev_mentions": 4200,
-            "delta_pct": 14.3
+            "prev_mentions": 0,
+            "delta_pct": 8189600.0
           },
           "tr": {
             "mentions": 0,
@@ -64,13 +71,388 @@
         },
         "monthly": {
           "world": {
-            "mentions": 14035,
-            "appearances": 10,
-            "avg_cts": 31.07,
+            "mentions": 81896,
+            "appearances": 33,
+            "avg_cts": 29.57,
+            "max_cts": 34.39,
+            "burst": 0,
+            "prev_mentions": 39530,
+            "delta_pct": 107.2
+          },
+          "tr": {
+            "mentions": 0,
+            "appearances": 0,
+            "avg_cts": null,
+            "max_cts": null,
+            "burst": 0,
+            "prev_mentions": 19769,
+            "delta_pct": -100.0
+          }
+        }
+      },
+      "sample_topics": [
+        "Made carrot cake with cheesecake in the middle",
+        "All I saw was cheesecake boat and ocean for at least 5 minutes",
+        "Pretty on the money quote at the bottom of my cheesecake slice",
+        "yall this cheesecake i just made in pastry school….",
+        "tem make first cheesecake!!!"
+      ]
+    },
+    {
+      "id": "croissant",
+      "name_tr": "Kruvasan (genel)",
+      "name_en": "Croissant",
+      "group": "tatli",
+      "metrics": {
+        "daily": {
+          "world": {
+            "mentions": 52034,
+            "appearances": 18,
+            "avg_cts": 30.88,
+            "max_cts": 33.81,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 5203400.0
+          },
+          "tr": {
+            "mentions": 0,
+            "appearances": 0,
+            "avg_cts": null,
+            "max_cts": null,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": null
+          }
+        },
+        "weekly": {
+          "world": {
+            "mentions": 52034,
+            "appearances": 18,
+            "avg_cts": 30.88,
+            "max_cts": 33.81,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 5203400.0
+          },
+          "tr": {
+            "mentions": 0,
+            "appearances": 0,
+            "avg_cts": null,
+            "max_cts": null,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": null
+          }
+        },
+        "monthly": {
+          "world": {
+            "mentions": 52034,
+            "appearances": 18,
+            "avg_cts": 30.88,
+            "max_cts": 33.81,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 5203400.0
+          },
+          "tr": {
+            "mentions": 0,
+            "appearances": 0,
+            "avg_cts": null,
+            "max_cts": null,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": null
+          }
+        }
+      },
+      "sample_topics": [
+        "Gonna hold on to this croissant metaphor for the rest of my creative life",
+        "A Croissant",
+        "croissant ~",
+        "We invaded France and no one will sell us a croissant. It’s very hard on the men.",
+        "It's not illegal to warm up a croissant and fry an egg and butter and put it in there"
+      ]
+    },
+    {
+      "id": "matcha",
+      "name_tr": "Matcha",
+      "name_en": "Matcha",
+      "group": "kahve",
+      "metrics": {
+        "daily": {
+          "world": {
+            "mentions": 29930,
+            "appearances": 15,
+            "avg_cts": 31.01,
+            "max_cts": 41.41,
+            "burst": 1,
+            "prev_mentions": 0,
+            "delta_pct": 2993000.0
+          },
+          "tr": {
+            "mentions": 0,
+            "appearances": 0,
+            "avg_cts": null,
+            "max_cts": null,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": null
+          }
+        },
+        "weekly": {
+          "world": {
+            "mentions": 29932,
+            "appearances": 17,
+            "avg_cts": 30.22,
+            "max_cts": 41.41,
+            "burst": 1,
+            "prev_mentions": 0,
+            "delta_pct": 2993200.0
+          },
+          "tr": {
+            "mentions": 2,
+            "appearances": 2,
+            "avg_cts": 24.31,
+            "max_cts": 24.31,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 200.0
+          }
+        },
+        "monthly": {
+          "world": {
+            "mentions": 29932,
+            "appearances": 17,
+            "avg_cts": 30.22,
+            "max_cts": 41.41,
+            "burst": 1,
+            "prev_mentions": 1846,
+            "delta_pct": 1521.5
+          },
+          "tr": {
+            "mentions": 2,
+            "appearances": 2,
+            "avg_cts": 24.31,
+            "max_cts": 24.31,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 200.0
+          }
+        }
+      },
+      "sample_topics": [
+        "Matcha Latte 🌿🍵✨️",
+        "Vanilla Creme Matcha Fox (2017) Doodle",
+        "Vanilla Creme Matcha Fox",
+        "Matcha Latte",
+        "dubai matcha hamburger helper"
+      ]
+    },
+    {
+      "id": "tiramisu",
+      "name_tr": "Tiramisu",
+      "name_en": "Tiramisu",
+      "group": "tatli",
+      "metrics": {
+        "daily": {
+          "world": {
+            "mentions": 17991,
+            "appearances": 16,
+            "avg_cts": 30.41,
+            "max_cts": 41.66,
+            "burst": 1,
+            "prev_mentions": 0,
+            "delta_pct": 1799100.0
+          },
+          "tr": {
+            "mentions": 2,
+            "appearances": 1,
+            "avg_cts": 24.72,
+            "max_cts": 24.72,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 200.0
+          }
+        },
+        "weekly": {
+          "world": {
+            "mentions": 17991,
+            "appearances": 16,
+            "avg_cts": 30.41,
+            "max_cts": 41.66,
+            "burst": 1,
+            "prev_mentions": 0,
+            "delta_pct": 1799100.0
+          },
+          "tr": {
+            "mentions": 2,
+            "appearances": 1,
+            "avg_cts": 24.72,
+            "max_cts": 24.72,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 200.0
+          }
+        },
+        "monthly": {
+          "world": {
+            "mentions": 17991,
+            "appearances": 16,
+            "avg_cts": 30.41,
+            "max_cts": 41.66,
+            "burst": 1,
+            "prev_mentions": 18,
+            "delta_pct": 99850.0
+          },
+          "tr": {
+            "mentions": 2,
+            "appearances": 1,
+            "avg_cts": 24.72,
+            "max_cts": 24.72,
+            "burst": 0,
+            "prev_mentions": 18,
+            "delta_pct": -88.9
+          }
+        }
+      },
+      "sample_topics": [
+        "damn i fuckin nailed this tiramisu",
+        "Soup of the day: Tiramisu",
+        "Key lime tiramisu goes hard",
+        "After a exciting day at the hospital, I've earned this tiramisu.",
+        "this one's name is tiramisu"
+      ]
+    },
+    {
+      "id": "cold-brew",
+      "name_tr": "Cold Brew",
+      "name_en": "Cold Brew",
+      "group": "kahve",
+      "metrics": {
+        "daily": {
+          "world": {
+            "mentions": 15601,
+            "appearances": 22,
+            "avg_cts": 29.65,
+            "max_cts": 31.89,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 1560100.0
+          },
+          "tr": {
+            "mentions": 1,
+            "appearances": 1,
+            "avg_cts": 24.28,
+            "max_cts": 24.28,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 100.0
+          }
+        },
+        "weekly": {
+          "world": {
+            "mentions": 15601,
+            "appearances": 22,
+            "avg_cts": 29.65,
+            "max_cts": 31.89,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 1560100.0
+          },
+          "tr": {
+            "mentions": 1,
+            "appearances": 1,
+            "avg_cts": 24.28,
+            "max_cts": 24.28,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 100.0
+          }
+        },
+        "monthly": {
+          "world": {
+            "mentions": 15601,
+            "appearances": 22,
+            "avg_cts": 29.65,
+            "max_cts": 31.89,
+            "burst": 0,
+            "prev_mentions": 500,
+            "delta_pct": 3020.2
+          },
+          "tr": {
+            "mentions": 1,
+            "appearances": 1,
+            "avg_cts": 24.28,
+            "max_cts": 24.28,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 100.0
+          }
+        }
+      },
+      "sample_topics": [
+        "It's once again time for me to extol the virtues of the \"Laura Palmer,\" a refreshing blend of lemonade and cold brew coffee. In all my travels I have yet to find a better beverage for a hot summer mor",
+        "Strawberry Basil Cold Brew Tea:  www.ohhowcivilized.com/strawberry-b...",
+        "My coffee shop was out of ice so they gave me 16 ounces of undiluted cold brew and now my skin can feel sounds",
+        "Enjoy a cool sip of Tiger-chan Cold Brew!",
+        "HEARTBREAKING: Local Cafe's \"Cold Brew\" Is Just Burnt Coffee Over Ice"
+      ]
+    },
+    {
+      "id": "pistachio-wave",
+      "name_tr": "Fıstık Akımı",
+      "name_en": "Pistachio (wave)",
+      "group": "tatli",
+      "metrics": {
+        "daily": {
+          "world": {
+            "mentions": 387,
+            "appearances": 6,
+            "avg_cts": 27.2,
+            "max_cts": 27.89,
+            "burst": 0,
+            "prev_mentions": 3000,
+            "delta_pct": -87.1
+          },
+          "tr": {
+            "mentions": 0,
+            "appearances": 0,
+            "avg_cts": null,
+            "max_cts": null,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": null
+          }
+        },
+        "weekly": {
+          "world": {
+            "mentions": 5187,
+            "appearances": 9,
+            "avg_cts": 28.61,
+            "max_cts": 31.52,
+            "burst": 0,
+            "prev_mentions": 4200,
+            "delta_pct": 23.5
+          },
+          "tr": {
+            "mentions": 0,
+            "appearances": 0,
+            "avg_cts": null,
+            "max_cts": null,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": null
+          }
+        },
+        "monthly": {
+          "world": {
+            "mentions": 14422,
+            "appearances": 16,
+            "avg_cts": 29.62,
             "max_cts": 31.64,
             "burst": 0,
             "prev_mentions": 12,
-            "delta_pct": 116858.3
+            "delta_pct": 120083.3
           },
           "tr": {
             "mentions": 0,
@@ -85,25 +467,27 @@
       },
       "sample_topics": [
         "Book: In my pistachio era",
+        "the dubai pistachio chocolate is mid",
         "chobani costco pistachio creamer",
-        "Glutensiz Antep fıstıklı cookie tarifi (Videolu)"
+        "out of practice with the latte art but i made a pistachio syrup and it’s very tasty!! i’m handing you all a cup through the phone",
+        "Had a pistachio and chocolate latte, it was pretty good!   Also recently started having regular tea again, they still taste great. ❤️☕"
       ]
     },
     {
-      "id": "baklava",
-      "name_tr": "Baklava",
-      "name_en": "Baklava",
+      "id": "banana-pudding",
+      "name_tr": "Banana Pudding",
+      "name_en": "Banana Pudding",
       "group": "tatli",
       "metrics": {
         "daily": {
           "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
+            "mentions": 14153,
+            "appearances": 10,
+            "avg_cts": 29.7,
+            "max_cts": 32.67,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": null
+            "delta_pct": 1415300.0
           },
           "tr": {
             "mentions": 0,
@@ -117,13 +501,13 @@
         },
         "weekly": {
           "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
+            "mentions": 14153,
+            "appearances": 10,
+            "avg_cts": 29.7,
+            "max_cts": 32.67,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": null
+            "delta_pct": 1415300.0
           },
           "tr": {
             "mentions": 0,
@@ -137,18 +521,318 @@
         },
         "monthly": {
           "world": {
-            "mentions": 1564,
-            "appearances": 8,
-            "avg_cts": 29.16,
+            "mentions": 14153,
+            "appearances": 10,
+            "avg_cts": 29.7,
+            "max_cts": 32.67,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 1415300.0
+          },
+          "tr": {
+            "mentions": 0,
+            "appearances": 0,
+            "avg_cts": null,
+            "max_cts": null,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": null
+          }
+        }
+      },
+      "sample_topics": [
+        "Here’s the banana pudding I made for dinner tonight. I really do enjoy cooking.",
+        "Banana pudding tonight!",
+        "If you’ve never made this banana pudding… your dessert era hasn’t even started.  This Magnolia Bakery Banana Pudding is basically dessert giving you a warm hug… while also whispering, “Good luck stopp",
+        "wolf-shaped banana pudding",
+        "Dear Internet, I have a banana pudding parfait in a fancy serving bowl given to me by my awesome mother-in-law, your argument is invalid"
+      ]
+    },
+    {
+      "id": "bubble-tea",
+      "name_tr": "Bubble Tea / Boba",
+      "name_en": "Bubble Tea",
+      "group": "kahve",
+      "metrics": {
+        "daily": {
+          "world": {
+            "mentions": 12417,
+            "appearances": 3,
+            "avg_cts": 30.18,
+            "max_cts": 33.13,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 1241700.0
+          },
+          "tr": {
+            "mentions": 0,
+            "appearances": 0,
+            "avg_cts": null,
+            "max_cts": null,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": null
+          }
+        },
+        "weekly": {
+          "world": {
+            "mentions": 12417,
+            "appearances": 3,
+            "avg_cts": 30.18,
+            "max_cts": 33.13,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 1241700.0
+          },
+          "tr": {
+            "mentions": 0,
+            "appearances": 0,
+            "avg_cts": null,
+            "max_cts": null,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": null
+          }
+        },
+        "monthly": {
+          "world": {
+            "mentions": 12417,
+            "appearances": 3,
+            "avg_cts": 30.18,
+            "max_cts": 33.13,
+            "burst": 0,
+            "prev_mentions": 748,
+            "delta_pct": 1560.0
+          },
+          "tr": {
+            "mentions": 0,
+            "appearances": 0,
+            "avg_cts": null,
+            "max_cts": null,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": null
+          }
+        }
+      },
+      "sample_topics": [
+        "Banh Mi and boba tea !",
+        "Taro Boba Milk Tea ✨  Just something a little sweet 💜 #dnd #dice #ttrpg",
+        "Boba tea Bowser 🧋",
+        "Is your boba tea worth it",
+        "charmbracelet / bubbles: TUI components for Bubble Tea 🫧"
+      ]
+    },
+    {
+      "id": "dubai-cikolatasi",
+      "name_tr": "Dubai Çikolatası",
+      "name_en": "Dubai Chocolate",
+      "group": "tatli",
+      "metrics": {
+        "daily": {
+          "world": {
+            "mentions": 9591,
+            "appearances": 22,
+            "avg_cts": 27.63,
+            "max_cts": 31.52,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 959100.0
+          },
+          "tr": {
+            "mentions": 1,
+            "appearances": 15,
+            "avg_cts": 26.4,
+            "max_cts": 28.63,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 100.0
+          }
+        },
+        "weekly": {
+          "world": {
+            "mentions": 9591,
+            "appearances": 22,
+            "avg_cts": 27.63,
+            "max_cts": 31.52,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 959100.0
+          },
+          "tr": {
+            "mentions": 1,
+            "appearances": 15,
+            "avg_cts": 26.4,
+            "max_cts": 28.63,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 100.0
+          }
+        },
+        "monthly": {
+          "world": {
+            "mentions": 9591,
+            "appearances": 22,
+            "avg_cts": 27.63,
+            "max_cts": 31.52,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 959100.0
+          },
+          "tr": {
+            "mentions": 1,
+            "appearances": 15,
+            "avg_cts": 26.4,
+            "max_cts": 28.63,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 100.0
+          }
+        }
+      },
+      "sample_topics": [
+        "sure the us is sliding into authoritarianism but on the other hand, south korea is completely paralyzed by dubai chocolate fever. in a couple of weeks they went from dubai chocolate chewy cookie to du",
+        "All chocolate is Dubai chocolate to me cause I do buy it",
+        "one day we woke up and were supposed to know what dubai chocolate was",
+        "Homemade Dubai chocolate was a success!! It was SO delicious and like 5x cheaper than the premade ones.",
+        "Dubai Chocolate"
+      ]
+    },
+    {
+      "id": "specialty-coffee",
+      "name_tr": "3. Dalga / Specialty",
+      "name_en": "Specialty Coffee",
+      "group": "kahve",
+      "metrics": {
+        "daily": {
+          "world": {
+            "mentions": 1832,
+            "appearances": 15,
+            "avg_cts": 27.72,
+            "max_cts": 30.23,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 183200.0
+          },
+          "tr": {
+            "mentions": 1,
+            "appearances": 1,
+            "avg_cts": 24.29,
+            "max_cts": 24.29,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 100.0
+          }
+        },
+        "weekly": {
+          "world": {
+            "mentions": 2832,
+            "appearances": 16,
+            "avg_cts": 27.91,
+            "max_cts": 30.85,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 283200.0
+          },
+          "tr": {
+            "mentions": 1,
+            "appearances": 1,
+            "avg_cts": 24.29,
+            "max_cts": 24.29,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 100.0
+          }
+        },
+        "monthly": {
+          "world": {
+            "mentions": 2832,
+            "appearances": 16,
+            "avg_cts": 27.91,
+            "max_cts": 30.85,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 283200.0
+          },
+          "tr": {
+            "mentions": 1,
+            "appearances": 1,
+            "avg_cts": 24.29,
+            "max_cts": 24.29,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 100.0
+          }
+        }
+      },
+      "sample_topics": [
+        "How Specialty Coffee Became a $185 Billion Reckoning With Its Own Success",
+        "If I had sent \"specialty coffee drinks are fueling the breakdown of civil society\" to any editor with whom I've worked over the previous decade, they would have gently asked if I'd recently suffered a",
+        "whats wrong sweetie? you didn't touch your latte from CUM Specialty Coffee",
+        "Ok here I am: a small specialty coffee shop in Saint Paul, Mn. I have 7 cats who live in my coffee shop.  I figure I have about one platform change left in me, so I hope this is it.",
+        "the biggest hurdle was reactionary food luminaries of the mid 2010s (Josh Ozersky, David Chang) who screamed bloody murder at specialty coffee and declared the only true coffee was diner coffee, all t"
+      ]
+    },
+    {
+      "id": "baklava",
+      "name_tr": "Baklava",
+      "name_en": "Baklava",
+      "group": "tatli",
+      "metrics": {
+        "daily": {
+          "world": {
+            "mentions": 1,
+            "appearances": 3,
+            "avg_cts": 26.43,
+            "max_cts": 28.75,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 100.0
+          },
+          "tr": {
+            "mentions": 0,
+            "appearances": 2,
+            "avg_cts": 27.49,
+            "max_cts": 28.75,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": null
+          }
+        },
+        "weekly": {
+          "world": {
+            "mentions": 1,
+            "appearances": 3,
+            "avg_cts": 26.43,
+            "max_cts": 28.75,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 100.0
+          },
+          "tr": {
+            "mentions": 0,
+            "appearances": 2,
+            "avg_cts": 27.49,
+            "max_cts": 28.75,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": null
+          }
+        },
+        "monthly": {
+          "world": {
+            "mentions": 1565,
+            "appearances": 11,
+            "avg_cts": 28.41,
             "max_cts": 29.4,
             "burst": 0,
             "prev_mentions": 706,
-            "delta_pct": 121.5
+            "delta_pct": 121.7
           },
           "tr": {
             "mentions": 1564,
-            "appearances": 8,
-            "avg_cts": 29.16,
+            "appearances": 10,
+            "avg_cts": 28.83,
             "max_cts": 29.4,
             "burst": 0,
             "prev_mentions": 706,
@@ -165,20 +849,20 @@
       ]
     },
     {
-      "id": "specialty-coffee",
-      "name_tr": "3. Dalga / Specialty",
-      "name_en": "Specialty Coffee",
-      "group": "kahve",
+      "id": "crookie",
+      "name_tr": "Crookie",
+      "name_en": "Crookie",
+      "group": "tatli",
       "metrics": {
         "daily": {
           "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
+            "mentions": 1182,
+            "appearances": 20,
+            "avg_cts": 27.48,
+            "max_cts": 29.67,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": null
+            "delta_pct": 118200.0
           },
           "tr": {
             "mentions": 0,
@@ -192,13 +876,13 @@
         },
         "weekly": {
           "world": {
-            "mentions": 1000,
-            "appearances": 1,
-            "avg_cts": 30.85,
-            "max_cts": 30.85,
+            "mentions": 1182,
+            "appearances": 20,
+            "avg_cts": 27.48,
+            "max_cts": 29.67,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": 100000.0
+            "delta_pct": 118200.0
           },
           "tr": {
             "mentions": 0,
@@ -212,13 +896,13 @@
         },
         "monthly": {
           "world": {
-            "mentions": 1000,
-            "appearances": 1,
-            "avg_cts": 30.85,
-            "max_cts": 30.85,
+            "mentions": 1182,
+            "appearances": 20,
+            "avg_cts": 27.48,
+            "max_cts": 29.67,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": 100000.0
+            "delta_pct": 118200.0
           },
           "tr": {
             "mentions": 0,
@@ -232,7 +916,86 @@
         }
       },
       "sample_topics": [
-        "How Specialty Coffee Became a $185 Billion Reckoning With Its Own Success"
+        "I got a cold so not feeling the best but enjoying the season in the best way🍁   Art for Crookie",
+        "❄️Icon rewards for Sablesuits and Crookie",
+        "Bad Guy Crookie Award For Worst Cabinet Pick: Russell Vought",
+        "Crookie Award For Lie Of The Year: The Epstein Files",
+        "Bad Guy Crookie Of The Year? Mike Johnson, Of Course"
+      ]
+    },
+    {
+      "id": "san-sebastian",
+      "name_tr": "San Sebastian",
+      "name_en": "Basque Cheesecake",
+      "group": "tatli",
+      "metrics": {
+        "daily": {
+          "world": {
+            "mentions": 1104,
+            "appearances": 9,
+            "avg_cts": 27.26,
+            "max_cts": 30.91,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 110400.0
+          },
+          "tr": {
+            "mentions": 0,
+            "appearances": 0,
+            "avg_cts": null,
+            "max_cts": null,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": null
+          }
+        },
+        "weekly": {
+          "world": {
+            "mentions": 1104,
+            "appearances": 9,
+            "avg_cts": 27.26,
+            "max_cts": 30.91,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 110400.0
+          },
+          "tr": {
+            "mentions": 0,
+            "appearances": 0,
+            "avg_cts": null,
+            "max_cts": null,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": null
+          }
+        },
+        "monthly": {
+          "world": {
+            "mentions": 1104,
+            "appearances": 9,
+            "avg_cts": 27.26,
+            "max_cts": 30.91,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 110400.0
+          },
+          "tr": {
+            "mentions": 0,
+            "appearances": 0,
+            "avg_cts": null,
+            "max_cts": null,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": null
+          }
+        }
+      },
+      "sample_topics": [
+        "today's treat: ube basque cheesecake ☺️🍰💜",
+        "Today I made a San Sebastian cheesecake for the first time at work!  🍽️",
+        "Habe einen San Sebastian Cheesecake gebacken. Mit Frischkäse und ohne Boden. Bin gespannt, wie er schmeckt.",
+        "I'm hugging yesterday me for getting two slices of San Sebastian cheesecake but eating only one.",
+        "Şimdi şöyle güzelce marinelenmiş ardından mangalda pişirilmiş kuzu kaburgası, haşlanmış brokoli yanına da san sebastian cheesecake olsaydı da yeseydik şu saatte. AĞZIM SULANDI."
       ]
     },
     {
@@ -243,139 +1006,293 @@
       "metrics": {
         "daily": {
           "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
+            "mentions": 4,
+            "appearances": 16,
+            "avg_cts": 27.58,
+            "max_cts": 29.74,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": null
+            "delta_pct": 400.0
           },
           "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
+            "mentions": 1,
+            "appearances": 15,
+            "avg_cts": 27.76,
+            "max_cts": 29.74,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": null
+            "delta_pct": 100.0
           }
         },
         "weekly": {
           "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
+            "mentions": 4,
+            "appearances": 16,
+            "avg_cts": 27.58,
+            "max_cts": 29.74,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": null
+            "delta_pct": 400.0
           },
           "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
+            "mentions": 1,
+            "appearances": 15,
+            "avg_cts": 27.76,
+            "max_cts": 29.74,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": null
+            "delta_pct": 100.0
           }
         },
         "monthly": {
           "world": {
-            "mentions": 498,
-            "appearances": 9,
-            "avg_cts": 28.01,
-            "max_cts": 28.85,
+            "mentions": 502,
+            "appearances": 25,
+            "avg_cts": 27.74,
+            "max_cts": 29.74,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": 49800.0
+            "delta_pct": 50200.0
           },
           "tr": {
-            "mentions": 498,
-            "appearances": 9,
-            "avg_cts": 28.01,
-            "max_cts": 28.85,
+            "mentions": 499,
+            "appearances": 24,
+            "avg_cts": 27.85,
+            "max_cts": 29.74,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": 49800.0
+            "delta_pct": 49900.0
           }
         }
       },
       "sample_topics": [
         "türk kahvesinin yanına en çok yakışan şey",
-        "Türk Kahvesi"
+        "Türk Kahvesi",
+        "türk kahvesi — Restaurant review: Kahve Café blends authentic Turkish tradi... - Salt Lake City Weekly",
+        "türk kahvesi — Bir fincanla yetinemeyeceksiniz! Sosyal medyanın yeni gözdesi Turkish Latte'nin tarifi ve püf noktaları - Habertürk",
+        "1 Türk kahvesi 1 filtre kahve 1 ice americano"
       ]
     },
     {
-      "id": "brownie",
-      "name_tr": "Brownie",
-      "name_en": "Brownie",
-      "group": "tatli",
+      "id": "pistachio-latte",
+      "name_tr": "Fıstıklı Latte",
+      "name_en": "Pistachio Latte",
+      "group": "kahve",
       "metrics": {
         "daily": {
           "world": {
-            "mentions": 0,
-            "appearances": 1,
-            "avg_cts": 24.73,
-            "max_cts": 24.73,
+            "mentions": 275,
+            "appearances": 4,
+            "avg_cts": 26.6,
+            "max_cts": 28.77,
             "burst": 0,
-            "prev_mentions": 8,
-            "delta_pct": -100.0
+            "prev_mentions": 0,
+            "delta_pct": 27500.0
           },
           "tr": {
             "mentions": 0,
-            "appearances": 1,
-            "avg_cts": 24.73,
-            "max_cts": 24.73,
+            "appearances": 0,
+            "avg_cts": null,
+            "max_cts": null,
             "burst": 0,
-            "prev_mentions": 8,
-            "delta_pct": -100.0
+            "prev_mentions": 0,
+            "delta_pct": null
           }
         },
         "weekly": {
           "world": {
-            "mentions": 8,
-            "appearances": 6,
-            "avg_cts": 24.74,
-            "max_cts": 24.77,
+            "mentions": 275,
+            "appearances": 4,
+            "avg_cts": 26.6,
+            "max_cts": 28.77,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": 800.0
+            "delta_pct": 27500.0
           },
           "tr": {
-            "mentions": 8,
-            "appearances": 6,
-            "avg_cts": 24.74,
-            "max_cts": 24.77,
+            "mentions": 0,
+            "appearances": 0,
+            "avg_cts": null,
+            "max_cts": null,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": 800.0
+            "delta_pct": null
           }
         },
         "monthly": {
           "world": {
-            "mentions": 8,
-            "appearances": 6,
-            "avg_cts": 24.74,
-            "max_cts": 24.77,
+            "mentions": 275,
+            "appearances": 4,
+            "avg_cts": 26.6,
+            "max_cts": 28.77,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": 800.0
+            "delta_pct": 27500.0
           },
           "tr": {
-            "mentions": 8,
-            "appearances": 6,
-            "avg_cts": 24.74,
-            "max_cts": 24.77,
+            "mentions": 0,
+            "appearances": 0,
+            "avg_cts": null,
+            "max_cts": null,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": 800.0
+            "delta_pct": null
           }
         }
       },
       "sample_topics": [
-        "Brownie tarifi (Videolu)"
+        "My dissertation outline was approved and holy moly the sheer amount of Queer Criminology literature I just poured through   Your boyfriend deserves a pistachio latte",
+        "Iced Pistachio Latte in my Menlo Mud cup!",
+        "Chocolate croissant & pistachio latte 😁💕",
+        "Pistachio Latte ? What devilish bowel-rupturing hell-brew is this ?",
+        "Heute iced pistachio latte"
+      ]
+    },
+    {
+      "id": "chai-latte",
+      "name_tr": "Chai Latte",
+      "name_en": "Chai Latte",
+      "group": "kahve",
+      "metrics": {
+        "daily": {
+          "world": {
+            "mentions": 55,
+            "appearances": 2,
+            "avg_cts": 26.22,
+            "max_cts": 27.73,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 5500.0
+          },
+          "tr": {
+            "mentions": 0,
+            "appearances": 0,
+            "avg_cts": null,
+            "max_cts": null,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": null
+          }
+        },
+        "weekly": {
+          "world": {
+            "mentions": 55,
+            "appearances": 2,
+            "avg_cts": 26.22,
+            "max_cts": 27.73,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 5500.0
+          },
+          "tr": {
+            "mentions": 0,
+            "appearances": 0,
+            "avg_cts": null,
+            "max_cts": null,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": null
+          }
+        },
+        "monthly": {
+          "world": {
+            "mentions": 55,
+            "appearances": 2,
+            "avg_cts": 26.22,
+            "max_cts": 27.73,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 5500.0
+          },
+          "tr": {
+            "mentions": 0,
+            "appearances": 0,
+            "avg_cts": null,
+            "max_cts": null,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": null
+          }
+        }
+      },
+      "sample_topics": [
+        "Dessert?  Hot pistachio cake with butter, whipped cream, crushed sugared roasted pistachio crumble on top.  Weird but tasty. A shortbread cookie on top. Had this with a cup of hot chai latte.",
+        "You can’t spell chai latte without AI. That will hurt India - The Economic Times"
+      ]
+    },
+    {
+      "id": "gelato",
+      "name_tr": "Gelato / Dondurma",
+      "name_en": "Gelato",
+      "group": "tatli",
+      "metrics": {
+        "daily": {
+          "world": {
+            "mentions": 17,
+            "appearances": 1,
+            "avg_cts": 26.61,
+            "max_cts": 26.61,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 1700.0
+          },
+          "tr": {
+            "mentions": 0,
+            "appearances": 0,
+            "avg_cts": null,
+            "max_cts": null,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": null
+          }
+        },
+        "weekly": {
+          "world": {
+            "mentions": 17,
+            "appearances": 1,
+            "avg_cts": 26.61,
+            "max_cts": 26.61,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 1700.0
+          },
+          "tr": {
+            "mentions": 0,
+            "appearances": 0,
+            "avg_cts": null,
+            "max_cts": null,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": null
+          }
+        },
+        "monthly": {
+          "world": {
+            "mentions": 17,
+            "appearances": 1,
+            "avg_cts": 26.61,
+            "max_cts": 26.61,
+            "burst": 0,
+            "prev_mentions": 5000,
+            "delta_pct": -99.7
+          },
+          "tr": {
+            "mentions": 0,
+            "appearances": 0,
+            "avg_cts": null,
+            "max_cts": null,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": null
+          }
+        }
+      },
+      "sample_topics": [
+        "Choc a Casoria: sedicenne mangia un gelato, poi il malore e la morte improvvisa - Il Mattino",
+        "Mangia un gelato e muore a 16 anni: era allergico al lattosio - tgcom24.mediaset.it",
+        "Adriano D'Orsi mangia un gelato e muore a 16 anni. La mamma: «Un figlio meraviglioso. Era allergico, leggeva sempre le etichette» - Leggo.it",
+        "Adriano morto a Casoria dopo aver mangiato un gelato: il 16enne allergico alle proteine del latte forse \"tradito\" da un nuovo gusto al melone - Corriere Del Mezzogiorno",
+        "Italian gelato restaurant opens in Old Town this week - The Edinburgh Reporter"
       ]
     },
     {
@@ -386,67 +1303,142 @@
       "metrics": {
         "daily": {
           "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
+            "mentions": 6,
+            "appearances": 2,
+            "avg_cts": 25.03,
+            "max_cts": 25.03,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": null
+            "delta_pct": 600.0
           },
           "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
+            "mentions": 3,
+            "appearances": 1,
+            "avg_cts": 25.03,
+            "max_cts": 25.03,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": null
+            "delta_pct": 300.0
           }
         },
         "weekly": {
           "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
+            "mentions": 6,
+            "appearances": 2,
+            "avg_cts": 25.03,
+            "max_cts": 25.03,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": null
+            "delta_pct": 600.0
           },
           "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
+            "mentions": 3,
+            "appearances": 1,
+            "avg_cts": 25.03,
+            "max_cts": 25.03,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": null
+            "delta_pct": 300.0
           }
         },
         "monthly": {
           "world": {
-            "mentions": 8,
-            "appearances": 9,
-            "avg_cts": 24.3,
-            "max_cts": 24.3,
+            "mentions": 14,
+            "appearances": 11,
+            "avg_cts": 24.43,
+            "max_cts": 25.03,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": 800.0
+            "delta_pct": 1400.0
           },
           "tr": {
-            "mentions": 8,
-            "appearances": 9,
-            "avg_cts": 24.3,
-            "max_cts": 24.3,
+            "mentions": 11,
+            "appearances": 10,
+            "avg_cts": 24.37,
+            "max_cts": 25.03,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": 800.0
+            "delta_pct": 1100.0
           }
         }
       },
       "sample_topics": [
-        "Bizim katmerlenen NATO aşkımız!"
+        "Bizim katmerlenen NATO aşkımız!",
+        "Katmer showcased Turkish desserts and signature dishes at the “White City Ashgabat” exhibition - Turkmenportal.com",
+        "AK Parti Rize İl Başkanı Yılmaz Katmer'den 15 Temmuz Mesajı - 2 Mart Gazetesi"
+      ]
+    },
+    {
+      "id": "brownie",
+      "name_tr": "Brownie",
+      "name_en": "Brownie",
+      "group": "tatli",
+      "metrics": {
+        "daily": {
+          "world": {
+            "mentions": 4,
+            "appearances": 2,
+            "avg_cts": 24.88,
+            "max_cts": 25.03,
+            "burst": 0,
+            "prev_mentions": 8,
+            "delta_pct": -50.0
+          },
+          "tr": {
+            "mentions": 1,
+            "appearances": 1,
+            "avg_cts": 24.73,
+            "max_cts": 24.73,
+            "burst": 0,
+            "prev_mentions": 8,
+            "delta_pct": -87.5
+          }
+        },
+        "weekly": {
+          "world": {
+            "mentions": 12,
+            "appearances": 7,
+            "avg_cts": 24.78,
+            "max_cts": 25.03,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 1200.0
+          },
+          "tr": {
+            "mentions": 9,
+            "appearances": 6,
+            "avg_cts": 24.74,
+            "max_cts": 24.77,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 900.0
+          }
+        },
+        "monthly": {
+          "world": {
+            "mentions": 12,
+            "appearances": 7,
+            "avg_cts": 24.78,
+            "max_cts": 25.03,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 1200.0
+          },
+          "tr": {
+            "mentions": 9,
+            "appearances": 6,
+            "avg_cts": 24.74,
+            "max_cts": 24.77,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 900.0
+          }
+        }
+      },
+      "sample_topics": [
+        "Brownie tarifi (Videolu)",
+        "I Asked 6 Bakers To Name the Best Boxed Brownie Mix—They All Said the Same Brand - AOL.com",
+        "brownie — Bugün ne pişirsem diyenlere: Günlük ev yemeği menüsü (14 Temmuz 2026) - Hürriyet"
       ]
     },
     {
@@ -457,81 +1449,90 @@
       "metrics": {
         "daily": {
           "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
+            "mentions": 4,
+            "appearances": 1,
+            "avg_cts": 25.25,
+            "max_cts": 25.25,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": null
+            "delta_pct": 400.0
           },
           "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
+            "mentions": 4,
+            "appearances": 1,
+            "avg_cts": 25.25,
+            "max_cts": 25.25,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": null
+            "delta_pct": 400.0
           }
         },
         "weekly": {
           "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
+            "mentions": 4,
+            "appearances": 1,
+            "avg_cts": 25.25,
+            "max_cts": 25.25,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": null
+            "delta_pct": 400.0
           },
           "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
+            "mentions": 4,
+            "appearances": 1,
+            "avg_cts": 25.25,
+            "max_cts": 25.25,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": null
+            "delta_pct": 400.0
           }
         },
         "monthly": {
           "world": {
-            "mentions": 7,
-            "appearances": 7,
-            "avg_cts": 24.38,
-            "max_cts": 24.79,
+            "mentions": 11,
+            "appearances": 8,
+            "avg_cts": 24.49,
+            "max_cts": 25.25,
             "burst": 0,
             "prev_mentions": 7,
-            "delta_pct": 0.0
+            "delta_pct": 57.1
           },
           "tr": {
-            "mentions": 7,
-            "appearances": 7,
-            "avg_cts": 24.38,
-            "max_cts": 24.79,
+            "mentions": 11,
+            "appearances": 8,
+            "avg_cts": 24.49,
+            "max_cts": 25.25,
             "burst": 0,
             "prev_mentions": 7,
-            "delta_pct": 0.0
+            "delta_pct": 57.1
           }
         }
       },
       "sample_topics": [
         "Bolu'da yabani salep toplayan kişiler 2 milyon lira ceza kesildi",
         "Salepte ‘bal’lı, ‘bol’lu yeni dönem",
+        "İzinsiz salep toplayan 4 kişi ile biyokaçakçılık yapan 2 kişiye 4 milyon lira ceza! - Ege'de Sonsöz",
         "İzinsiz salep orkidesi yumrusu toplayan kişilere 7 milyon lira ceza kesildi",
-        "Tescillenen \"Balyumru\" ve \"Bolyumru\" salepleriyle verim 4 kata kadar artacak",
-        "Bolu'da yabani salep toplayan 3 kişiye toplam 2 milyon lira ceza"
+        "Tescillenen \"Balyumru\" ve \"Bolyumru\" salepleriyle verim 4 kata kadar artacak"
       ]
     },
     {
-      "id": "matcha",
-      "name_tr": "Matcha",
-      "name_en": "Matcha",
-      "group": "kahve",
+      "id": "cinnamon-roll",
+      "name_tr": "Tarçınlı Rulo",
+      "name_en": "Cinnamon Roll",
+      "group": "tatli",
       "metrics": {
         "daily": {
           "world": {
+            "mentions": 7,
+            "appearances": 1,
+            "avg_cts": 25.75,
+            "max_cts": 25.75,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 700.0
+          },
+          "tr": {
             "mentions": 0,
             "appearances": 0,
             "avg_cts": null,
@@ -539,6 +1540,641 @@
             "burst": 0,
             "prev_mentions": 0,
             "delta_pct": null
+          }
+        },
+        "weekly": {
+          "world": {
+            "mentions": 7,
+            "appearances": 1,
+            "avg_cts": 25.75,
+            "max_cts": 25.75,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 700.0
+          },
+          "tr": {
+            "mentions": 0,
+            "appearances": 0,
+            "avg_cts": null,
+            "max_cts": null,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": null
+          }
+        },
+        "monthly": {
+          "world": {
+            "mentions": 7,
+            "appearances": 1,
+            "avg_cts": 25.75,
+            "max_cts": 25.75,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 700.0
+          },
+          "tr": {
+            "mentions": 0,
+            "appearances": 0,
+            "avg_cts": null,
+            "max_cts": null,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": null
+          }
+        }
+      },
+      "sample_topics": [
+        "Houston's Cinnamon Roll Craze Grows Fast - Yahoo"
+      ]
+    },
+    {
+      "id": "lotus-biscoff",
+      "name_tr": "Lotus / Biscoff",
+      "name_en": "Biscoff",
+      "group": "tatli",
+      "metrics": {
+        "daily": {
+          "world": {
+            "mentions": 6,
+            "appearances": 2,
+            "avg_cts": 25.0,
+            "max_cts": 25.26,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 600.0
+          },
+          "tr": {
+            "mentions": 4,
+            "appearances": 1,
+            "avg_cts": 25.26,
+            "max_cts": 25.26,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 400.0
+          }
+        },
+        "weekly": {
+          "world": {
+            "mentions": 6,
+            "appearances": 2,
+            "avg_cts": 25.0,
+            "max_cts": 25.26,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 600.0
+          },
+          "tr": {
+            "mentions": 4,
+            "appearances": 1,
+            "avg_cts": 25.26,
+            "max_cts": 25.26,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 400.0
+          }
+        },
+        "monthly": {
+          "world": {
+            "mentions": 6,
+            "appearances": 2,
+            "avg_cts": 25.0,
+            "max_cts": 25.26,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 600.0
+          },
+          "tr": {
+            "mentions": 4,
+            "appearances": 1,
+            "avg_cts": 25.26,
+            "max_cts": 25.26,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 400.0
+          }
+        }
+      },
+      "sample_topics": [
+        "biscoff — Bakan Yardımcısı Nguyen Tri Thuc: Veri temizleme işleminin tamamlanması ve elektronik sağlık kayıtlarının oluşturulması, tüm sistemin katılımını gerektirir. - Vietnam.vn",
+        "Mondelēz WTR launches Marabou Biscoff 160g Tablet in travel retail - Global Travel Retail Magazine"
+      ]
+    },
+    {
+      "id": "creme-brulee",
+      "name_tr": "Krem Brüle",
+      "name_en": "Crème Brûlée",
+      "group": "tatli",
+      "metrics": {
+        "daily": {
+          "world": {
+            "mentions": 5,
+            "appearances": 1,
+            "avg_cts": 25.45,
+            "max_cts": 25.45,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 500.0
+          },
+          "tr": {
+            "mentions": 0,
+            "appearances": 0,
+            "avg_cts": null,
+            "max_cts": null,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": null
+          }
+        },
+        "weekly": {
+          "world": {
+            "mentions": 5,
+            "appearances": 1,
+            "avg_cts": 25.45,
+            "max_cts": 25.45,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 500.0
+          },
+          "tr": {
+            "mentions": 0,
+            "appearances": 0,
+            "avg_cts": null,
+            "max_cts": null,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": null
+          }
+        },
+        "monthly": {
+          "world": {
+            "mentions": 5,
+            "appearances": 1,
+            "avg_cts": 25.45,
+            "max_cts": 25.45,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 500.0
+          },
+          "tr": {
+            "mentions": 0,
+            "appearances": 0,
+            "avg_cts": null,
+            "max_cts": null,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": null
+          }
+        }
+      },
+      "sample_topics": [
+        "Creme brulee loaf cake - The Cairns Post"
+      ]
+    },
+    {
+      "id": "protein-coffee",
+      "name_tr": "Protein Kahve",
+      "name_en": "Protein Coffee",
+      "group": "kahve",
+      "metrics": {
+        "daily": {
+          "world": {
+            "mentions": 5,
+            "appearances": 1,
+            "avg_cts": 25.44,
+            "max_cts": 25.44,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 500.0
+          },
+          "tr": {
+            "mentions": 0,
+            "appearances": 0,
+            "avg_cts": null,
+            "max_cts": null,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": null
+          }
+        },
+        "weekly": {
+          "world": {
+            "mentions": 5,
+            "appearances": 1,
+            "avg_cts": 25.44,
+            "max_cts": 25.44,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 500.0
+          },
+          "tr": {
+            "mentions": 0,
+            "appearances": 0,
+            "avg_cts": null,
+            "max_cts": null,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": null
+          }
+        },
+        "monthly": {
+          "world": {
+            "mentions": 5,
+            "appearances": 1,
+            "avg_cts": 25.44,
+            "max_cts": 25.44,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 500.0
+          },
+          "tr": {
+            "mentions": 0,
+            "appearances": 0,
+            "avg_cts": null,
+            "max_cts": null,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": null
+          }
+        }
+      },
+      "sample_topics": [
+        "Protein coffee explained: How this trending drink became the smoothie replacement you need - AOL.com"
+      ]
+    },
+    {
+      "id": "strawberry-matcha",
+      "name_tr": "Çilekli Matcha",
+      "name_en": "Strawberry Matcha",
+      "group": "kahve",
+      "metrics": {
+        "daily": {
+          "world": {
+            "mentions": 5,
+            "appearances": 1,
+            "avg_cts": 25.43,
+            "max_cts": 25.43,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 500.0
+          },
+          "tr": {
+            "mentions": 0,
+            "appearances": 0,
+            "avg_cts": null,
+            "max_cts": null,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": null
+          }
+        },
+        "weekly": {
+          "world": {
+            "mentions": 5,
+            "appearances": 1,
+            "avg_cts": 25.43,
+            "max_cts": 25.43,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 500.0
+          },
+          "tr": {
+            "mentions": 0,
+            "appearances": 0,
+            "avg_cts": null,
+            "max_cts": null,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": null
+          }
+        },
+        "monthly": {
+          "world": {
+            "mentions": 5,
+            "appearances": 1,
+            "avg_cts": 25.43,
+            "max_cts": 25.43,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 500.0
+          },
+          "tr": {
+            "mentions": 0,
+            "appearances": 0,
+            "avg_cts": null,
+            "max_cts": null,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": null
+          }
+        }
+      },
+      "sample_topics": [
+        "Cracking Strawberry Matcha — EspresSoul Cafe - Tucson Foodie"
+      ]
+    },
+    {
+      "id": "iced-americano",
+      "name_tr": "Buzlu Americano",
+      "name_en": "Iced Americano",
+      "group": "kahve",
+      "metrics": {
+        "daily": {
+          "world": {
+            "mentions": 4,
+            "appearances": 1,
+            "avg_cts": 25.25,
+            "max_cts": 25.25,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 400.0
+          },
+          "tr": {
+            "mentions": 0,
+            "appearances": 0,
+            "avg_cts": null,
+            "max_cts": null,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": null
+          }
+        },
+        "weekly": {
+          "world": {
+            "mentions": 4,
+            "appearances": 1,
+            "avg_cts": 25.25,
+            "max_cts": 25.25,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 400.0
+          },
+          "tr": {
+            "mentions": 0,
+            "appearances": 0,
+            "avg_cts": null,
+            "max_cts": null,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": null
+          }
+        },
+        "monthly": {
+          "world": {
+            "mentions": 4,
+            "appearances": 1,
+            "avg_cts": 25.25,
+            "max_cts": 25.25,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 400.0
+          },
+          "tr": {
+            "mentions": 0,
+            "appearances": 0,
+            "avg_cts": null,
+            "max_cts": null,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": null
+          }
+        }
+      },
+      "sample_topics": [
+        "iced americano — 5 Viral Iced Coffee Hacks That Actually Made My Coffee Better - AOL.com"
+      ]
+    },
+    {
+      "id": "kunefe",
+      "name_tr": "Künefe / Kunafa",
+      "name_en": "Kunafa",
+      "group": "tatli",
+      "metrics": {
+        "daily": {
+          "world": {
+            "mentions": 4,
+            "appearances": 21,
+            "avg_cts": 26.74,
+            "max_cts": 28.26,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 400.0
+          },
+          "tr": {
+            "mentions": 0,
+            "appearances": 20,
+            "avg_cts": 26.82,
+            "max_cts": 28.26,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": null
+          }
+        },
+        "weekly": {
+          "world": {
+            "mentions": 4,
+            "appearances": 21,
+            "avg_cts": 26.74,
+            "max_cts": 28.26,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 400.0
+          },
+          "tr": {
+            "mentions": 0,
+            "appearances": 20,
+            "avg_cts": 26.82,
+            "max_cts": 28.26,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": null
+          }
+        },
+        "monthly": {
+          "world": {
+            "mentions": 4,
+            "appearances": 21,
+            "avg_cts": 26.74,
+            "max_cts": 28.26,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 400.0
+          },
+          "tr": {
+            "mentions": 0,
+            "appearances": 20,
+            "avg_cts": 26.82,
+            "max_cts": 28.26,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": null
+          }
+        }
+      },
+      "sample_topics": [
+        "POLAR ICE CREAM LAUNCHES DUBAIINSPIRED 'PISTA KUNAFA' AND 'CHOCOLATE FINESTA' - The Financial Express",
+        "Günaydın, künefe tadında bir gün olsun:)",
+        "Künefe, ...  #plompergspeist",
+        "Dondurma şimdi yalnız gitmez.  Haydi KÜNEFE yapalım 🫠😁🤤",
+        "Another important update: chocolate kunefe"
+      ]
+    },
+    {
+      "id": "filtre-kahve",
+      "name_tr": "Filtre / Demleme",
+      "name_en": "Filter / Pour Over",
+      "group": "kahve",
+      "metrics": {
+        "daily": {
+          "world": {
+            "mentions": 3,
+            "appearances": 1,
+            "avg_cts": 25.02,
+            "max_cts": 25.02,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 300.0
+          },
+          "tr": {
+            "mentions": 0,
+            "appearances": 0,
+            "avg_cts": null,
+            "max_cts": null,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": null
+          }
+        },
+        "weekly": {
+          "world": {
+            "mentions": 3,
+            "appearances": 1,
+            "avg_cts": 25.02,
+            "max_cts": 25.02,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 300.0
+          },
+          "tr": {
+            "mentions": 0,
+            "appearances": 0,
+            "avg_cts": null,
+            "max_cts": null,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": null
+          }
+        },
+        "monthly": {
+          "world": {
+            "mentions": 3,
+            "appearances": 1,
+            "avg_cts": 25.02,
+            "max_cts": 25.02,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 300.0
+          },
+          "tr": {
+            "mentions": 0,
+            "appearances": 0,
+            "avg_cts": null,
+            "max_cts": null,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": null
+          }
+        }
+      },
+      "sample_topics": [
+        "Jacobs Krönung by JDE Peet's N.V. - filter coffee classic holds ground in supermarkets - Ad-hoc-news.de"
+      ]
+    },
+    {
+      "id": "mochi",
+      "name_tr": "Mochi",
+      "name_en": "Mochi",
+      "group": "tatli",
+      "metrics": {
+        "daily": {
+          "world": {
+            "mentions": 3,
+            "appearances": 1,
+            "avg_cts": 25.02,
+            "max_cts": 25.02,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 300.0
+          },
+          "tr": {
+            "mentions": 0,
+            "appearances": 0,
+            "avg_cts": null,
+            "max_cts": null,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": null
+          }
+        },
+        "weekly": {
+          "world": {
+            "mentions": 3,
+            "appearances": 1,
+            "avg_cts": 25.02,
+            "max_cts": 25.02,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 300.0
+          },
+          "tr": {
+            "mentions": 0,
+            "appearances": 0,
+            "avg_cts": null,
+            "max_cts": null,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": null
+          }
+        },
+        "monthly": {
+          "world": {
+            "mentions": 3,
+            "appearances": 1,
+            "avg_cts": 25.02,
+            "max_cts": 25.02,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 300.0
+          },
+          "tr": {
+            "mentions": 0,
+            "appearances": 0,
+            "avg_cts": null,
+            "max_cts": null,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": null
+          }
+        }
+      },
+      "sample_topics": [
+        "Mochi Health Expands Glucose Monitoring Through Independent Pharmacy Partnerships - HealthTechzone"
+      ]
+    },
+    {
+      "id": "mushroom-coffee",
+      "name_tr": "Mantar Kahvesi",
+      "name_en": "Mushroom Coffee",
+      "group": "kahve",
+      "metrics": {
+        "daily": {
+          "world": {
+            "mentions": 2,
+            "appearances": 1,
+            "avg_cts": 24.71,
+            "max_cts": 24.71,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 200.0
           },
           "tr": {
             "mentions": 0,
@@ -553,47 +2189,189 @@
         "weekly": {
           "world": {
             "mentions": 2,
-            "appearances": 2,
-            "avg_cts": 24.31,
-            "max_cts": 24.31,
+            "appearances": 1,
+            "avg_cts": 24.71,
+            "max_cts": 24.71,
             "burst": 0,
             "prev_mentions": 0,
             "delta_pct": 200.0
           },
           "tr": {
-            "mentions": 2,
-            "appearances": 2,
-            "avg_cts": 24.31,
-            "max_cts": 24.31,
+            "mentions": 0,
+            "appearances": 0,
+            "avg_cts": null,
+            "max_cts": null,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": 200.0
+            "delta_pct": null
           }
         },
         "monthly": {
           "world": {
             "mentions": 2,
-            "appearances": 2,
-            "avg_cts": 24.31,
-            "max_cts": 24.31,
-            "burst": 0,
-            "prev_mentions": 1846,
-            "delta_pct": -99.9
-          },
-          "tr": {
-            "mentions": 2,
-            "appearances": 2,
-            "avg_cts": 24.31,
-            "max_cts": 24.31,
+            "appearances": 1,
+            "avg_cts": 24.71,
+            "max_cts": 24.71,
             "burst": 0,
             "prev_mentions": 0,
             "delta_pct": 200.0
+          },
+          "tr": {
+            "mentions": 0,
+            "appearances": 0,
+            "avg_cts": null,
+            "max_cts": null,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": null
           }
         }
       },
       "sample_topics": [
-        "Matcha likes the roadtrip music   🪑: @baby.thunderpup.dog",
-        "Bu lezzet Matcha'nın tahtını sallıyor!"
+        "mushroom coffee — Functional Instant Coffee Seller Reformed Gets $22 Million Round - Daily Coffee News by Roast Magazine"
+      ]
+    },
+    {
+      "id": "swedish-candy",
+      "name_tr": "İsveç Şekeri",
+      "name_en": "Swedish Candy",
+      "group": "tatli",
+      "metrics": {
+        "daily": {
+          "world": {
+            "mentions": 2,
+            "appearances": 1,
+            "avg_cts": 24.73,
+            "max_cts": 24.73,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 200.0
+          },
+          "tr": {
+            "mentions": 0,
+            "appearances": 0,
+            "avg_cts": null,
+            "max_cts": null,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": null
+          }
+        },
+        "weekly": {
+          "world": {
+            "mentions": 2,
+            "appearances": 1,
+            "avg_cts": 24.73,
+            "max_cts": 24.73,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 200.0
+          },
+          "tr": {
+            "mentions": 0,
+            "appearances": 0,
+            "avg_cts": null,
+            "max_cts": null,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": null
+          }
+        },
+        "monthly": {
+          "world": {
+            "mentions": 2,
+            "appearances": 1,
+            "avg_cts": 24.73,
+            "max_cts": 24.73,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 200.0
+          },
+          "tr": {
+            "mentions": 0,
+            "appearances": 0,
+            "avg_cts": null,
+            "max_cts": null,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": null
+          }
+        }
+      },
+      "sample_topics": [
+        "swedish candy — This Iconic Candy Is Beloved In Sweden, But Divisive In The US - AOL.com"
+      ]
+    },
+    {
+      "id": "ube-latte",
+      "name_tr": "Ube Latte",
+      "name_en": "Ube Latte",
+      "group": "kahve",
+      "metrics": {
+        "daily": {
+          "world": {
+            "mentions": 2,
+            "appearances": 1,
+            "avg_cts": 24.29,
+            "max_cts": 24.29,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 200.0
+          },
+          "tr": {
+            "mentions": 1,
+            "appearances": 0,
+            "avg_cts": null,
+            "max_cts": null,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 100.0
+          }
+        },
+        "weekly": {
+          "world": {
+            "mentions": 2,
+            "appearances": 1,
+            "avg_cts": 24.29,
+            "max_cts": 24.29,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 200.0
+          },
+          "tr": {
+            "mentions": 1,
+            "appearances": 0,
+            "avg_cts": null,
+            "max_cts": null,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 100.0
+          }
+        },
+        "monthly": {
+          "world": {
+            "mentions": 2,
+            "appearances": 1,
+            "avg_cts": 24.29,
+            "max_cts": 24.29,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 200.0
+          },
+          "tr": {
+            "mentions": 1,
+            "appearances": 0,
+            "avg_cts": null,
+            "max_cts": null,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 100.0
+          }
+        }
+      },
+      "sample_topics": [
+        "10 Must-Try Ube Desserts In Singapore, From Halo-Halo To Ube Latte - Eatbook.sg",
+        "ube latte — Bir fincanla yetinemeyeceksiniz! Sosyal medyanın yeni gözdesi Turkish Latte'nin tarifi ve püf noktaları - Habertürk"
       ]
     },
     {
@@ -604,13 +2382,13 @@
       "metrics": {
         "daily": {
           "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
+            "mentions": 1,
+            "appearances": 1,
+            "avg_cts": 24.29,
+            "max_cts": 24.29,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": null
+            "delta_pct": 100.0
           },
           "tr": {
             "mentions": 0,
@@ -624,13 +2402,13 @@
         },
         "weekly": {
           "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
+            "mentions": 1,
+            "appearances": 1,
+            "avg_cts": 24.29,
+            "max_cts": 24.29,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": null
+            "delta_pct": 100.0
           },
           "tr": {
             "mentions": 0,
@@ -644,220 +2422,13 @@
         },
         "monthly": {
           "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
+            "mentions": 1,
+            "appearances": 1,
+            "avg_cts": 24.29,
+            "max_cts": 24.29,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        }
-      },
-      "sample_topics": []
-    },
-    {
-      "id": "banana-pudding",
-      "name_tr": "Banana Pudding",
-      "name_en": "Banana Pudding",
-      "group": "tatli",
-      "metrics": {
-        "daily": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        },
-        "weekly": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        },
-        "monthly": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        }
-      },
-      "sample_topics": []
-    },
-    {
-      "id": "brown-sugar",
-      "name_tr": "Brown Sugar",
-      "name_en": "Brown Sugar Latte/Boba",
-      "group": "kahve",
-      "metrics": {
-        "daily": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        },
-        "weekly": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        },
-        "monthly": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        }
-      },
-      "sample_topics": []
-    },
-    {
-      "id": "bubble-tea",
-      "name_tr": "Bubble Tea / Boba",
-      "name_en": "Bubble Tea",
-      "group": "kahve",
-      "metrics": {
-        "daily": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        },
-        "weekly": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        },
-        "monthly": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 748,
-            "delta_pct": -100.0
+            "delta_pct": 100.0
           },
           "tr": {
             "mentions": 0,
@@ -871,9 +2442,437 @@
         }
       },
       "sample_topics": [
-        "charmbracelet / bubbles: TUI components for Bubble Tea 🫧",
-        "Milk tea chain Gong Cha on market as TA Associates pursues exit",
-        "peektea: brewing a terminal file browser with Bubble Tea"
+        "I brake for this Highway 1 affogato - San Francisco Chronicle"
+      ]
+    },
+    {
+      "id": "brown-sugar",
+      "name_tr": "Brown Sugar",
+      "name_en": "Brown Sugar Latte/Boba",
+      "group": "kahve",
+      "metrics": {
+        "daily": {
+          "world": {
+            "mentions": 1,
+            "appearances": 1,
+            "avg_cts": 24.29,
+            "max_cts": 24.29,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 100.0
+          },
+          "tr": {
+            "mentions": 1,
+            "appearances": 1,
+            "avg_cts": 24.29,
+            "max_cts": 24.29,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 100.0
+          }
+        },
+        "weekly": {
+          "world": {
+            "mentions": 1,
+            "appearances": 1,
+            "avg_cts": 24.29,
+            "max_cts": 24.29,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 100.0
+          },
+          "tr": {
+            "mentions": 1,
+            "appearances": 1,
+            "avg_cts": 24.29,
+            "max_cts": 24.29,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 100.0
+          }
+        },
+        "monthly": {
+          "world": {
+            "mentions": 1,
+            "appearances": 1,
+            "avg_cts": 24.29,
+            "max_cts": 24.29,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 100.0
+          },
+          "tr": {
+            "mentions": 1,
+            "appearances": 1,
+            "avg_cts": 24.29,
+            "max_cts": 24.29,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 100.0
+          }
+        }
+      },
+      "sample_topics": [
+        "brown sugar latte — Bu Yaz Starbucks’ta Bulutların Üzerinde: Cloud Frappuccino® Blended Beverage’lar İlk Kez Menüde, Tiramisu Ailesi Geri Döndü - KLASS Magazin"
+      ]
+    },
+    {
+      "id": "flat-white",
+      "name_tr": "Flat White",
+      "name_en": "Flat White",
+      "group": "kahve",
+      "metrics": {
+        "daily": {
+          "world": {
+            "mentions": 1,
+            "appearances": 1,
+            "avg_cts": 24.28,
+            "max_cts": 24.28,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 100.0
+          },
+          "tr": {
+            "mentions": 0,
+            "appearances": 0,
+            "avg_cts": null,
+            "max_cts": null,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": null
+          }
+        },
+        "weekly": {
+          "world": {
+            "mentions": 1,
+            "appearances": 1,
+            "avg_cts": 24.28,
+            "max_cts": 24.28,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 100.0
+          },
+          "tr": {
+            "mentions": 0,
+            "appearances": 0,
+            "avg_cts": null,
+            "max_cts": null,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": null
+          }
+        },
+        "monthly": {
+          "world": {
+            "mentions": 1,
+            "appearances": 1,
+            "avg_cts": 24.28,
+            "max_cts": 24.28,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 100.0
+          },
+          "tr": {
+            "mentions": 0,
+            "appearances": 0,
+            "avg_cts": null,
+            "max_cts": null,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": null
+          }
+        }
+      },
+      "sample_topics": [
+        "flat white — This nation’s coffee myth must be confronted. It’s overrated and at $6 a cup, overpriced - SMH.com.au"
+      ]
+    },
+    {
+      "id": "mille-crepe",
+      "name_tr": "Krep Pasta",
+      "name_en": "Mille Crêpe",
+      "group": "tatli",
+      "metrics": {
+        "daily": {
+          "world": {
+            "mentions": 1,
+            "appearances": 1,
+            "avg_cts": 24.3,
+            "max_cts": 24.3,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 100.0
+          },
+          "tr": {
+            "mentions": 1,
+            "appearances": 1,
+            "avg_cts": 24.3,
+            "max_cts": 24.3,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 100.0
+          }
+        },
+        "weekly": {
+          "world": {
+            "mentions": 1,
+            "appearances": 1,
+            "avg_cts": 24.3,
+            "max_cts": 24.3,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 100.0
+          },
+          "tr": {
+            "mentions": 1,
+            "appearances": 1,
+            "avg_cts": 24.3,
+            "max_cts": 24.3,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 100.0
+          }
+        },
+        "monthly": {
+          "world": {
+            "mentions": 1,
+            "appearances": 1,
+            "avg_cts": 24.3,
+            "max_cts": 24.3,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 100.0
+          },
+          "tr": {
+            "mentions": 1,
+            "appearances": 1,
+            "avg_cts": 24.3,
+            "max_cts": 24.3,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 100.0
+          }
+        }
+      },
+      "sample_topics": [
+        "mille crepe — 14-17-19 TEMMUZ YENİ BİM AKTÜEL KATALOGLAR | BİM 17 Temmuz Cuma aktüel kataloğunda hangi ürünler satışa sunulacak? Karnıyarık Tencere, Wok Tava, Kızartma Tenceresi, Tava Seti, Manuel Rondo... - Milliyet"
+      ]
+    },
+    {
+      "id": "pavlova",
+      "name_tr": "Pavlova",
+      "name_en": "Pavlova",
+      "group": "tatli",
+      "metrics": {
+        "daily": {
+          "world": {
+            "mentions": 1,
+            "appearances": 1,
+            "avg_cts": 24.3,
+            "max_cts": 24.3,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 100.0
+          },
+          "tr": {
+            "mentions": 0,
+            "appearances": 0,
+            "avg_cts": null,
+            "max_cts": null,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": null
+          }
+        },
+        "weekly": {
+          "world": {
+            "mentions": 1,
+            "appearances": 1,
+            "avg_cts": 24.3,
+            "max_cts": 24.3,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 100.0
+          },
+          "tr": {
+            "mentions": 0,
+            "appearances": 0,
+            "avg_cts": null,
+            "max_cts": null,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": null
+          }
+        },
+        "monthly": {
+          "world": {
+            "mentions": 1,
+            "appearances": 1,
+            "avg_cts": 24.3,
+            "max_cts": 24.3,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 100.0
+          },
+          "tr": {
+            "mentions": 0,
+            "appearances": 0,
+            "avg_cts": null,
+            "max_cts": null,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": null
+          }
+        }
+      },
+      "sample_topics": [
+        "July 16, 2026: Kardava vs Pavlova Tennis Prediction Market - Robinhood"
+      ]
+    },
+    {
+      "id": "spanish-latte",
+      "name_tr": "Spanish Latte",
+      "name_en": "Spanish Latte",
+      "group": "kahve",
+      "metrics": {
+        "daily": {
+          "world": {
+            "mentions": 1,
+            "appearances": 1,
+            "avg_cts": 24.28,
+            "max_cts": 24.28,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 100.0
+          },
+          "tr": {
+            "mentions": 0,
+            "appearances": 0,
+            "avg_cts": null,
+            "max_cts": null,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": null
+          }
+        },
+        "weekly": {
+          "world": {
+            "mentions": 1,
+            "appearances": 1,
+            "avg_cts": 24.28,
+            "max_cts": 24.28,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 100.0
+          },
+          "tr": {
+            "mentions": 0,
+            "appearances": 0,
+            "avg_cts": null,
+            "max_cts": null,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": null
+          }
+        },
+        "monthly": {
+          "world": {
+            "mentions": 1,
+            "appearances": 1,
+            "avg_cts": 24.28,
+            "max_cts": 24.28,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 100.0
+          },
+          "tr": {
+            "mentions": 0,
+            "appearances": 0,
+            "avg_cts": null,
+            "max_cts": null,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": null
+          }
+        }
+      },
+      "sample_topics": [
+        "Why coffee lovers keep coming back to CBTL’s Spanish Latte - CinemaBravo"
+      ]
+    },
+    {
+      "id": "trilece",
+      "name_tr": "Trileçe",
+      "name_en": "Tres Leches",
+      "group": "tatli",
+      "metrics": {
+        "daily": {
+          "world": {
+            "mentions": 1,
+            "appearances": 18,
+            "avg_cts": 27.43,
+            "max_cts": 30.52,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 100.0
+          },
+          "tr": {
+            "mentions": 0,
+            "appearances": 17,
+            "avg_cts": 27.61,
+            "max_cts": 30.52,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": null
+          }
+        },
+        "weekly": {
+          "world": {
+            "mentions": 1,
+            "appearances": 18,
+            "avg_cts": 27.43,
+            "max_cts": 30.52,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 100.0
+          },
+          "tr": {
+            "mentions": 0,
+            "appearances": 17,
+            "avg_cts": 27.61,
+            "max_cts": 30.52,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": null
+          }
+        },
+        "monthly": {
+          "world": {
+            "mentions": 1,
+            "appearances": 18,
+            "avg_cts": 27.43,
+            "max_cts": 30.52,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 100.0
+          },
+          "tr": {
+            "mentions": 0,
+            "appearances": 17,
+            "avg_cts": 27.61,
+            "max_cts": 30.52,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": null
+          }
+        }
+      },
+      "sample_topics": [
+        "From Godfather pizza to tres leches: Coimbatore’s Britain to Bombay 1800 Café rolls out new menu - The Hindu",
+        "Mookha is spotting Trilece today.  However, after workout, they continue their exercise in the shower~  For more P-bonus art ▶️ patreon.com/ripple_moon",
+        "【MY MILKY ROOMIE: DAIRY ON THE DAILY】EP.02  Trilece is looking for a midnight snack...",
+        "August 8th is Father's Day in Taiwan. So Mookha and Trilece baked father's day cakes together. Happy Father's Day!👔☕️",
+        "Trilece gifted Mookha a fundoshi, insisting he try it on immediately. The snug, embracing feel brought Mookha such pleasure that he became erect (much to Trilece's delight!)  For more P-bonus art ▶️ p"
       ]
     },
     {
@@ -946,286 +2945,6 @@
       "sample_topics": []
     },
     {
-      "id": "chai-latte",
-      "name_tr": "Chai Latte",
-      "name_en": "Chai Latte",
-      "group": "kahve",
-      "metrics": {
-        "daily": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        },
-        "weekly": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        },
-        "monthly": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        }
-      },
-      "sample_topics": []
-    },
-    {
-      "id": "cheesecake",
-      "name_tr": "Cheesecake (genel)",
-      "name_en": "Cheesecake",
-      "group": "tatli",
-      "metrics": {
-        "daily": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        },
-        "weekly": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        },
-        "monthly": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 39530,
-            "delta_pct": -100.0
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 19769,
-            "delta_pct": -100.0
-          }
-        }
-      },
-      "sample_topics": [
-        "Made carrot cake with cheesecake in the middle"
-      ]
-    },
-    {
-      "id": "cinnamon-roll",
-      "name_tr": "Tarçınlı Rulo",
-      "name_en": "Cinnamon Roll",
-      "group": "tatli",
-      "metrics": {
-        "daily": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        },
-        "weekly": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        },
-        "monthly": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        }
-      },
-      "sample_topics": []
-    },
-    {
-      "id": "cold-brew",
-      "name_tr": "Cold Brew",
-      "name_en": "Cold Brew",
-      "group": "kahve",
-      "metrics": {
-        "daily": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        },
-        "weekly": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        },
-        "monthly": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 500,
-            "delta_pct": -100.0
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        }
-      },
-      "sample_topics": [
-        "Are You Cold Brew or Hot Brew?"
-      ]
-    },
-    {
       "id": "cortado",
       "name_tr": "Cortado",
       "name_en": "Cortado",
@@ -1295,216 +3014,9 @@
       "sample_topics": []
     },
     {
-      "id": "creme-brulee",
-      "name_tr": "Krem Brüle",
-      "name_en": "Crème Brûlée",
-      "group": "tatli",
-      "metrics": {
-        "daily": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        },
-        "weekly": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        },
-        "monthly": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        }
-      },
-      "sample_topics": []
-    },
-    {
-      "id": "croissant",
-      "name_tr": "Kruvasan (genel)",
-      "name_en": "Croissant",
-      "group": "tatli",
-      "metrics": {
-        "daily": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        },
-        "weekly": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        },
-        "monthly": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        }
-      },
-      "sample_topics": []
-    },
-    {
       "id": "cromboloni",
       "name_tr": "Cromboloni / NY Roll",
       "name_en": "Cromboloni",
-      "group": "tatli",
-      "metrics": {
-        "daily": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        },
-        "weekly": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        },
-        "monthly": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        }
-      },
-      "sample_topics": []
-    },
-    {
-      "id": "crookie",
-      "name_tr": "Crookie",
-      "name_en": "Crookie",
       "group": "tatli",
       "metrics": {
         "daily": {
@@ -1644,75 +3156,6 @@
       "name_tr": "Dirty Chai",
       "name_en": "Dirty Chai",
       "group": "kahve",
-      "metrics": {
-        "daily": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        },
-        "weekly": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        },
-        "monthly": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        }
-      },
-      "sample_topics": []
-    },
-    {
-      "id": "dubai-cikolatasi",
-      "name_tr": "Dubai Çikolatası",
-      "name_en": "Dubai Chocolate",
-      "group": "tatli",
       "metrics": {
         "daily": {
           "world": {
@@ -1985,148 +3428,10 @@
       "sample_topics": []
     },
     {
-      "id": "filtre-kahve",
-      "name_tr": "Filtre / Demleme",
-      "name_en": "Filter / Pour Over",
-      "group": "kahve",
-      "metrics": {
-        "daily": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        },
-        "weekly": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        },
-        "monthly": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        }
-      },
-      "sample_topics": []
-    },
-    {
       "id": "flat-croissant",
       "name_tr": "Flat Croissant",
       "name_en": "Flat Croissant",
       "group": "tatli",
-      "metrics": {
-        "daily": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        },
-        "weekly": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        },
-        "monthly": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        }
-      },
-      "sample_topics": []
-    },
-    {
-      "id": "flat-white",
-      "name_tr": "Flat White",
-      "name_en": "Flat White",
-      "group": "kahve",
       "metrics": {
         "daily": {
           "world": {
@@ -2261,152 +3566,9 @@
       "sample_topics": []
     },
     {
-      "id": "gelato",
-      "name_tr": "Gelato / Dondurma",
-      "name_en": "Gelato",
-      "group": "tatli",
-      "metrics": {
-        "daily": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        },
-        "weekly": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        },
-        "monthly": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 5000,
-            "delta_pct": -100.0
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        }
-      },
-      "sample_topics": [
-        "Choc a Casoria: sedicenne mangia un gelato, poi il malore e la morte improvvisa - Il Mattino",
-        "Mangia un gelato e muore a 16 anni: era allergico al lattosio - tgcom24.mediaset.it",
-        "Adriano D'Orsi mangia un gelato e muore a 16 anni. La mamma: «Un figlio meraviglioso. Era allergico, leggeva sempre le etichette» - Leggo.it",
-        "Adriano morto a Casoria dopo aver mangiato un gelato: il 16enne allergico alle proteine del latte forse \"tradito\" da un nuovo gusto al melone - Corriere Del Mezzogiorno"
-      ]
-    },
-    {
       "id": "hojicha",
       "name_tr": "Hojicha",
       "name_en": "Hojicha",
-      "group": "kahve",
-      "metrics": {
-        "daily": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        },
-        "weekly": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        },
-        "monthly": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        }
-      },
-      "sample_topics": []
-    },
-    {
-      "id": "iced-americano",
-      "name_tr": "Buzlu Americano",
-      "name_en": "Iced Americano",
       "group": "kahve",
       "metrics": {
         "daily": {
@@ -2542,355 +3704,10 @@
       "sample_topics": []
     },
     {
-      "id": "kunefe",
-      "name_tr": "Künefe / Kunafa",
-      "name_en": "Kunafa",
-      "group": "tatli",
-      "metrics": {
-        "daily": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        },
-        "weekly": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        },
-        "monthly": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        }
-      },
-      "sample_topics": []
-    },
-    {
-      "id": "lotus-biscoff",
-      "name_tr": "Lotus / Biscoff",
-      "name_en": "Biscoff",
-      "group": "tatli",
-      "metrics": {
-        "daily": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        },
-        "weekly": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        },
-        "monthly": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        }
-      },
-      "sample_topics": []
-    },
-    {
       "id": "magnolia",
       "name_tr": "Magnolia",
       "name_en": "Magnolia Dessert",
       "group": "tatli",
-      "metrics": {
-        "daily": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        },
-        "weekly": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        },
-        "monthly": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        }
-      },
-      "sample_topics": []
-    },
-    {
-      "id": "mille-crepe",
-      "name_tr": "Krep Pasta",
-      "name_en": "Mille Crêpe",
-      "group": "tatli",
-      "metrics": {
-        "daily": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        },
-        "weekly": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        },
-        "monthly": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        }
-      },
-      "sample_topics": []
-    },
-    {
-      "id": "mochi",
-      "name_tr": "Mochi",
-      "name_en": "Mochi",
-      "group": "tatli",
-      "metrics": {
-        "daily": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        },
-        "weekly": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        },
-        "monthly": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        }
-      },
-      "sample_topics": []
-    },
-    {
-      "id": "mushroom-coffee",
-      "name_tr": "Mantar Kahvesi",
-      "name_en": "Mushroom Coffee",
-      "group": "kahve",
       "metrics": {
         "daily": {
           "world": {
@@ -3025,424 +3842,10 @@
       "sample_topics": []
     },
     {
-      "id": "pavlova",
-      "name_tr": "Pavlova",
-      "name_en": "Pavlova",
-      "group": "tatli",
-      "metrics": {
-        "daily": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        },
-        "weekly": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        },
-        "monthly": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        }
-      },
-      "sample_topics": []
-    },
-    {
-      "id": "pistachio-latte",
-      "name_tr": "Fıstıklı Latte",
-      "name_en": "Pistachio Latte",
-      "group": "kahve",
-      "metrics": {
-        "daily": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        },
-        "weekly": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        },
-        "monthly": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        }
-      },
-      "sample_topics": []
-    },
-    {
       "id": "profiterol",
       "name_tr": "Profiterol",
       "name_en": "Profiterole",
       "group": "tatli",
-      "metrics": {
-        "daily": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        },
-        "weekly": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        },
-        "monthly": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        }
-      },
-      "sample_topics": []
-    },
-    {
-      "id": "protein-coffee",
-      "name_tr": "Protein Kahve",
-      "name_en": "Protein Coffee",
-      "group": "kahve",
-      "metrics": {
-        "daily": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        },
-        "weekly": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        },
-        "monthly": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        }
-      },
-      "sample_topics": []
-    },
-    {
-      "id": "san-sebastian",
-      "name_tr": "San Sebastian",
-      "name_en": "Basque Cheesecake",
-      "group": "tatli",
-      "metrics": {
-        "daily": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        },
-        "weekly": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        },
-        "monthly": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        }
-      },
-      "sample_topics": []
-    },
-    {
-      "id": "spanish-latte",
-      "name_tr": "Spanish Latte",
-      "name_en": "Spanish Latte",
-      "group": "kahve",
-      "metrics": {
-        "daily": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        },
-        "weekly": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        },
-        "monthly": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        }
-      },
-      "sample_topics": []
-    },
-    {
-      "id": "strawberry-matcha",
-      "name_tr": "Çilekli Matcha",
-      "name_en": "Strawberry Matcha",
-      "group": "kahve",
       "metrics": {
         "daily": {
           "world": {
@@ -3577,75 +3980,6 @@
       "sample_topics": []
     },
     {
-      "id": "swedish-candy",
-      "name_tr": "İsveç Şekeri",
-      "name_en": "Swedish Candy",
-      "group": "tatli",
-      "metrics": {
-        "daily": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        },
-        "weekly": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        },
-        "monthly": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        }
-      },
-      "sample_topics": []
-    },
-    {
       "id": "tanghulu",
       "name_tr": "Tanghulu",
       "name_en": "Tanghulu",
@@ -3654,9 +3988,9 @@
         "daily": {
           "world": {
             "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
+            "appearances": 19,
+            "avg_cts": 28.59,
+            "max_cts": 32.35,
             "burst": 0,
             "prev_mentions": 0,
             "delta_pct": null
@@ -3674,9 +4008,9 @@
         "weekly": {
           "world": {
             "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
+            "appearances": 19,
+            "avg_cts": 28.59,
+            "max_cts": 32.35,
             "burst": 0,
             "prev_mentions": 0,
             "delta_pct": null
@@ -3694,9 +4028,9 @@
         "monthly": {
           "world": {
             "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
+            "appearances": 19,
+            "avg_cts": 28.59,
+            "max_cts": 32.35,
             "burst": 0,
             "prev_mentions": 0,
             "delta_pct": null
@@ -3709,219 +4043,16 @@
             "burst": 0,
             "prev_mentions": 0,
             "delta_pct": null
-          }
-        }
-      },
-      "sample_topics": []
-    },
-    {
-      "id": "tiramisu",
-      "name_tr": "Tiramisu",
-      "name_en": "Tiramisu",
-      "group": "tatli",
-      "metrics": {
-        "daily": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        },
-        "weekly": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        },
-        "monthly": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 18,
-            "delta_pct": -100.0
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 18,
-            "delta_pct": -100.0
           }
         }
       },
       "sample_topics": [
-        "Tiramisu"
+        "TANGHULU 😭",
+        "Yesterday just as I got some tanghulu with my friend, it started to snow. As we were eating it, the snowflakes stuck to the tanghulu.  It reminded me of childhood, when tanghulu was only sold during w",
+        "#jinghengweek2025 #jingheng  day 4: tanghulu",
+        "🍬Meet Tinkatang, the Candied Fruit Pokémon! 🍊Won't you buy a tanghulu from her?",
+        "Have you had tanghulu before? It's a Chinese street food dessert where you sugarcandy coat fruit! Traditionally it's hawthorn berries but strawberries and grapes are popular too. They look like jewels"
       ]
-    },
-    {
-      "id": "trilece",
-      "name_tr": "Trileçe",
-      "name_en": "Tres Leches",
-      "group": "tatli",
-      "metrics": {
-        "daily": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        },
-        "weekly": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        },
-        "monthly": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        }
-      },
-      "sample_topics": []
-    },
-    {
-      "id": "ube-latte",
-      "name_tr": "Ube Latte",
-      "name_en": "Ube Latte",
-      "group": "kahve",
-      "metrics": {
-        "daily": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        },
-        "weekly": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        },
-        "monthly": {
-          "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        }
-      },
-      "sample_topics": []
     },
     {
       "id": "yuzu-coffee",
@@ -3998,26 +4129,117 @@
       "name_tr": "Türkiye",
       "windows": {
         "daily": {
-          "total_mentions": 0,
-          "concepts": []
+          "total_mentions": 21,
+          "concepts": [
+            {
+              "id": "lotus-biscoff",
+              "mentions": 4,
+              "prev_mentions": 0
+            },
+            {
+              "id": "salep",
+              "mentions": 4,
+              "prev_mentions": 0
+            },
+            {
+              "id": "katmer",
+              "mentions": 3,
+              "prev_mentions": 0
+            },
+            {
+              "id": "tiramisu",
+              "mentions": 2,
+              "prev_mentions": 0
+            },
+            {
+              "id": "brown-sugar",
+              "mentions": 1,
+              "prev_mentions": 0
+            },
+            {
+              "id": "brownie",
+              "mentions": 1,
+              "prev_mentions": 8
+            },
+            {
+              "id": "cold-brew",
+              "mentions": 1,
+              "prev_mentions": 0
+            },
+            {
+              "id": "dubai-cikolatasi",
+              "mentions": 1,
+              "prev_mentions": 0
+            },
+            {
+              "id": "mille-crepe",
+              "mentions": 1,
+              "prev_mentions": 0
+            },
+            {
+              "id": "specialty-coffee",
+              "mentions": 1,
+              "prev_mentions": 0
+            }
+          ]
         },
         "weekly": {
-          "total_mentions": 10,
+          "total_mentions": 31,
           "concepts": [
             {
               "id": "brownie",
-              "mentions": 8,
+              "mentions": 9,
+              "prev_mentions": 0
+            },
+            {
+              "id": "lotus-biscoff",
+              "mentions": 4,
+              "prev_mentions": 0
+            },
+            {
+              "id": "salep",
+              "mentions": 4,
+              "prev_mentions": 0
+            },
+            {
+              "id": "katmer",
+              "mentions": 3,
               "prev_mentions": 0
             },
             {
               "id": "matcha",
               "mentions": 2,
               "prev_mentions": 0
+            },
+            {
+              "id": "tiramisu",
+              "mentions": 2,
+              "prev_mentions": 0
+            },
+            {
+              "id": "brown-sugar",
+              "mentions": 1,
+              "prev_mentions": 0
+            },
+            {
+              "id": "cold-brew",
+              "mentions": 1,
+              "prev_mentions": 0
+            },
+            {
+              "id": "dubai-cikolatasi",
+              "mentions": 1,
+              "prev_mentions": 0
+            },
+            {
+              "id": "mille-crepe",
+              "mentions": 1,
+              "prev_mentions": 0
             }
           ]
         },
         "monthly": {
-          "total_mentions": 2087,
+          "total_mentions": 2108,
           "concepts": [
             {
               "id": "baklava",
@@ -4026,27 +4248,47 @@
             },
             {
               "id": "turk-kahvesi",
-              "mentions": 498,
-              "prev_mentions": 0
-            },
-            {
-              "id": "brownie",
-              "mentions": 8,
+              "mentions": 499,
               "prev_mentions": 0
             },
             {
               "id": "katmer",
-              "mentions": 8,
+              "mentions": 11,
               "prev_mentions": 0
             },
             {
               "id": "salep",
-              "mentions": 7,
+              "mentions": 11,
               "prev_mentions": 7
+            },
+            {
+              "id": "brownie",
+              "mentions": 9,
+              "prev_mentions": 0
+            },
+            {
+              "id": "lotus-biscoff",
+              "mentions": 4,
+              "prev_mentions": 0
             },
             {
               "id": "matcha",
               "mentions": 2,
+              "prev_mentions": 0
+            },
+            {
+              "id": "tiramisu",
+              "mentions": 2,
+              "prev_mentions": 18
+            },
+            {
+              "id": "brown-sugar",
+              "mentions": 1,
+              "prev_mentions": 0
+            },
+            {
+              "id": "cold-brew",
+              "mentions": 1,
               "prev_mentions": 0
             }
           ]
@@ -4079,6 +4321,390 @@
   },
   "geo": {
     "note": "Google Trends interest_by_region • timeframe: now 7-d • 0-100 göreli ilgi endeksi",
-    "concepts": {}
+    "concepts": {
+      "matcha": {
+        "term": "matcha",
+        "updated_at": "2026-07-16T00:40:56+00:00",
+        "interest": {
+          "AL": 37,
+          "DZ": 14,
+          "AD": 23,
+          "AO": 2,
+          "AG": 25,
+          "AR": 7,
+          "AM": 20,
+          "AW": 21,
+          "AU": 49,
+          "AT": 37,
+          "AZ": 11,
+          "BS": 43,
+          "BH": 64,
+          "BD": 6,
+          "BB": 24,
+          "BY": 5,
+          "BE": 28,
+          "BZ": 23,
+          "BJ": 5,
+          "BM": 32,
+          "BT": 6,
+          "BO": 7,
+          "BA": 15,
+          "BW": 7,
+          "BR": 6,
+          "BN": 88,
+          "BG": 16,
+          "BF": 45,
+          "KH": 34,
+          "CM": 3,
+          "CA": 44,
+          "CV": 17,
+          "BQ": 48,
+          "KY": 39,
+          "CL": 15,
+          "CN": 18,
+          "CO": 11,
+          "CD": 2,
+          "CR": 25,
+          "HR": 20,
+          "CU": 3,
+          "CW": 26,
+          "CY": 26,
+          "CZ": 50,
+          "CI": 8,
+          "DK": 27,
+          "DO": 16,
+          "EC": 14,
+          "EG": 9,
+          "SV": 11,
+          "EE": 33,
+          "SZ": 6,
+          "ET": 16,
+          "FJ": 12,
+          "FI": 19,
+          "FR": 25,
+          "PF": 13,
+          "GE": 18,
+          "DE": 40,
+          "GH": 8,
+          "GI": 22,
+          "GR": 13,
+          "GD": 19,
+          "GP": 15,
+          "GU": 49,
+          "GT": 12,
+          "GG": 22,
+          "GY": 6,
+          "HT": 3,
+          "HN": 12,
+          "HK": 27,
+          "HU": 30,
+          "IS": 25,
+          "IN": 7,
+          "ID": 65,
+          "IR": 1,
+          "IQ": 25,
+          "IE": 31,
+          "IM": 18,
+          "IL": 17,
+          "IT": 19,
+          "JM": 14,
+          "JP": 6,
+          "JE": 41,
+          "JO": 13,
+          "KZ": 3,
+          "KE": 7,
+          "XK": 32,
+          "KW": 45,
+          "KG": 2,
+          "LA": 19,
+          "LV": 16,
+          "LB": 17,
+          "LY": 3,
+          "LI": 33,
+          "LT": 26,
+          "LU": 31,
+          "MO": 19,
+          "MG": 9,
+          "MW": 3,
+          "MY": 55,
+          "MV": 28,
+          "ML": 3,
+          "MT": 37,
+          "MQ": 18,
+          "MR": 4,
+          "MU": 25,
+          "MX": 29,
+          "MD": 14,
+          "MN": 14,
+          "ME": 17,
+          "MA": 43,
+          "MZ": 3,
+          "MM": 9,
+          "NA": 13,
+          "NP": 11,
+          "NL": 38,
+          "NC": 11,
+          "NZ": 39,
+          "NI": 10,
+          "NG": 4,
+          "MK": 26,
+          "MP": 53,
+          "NO": 23,
+          "OM": 18,
+          "PK": 7,
+          "PS": 24,
+          "PA": 19,
+          "PY": 7,
+          "PE": 10,
+          "PH": 76,
+          "PL": 39,
+          "PT": 22,
+          "PR": 46,
+          "QA": 34,
+          "RO": 20,
+          "RU": 2,
+          "RW": 4,
+          "RE": 40,
+          "SA": 17,
+          "SN": 21,
+          "RS": 18,
+          "SC": 20,
+          "SG": 100,
+          "SK": 45,
+          "SI": 25,
+          "SO": 4,
+          "ZA": 16,
+          "KR": 8,
+          "ES": 26,
+          "LK": 9,
+          "SH": 19,
+          "LC": 19,
+          "SD": 1,
+          "SR": 25,
+          "SE": 33,
+          "CH": 35,
+          "SY": 2,
+          "TW": 7,
+          "TJ": 2,
+          "TZ": 5,
+          "TH": 38,
+          "TL": 7,
+          "TG": 5,
+          "TT": 34,
+          "TN": 40,
+          "TM": 1,
+          "TR": 16,
+          "VI": 18,
+          "UG": 3,
+          "UA": 7,
+          "AE": 53,
+          "GB": 49,
+          "US": 45,
+          "UY": 9,
+          "UZ": 4,
+          "VE": 5,
+          "VN": 37,
+          "EH": 19,
+          "YE": 1,
+          "ZM": 3,
+          "ZW": 6
+        }
+      },
+      "spanish-latte": {
+        "term": "spanish latte",
+        "updated_at": "2026-07-16T00:40:56+00:00",
+        "interest": {
+          "AL": 13,
+          "AU": 2,
+          "AT": 1,
+          "AZ": 7,
+          "BH": 24,
+          "BE": 2,
+          "BN": 100,
+          "CA": 7,
+          "CD": 7,
+          "CY": 9,
+          "EG": 16,
+          "FR": 1,
+          "GE": 5,
+          "DE": 2,
+          "GR": 3,
+          "HK": 4,
+          "IN": 1,
+          "ID": 8,
+          "IQ": 5,
+          "IE": 8,
+          "IT": 1,
+          "JO": 16,
+          "KW": 27,
+          "LB": 34,
+          "MY": 38,
+          "MX": 2,
+          "MA": 14,
+          "NP": 4,
+          "NL": 4,
+          "NZ": 3,
+          "NO": 2,
+          "OM": 10,
+          "PK": 10,
+          "PH": 51,
+          "PL": 1,
+          "QA": 29,
+          "RO": 2,
+          "SA": 13,
+          "SG": 22,
+          "ZA": 6,
+          "KR": 1,
+          "ES": 4,
+          "LK": 9,
+          "SE": 1,
+          "CH": 1,
+          "TW": 1,
+          "TH": 1,
+          "TN": 5,
+          "TR": 12,
+          "AE": 38,
+          "GB": 17,
+          "US": 4,
+          "VN": 1
+        }
+      },
+      "cortado": {
+        "term": "cortado",
+        "updated_at": "2026-07-16T00:40:56+00:00",
+        "interest": {
+          "AL": 9,
+          "DZ": 2,
+          "AO": 13,
+          "AR": 75,
+          "AU": 8,
+          "AT": 8,
+          "AZ": 7,
+          "BH": 73,
+          "BD": 1,
+          "BY": 2,
+          "BE": 9,
+          "BO": 48,
+          "BA": 10,
+          "BR": 91,
+          "BG": 10,
+          "CA": 18,
+          "CL": 68,
+          "CN": 3,
+          "CO": 33,
+          "CR": 46,
+          "HR": 17,
+          "CU": 24,
+          "CY": 23,
+          "CZ": 12,
+          "DK": 24,
+          "DO": 31,
+          "EC": 37,
+          "EG": 5,
+          "SV": 45,
+          "EE": 11,
+          "FI": 7,
+          "FR": 6,
+          "GE": 6,
+          "DE": 10,
+          "GR": 5,
+          "GT": 32,
+          "HN": 42,
+          "HK": 4,
+          "HU": 24,
+          "IN": 2,
+          "ID": 2,
+          "IQ": 2,
+          "IE": 27,
+          "IL": 4,
+          "IT": 7,
+          "JP": 1,
+          "JO": 5,
+          "KE": 3,
+          "KW": 9,
+          "LV": 7,
+          "LB": 12,
+          "LR": 66,
+          "LT": 11,
+          "LU": 8,
+          "MY": 3,
+          "MX": 66,
+          "MD": 6,
+          "MA": 7,
+          "MZ": 26,
+          "NP": 4,
+          "NL": 22,
+          "NZ": 7,
+          "NI": 50,
+          "MK": 9,
+          "NO": 23,
+          "OM": 8,
+          "PK": 2,
+          "PA": 32,
+          "PY": 61,
+          "PE": 46,
+          "PH": 6,
+          "PL": 10,
+          "PT": 42,
+          "PR": 29,
+          "QA": 15,
+          "RO": 12,
+          "SA": 4,
+          "RS": 10,
+          "SG": 9,
+          "SK": 15,
+          "SI": 6,
+          "ZA": 10,
+          "KR": 2,
+          "ES": 100,
+          "SH": 4,
+          "SE": 18,
+          "CH": 9,
+          "TW": 1,
+          "TH": 1,
+          "TT": 9,
+          "TN": 6,
+          "TR": 12,
+          "UA": 2,
+          "AE": 17,
+          "GB": 17,
+          "US": 20,
+          "UY": 60,
+          "VE": 34,
+          "VN": 1
+        }
+      },
+      "dirty-chai": {
+        "term": "dirty chai",
+        "updated_at": "2026-07-16T00:40:56+00:00",
+        "interest": {
+          "AU": 19,
+          "AT": 2,
+          "BE": 3,
+          "CA": 5,
+          "CL": 3,
+          "CZ": 2,
+          "SZ": 100,
+          "FR": 2,
+          "GE": 7,
+          "DE": 2,
+          "HU": 3,
+          "IE": 6,
+          "MY": 1,
+          "MX": 7,
+          "NL": 7,
+          "NZ": 8,
+          "PH": 1,
+          "PT": 2,
+          "SG": 3,
+          "ZA": 9,
+          "ES": 1,
+          "SE": 2,
+          "CH": 2,
+          "GB": 4,
+          "US": 6
+        }
+      }
+    }
   }
 }
