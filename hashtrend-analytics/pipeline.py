@@ -54,6 +54,8 @@ from collectors.trends24 import Trends24Collector
 # ── Free X-alternatif + TR derinlik (v2) ──
 from collectors.bluesky import BlueskyCollector
 from collectors.tr_news_rss import TRNewsRSSCollector
+# ── Kahve & tatlı radarı — Google News RSS aktif probe (v4) ──
+from collectors.food_probe import FoodProbeCollector
 # ── Apify-based collectors (TikTok + Instagram) ──
 # Twitter Apify pasifleştirildi — trends24 (zaten aktif) yeterli, $0
 # from collectors.twitter import TwitterCollector
@@ -133,6 +135,8 @@ class Pipeline:
             # ── Free X-alternatif + TR gündem (v2) ──
             ("Bluesky", BlueskyCollector),  # X'in modern alternatifi (free AT Protocol)
             ("TR News RSS", TRNewsRSSCollector),  # Hürriyet + 7 ana akım
+            # Kahve/tatlı watchlist için Google News RSS aktif sinyal (EN+TR)
+            ("Food Probe", FoodProbeCollector),
             # X (Twitter) — trends24 collector hashtag listesini RSS'le getiriyor ($0).
             # Apify Twitter scraper Pay-per-event çok pahalı, pasifleştirildi.
             # ("Twitter / X", TwitterCollector),

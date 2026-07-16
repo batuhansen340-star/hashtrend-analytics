@@ -11,6 +11,8 @@
  *      - Harita Genel karışımı: max(normalize(bahsetme), geo maks ilgi/100).
  *      - Kavram modu: yalnız o kavramın interest'i; chip metinleri.
  *      - Ülke kartı: 💬 Bahsetmeler + 📈 Google Trends ilgisi bölümleri.
+ *      - Kapsam dürüstlüğü: coverage_gaps kesişim uyarısı, '⚠ kapsam' çipi,
+ *        boş pencere probe açıklaması (daily/weekly) vs genel metin (monthly).
  *   3) Gerçek docs/data/kahve.json ile geriye-uyum (geo'suz → v2 davranışı).
  *
  * Çalıştırma:  node tests/test_kahve_dom.js
@@ -187,6 +189,43 @@ async function testV3() {
 
   // Tooltip önbelleği güncelleniyor mu (updateMap svg'siz erken döner; mapValues üstünden dolaylı test edildi)
   assert(run('hasGeo()') === true && run("geoFor('cortado')") === null, 'geoFor: verisiz kavram → null');
+
+  // ── Kapsam dürüstlüğü — coverage_gaps uyarısı (üst bar) ────────────────
+  run("win='weekly';render();");
+  assert(els.ubGap.textContent.indexOf('4–11 Tem veri kesintisiyle kesişiyor') !== -1,
+    'weekly pencere (kesişiyor) üst barda gap uyarısı gösterir');
+  run("win='monthly';render();");
+  assert(els.ubGap.textContent.indexOf('DEĞİŞİM oranları yanıltıcı olabilir') !== -1,
+    'monthly pencere (kesişiyor) uyarı gösterir');
+  run("win='daily';render();");
+  assert(els.ubGap.textContent === '', 'daily pencere (15-16 Tem, kesişmiyor) uyarı GÖSTERMEZ');
+
+  // ── '⚠ kapsam' çipi — cur<5 && prev>100 → ok yerine nötr çip ──────────
+  assert(run('deltaHtml({mentions:2,prev_mentions:500})').indexOf('⚠ kapsam') !== -1,
+    'cur<5 && prev>100 → ⚠ kapsam çipi');
+  assert(run('deltaHtml({mentions:0,prev_mentions:500})').indexOf('⚠ kapsam') !== -1,
+    'cur=0 && prev>100 → ↓ %100 yerine ⚠ kapsam çipi');
+  assert(run('deltaHtml({mentions:2,prev_mentions:500})').indexOf('gerçek düşüş sanma') !== -1,
+    'çipin tooltip açıklaması var');
+  assert(run('deltaHtml({mentions:4,prev_mentions:100})').indexOf('kapsam') === -1,
+    'prev=100 (>100 değil) → normal yüzde kuralı');
+  assert(run('deltaHtml({mentions:0,prev_mentions:40})').indexOf('↓ %100') !== -1,
+    'küçük prev → ↓ %100 kuralı korunur');
+  assert(run('deltaHtml({mentions:500,prev_mentions:2})').indexOf('×') !== -1,
+    'ters yön (küçük prev, büyük şimdi) ×N kuralı aynen kalır');
+  assert(run('deltaHtml({mentions:120,prev_mentions:0})').indexOf('YENİ') !== -1,
+    'YENİ kuralı aynen kalır');
+
+  // ── Boş pencere mesajı — daily/weekly probe açıklaması, monthly genel ──
+  run("win='daily';grp='tatli';");
+  h = run("panelHtml('tr','TR','x')");
+  assert(h.indexOf("probe kaynakları 16 Tem 2026'da devreye girdi") !== -1,
+    'daily boş panel probe kaynak açıklaması gösterir');
+  assert(run("win='weekly';emptyWinMsg()").indexOf('16 Tem 2026') !== -1,
+    'weekly boş metni de probe açıklaması');
+  assert(run("win='monthly';emptyWinMsg()") === 'Bu pencerede henüz sinyal yok.',
+    'monthly boş metni genel kalır');
+  run("win='weekly';grp='all';");
 }
 
 // ── 3) Gerçek kahve.json ile geriye-uyum ─────────────────────────────────
@@ -205,11 +244,20 @@ async function testRealJson() {
         `${w}/${r}: görünen satır (${countRows(h)}) = sinyalli (${sig}), nosig gizli`);
     }
   }
+  // coverage_gaps alanı yoksa uyarı yolu no-op kalmalı (geriye-uyum)
+  if (!data.coverage_gaps) {
+    run("win='weekly';render();");
+    assert(run('gapsIntersecting().length') === 0 && page.els.ubGap.textContent === '',
+      'coverage_gaps yok → gap uyarısı asla görünmez');
+  }
   const hasGeo = run('hasGeo()');
-  if (data.geo) {
-    assert(hasGeo === true, 'v3 veri: hasGeo() true');
+  // geo alanı olsa da concepts boş olabilir (tüm pytrends çekimleri düşmüş
+  // taze v3 çıktısı) — sayfa bu durumda v2 gibi davranmalı, test de öyle bakar.
+  const geoCount = (data.geo && data.geo.concepts) ? Object.keys(data.geo.concepts).length : 0;
+  if (geoCount > 0) {
+    assert(hasGeo === true, 'v3 veri (geo dolu): hasGeo() true');
   } else {
-    assert(hasGeo === false, 'geo alanı yok → hasGeo() false (v2 davranışı)');
+    assert(hasGeo === false, 'geo alanı yok/boş → hasGeo() false (v2 davranışı)');
     assert(run('mapChipHtml()') === '', 'geo yokken çip asla görünmez');
     const first = data.items.find((i) => i.metrics.weekly.tr.mentions > 0) || data.items[0];
     run(`win='weekly';toggleRow('tr','${first.id}');`);
