@@ -14,6 +14,10 @@ GEO_BATCH kavram tazelenir (rotasyon), kalanlar ve her tür hata durumunda
 mevcut kahve.json'daki geo verisi AYNEN taşınır (carry-forward) — geo
 katmanı rollup'ı asla düşürmez.
 
+Kapsam dürüstlüğü (additive, şema v3 içinde): kanıtlı pipeline kesintileri
+KNOWN_GAPS sabitinden "coverage_gaps" alanına yazılır — alanı tanımayan
+eski sayfalar görmezden gelir, schema_version 3 kalır.
+
 LLM çağrısı YOK — REST (PostgREST) agregasyon + pytrends.
 
 Kullanım:
@@ -59,6 +63,11 @@ WINDOW_DELTAS = {
 
 # Harita paneli için ülke başına en fazla kaç kavram listelensin
 COUNTRY_TOP_N = 10
+
+# Kanıtlı pipeline kesintileri (from, to) — kahve.json "coverage_gaps" alanına
+# yazılır; sayfa, penceresi bu aralıkla kesişince DEĞİŞİM oranlarının yanıltıcı
+# olabileceği konusunda uyarır. Additive alan: schema_version 3 kalır.
+KNOWN_GAPS = [("2026-07-04", "2026-07-11")]
 
 # ISO2 → Türkçe ülke adı (listede yoksa ISO kodu gösterilir)
 COUNTRY_NAMES_TR = {
@@ -221,6 +230,12 @@ def _build_countries(country_counts: dict[str, dict[str, dict[str, dict[str, int
     return countries
 
 
+def _coverage_gaps() -> list[dict]:
+    """KNOWN_GAPS sabitini kahve.json "coverage_gaps" sözleşmesine çevir."""
+    return [{"from": f, "to": t, "note": "pipeline kesintisi"}
+            for f, t in KNOWN_GAPS]
+
+
 def _empty_metric() -> dict:
     return {
         "mentions": 0, "appearances": 0,
@@ -368,6 +383,7 @@ def build_rollup(now: datetime) -> dict:
             w: {"since": v["since"].isoformat(), "until": v["until"].isoformat()}
             for w, v in windows.items()
         },
+        "coverage_gaps": _coverage_gaps(),
         "items": items,
         "countries": countries,
     }
@@ -586,6 +602,14 @@ def _self_test() -> None:
     assert _load_previous_geo(broken)["concepts"] == sample, \
         "mevcut geo.concepts AYNEN taşınmalı"
     broken.unlink()
+
+    # ── _coverage_gaps: KNOWN_GAPS → kahve.json alan sözleşmesi ─────────
+    gaps = _coverage_gaps()
+    assert all(set(g) == {"from", "to", "note"} for g in gaps), \
+        "coverage_gaps girdileri from/to/note alanlarını taşımalı"
+    assert {"from": "2026-07-04", "to": "2026-07-11",
+            "note": "pipeline kesintisi"} in gaps, \
+        "kanıtlı 4–11 Tem kesintisi coverage_gaps'te olmalı"
 
     print("self-test OK — geo katmanı birim testleri geçti")
 

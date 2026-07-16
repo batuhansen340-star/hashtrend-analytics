@@ -26,6 +26,8 @@ nav .container{display:flex;justify-content:space-between;align-items:center}
 
 .ub{padding:6px 0;border-bottom:1px solid var(--border);background:var(--bg2)}
 .ub .container{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:0.72rem;color:var(--dim2)}
+.ub .ubgap{color:var(--orange)}
+.ub .ubgap:empty{display:none}
 
 .radar-head{padding:22px 0 4px}
 .radar-head h1{font-size:1.55rem;font-weight:700;letter-spacing:-0.5px}
@@ -67,6 +69,7 @@ nav .container{display:flex;justify-content:space-between;align-items:center}
 .d-down{color:var(--red);font-family:var(--mono);font-size:0.72rem;font-weight:600;white-space:nowrap}
 .d-neu{color:var(--dim2);font-family:var(--mono);font-size:0.72rem;white-space:nowrap}
 .nosig-tag{font-size:0.6rem;color:var(--dim2);border:1px solid var(--border);padding:2px 7px;border-radius:4px;white-space:nowrap}
+.covchip{font-size:0.62rem;border:1px solid var(--border2);padding:2px 7px;border-radius:4px;cursor:help}
 
 tr.detail-row td{padding:0;border-bottom:1px solid var(--border)}
 .detail{padding:12px 14px 14px;background:var(--bg3)}
@@ -164,6 +167,7 @@ footer{margin-top:24px;padding:16px 0;border-top:1px solid var(--border);text-al
 
 <div class="ub"><div class="container">
 <span id="ubLeft">Pencere: —</span>
+<span id="ubGap" class="ubgap"></span>
 <span id="ubRight">Son güncelleme: yükleniyor…</span>
 </div></div>
 
@@ -181,6 +185,7 @@ footer{margin-top:24px;padding:16px 0;border-top:1px solid var(--border);text-al
 <div class="mrow"><b>Değişim</b> — bir önceki <b>eşit uzunluktaki</b> döneme göre: Günlük → önceki 24 saat, Haftalık → önceki 7 gün, Aylık → önceki 30 gün. Gösterim kuralları: önceki dönem 0 iken şimdi sinyal varsa <span class="d-up">YENİ</span>; artış 10 kat ve üzerindeyse <span class="d-up">↑ ×N</span> (N = bu dönem ÷ önceki dönem, yuvarlanır; 100'ü aşarsa <span class="d-up">↑ ×100+</span>); bu dönem 0'a düştüyse <span class="d-down">↓ %100</span>; iki dönem de 0 ise <span class="d-neu">−</span>; diğer tüm durumlarda <span class="d-up">↑</span>/<span class="d-down">↓</span> %X,X (ondalık virgülle).</div>
 <div class="mrow"><b>CTS</b> — HashTrend trend gücü skoru (0–100): kaynak çeşitliliği %35 + hız %30 + hacim %20 + tazelik %15.</div>
 <div class="mrow"><b>Google Trends ilgisi</b> — Harita ayrıca Google Trends ülke ilgi endeksi (0-100, son 7 gün, göreli) kullanır — bahsetme sayısı değildir, o ülkedeki arama ilgisinin görece gücüdür. Genel görünümde ülke rengi, bahsetme yoğunluğu ile bu ilgi endeksinden yüksek olanıdır; tablodan bir kavrama tıklayınca harita yalnız o kavramın ilgi endeksini gösterir.</div>
+<div class="mrow"><b>Kapsam &amp; kesintiler</b> — Bu radar mutlak hacim ölçmez, <b>GÖRELİ sinyal aracıdır</b>: sayılar kaynak kapsamına bağlıdır ve kapsam zamanla değişir. 4–11 Tem 2026 arasında pipeline kesintisi yaşandı; kesintiyle kesişen pencerelerde üst barda uyarı gösterilir. Probe kaynakları (Google News, Bluesky) <b>16 Tem 2026</b>'da devreye girdi — önceki dönemlerle kıyas bu yüzden temkinli okunmalı. Bu dönem çok küçükken (&lt;5) önceki dönem büyükse (&gt;100), ok yerine nötr <span class="d-neu covchip">⚠ kapsam</span> çipi gösterilir: gerçek düşüş değil, kapsama farkı olabilir.</div>
 </div>
 </details>
 
@@ -252,6 +257,7 @@ function metricsFor(item,region){
 // JSON'daki delta_pct OKUNMAZ; her şey mentions/prev_mentions'tan hesaplanır.
 // Kurallar (metodoloji kutusundakiyle birebir):
 //   prev==0 && m>0        → YENİ (yeşil)
+//   m<5   && prev>100     → nötr '⚠ kapsam' çipi (kapsama farkı olabilir — düşüş sanma)
 //   prev>0 && m/prev>=10  → ↑ ×N (N=round(m/prev); 100'ü aşarsa ×100+)
 //   m==0  && prev>0       → ↓ %100
 //   m==0  && prev==0      → −
@@ -261,6 +267,10 @@ function deltaHtml(m){
   var cur=Number(m.mentions)||0,prev=Number(m.prev_mentions)||0;
   if(prev<=0&&cur>0)return'<span class="d-up">YENİ</span>';
   if(prev<=0)return'<span class="d-neu">−</span>';
+  // Kapsam dürüstlüğü: bu dönem neredeyse boş (<5) ama önceki dönem büyükse (>100)
+  // gerçek düşüş yerine kapsama farkı (veri kesintisi / kaynak değişimi) olabilir.
+  // Ters yön (küçük prev, büyük şimdi) bu kurala GİRMEZ — YENİ/×N aynen kalır.
+  if(cur<5&&prev>100)return'<span class="d-neu covchip" title="Önceki dönemle kapsama farkı olabilir — gerçek düşüş sanma">⚠ kapsam</span>';
   if(cur<=0)return'<span class="d-down">↓ %100</span>';
   var r=cur/prev;
   if(r>=10){var n=Math.round(r);return'<span class="d-up">↑ ×'+(n>100?'100+':n)+'</span>'}
@@ -307,7 +317,7 @@ function panelHtml(region,title,note){
   var zeroCount=items.filter(function(it){return!hasSignal(metricsFor(it,region))}).length;
   if(!showZero[region])items=items.filter(function(it){return hasSignal(metricsFor(it,region))});
   if(!items.length){
-    h+='<div class="empty">Bu pencerede henüz sinyal yok.</div>';
+    h+='<div class="empty">'+emptyWinMsg()+'</div>';
     h+=zeroToggleHtml(region,zeroCount)+'</div>';
     return h;
   }
@@ -375,11 +385,48 @@ function toggleZero(region){
 
 function winName(){return{daily:'Günlük',weekly:'Haftalık',monthly:'Aylık'}[win]||win}
 
+// Boş pencere mesajı — daily/weekly boşsa probe kaynak açıklaması (Google News/
+// Bluesky 16 Tem 2026'da devreye girdi), monthly boşsa genel metin.
+function emptyWinMsg(){
+  if(win==='daily'||win==='weekly')
+    return'Bu pencerede henüz sinyal yok — probe kaynakları 16 Tem 2026\'da devreye girdi; günlük/haftalık görünümler önümüzdeki günlerde dolacak.';
+  return'Bu pencerede henüz sinyal yok.';
+}
+
+/* ─── Kapsam dürüstlüğü: coverage_gaps (rollup KNOWN_GAPS'ten yazar) ────────
+   Alan yoksa (eski JSON) her şey no-op — sayfa aynen çalışır. */
+var AY_KISA=['Oca','Şub','Mar','Nis','May','Haz','Tem','Ağu','Eyl','Eki','Kas','Ara'];
+// {from,to} → '4–11 Tem' (ay/yıl farklıysa '28 Haz–3 Tem'); bozuk tarih → ham metin
+function gapLabel(g){
+  var f=new Date(g.from+'T00:00:00Z'),t=new Date(g.to+'T00:00:00Z');
+  if(isNaN(f)||isNaN(t))return String(g.from)+'–'+String(g.to);
+  if(f.getUTCMonth()===t.getUTCMonth()&&f.getUTCFullYear()===t.getUTCFullYear())
+    return f.getUTCDate()+'–'+t.getUTCDate()+' '+AY_KISA[f.getUTCMonth()];
+  return f.getUTCDate()+' '+AY_KISA[f.getUTCMonth()]+'–'+t.getUTCDate()+' '+AY_KISA[t.getUTCMonth()];
+}
+// Seçili pencere [since, until) ile kesişen gap'ler. Gap 'to' günü kesinti
+// gününün kendisi → gün SONU (23:59:59Z) inclusive sayılır (temkinli okuma).
+function gapsIntersecting(){
+  var gaps=(DATA&&Array.isArray(DATA.coverage_gaps))?DATA.coverage_gaps:[];
+  var w=DATA&&DATA.windows&&DATA.windows[win];
+  if(!w||!gaps.length)return[];
+  var since=new Date(w.since),until=new Date(w.until);
+  if(isNaN(since)||isNaN(until))return[];
+  return gaps.filter(function(g){
+    var f=new Date(g.from+'T00:00:00Z'),t=new Date(g.to+'T23:59:59Z');
+    return!isNaN(f)&&!isNaN(t)&&f<until&&t>since;
+  });
+}
+
 function render(){
   if(!DATA)return;
   var w=DATA.windows&&DATA.windows[win];
   document.getElementById('ubLeft').textContent=
     'Pencere: '+winName()+(w?' • '+fmtDT(w.since)+' → '+fmtDT(w.until):'');
+  // Kapsam uyarısı: pencere bilinen bir veri kesintisiyle kesişiyorsa üst barda söyle
+  var gaps=gapsIntersecting();
+  document.getElementById('ubGap').textContent=gaps.length?
+    ('⚠ Bu pencere '+gapLabel(gaps[0])+' veri kesintisiyle kesişiyor — DEĞİŞİM oranları yanıltıcı olabilir.'):'';
   document.getElementById('ubRight').textContent='Son güncelleme: '+fmtDT(DATA.generated_at);
   document.getElementById('footGen').textContent=' • Üretim: '+fmtDT(DATA.generated_at);
   document.getElementById('content').innerHTML=

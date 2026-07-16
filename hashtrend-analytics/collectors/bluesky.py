@@ -10,6 +10,9 @@ Endpoint: https://api.bsky.app/xrpc/app.bsky.feed.searchPosts
 Rate limit: ~3000 req/5min, anonim kullanım için yeterli.
 """
 
+import time
+from itertools import zip_longest
+
 import requests
 from loguru import logger
 from collectors.base import BaseCollector
@@ -17,28 +20,57 @@ from core.models import RawMention
 
 
 # Trending probe keyword'leri — Bluesky'da popüler post bulmak için sorgular.
-# Çeşitlilik: tech, kültür, gündem, TR, eğlence.
-PROBE_QUERIES = [
-    # Global tech/gündem
-    "ai", "crypto", "election",
-    "openai", "google", "apple",
-    "startup", "design",
-    "tech", "music", "movie",
-    "trump", "ukraine", "climate",
-    # Kahve & tatlı radarı — global (EN) sorgular
+# İki grup ayrı tutulur ve aşağıda DÖNÜŞÜMLÜ dizilir: rate limit hangi
+# noktada keserse kessin iki gruptan da veri gelsin.
+
+# Kahve & tatlı radarı probe'ları (EN + TR)
+_FOOD_PROBES = [
     "matcha", "dubai chocolate", "pistachio latte", "cold brew",
     "tiramisu", "croissant", "cheesecake", "iced coffee",
     "specialty coffee", "boba", "crookie", "banana pudding", "tanghulu",
     # "san sebastian" TR sorgusu DEĞİL (İspanya şehri) — nitelikli EN kalıp
     "san sebastian cheesecake",
-    # TR sinyali veren query'ler — TR_QUERIES ile çakışır, country='TR' set edilir
-    "türkiye", "istanbul", "ankara", "izmir",
-    "gündem", "ekonomi", "spor", "magazin",
-    "galatasaray", "fenerbahçe",
-    # Kahve & tatlı radarı — TR sorguları
+    # TR sorguları — TR_QUERIES ile çakışır, country='TR' set edilir
     "kahve", "tatlı", "künefe", "trileçe",
     "dubai çikolatası", "türk kahvesi",
 ]
+
+# Genel probe'lar — tech, kültür, gündem, TR, eğlence
+_GENERAL_PROBES = [
+    "ai", "crypto", "election",
+    "openai", "google", "apple",
+    "startup", "design",
+    "tech", "music", "movie",
+    "trump", "ukraine", "climate",
+    # TR sinyali veren query'ler
+    "türkiye", "istanbul", "ankara", "izmir",
+    "gündem", "ekonomi", "spor", "magazin",
+    "galatasaray", "fenerbahçe",
+]
+
+
+def _interleave(a: list[str], b: list[str]) -> list[str]:
+    """İki listeyi dönüşümlü diz (a0, b0, a1, b1, ...); uzun olanın artığı sona."""
+    out = []
+    for x, y in zip_longest(a, b):
+        if x is not None:
+            out.append(x)
+        if y is not None:
+            out.append(y)
+    return out
+
+
+PROBE_QUERIES = _interleave(_FOOD_PROBES, _GENERAL_PROBES)
+
+# Sorgular arası nezaket beklemesi — art arda ~10 sorgudan sonra API 403
+# (rate limit) döndürüyordu; 2s aralık limiti tetiklemiyor.
+QUERY_SLEEP = 2.0
+# 403 sonrası soğuma beklemesi (tek yeniden deneme hakkı)
+RATE_LIMIT_COOLDOWN = 30
+
+
+class _RateLimited(Exception):
+    """Aynı sorguda art arda iki 403 — bu run için kalan sorgular atlanır."""
 
 # TR sinyali veren query'ler — bu sorgularla bulunan post'lar country='TR' işaretlenir.
 TR_QUERIES = frozenset({
@@ -67,10 +99,19 @@ class BlueskyCollector(BaseCollector):
 
     def collect(self) -> list[RawMention]:
         all_mentions = []
-        for q in PROBE_QUERIES:
+        for i, q in enumerate(PROBE_QUERIES):
+            if i:
+                time.sleep(QUERY_SLEEP)  # rate limit önleme
             try:
                 mentions = self._search(q)
                 all_mentions.extend(mentions)
+            except _RateLimited:
+                remaining = len(PROBE_QUERIES) - i - 1
+                logger.warning(
+                    f"[bluesky] '{q}' ikinci 403 — rate limit kalıcı, "
+                    f"kalan {remaining} sorgu bu run için atlandı"
+                )
+                break
             except Exception as e:
                 logger.warning(f"[bluesky] '{q}' fetch hatasi: {e}")
         return all_mentions
@@ -83,6 +124,16 @@ class BlueskyCollector(BaseCollector):
             "limit": limit,
         }
         resp = self.session.get(self.BASE_URL, params=params, timeout=15)
+        if resp.status_code == 403:
+            # Rate limit: soğu, BİR kez yeniden dene; ikinci 403 run'ı keser
+            logger.warning(
+                f"[bluesky] '{query}' HTTP 403 — {RATE_LIMIT_COOLDOWN}s "
+                f"bekleyip yeniden denenecek"
+            )
+            time.sleep(RATE_LIMIT_COOLDOWN)
+            resp = self.session.get(self.BASE_URL, params=params, timeout=15)
+            if resp.status_code == 403:
+                raise _RateLimited(query)
         if resp.status_code != 200:
             logger.warning(f"[bluesky] '{query}' HTTP {resp.status_code}")
             return []

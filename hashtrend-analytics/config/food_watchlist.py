@@ -183,8 +183,11 @@ import re as _re
 _EXCLUDES: dict[str, list[str]] = {
     # PT/ES "cortado" = "kesilmiş" (futbol kadrosu, bütçe haberleri)
     "cortado": ["seleção", "selecao", "orçamento", "orcamento"],
-    # GitHub repo "Anil-matcha/...", "MATCHA: Matching..." akademik kısaltma
-    "matcha": ["anil-matcha", "contrastive", "matching text"],
+    # GitHub repo "Anil-matcha/...", "MATCHA: Matching..." akademik kısaltma;
+    # RU transliterasyon "matcha" = "maç"ın -in hali — yalnız Latin harfli
+    # Türkmen ajans spor haberlerinde görülür ("turkmen" hepsini yakalar)
+    "matcha": ["anil-matcha", "contrastive", "matching text",
+               "sbornoi", "chempionat", "turkmen"],
     # "MOCHI: Motion Enhancement..." akademik kısaltma
     "mochi": ["motion enhancement", "human-object"],
     # İngilizce deyim "brownie points"
