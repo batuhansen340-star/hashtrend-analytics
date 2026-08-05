@@ -1,18 +1,18 @@
 {
   "schema_version": 3,
-  "generated_at": "2026-08-05T14:25:42+00:00",
+  "generated_at": "2026-08-05T17:54:44+00:00",
   "windows": {
     "daily": {
-      "since": "2026-08-04T14:25:42+00:00",
-      "until": "2026-08-05T14:25:42+00:00"
+      "since": "2026-08-04T17:54:44+00:00",
+      "until": "2026-08-05T17:54:44+00:00"
     },
     "weekly": {
-      "since": "2026-07-29T14:25:42+00:00",
-      "until": "2026-08-05T14:25:42+00:00"
+      "since": "2026-07-29T17:54:44+00:00",
+      "until": "2026-08-05T17:54:44+00:00"
     },
     "monthly": {
-      "since": "2026-07-06T14:25:42+00:00",
-      "until": "2026-08-05T14:25:42+00:00"
+      "since": "2026-07-06T17:54:44+00:00",
+      "until": "2026-08-05T17:54:44+00:00"
     }
   },
   "coverage_gaps": [
@@ -31,62 +31,62 @@
       "metrics": {
         "daily": {
           "world": {
-            "mentions": 432147,
-            "appearances": 264,
-            "avg_cts": 29.83,
+            "mentions": 432090,
+            "appearances": 298,
+            "avg_cts": 29.82,
             "max_cts": 35.13,
             "burst": 0,
-            "prev_mentions": 493148,
-            "delta_pct": -12.4
+            "prev_mentions": 493900,
+            "delta_pct": -12.5
           },
           "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
+            "mentions": 1,
+            "appearances": 1,
+            "avg_cts": 24.32,
+            "max_cts": 24.32,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": null
+            "delta_pct": 100.0
           }
         },
         "weekly": {
           "world": {
-            "mentions": 3435883,
-            "appearances": 2047,
+            "mentions": 3435693,
+            "appearances": 2045,
             "avg_cts": 29.73,
             "max_cts": 37.85,
             "burst": 0,
-            "prev_mentions": 3654823,
+            "prev_mentions": 3656884,
             "delta_pct": -6.0
           },
           "tr": {
-            "mentions": 32,
+            "mentions": 31,
             "appearances": 21,
-            "avg_cts": 24.63,
+            "avg_cts": 24.61,
             "max_cts": 25.42,
             "burst": 0,
-            "prev_mentions": 29,
-            "delta_pct": 10.3
+            "prev_mentions": 31,
+            "delta_pct": 0.0
           }
         },
         "monthly": {
           "world": {
-            "mentions": 11290165,
-            "appearances": 5975,
+            "mentions": 11372537,
+            "appearances": 6009,
             "avg_cts": 29.68,
             "max_cts": 37.85,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": 1129016500.0
+            "delta_pct": 1137253700.0
           },
           "tr": {
-            "mentions": 61,
-            "appearances": 53,
+            "mentions": 62,
+            "appearances": 54,
             "avg_cts": 24.43,
             "max_cts": 25.42,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": 6100.0
+            "delta_pct": 6200.0
           }
         }
       },
@@ -106,62 +106,62 @@
       "metrics": {
         "daily": {
           "world": {
-            "mentions": 257429,
-            "appearances": 131,
-            "avg_cts": 30.8,
+            "mentions": 258273,
+            "appearances": 148,
+            "avg_cts": 30.81,
             "max_cts": 34.54,
             "burst": 0,
-            "prev_mentions": 308778,
-            "delta_pct": -16.6
+            "prev_mentions": 307881,
+            "delta_pct": -16.1
           },
           "tr": {
-            "mentions": 11,
-            "appearances": 8,
-            "avg_cts": 24.51,
+            "mentions": 14,
+            "appearances": 9,
+            "avg_cts": 24.57,
             "max_cts": 25.13,
             "burst": 0,
             "prev_mentions": 1,
-            "delta_pct": 1000.0
+            "delta_pct": 1300.0
           }
         },
         "weekly": {
           "world": {
-            "mentions": 2236262,
-            "appearances": 1027,
+            "mentions": 2236196,
+            "appearances": 1026,
             "avg_cts": 30.94,
             "max_cts": 42.57,
             "burst": 1,
-            "prev_mentions": 2358032,
+            "prev_mentions": 2358014,
             "delta_pct": -5.2
           },
           "tr": {
-            "mentions": 22,
+            "mentions": 24,
             "appearances": 21,
-            "avg_cts": 24.39,
+            "avg_cts": 24.43,
             "max_cts": 25.13,
             "burst": 0,
-            "prev_mentions": 16,
-            "delta_pct": 37.5
+            "prev_mentions": 17,
+            "delta_pct": 41.2
           }
         },
         "monthly": {
           "world": {
-            "mentions": 7197576,
-            "appearances": 3237,
+            "mentions": 7249558,
+            "appearances": 3254,
             "avg_cts": 30.79,
             "max_cts": 42.57,
             "burst": 1,
             "prev_mentions": 0,
-            "delta_pct": 719757600.0
+            "delta_pct": 724955800.0
           },
           "tr": {
-            "mentions": 100,
-            "appearances": 74,
+            "mentions": 103,
+            "appearances": 75,
             "avg_cts": 24.56,
             "max_cts": 25.44,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": 10000.0
+            "delta_pct": 10300.0
           }
         }
       },
@@ -181,13 +181,13 @@
       "metrics": {
         "daily": {
           "world": {
-            "mentions": 169772,
-            "appearances": 117,
-            "avg_cts": 30.26,
+            "mentions": 170159,
+            "appearances": 133,
+            "avg_cts": 30.23,
             "max_cts": 41.59,
             "burst": 1,
-            "prev_mentions": 168995,
-            "delta_pct": 0.5
+            "prev_mentions": 169167,
+            "delta_pct": 0.6
           },
           "tr": {
             "mentions": 0,
@@ -201,33 +201,33 @@
         },
         "weekly": {
           "world": {
-            "mentions": 1413352,
-            "appearances": 972,
+            "mentions": 1411739,
+            "appearances": 973,
             "avg_cts": 29.98,
             "max_cts": 41.66,
             "burst": 2,
-            "prev_mentions": 1529911,
-            "delta_pct": -7.6
+            "prev_mentions": 1499491,
+            "delta_pct": -5.9
           },
           "tr": {
-            "mentions": 84,
-            "appearances": 24,
-            "avg_cts": 25.17,
+            "mentions": 83,
+            "appearances": 23,
+            "avg_cts": 25.21,
             "max_cts": 25.78,
             "burst": 0,
-            "prev_mentions": 80,
-            "delta_pct": 5.0
+            "prev_mentions": 78,
+            "delta_pct": 6.4
           }
         },
         "monthly": {
           "world": {
-            "mentions": 4517147,
-            "appearances": 2922,
+            "mentions": 4545606,
+            "appearances": 2938,
             "avg_cts": 30.01,
             "max_cts": 42.5,
             "burst": 13,
             "prev_mentions": 1846,
-            "delta_pct": 244599.2
+            "delta_pct": 246140.8
           },
           "tr": {
             "mentions": 239,
@@ -256,13 +256,13 @@
       "metrics": {
         "daily": {
           "world": {
-            "mentions": 107833,
-            "appearances": 144,
+            "mentions": 107845,
+            "appearances": 162,
             "avg_cts": 30.23,
             "max_cts": 33.64,
             "burst": 0,
-            "prev_mentions": 130486,
-            "delta_pct": -17.4
+            "prev_mentions": 130209,
+            "delta_pct": -17.2
           },
           "tr": {
             "mentions": 0,
@@ -276,33 +276,33 @@
         },
         "weekly": {
           "world": {
-            "mentions": 967404,
-            "appearances": 1108,
+            "mentions": 967082,
+            "appearances": 1109,
             "avg_cts": 30.11,
             "max_cts": 33.92,
             "burst": 0,
-            "prev_mentions": 923865,
-            "delta_pct": 4.7
+            "prev_mentions": 927162,
+            "delta_pct": 4.3
           },
           "tr": {
-            "mentions": 32,
-            "appearances": 32,
-            "avg_cts": 24.67,
+            "mentions": 30,
+            "appearances": 31,
+            "avg_cts": 24.66,
             "max_cts": 33.62,
             "burst": 0,
-            "prev_mentions": 32,
-            "delta_pct": 0.0
+            "prev_mentions": 34,
+            "delta_pct": -11.8
           }
         },
         "monthly": {
           "world": {
-            "mentions": 2858442,
-            "appearances": 3019,
+            "mentions": 2880007,
+            "appearances": 3037,
             "avg_cts": 30.23,
             "max_cts": 41.89,
             "burst": 21,
             "prev_mentions": 18,
-            "delta_pct": 15880133.3
+            "delta_pct": 15999938.9
           },
           "tr": {
             "mentions": 93,
@@ -331,13 +331,13 @@
       "metrics": {
         "daily": {
           "world": {
-            "mentions": 110203,
-            "appearances": 104,
-            "avg_cts": 29.54,
+            "mentions": 110172,
+            "appearances": 116,
+            "avg_cts": 29.56,
             "max_cts": 33.29,
             "burst": 0,
-            "prev_mentions": 94620,
-            "delta_pct": 16.5
+            "prev_mentions": 94617,
+            "delta_pct": 16.4
           },
           "tr": {
             "mentions": 0,
@@ -351,13 +351,13 @@
         },
         "weekly": {
           "world": {
-            "mentions": 695344,
-            "appearances": 820,
+            "mentions": 695577,
+            "appearances": 822,
             "avg_cts": 29.57,
             "max_cts": 33.52,
             "burst": 0,
-            "prev_mentions": 660727,
-            "delta_pct": 5.2
+            "prev_mentions": 662031,
+            "delta_pct": 5.1
           },
           "tr": {
             "mentions": 0,
@@ -371,13 +371,13 @@
         },
         "monthly": {
           "world": {
-            "mentions": 2042831,
-            "appearances": 2010,
+            "mentions": 2058567,
+            "appearances": 2022,
             "avg_cts": 29.59,
             "max_cts": 33.93,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": 204283100.0
+            "delta_pct": 205856700.0
           },
           "tr": {
             "mentions": 0,
@@ -406,13 +406,13 @@
       "metrics": {
         "daily": {
           "world": {
-            "mentions": 77388,
-            "appearances": 136,
-            "avg_cts": 30.08,
+            "mentions": 77546,
+            "appearances": 154,
+            "avg_cts": 30.07,
             "max_cts": 32.48,
             "burst": 0,
-            "prev_mentions": 93632,
-            "delta_pct": -17.3
+            "prev_mentions": 92506,
+            "delta_pct": -16.2
           },
           "tr": {
             "mentions": 0,
@@ -420,39 +420,39 @@
             "avg_cts": null,
             "max_cts": null,
             "burst": 0,
-            "prev_mentions": 6,
+            "prev_mentions": 5,
             "delta_pct": -100.0
           }
         },
         "weekly": {
           "world": {
-            "mentions": 660243,
-            "appearances": 1175,
-            "avg_cts": 29.71,
+            "mentions": 662931,
+            "appearances": 1172,
+            "avg_cts": 29.72,
             "max_cts": 39.01,
             "burst": 3,
-            "prev_mentions": 622778,
-            "delta_pct": 6.0
+            "prev_mentions": 620897,
+            "delta_pct": 6.8
           },
           "tr": {
-            "mentions": 44,
-            "appearances": 49,
+            "mentions": 43,
+            "appearances": 48,
             "avg_cts": 24.33,
             "max_cts": 24.82,
             "burst": 0,
-            "prev_mentions": 35,
-            "delta_pct": 25.7
+            "prev_mentions": 32,
+            "delta_pct": 34.4
           }
         },
         "monthly": {
           "world": {
-            "mentions": 2038521,
-            "appearances": 3672,
+            "mentions": 2054121,
+            "appearances": 3690,
             "avg_cts": 29.63,
             "max_cts": 39.01,
             "burst": 3,
             "prev_mentions": 0,
-            "delta_pct": 203852100.0
+            "delta_pct": 205412100.0
           },
           "tr": {
             "mentions": 103,
@@ -481,62 +481,62 @@
       "metrics": {
         "daily": {
           "world": {
-            "mentions": 74516,
-            "appearances": 32,
+            "mentions": 74527,
+            "appearances": 36,
             "avg_cts": 29.03,
             "max_cts": 33.73,
             "burst": 0,
-            "prev_mentions": 74518,
-            "delta_pct": -0.0
+            "prev_mentions": 74509,
+            "delta_pct": 0.0
           },
           "tr": {
-            "mentions": 13,
-            "appearances": 8,
-            "avg_cts": 24.68,
+            "mentions": 14,
+            "appearances": 9,
+            "avg_cts": 24.64,
             "max_cts": 24.75,
             "burst": 0,
-            "prev_mentions": 10,
-            "delta_pct": 30.0
+            "prev_mentions": 9,
+            "delta_pct": 55.6
           }
         },
         "weekly": {
           "world": {
-            "mentions": 534049,
+            "mentions": 534048,
             "appearances": 209,
             "avg_cts": 29.78,
             "max_cts": 33.97,
             "burst": 0,
-            "prev_mentions": 542483,
-            "delta_pct": -1.6
+            "prev_mentions": 542181,
+            "delta_pct": -1.5
           },
           "tr": {
-            "mentions": 58,
+            "mentions": 56,
             "appearances": 30,
-            "avg_cts": 24.78,
+            "avg_cts": 24.76,
             "max_cts": 25.42,
             "burst": 0,
-            "prev_mentions": 38,
-            "delta_pct": 52.6
+            "prev_mentions": 39,
+            "delta_pct": 43.6
           }
         },
         "monthly": {
           "world": {
-            "mentions": 1664530,
-            "appearances": 614,
+            "mentions": 1676948,
+            "appearances": 618,
             "avg_cts": 29.73,
             "max_cts": 34.44,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": 166453000.0
+            "delta_pct": 167694800.0
           },
           "tr": {
-            "mentions": 105,
-            "appearances": 76,
-            "avg_cts": 24.56,
+            "mentions": 106,
+            "appearances": 77,
+            "avg_cts": 24.55,
             "max_cts": 25.42,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": 10500.0
+            "delta_pct": 10600.0
           }
         }
       },
@@ -556,62 +556,62 @@
       "metrics": {
         "daily": {
           "world": {
-            "mentions": 62927,
-            "appearances": 176,
-            "avg_cts": 27.77,
+            "mentions": 62939,
+            "appearances": 198,
+            "avg_cts": 27.78,
             "max_cts": 32.06,
             "burst": 0,
-            "prev_mentions": 62414,
-            "delta_pct": 0.8
+            "prev_mentions": 62869,
+            "delta_pct": 0.1
           },
           "tr": {
-            "mentions": 2291,
-            "appearances": 112,
-            "avg_cts": 26.57,
+            "mentions": 2302,
+            "appearances": 126,
+            "avg_cts": 26.58,
             "max_cts": 28.98,
             "burst": 0,
-            "prev_mentions": 2226,
-            "delta_pct": 2.9
+            "prev_mentions": 2233,
+            "delta_pct": 3.1
           }
         },
         "weekly": {
           "world": {
-            "mentions": 486740,
+            "mentions": 487426,
             "appearances": 1265,
             "avg_cts": 27.81,
             "max_cts": 36.42,
             "burst": 0,
-            "prev_mentions": 502776,
-            "delta_pct": -3.2
+            "prev_mentions": 492946,
+            "delta_pct": -1.1
           },
           "tr": {
-            "mentions": 14632,
+            "mentions": 14642,
             "appearances": 809,
             "avg_cts": 26.61,
             "max_cts": 29.11,
             "burst": 0,
-            "prev_mentions": 16185,
-            "delta_pct": -9.6
+            "prev_mentions": 16170,
+            "delta_pct": -9.4
           }
         },
         "monthly": {
           "world": {
-            "mentions": 1514549,
-            "appearances": 4073,
+            "mentions": 1524991,
+            "appearances": 4095,
             "avg_cts": 27.67,
             "max_cts": 36.42,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": 151454900.0
+            "delta_pct": 152499100.0
           },
           "tr": {
-            "mentions": 46228,
-            "appearances": 2633,
+            "mentions": 46564,
+            "appearances": 2647,
             "avg_cts": 26.56,
             "max_cts": 29.33,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": 4622800.0
+            "delta_pct": 4656400.0
           }
         }
       },
@@ -632,11 +632,11 @@
         "daily": {
           "world": {
             "mentions": 46270,
-            "appearances": 144,
+            "appearances": 162,
             "avg_cts": 28.74,
             "max_cts": 32.94,
             "burst": 0,
-            "prev_mentions": 39667,
+            "prev_mentions": 39666,
             "delta_pct": 16.6
           },
           "tr": {
@@ -651,12 +651,12 @@
         },
         "weekly": {
           "world": {
-            "mentions": 297468,
-            "appearances": 1101,
-            "avg_cts": 28.68,
+            "mentions": 297465,
+            "appearances": 1100,
+            "avg_cts": 28.69,
             "max_cts": 33.16,
             "burst": 0,
-            "prev_mentions": 291421,
+            "prev_mentions": 291386,
             "delta_pct": 2.1
           },
           "tr": {
@@ -671,13 +671,13 @@
         },
         "monthly": {
           "world": {
-            "mentions": 907984,
-            "appearances": 3365,
+            "mentions": 914594,
+            "appearances": 3383,
             "avg_cts": 28.66,
             "max_cts": 33.56,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": 90798400.0
+            "delta_pct": 91459400.0
           },
           "tr": {
             "mentions": 0,
@@ -706,62 +706,62 @@
       "metrics": {
         "daily": {
           "world": {
-            "mentions": 15560,
-            "appearances": 136,
+            "mentions": 15563,
+            "appearances": 153,
             "avg_cts": 27.33,
             "max_cts": 30.99,
             "burst": 0,
-            "prev_mentions": 15555,
-            "delta_pct": 0.0
+            "prev_mentions": 15554,
+            "delta_pct": 0.1
           },
           "tr": {
             "mentions": 15540,
-            "appearances": 128,
-            "avg_cts": 27.47,
+            "appearances": 144,
+            "avg_cts": 27.48,
             "max_cts": 30.99,
             "burst": 0,
-            "prev_mentions": 15544,
+            "prev_mentions": 15543,
             "delta_pct": -0.0
           }
         },
         "weekly": {
           "world": {
-            "mentions": 103916,
-            "appearances": 1076,
+            "mentions": 103780,
+            "appearances": 1073,
             "avg_cts": 27.28,
             "max_cts": 31.16,
             "burst": 0,
-            "prev_mentions": 109881,
-            "delta_pct": -5.4
+            "prev_mentions": 109915,
+            "delta_pct": -5.6
           },
           "tr": {
-            "mentions": 103823,
-            "appearances": 1026,
+            "mentions": 103685,
+            "appearances": 1023,
             "avg_cts": 27.4,
             "max_cts": 31.16,
             "burst": 0,
-            "prev_mentions": 109831,
-            "delta_pct": -5.5
+            "prev_mentions": 109864,
+            "delta_pct": -5.6
           }
         },
         "monthly": {
           "world": {
-            "mentions": 321925,
-            "appearances": 3054,
+            "mentions": 324148,
+            "appearances": 3071,
             "avg_cts": 27.42,
             "max_cts": 31.48,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": 32192500.0
+            "delta_pct": 32414800.0
           },
           "tr": {
-            "mentions": 321778,
-            "appearances": 2963,
+            "mentions": 323998,
+            "appearances": 2979,
             "avg_cts": 27.51,
             "max_cts": 31.48,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": 32177800.0
+            "delta_pct": 32399800.0
           }
         }
       },
@@ -781,62 +781,62 @@
       "metrics": {
         "daily": {
           "world": {
-            "mentions": 14317,
-            "appearances": 128,
-            "avg_cts": 28.08,
+            "mentions": 14327,
+            "appearances": 143,
+            "avg_cts": 28.12,
             "max_cts": 30.11,
             "burst": 0,
-            "prev_mentions": 16023,
-            "delta_pct": -10.6
+            "prev_mentions": 16055,
+            "delta_pct": -10.8
           },
           "tr": {
-            "mentions": 14310,
-            "appearances": 120,
-            "avg_cts": 28.34,
+            "mentions": 14321,
+            "appearances": 135,
+            "avg_cts": 28.35,
             "max_cts": 30.11,
             "burst": 0,
-            "prev_mentions": 16019,
-            "delta_pct": -10.7
+            "prev_mentions": 16050,
+            "delta_pct": -10.8
           }
         },
         "weekly": {
           "world": {
-            "mentions": 96309,
-            "appearances": 927,
+            "mentions": 96600,
+            "appearances": 928,
             "avg_cts": 28.07,
             "max_cts": 30.27,
             "burst": 0,
-            "prev_mentions": 99077,
-            "delta_pct": -2.8
+            "prev_mentions": 98853,
+            "delta_pct": -2.3
           },
           "tr": {
-            "mentions": 96265,
-            "appearances": 882,
+            "mentions": 96556,
+            "appearances": 883,
             "avg_cts": 28.26,
             "max_cts": 30.27,
             "burst": 0,
-            "prev_mentions": 99050,
-            "delta_pct": -2.8
+            "prev_mentions": 98827,
+            "delta_pct": -2.3
           }
         },
         "monthly": {
           "world": {
-            "mentions": 289785,
-            "appearances": 2993,
+            "mentions": 292105,
+            "appearances": 3008,
             "avg_cts": 27.85,
             "max_cts": 30.65,
             "burst": 0,
             "prev_mentions": 498,
-            "delta_pct": 58089.8
+            "delta_pct": 58555.6
           },
           "tr": {
-            "mentions": 289677,
-            "appearances": 2900,
-            "avg_cts": 27.95,
+            "mentions": 291997,
+            "appearances": 2915,
+            "avg_cts": 27.96,
             "max_cts": 30.65,
             "burst": 0,
             "prev_mentions": 498,
-            "delta_pct": 58068.1
+            "delta_pct": 58533.9
           }
         }
       },
@@ -856,62 +856,62 @@
       "metrics": {
         "daily": {
           "world": {
-            "mentions": 10801,
-            "appearances": 132,
-            "avg_cts": 27.75,
+            "mentions": 10884,
+            "appearances": 150,
+            "avg_cts": 27.74,
             "max_cts": 30.69,
             "burst": 0,
-            "prev_mentions": 10656,
-            "delta_pct": 1.4
+            "prev_mentions": 10673,
+            "delta_pct": 2.0
           },
           "tr": {
-            "mentions": 1,
-            "appearances": 1,
-            "avg_cts": 24.34,
+            "mentions": 2,
+            "appearances": 2,
+            "avg_cts": 24.32,
             "max_cts": 24.34,
             "burst": 0,
-            "prev_mentions": 12,
-            "delta_pct": -91.7
+            "prev_mentions": 10,
+            "delta_pct": -80.0
           }
         },
         "weekly": {
           "world": {
-            "mentions": 75493,
-            "appearances": 955,
+            "mentions": 75646,
+            "appearances": 959,
             "avg_cts": 27.67,
             "max_cts": 30.86,
             "burst": 0,
-            "prev_mentions": 73418,
-            "delta_pct": 2.8
+            "prev_mentions": 73385,
+            "delta_pct": 3.1
           },
           "tr": {
-            "mentions": 31,
-            "appearances": 19,
-            "avg_cts": 24.72,
+            "mentions": 32,
+            "appearances": 20,
+            "avg_cts": 24.7,
             "max_cts": 24.82,
             "burst": 0,
-            "prev_mentions": 21,
-            "delta_pct": 47.6
+            "prev_mentions": 15,
+            "delta_pct": 113.3
           }
         },
         "monthly": {
           "world": {
-            "mentions": 231083,
-            "appearances": 2670,
+            "mentions": 232939,
+            "appearances": 2688,
             "avg_cts": 27.71,
             "max_cts": 35.48,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": 23108300.0
+            "delta_pct": 23293900.0
           },
           "tr": {
-            "mentions": 79,
-            "appearances": 48,
-            "avg_cts": 24.66,
+            "mentions": 80,
+            "appearances": 49,
+            "avg_cts": 24.65,
             "max_cts": 25.13,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": 7900.0
+            "delta_pct": 8000.0
           }
         }
       },
@@ -931,8 +931,8 @@
       "metrics": {
         "daily": {
           "world": {
-            "mentions": 7840,
-            "appearances": 72,
+            "mentions": 7842,
+            "appearances": 81,
             "avg_cts": 27.17,
             "max_cts": 31.4,
             "burst": 0,
@@ -951,13 +951,13 @@
         },
         "weekly": {
           "world": {
-            "mentions": 65469,
-            "appearances": 533,
+            "mentions": 65077,
+            "appearances": 530,
             "avg_cts": 27.45,
             "max_cts": 31.58,
             "burst": 0,
-            "prev_mentions": 69043,
-            "delta_pct": -5.2
+            "prev_mentions": 69424,
+            "delta_pct": -6.3
           },
           "tr": {
             "mentions": 0,
@@ -971,13 +971,13 @@
         },
         "monthly": {
           "world": {
-            "mentions": 212929,
-            "appearances": 1704,
+            "mentions": 214363,
+            "appearances": 1713,
             "avg_cts": 27.34,
             "max_cts": 31.92,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": 21292900.0
+            "delta_pct": 21436300.0
           },
           "tr": {
             "mentions": 14,
@@ -1007,8 +1007,8 @@
         "daily": {
           "world": {
             "mentions": 7230,
-            "appearances": 160,
-            "avg_cts": 27.61,
+            "appearances": 180,
+            "avg_cts": 27.62,
             "max_cts": 30.08,
             "burst": 0,
             "prev_mentions": 7230,
@@ -1026,7 +1026,7 @@
         },
         "weekly": {
           "world": {
-            "mentions": 51843,
+            "mentions": 51842,
             "appearances": 1200,
             "avg_cts": 27.64,
             "max_cts": 30.24,
@@ -1046,13 +1046,13 @@
         },
         "monthly": {
           "world": {
-            "mentions": 159956,
-            "appearances": 3617,
+            "mentions": 161161,
+            "appearances": 3637,
             "avg_cts": 27.59,
             "max_cts": 30.52,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": 15995600.0
+            "delta_pct": 16116100.0
           },
           "tr": {
             "mentions": 0,
@@ -1081,13 +1081,13 @@
       "metrics": {
         "daily": {
           "world": {
-            "mentions": 2798,
-            "appearances": 58,
-            "avg_cts": 27.33,
+            "mentions": 2827,
+            "appearances": 65,
+            "avg_cts": 27.32,
             "max_cts": 28.72,
             "burst": 0,
-            "prev_mentions": 2802,
-            "delta_pct": -0.1
+            "prev_mentions": 2750,
+            "delta_pct": 2.8
           },
           "tr": {
             "mentions": 2,
@@ -1101,13 +1101,13 @@
         },
         "weekly": {
           "world": {
-            "mentions": 21337,
+            "mentions": 21313,
             "appearances": 413,
             "avg_cts": 27.14,
             "max_cts": 28.76,
             "burst": 0,
-            "prev_mentions": 26973,
-            "delta_pct": -20.9
+            "prev_mentions": 26637,
+            "delta_pct": -20.0
           },
           "tr": {
             "mentions": 2,
@@ -1121,13 +1121,13 @@
         },
         "monthly": {
           "world": {
-            "mentions": 73547,
-            "appearances": 1275,
+            "mentions": 73964,
+            "appearances": 1282,
             "avg_cts": 27.05,
             "max_cts": 31.52,
             "burst": 0,
             "prev_mentions": 9235,
-            "delta_pct": 696.4
+            "delta_pct": 700.9
           },
           "tr": {
             "mentions": 20,
@@ -1156,17 +1156,17 @@
       "metrics": {
         "daily": {
           "world": {
-            "mentions": 3696,
-            "appearances": 176,
+            "mentions": 3697,
+            "appearances": 198,
             "avg_cts": 26.72,
             "max_cts": 28.59,
             "burst": 0,
             "prev_mentions": 3691,
-            "delta_pct": 0.1
+            "delta_pct": 0.2
           },
           "tr": {
             "mentions": 3689,
-            "appearances": 168,
+            "appearances": 189,
             "avg_cts": 26.84,
             "max_cts": 28.59,
             "burst": 0,
@@ -1176,42 +1176,42 @@
         },
         "weekly": {
           "world": {
-            "mentions": 22738,
-            "appearances": 1252,
+            "mentions": 22755,
+            "appearances": 1254,
             "avg_cts": 26.85,
             "max_cts": 28.71,
             "burst": 0,
-            "prev_mentions": 23566,
+            "prev_mentions": 23576,
             "delta_pct": -3.5
           },
           "tr": {
-            "mentions": 22729,
-            "appearances": 1242,
+            "mentions": 22745,
+            "appearances": 1243,
             "avg_cts": 26.87,
             "max_cts": 28.71,
             "burst": 0,
-            "prev_mentions": 23564,
+            "prev_mentions": 23574,
             "delta_pct": -3.5
           }
         },
         "monthly": {
           "world": {
-            "mentions": 69659,
-            "appearances": 3681,
+            "mentions": 70187,
+            "appearances": 3703,
             "avg_cts": 26.84,
             "max_cts": 28.92,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": 6965900.0
+            "delta_pct": 7018700.0
           },
           "tr": {
-            "mentions": 69609,
-            "appearances": 3648,
+            "mentions": 70136,
+            "appearances": 3669,
             "avg_cts": 26.86,
             "max_cts": 28.92,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": 6960900.0
+            "delta_pct": 7013600.0
           }
         }
       },
@@ -1232,8 +1232,8 @@
         "daily": {
           "world": {
             "mentions": 1290,
-            "appearances": 16,
-            "avg_cts": 27.86,
+            "appearances": 18,
+            "avg_cts": 27.87,
             "max_cts": 29.13,
             "burst": 0,
             "prev_mentions": 1548,
@@ -1256,8 +1256,8 @@
             "avg_cts": 27.89,
             "max_cts": 29.25,
             "burst": 0,
-            "prev_mentions": 13115,
-            "delta_pct": -5.6
+            "prev_mentions": 12859,
+            "delta_pct": -3.7
           },
           "tr": {
             "mentions": 0,
@@ -1271,13 +1271,13 @@
         },
         "monthly": {
           "world": {
-            "mentions": 39006,
-            "appearances": 384,
+            "mentions": 39264,
+            "appearances": 386,
             "avg_cts": 27.66,
             "max_cts": 29.49,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": 3900600.0
+            "delta_pct": 3926400.0
           },
           "tr": {
             "mentions": 0,
@@ -1306,62 +1306,62 @@
       "metrics": {
         "daily": {
           "world": {
-            "mentions": 1241,
-            "appearances": 34,
+            "mentions": 1248,
+            "appearances": 39,
+            "avg_cts": 26.67,
+            "max_cts": 29.1,
+            "burst": 0,
+            "prev_mentions": 1259,
+            "delta_pct": -0.9
+          },
+          "tr": {
+            "mentions": 1086,
+            "appearances": 27,
             "avg_cts": 26.68,
             "max_cts": 29.1,
             "burst": 0,
-            "prev_mentions": 1261,
-            "delta_pct": -1.6
-          },
-          "tr": {
-            "mentions": 1082,
-            "appearances": 24,
-            "avg_cts": 26.66,
-            "max_cts": 29.1,
-            "burst": 0,
-            "prev_mentions": 1074,
-            "delta_pct": 0.7
+            "prev_mentions": 1073,
+            "delta_pct": 1.2
           }
         },
         "weekly": {
           "world": {
-            "mentions": 7691,
-            "appearances": 217,
-            "avg_cts": 26.61,
+            "mentions": 7726,
+            "appearances": 218,
+            "avg_cts": 26.62,
             "max_cts": 29.23,
             "burst": 0,
-            "prev_mentions": 6756,
-            "delta_pct": 13.8
+            "prev_mentions": 6750,
+            "delta_pct": 14.5
           },
           "tr": {
-            "mentions": 6890,
+            "mentions": 6892,
             "appearances": 143,
             "avg_cts": 27.11,
             "max_cts": 29.23,
             "burst": 0,
-            "prev_mentions": 6672,
+            "prev_mentions": 6670,
             "delta_pct": 3.3
           }
         },
         "monthly": {
           "world": {
-            "mentions": 22018,
-            "appearances": 650,
+            "mentions": 22208,
+            "appearances": 655,
             "avg_cts": 26.59,
             "max_cts": 33.63,
             "burst": 0,
             "prev_mentions": 1564,
-            "delta_pct": 1307.8
+            "delta_pct": 1319.9
           },
           "tr": {
-            "mentions": 20978,
-            "appearances": 477,
+            "mentions": 21134,
+            "appearances": 480,
             "avg_cts": 27.06,
             "max_cts": 33.63,
             "burst": 0,
             "prev_mentions": 1564,
-            "delta_pct": 1241.3
+            "delta_pct": 1251.3
           }
         }
       },
@@ -1382,8 +1382,8 @@
         "daily": {
           "world": {
             "mentions": 277,
-            "appearances": 16,
-            "avg_cts": 26.21,
+            "appearances": 18,
+            "avg_cts": 26.19,
             "max_cts": 28.02,
             "burst": 0,
             "prev_mentions": 326,
@@ -1401,13 +1401,13 @@
         },
         "weekly": {
           "world": {
-            "mentions": 2473,
-            "appearances": 75,
-            "avg_cts": 27.15,
+            "mentions": 2474,
+            "appearances": 76,
+            "avg_cts": 27.11,
             "max_cts": 28.12,
             "burst": 0,
-            "prev_mentions": 2750,
-            "delta_pct": -10.1
+            "prev_mentions": 2695,
+            "delta_pct": -8.2
           },
           "tr": {
             "mentions": 0,
@@ -1421,13 +1421,13 @@
         },
         "monthly": {
           "world": {
-            "mentions": 7994,
-            "appearances": 271,
+            "mentions": 8048,
+            "appearances": 273,
             "avg_cts": 26.71,
             "max_cts": 28.31,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": 799400.0
+            "delta_pct": 804800.0
           },
           "tr": {
             "mentions": 0,
@@ -1456,13 +1456,13 @@
       "metrics": {
         "daily": {
           "world": {
-            "mentions": 162,
-            "appearances": 14,
-            "avg_cts": 25.8,
+            "mentions": 184,
+            "appearances": 15,
+            "avg_cts": 25.88,
             "max_cts": 27.1,
             "burst": 0,
-            "prev_mentions": 125,
-            "delta_pct": 29.6
+            "prev_mentions": 113,
+            "delta_pct": 62.8
           },
           "tr": {
             "mentions": 5,
@@ -1470,19 +1470,19 @@
             "avg_cts": 24.31,
             "max_cts": 24.33,
             "burst": 0,
-            "prev_mentions": 15,
-            "delta_pct": -66.7
+            "prev_mentions": 13,
+            "delta_pct": -61.5
           }
         },
         "weekly": {
           "world": {
-            "mentions": 866,
+            "mentions": 868,
             "appearances": 82,
             "avg_cts": 25.93,
             "max_cts": 27.3,
             "burst": 0,
-            "prev_mentions": 662,
-            "delta_pct": 30.8
+            "prev_mentions": 646,
+            "delta_pct": 34.4
           },
           "tr": {
             "mentions": 26,
@@ -1490,19 +1490,19 @@
             "avg_cts": 24.47,
             "max_cts": 24.83,
             "burst": 0,
-            "prev_mentions": 16,
-            "delta_pct": 62.5
+            "prev_mentions": 12,
+            "delta_pct": 116.7
           }
         },
         "monthly": {
           "world": {
-            "mentions": 2255,
-            "appearances": 259,
+            "mentions": 2277,
+            "appearances": 260,
             "avg_cts": 25.91,
             "max_cts": 27.3,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": 225500.0
+            "delta_pct": 227700.0
           },
           "tr": {
             "mentions": 232,
@@ -1531,13 +1531,13 @@
       "metrics": {
         "daily": {
           "world": {
-            "mentions": 50,
-            "appearances": 8,
+            "mentions": 57,
+            "appearances": 9,
             "avg_cts": 25.76,
             "max_cts": 26.16,
             "burst": 0,
-            "prev_mentions": 32,
-            "delta_pct": 56.2
+            "prev_mentions": 27,
+            "delta_pct": 111.1
           },
           "tr": {
             "mentions": 0,
@@ -1556,8 +1556,8 @@
             "avg_cts": 25.86,
             "max_cts": 26.51,
             "burst": 0,
-            "prev_mentions": 163,
-            "delta_pct": 157.1
+            "prev_mentions": 156,
+            "delta_pct": 168.6
           },
           "tr": {
             "mentions": 0,
@@ -1571,13 +1571,13 @@
         },
         "monthly": {
           "world": {
-            "mentions": 901,
-            "appearances": 201,
-            "avg_cts": 25.49,
+            "mentions": 908,
+            "appearances": 202,
+            "avg_cts": 25.5,
             "max_cts": 34.05,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": 90100.0
+            "delta_pct": 90800.0
           },
           "tr": {
             "mentions": 69,
@@ -1606,22 +1606,22 @@
       "metrics": {
         "daily": {
           "world": {
-            "mentions": 32,
-            "appearances": 14,
-            "avg_cts": 24.82,
+            "mentions": 31,
+            "appearances": 15,
+            "avg_cts": 24.83,
             "max_cts": 25.46,
             "burst": 0,
-            "prev_mentions": 40,
-            "delta_pct": -20.0
+            "prev_mentions": 38,
+            "delta_pct": -18.4
           },
           "tr": {
-            "mentions": 5,
+            "mentions": 4,
             "appearances": 6,
             "avg_cts": 24.3,
             "max_cts": 24.31,
             "burst": 0,
-            "prev_mentions": 13,
-            "delta_pct": -61.5
+            "prev_mentions": 12,
+            "delta_pct": -66.7
           }
         },
         "weekly": {
@@ -1631,8 +1631,8 @@
             "avg_cts": 24.83,
             "max_cts": 25.64,
             "burst": 0,
-            "prev_mentions": 299,
-            "delta_pct": -30.1
+            "prev_mentions": 278,
+            "delta_pct": -24.8
           },
           "tr": {
             "mentions": 37,
@@ -1640,19 +1640,19 @@
             "avg_cts": 24.39,
             "max_cts": 24.82,
             "burst": 0,
-            "prev_mentions": 59,
-            "delta_pct": -37.3
+            "prev_mentions": 51,
+            "delta_pct": -27.5
           }
         },
         "monthly": {
           "world": {
-            "mentions": 711,
-            "appearances": 292,
+            "mentions": 714,
+            "appearances": 293,
             "avg_cts": 25.01,
             "max_cts": 33.85,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": 71100.0
+            "delta_pct": 71400.0
           },
           "tr": {
             "mentions": 191,
@@ -1681,62 +1681,62 @@
       "metrics": {
         "daily": {
           "world": {
-            "mentions": 85,
-            "appearances": 16,
-            "avg_cts": 25.26,
+            "mentions": 90,
+            "appearances": 18,
+            "avg_cts": 25.21,
             "max_cts": 26.36,
             "burst": 0,
-            "prev_mentions": 87,
-            "delta_pct": -2.3
+            "prev_mentions": 81,
+            "delta_pct": 11.1
           },
           "tr": {
-            "mentions": 7,
-            "appearances": 8,
+            "mentions": 8,
+            "appearances": 9,
             "avg_cts": 24.31,
             "max_cts": 24.35,
             "burst": 0,
-            "prev_mentions": 7,
-            "delta_pct": 0.0
+            "prev_mentions": 6,
+            "delta_pct": 33.3
           }
         },
         "weekly": {
           "world": {
-            "mentions": 321,
-            "appearances": 87,
+            "mentions": 323,
+            "appearances": 88,
             "avg_cts": 25.09,
             "max_cts": 26.47,
             "burst": 0,
-            "prev_mentions": 189,
-            "delta_pct": 69.8
+            "prev_mentions": 180,
+            "delta_pct": 79.4
           },
           "tr": {
-            "mentions": 33,
-            "appearances": 33,
-            "avg_cts": 24.42,
+            "mentions": 34,
+            "appearances": 34,
+            "avg_cts": 24.41,
             "max_cts": 24.74,
             "burst": 0,
-            "prev_mentions": 21,
-            "delta_pct": 57.1
+            "prev_mentions": 19,
+            "delta_pct": 78.9
           }
         },
         "monthly": {
           "world": {
-            "mentions": 630,
-            "appearances": 237,
+            "mentions": 635,
+            "appearances": 239,
             "avg_cts": 24.84,
             "max_cts": 26.51,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": 63000.0
+            "delta_pct": 63500.0
           },
           "tr": {
-            "mentions": 81,
-            "appearances": 83,
-            "avg_cts": 24.4,
+            "mentions": 82,
+            "appearances": 84,
+            "avg_cts": 24.39,
             "max_cts": 24.76,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": 8100.0
+            "delta_pct": 8200.0
           }
         }
       },
@@ -1756,13 +1756,13 @@
       "metrics": {
         "daily": {
           "world": {
-            "mentions": 28,
-            "appearances": 8,
+            "mentions": 32,
+            "appearances": 9,
             "avg_cts": 25.28,
             "max_cts": 25.5,
             "burst": 0,
-            "prev_mentions": 23,
-            "delta_pct": 21.7
+            "prev_mentions": 21,
+            "delta_pct": 52.4
           },
           "tr": {
             "mentions": 0,
@@ -1776,13 +1776,13 @@
         },
         "weekly": {
           "world": {
-            "mentions": 152,
+            "mentions": 149,
             "appearances": 53,
-            "avg_cts": 25.03,
-            "max_cts": 25.8,
+            "avg_cts": 25.02,
+            "max_cts": 25.77,
             "burst": 0,
-            "prev_mentions": 223,
-            "delta_pct": -31.8
+            "prev_mentions": 222,
+            "delta_pct": -32.9
           },
           "tr": {
             "mentions": 0,
@@ -1796,13 +1796,13 @@
         },
         "monthly": {
           "world": {
-            "mentions": 588,
-            "appearances": 182,
+            "mentions": 592,
+            "appearances": 183,
             "avg_cts": 25.15,
             "max_cts": 28.01,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": 58800.0
+            "delta_pct": 59200.0
           },
           "tr": {
             "mentions": 9,
@@ -1831,33 +1831,33 @@
       "metrics": {
         "daily": {
           "world": {
-            "mentions": 24,
-            "appearances": 13,
-            "avg_cts": 24.7,
-            "max_cts": 25.26,
+            "mentions": 25,
+            "appearances": 14,
+            "avg_cts": 24.74,
+            "max_cts": 25.29,
             "burst": 0,
-            "prev_mentions": 37,
-            "delta_pct": -35.1
+            "prev_mentions": 34,
+            "delta_pct": -26.5
           },
           "tr": {
-            "mentions": 4,
+            "mentions": 3,
             "appearances": 5,
             "avg_cts": 24.29,
             "max_cts": 24.31,
             "burst": 0,
-            "prev_mentions": 9,
-            "delta_pct": -55.6
+            "prev_mentions": 8,
+            "delta_pct": -62.5
           }
         },
         "weekly": {
           "world": {
-            "mentions": 215,
+            "mentions": 216,
             "appearances": 83,
-            "avg_cts": 24.95,
+            "avg_cts": 24.96,
             "max_cts": 25.81,
             "burst": 0,
-            "prev_mentions": 146,
-            "delta_pct": 47.3
+            "prev_mentions": 142,
+            "delta_pct": 52.1
           },
           "tr": {
             "mentions": 27,
@@ -1871,13 +1871,13 @@
         },
         "monthly": {
           "world": {
-            "mentions": 562,
-            "appearances": 227,
+            "mentions": 566,
+            "appearances": 228,
             "avg_cts": 24.9,
             "max_cts": 26.24,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": 56200.0
+            "delta_pct": 56600.0
           },
           "tr": {
             "mentions": 48,
@@ -1906,13 +1906,13 @@
       "metrics": {
         "daily": {
           "world": {
-            "mentions": 109,
-            "appearances": 8,
-            "avg_cts": 26.54,
+            "mentions": 103,
+            "appearances": 9,
+            "avg_cts": 26.48,
             "max_cts": 26.72,
             "burst": 0,
-            "prev_mentions": 109,
-            "delta_pct": 0.0
+            "prev_mentions": 111,
+            "delta_pct": -7.2
           },
           "tr": {
             "mentions": 0,
@@ -1926,13 +1926,13 @@
         },
         "weekly": {
           "world": {
-            "mentions": 387,
+            "mentions": 394,
             "appearances": 58,
-            "avg_cts": 25.55,
+            "avg_cts": 25.58,
             "max_cts": 26.75,
             "burst": 0,
             "prev_mentions": 56,
-            "delta_pct": 591.1
+            "delta_pct": 603.6
           },
           "tr": {
             "mentions": 0,
@@ -1946,13 +1946,13 @@
         },
         "monthly": {
           "world": {
-            "mentions": 458,
-            "appearances": 141,
-            "avg_cts": 24.83,
+            "mentions": 467,
+            "appearances": 142,
+            "avg_cts": 24.84,
             "max_cts": 26.75,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": 45800.0
+            "delta_pct": 46700.0
           },
           "tr": {
             "mentions": 29,
@@ -1986,8 +1986,8 @@
             "avg_cts": 25.84,
             "max_cts": 26.41,
             "burst": 0,
-            "prev_mentions": 107,
-            "delta_pct": -39.3
+            "prev_mentions": 94,
+            "delta_pct": -30.9
           },
           "tr": {
             "mentions": 65,
@@ -1995,19 +1995,19 @@
             "avg_cts": 25.84,
             "max_cts": 26.41,
             "burst": 0,
-            "prev_mentions": 107,
-            "delta_pct": -39.3
+            "prev_mentions": 94,
+            "delta_pct": -30.9
           }
         },
         "weekly": {
           "world": {
-            "mentions": 234,
-            "appearances": 51,
-            "avg_cts": 25.13,
+            "mentions": 233,
+            "appearances": 50,
+            "avg_cts": 25.15,
             "max_cts": 26.59,
             "burst": 0,
-            "prev_mentions": 138,
-            "delta_pct": 69.6
+            "prev_mentions": 131,
+            "delta_pct": 77.9
           },
           "tr": {
             "mentions": 194,
@@ -2076,22 +2076,22 @@
         },
         "weekly": {
           "world": {
-            "mentions": 110,
-            "appearances": 34,
-            "avg_cts": 25.07,
+            "mentions": 109,
+            "appearances": 33,
+            "avg_cts": 25.09,
             "max_cts": 25.91,
             "burst": 0,
-            "prev_mentions": 227,
-            "delta_pct": -51.5
+            "prev_mentions": 205,
+            "delta_pct": -46.8
           },
           "tr": {
-            "mentions": 110,
-            "appearances": 34,
-            "avg_cts": 25.07,
+            "mentions": 109,
+            "appearances": 33,
+            "avg_cts": 25.09,
             "max_cts": 25.91,
             "burst": 0,
-            "prev_mentions": 225,
-            "delta_pct": -51.1
+            "prev_mentions": 204,
+            "delta_pct": -46.6
           }
         },
         "monthly": {
@@ -2131,13 +2131,13 @@
       "metrics": {
         "daily": {
           "world": {
-            "mentions": 52,
-            "appearances": 8,
-            "avg_cts": 25.82,
+            "mentions": 60,
+            "appearances": 9,
+            "avg_cts": 25.83,
             "max_cts": 26.16,
             "burst": 0,
-            "prev_mentions": 27,
-            "delta_pct": 92.6
+            "prev_mentions": 25,
+            "delta_pct": 140.0
           },
           "tr": {
             "mentions": 0,
@@ -2151,13 +2151,13 @@
         },
         "weekly": {
           "world": {
-            "mentions": 88,
-            "appearances": 28,
-            "avg_cts": 25.01,
+            "mentions": 96,
+            "appearances": 29,
+            "avg_cts": 25.04,
             "max_cts": 26.16,
             "burst": 0,
-            "prev_mentions": 89,
-            "delta_pct": -1.1
+            "prev_mentions": 77,
+            "delta_pct": 24.7
           },
           "tr": {
             "mentions": 0,
@@ -2171,13 +2171,13 @@
         },
         "monthly": {
           "world": {
-            "mentions": 376,
-            "appearances": 130,
-            "avg_cts": 25.03,
+            "mentions": 384,
+            "appearances": 131,
+            "avg_cts": 25.04,
             "max_cts": 26.16,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": 37600.0
+            "delta_pct": 38400.0
           },
           "tr": {
             "mentions": 29,
@@ -2206,13 +2206,13 @@
       "metrics": {
         "daily": {
           "world": {
-            "mentions": 7,
-            "appearances": 8,
+            "mentions": 8,
+            "appearances": 9,
             "avg_cts": 24.31,
             "max_cts": 24.36,
             "burst": 0,
             "prev_mentions": 6,
-            "delta_pct": 16.7
+            "delta_pct": 33.3
           },
           "tr": {
             "mentions": 5,
@@ -2226,33 +2226,33 @@
         },
         "weekly": {
           "world": {
-            "mentions": 72,
-            "appearances": 53,
-            "avg_cts": 24.53,
+            "mentions": 69,
+            "appearances": 52,
+            "avg_cts": 24.52,
             "max_cts": 25.16,
             "burst": 0,
-            "prev_mentions": 109,
-            "delta_pct": -33.9
+            "prev_mentions": 105,
+            "delta_pct": -34.3
           },
           "tr": {
-            "mentions": 42,
-            "appearances": 32,
-            "avg_cts": 24.51,
-            "max_cts": 25.06,
+            "mentions": 39,
+            "appearances": 31,
+            "avg_cts": 24.49,
+            "max_cts": 25.04,
             "burst": 0,
-            "prev_mentions": 14,
-            "delta_pct": 200.0
+            "prev_mentions": 15,
+            "delta_pct": 160.0
           }
         },
         "monthly": {
           "world": {
-            "mentions": 351,
-            "appearances": 216,
+            "mentions": 352,
+            "appearances": 217,
             "avg_cts": 24.66,
             "max_cts": 25.48,
             "burst": 0,
             "prev_mentions": 8,
-            "delta_pct": 4287.5
+            "delta_pct": 4300.0
           },
           "tr": {
             "mentions": 130,
@@ -2281,13 +2281,13 @@
       "metrics": {
         "daily": {
           "world": {
-            "mentions": 13,
-            "appearances": 8,
-            "avg_cts": 24.66,
+            "mentions": 12,
+            "appearances": 9,
+            "avg_cts": 24.62,
             "max_cts": 25.02,
             "burst": 0,
             "prev_mentions": 16,
-            "delta_pct": -18.8
+            "delta_pct": -25.0
           },
           "tr": {
             "mentions": 0,
@@ -2306,8 +2306,8 @@
             "avg_cts": 24.65,
             "max_cts": 25.02,
             "burst": 0,
-            "prev_mentions": 118,
-            "delta_pct": -50.0
+            "prev_mentions": 104,
+            "delta_pct": -43.3
           },
           "tr": {
             "mentions": 0,
@@ -2321,13 +2321,13 @@
         },
         "monthly": {
           "world": {
-            "mentions": 291,
-            "appearances": 133,
+            "mentions": 292,
+            "appearances": 134,
             "avg_cts": 24.8,
             "max_cts": 25.92,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": 29100.0
+            "delta_pct": 29200.0
           },
           "tr": {
             "mentions": 0,
@@ -2357,12 +2357,12 @@
         "daily": {
           "world": {
             "mentions": 7,
-            "appearances": 8,
+            "appearances": 9,
             "avg_cts": 24.3,
             "max_cts": 24.34,
             "burst": 0,
-            "prev_mentions": 4,
-            "delta_pct": 75.0
+            "prev_mentions": 5,
+            "delta_pct": 40.0
           },
           "tr": {
             "mentions": 0,
@@ -2376,13 +2376,13 @@
         },
         "weekly": {
           "world": {
-            "mentions": 50,
+            "mentions": 49,
             "appearances": 44,
-            "avg_cts": 24.43,
+            "avg_cts": 24.42,
             "max_cts": 24.74,
             "burst": 0,
-            "prev_mentions": 158,
-            "delta_pct": -68.4
+            "prev_mentions": 152,
+            "delta_pct": -67.8
           },
           "tr": {
             "mentions": 0,
@@ -2396,13 +2396,13 @@
         },
         "monthly": {
           "world": {
-            "mentions": 289,
-            "appearances": 202,
+            "mentions": 290,
+            "appearances": 203,
             "avg_cts": 24.65,
             "max_cts": 25.38,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": 28900.0
+            "delta_pct": 29000.0
           },
           "tr": {
             "mentions": 71,
@@ -2431,13 +2431,13 @@
       "metrics": {
         "daily": {
           "world": {
-            "mentions": 4,
+            "mentions": 3,
             "appearances": 5,
             "avg_cts": 24.29,
             "max_cts": 24.31,
             "burst": 0,
-            "prev_mentions": 12,
-            "delta_pct": -66.7
+            "prev_mentions": 11,
+            "delta_pct": -72.7
           },
           "tr": {
             "mentions": 0,
@@ -2451,13 +2451,13 @@
         },
         "weekly": {
           "world": {
-            "mentions": 88,
-            "appearances": 56,
-            "avg_cts": 24.68,
-            "max_cts": 25.48,
+            "mentions": 83,
+            "appearances": 55,
+            "avg_cts": 24.67,
+            "max_cts": 25.46,
             "burst": 0,
-            "prev_mentions": 87,
-            "delta_pct": 1.1
+            "prev_mentions": 88,
+            "delta_pct": -5.7
           },
           "tr": {
             "mentions": 0,
@@ -2465,7 +2465,7 @@
             "avg_cts": null,
             "max_cts": null,
             "burst": 0,
-            "prev_mentions": 7,
+            "prev_mentions": 5,
             "delta_pct": -100.0
           }
         },
@@ -2506,13 +2506,13 @@
       "metrics": {
         "daily": {
           "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
+            "mentions": 1,
+            "appearances": 1,
+            "avg_cts": 24.33,
+            "max_cts": 24.33,
             "burst": 0,
-            "prev_mentions": 5,
-            "delta_pct": -100.0
+            "prev_mentions": 4,
+            "delta_pct": -75.0
           },
           "tr": {
             "mentions": 0,
@@ -2526,13 +2526,13 @@
         },
         "weekly": {
           "world": {
-            "mentions": 28,
-            "appearances": 23,
-            "avg_cts": 24.55,
+            "mentions": 29,
+            "appearances": 24,
+            "avg_cts": 24.54,
             "max_cts": 24.75,
             "burst": 0,
             "prev_mentions": 66,
-            "delta_pct": -57.6
+            "delta_pct": -56.1
           },
           "tr": {
             "mentions": 0,
@@ -2546,13 +2546,13 @@
         },
         "monthly": {
           "world": {
-            "mentions": 187,
-            "appearances": 107,
-            "avg_cts": 24.73,
+            "mentions": 188,
+            "appearances": 108,
+            "avg_cts": 24.72,
             "max_cts": 25.51,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": 18700.0
+            "delta_pct": 18800.0
           },
           "tr": {
             "mentions": 0,
@@ -2581,13 +2581,13 @@
       "metrics": {
         "daily": {
           "world": {
-            "mentions": 48,
+            "mentions": 32,
             "appearances": 0,
             "avg_cts": null,
             "max_cts": null,
             "burst": 0,
             "prev_mentions": 80,
-            "delta_pct": -40.0
+            "delta_pct": -60.0
           },
           "tr": {
             "mentions": 0,
@@ -2652,13 +2652,13 @@
       "metrics": {
         "daily": {
           "world": {
-            "mentions": 13,
-            "appearances": 8,
+            "mentions": 15,
+            "appearances": 9,
             "avg_cts": 24.69,
             "max_cts": 24.81,
             "burst": 0,
             "prev_mentions": 5,
-            "delta_pct": 160.0
+            "delta_pct": 200.0
           },
           "tr": {
             "mentions": 0,
@@ -2672,13 +2672,13 @@
         },
         "weekly": {
           "world": {
-            "mentions": 43,
+            "mentions": 42,
             "appearances": 28,
-            "avg_cts": 24.62,
-            "max_cts": 25.06,
+            "avg_cts": 24.61,
+            "max_cts": 25.04,
             "burst": 0,
-            "prev_mentions": 57,
-            "delta_pct": -24.6
+            "prev_mentions": 58,
+            "delta_pct": -27.6
           },
           "tr": {
             "mentions": 0,
@@ -2692,13 +2692,13 @@
         },
         "monthly": {
           "world": {
-            "mentions": 164,
-            "appearances": 112,
+            "mentions": 166,
+            "appearances": 113,
             "avg_cts": 24.6,
             "max_cts": 25.45,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": 16400.0
+            "delta_pct": 16600.0
           },
           "tr": {
             "mentions": 0,
@@ -2716,7 +2716,82 @@
         "creme brulee — Taco Bell Just Dropped a First-Of-Its-Kind Crunchwrap—Plus 4 All-New Menu Items - Allrecipes",
         "Build-your-own cold foam bar and creme brulee doughnuts – Paddock Bakery is heading to Pacific Fair - InDaily Queensland",
         "creme brulee — Ohayo Dairy taps South Korea as core market with 7-Eleven dessert launch - CHOSUNBIZ - Chosunbiz",
-        "Winter Park bakery celebrates National Crème Brûlée Day - FOX 35 Orlando"
+        "FIRST LOOK: Self-taught barista opens Coffee Society, with signature creme brulee cold foam - Glam Adelaide"
+      ]
+    },
+    {
+      "id": "mille-crepe",
+      "name_tr": "Krep Pasta",
+      "name_en": "Mille Crêpe",
+      "group": "tatli",
+      "metrics": {
+        "daily": {
+          "world": {
+            "mentions": 8,
+            "appearances": 9,
+            "avg_cts": 24.32,
+            "max_cts": 24.36,
+            "burst": 0,
+            "prev_mentions": 2,
+            "delta_pct": 300.0
+          },
+          "tr": {
+            "mentions": 8,
+            "appearances": 9,
+            "avg_cts": 24.32,
+            "max_cts": 24.36,
+            "burst": 0,
+            "prev_mentions": 2,
+            "delta_pct": 300.0
+          }
+        },
+        "weekly": {
+          "world": {
+            "mentions": 86,
+            "appearances": 64,
+            "avg_cts": 24.53,
+            "max_cts": 25.28,
+            "burst": 0,
+            "prev_mentions": 72,
+            "delta_pct": 19.4
+          },
+          "tr": {
+            "mentions": 55,
+            "appearances": 41,
+            "avg_cts": 24.51,
+            "max_cts": 25.28,
+            "burst": 0,
+            "prev_mentions": 56,
+            "delta_pct": -1.8
+          }
+        },
+        "monthly": {
+          "world": {
+            "mentions": 162,
+            "appearances": 112,
+            "avg_cts": 24.57,
+            "max_cts": 25.34,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 16200.0
+          },
+          "tr": {
+            "mentions": 115,
+            "appearances": 72,
+            "avg_cts": 24.62,
+            "max_cts": 25.34,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 11500.0
+          }
+        }
+      },
+      "sample_topics": [
+        "mille crepe — Two new dessert cafés bring cold-brewed teas, crepe cakes, and taro buns to Ardmore - Inquirer.com",
+        "mille crepe — 31 TEMMUZ CUMA BİM YENİ AKTÜEL KATALOG | BİM 2 Ağustos Pazar Elektronik-Oyuncak aktüel kataloğunda hangi ürünler satışa çıkacak? Tam Otomatik Espresso Makinesi,Toz Torbasız Elektrikli Süpürge, Tost Makinesi, El Blender Seti, Dikey Şarjlı Süpür - Milliyet",
+        "mille crepe — TEMMUZ AYI SON BİM AKTÜEL KATALOG (31 TEMMUZ) SATIŞTA! BİM 2 Ağustos Pazar aktüel kataloğunda hangi ürünler satışa sunulacak? Dikey Şarjlı Süpürge, Tost Makinesi, El Blender Seti, Türk Kahve Makinesi, Buz Başlıklı IPL Lazer Cihazı - Milliyet",
+        "mille crepe — 'Surprisingly simple' ingredient Martha Stewart swears by for cafe-style crêpes - Taste",
+        "mille crepe — An Giang eyaleti için 5 Ağustos 2026 hava tahmini. - Vietnam.vn"
       ]
     },
     {
@@ -2747,22 +2822,22 @@
         },
         "weekly": {
           "world": {
-            "mentions": 12,
-            "appearances": 8,
-            "avg_cts": 24.64,
-            "max_cts": 24.75,
+            "mentions": 10,
+            "appearances": 7,
+            "avg_cts": 24.62,
+            "max_cts": 24.74,
             "burst": 0,
-            "prev_mentions": 136,
-            "delta_pct": -91.2
+            "prev_mentions": 118,
+            "delta_pct": -91.5
           },
           "tr": {
-            "mentions": 12,
-            "appearances": 8,
-            "avg_cts": 24.64,
-            "max_cts": 24.75,
+            "mentions": 10,
+            "appearances": 7,
+            "avg_cts": 24.62,
+            "max_cts": 24.74,
             "burst": 0,
-            "prev_mentions": 136,
-            "delta_pct": -91.2
+            "prev_mentions": 118,
+            "delta_pct": -91.5
           }
         },
         "monthly": {
@@ -2795,81 +2870,6 @@
       ]
     },
     {
-      "id": "mille-crepe",
-      "name_tr": "Krep Pasta",
-      "name_en": "Mille Crêpe",
-      "group": "tatli",
-      "metrics": {
-        "daily": {
-          "world": {
-            "mentions": 7,
-            "appearances": 8,
-            "avg_cts": 24.31,
-            "max_cts": 24.36,
-            "burst": 0,
-            "prev_mentions": 2,
-            "delta_pct": 250.0
-          },
-          "tr": {
-            "mentions": 7,
-            "appearances": 8,
-            "avg_cts": 24.31,
-            "max_cts": 24.36,
-            "burst": 0,
-            "prev_mentions": 2,
-            "delta_pct": 250.0
-          }
-        },
-        "weekly": {
-          "world": {
-            "mentions": 90,
-            "appearances": 65,
-            "avg_cts": 24.54,
-            "max_cts": 25.3,
-            "burst": 0,
-            "prev_mentions": 67,
-            "delta_pct": 34.3
-          },
-          "tr": {
-            "mentions": 58,
-            "appearances": 41,
-            "avg_cts": 24.53,
-            "max_cts": 25.3,
-            "burst": 0,
-            "prev_mentions": 52,
-            "delta_pct": 11.5
-          }
-        },
-        "monthly": {
-          "world": {
-            "mentions": 161,
-            "appearances": 111,
-            "avg_cts": 24.57,
-            "max_cts": 25.34,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": 16100.0
-          },
-          "tr": {
-            "mentions": 114,
-            "appearances": 71,
-            "avg_cts": 24.63,
-            "max_cts": 25.34,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": 11400.0
-          }
-        }
-      },
-      "sample_topics": [
-        "mille crepe — Two new dessert cafés bring cold-brewed teas, crepe cakes, and taro buns to Ardmore - Inquirer.com",
-        "mille crepe — 31 TEMMUZ CUMA BİM YENİ AKTÜEL KATALOG | BİM 2 Ağustos Pazar Elektronik-Oyuncak aktüel kataloğunda hangi ürünler satışa çıkacak? Tam Otomatik Espresso Makinesi,Toz Torbasız Elektrikli Süpürge, Tost Makinesi, El Blender Seti, Dikey Şarjlı Süpür - Milliyet",
-        "mille crepe — TEMMUZ AYI SON BİM AKTÜEL KATALOG (31 TEMMUZ) SATIŞTA! BİM 2 Ağustos Pazar aktüel kataloğunda hangi ürünler satışa sunulacak? Dikey Şarjlı Süpürge, Tost Makinesi, El Blender Seti, Türk Kahve Makinesi, Buz Başlıklı IPL Lazer Cihazı - Milliyet",
-        "mille crepe — 'Surprisingly simple' ingredient Martha Stewart swears by for cafe-style crêpes - Taste",
-        "mille crepe — An Giang eyaleti için 5 Ağustos 2026 hava tahmini. - Vietnam.vn"
-      ]
-    },
-    {
       "id": "affogato",
       "name_tr": "Affogato",
       "name_en": "Affogato",
@@ -2897,13 +2897,13 @@
         },
         "weekly": {
           "world": {
-            "mentions": 51,
-            "appearances": 30,
+            "mentions": 49,
+            "appearances": 29,
             "avg_cts": 24.72,
             "max_cts": 25.05,
             "burst": 0,
-            "prev_mentions": 41,
-            "delta_pct": 24.4
+            "prev_mentions": 37,
+            "delta_pct": 32.4
           },
           "tr": {
             "mentions": 0,
@@ -2911,7 +2911,7 @@
             "avg_cts": null,
             "max_cts": null,
             "burst": 0,
-            "prev_mentions": 7,
+            "prev_mentions": 5,
             "delta_pct": -100.0
           }
         },
@@ -2952,13 +2952,13 @@
       "metrics": {
         "daily": {
           "world": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
+            "mentions": 1,
+            "appearances": 1,
+            "avg_cts": 24.31,
+            "max_cts": 24.31,
             "burst": 0,
-            "prev_mentions": 10,
-            "delta_pct": -100.0
+            "prev_mentions": 8,
+            "delta_pct": -87.5
           },
           "tr": {
             "mentions": 0,
@@ -2977,8 +2977,8 @@
             "avg_cts": 24.52,
             "max_cts": 25.04,
             "burst": 0,
-            "prev_mentions": 51,
-            "delta_pct": 7.8
+            "prev_mentions": 50,
+            "delta_pct": 10.0
           },
           "tr": {
             "mentions": 0,
@@ -2992,13 +2992,13 @@
         },
         "monthly": {
           "world": {
-            "mentions": 125,
-            "appearances": 109,
+            "mentions": 126,
+            "appearances": 110,
             "avg_cts": 24.45,
             "max_cts": 25.04,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": 12500.0
+            "delta_pct": 12600.0
           },
           "tr": {
             "mentions": 0,
@@ -3027,13 +3027,13 @@
       "metrics": {
         "daily": {
           "world": {
-            "mentions": 13,
-            "appearances": 8,
-            "avg_cts": 24.68,
+            "mentions": 14,
+            "appearances": 9,
+            "avg_cts": 24.64,
             "max_cts": 24.75,
             "burst": 0,
-            "prev_mentions": 11,
-            "delta_pct": 18.2
+            "prev_mentions": 10,
+            "delta_pct": 40.0
           },
           "tr": {
             "mentions": 0,
@@ -3047,13 +3047,13 @@
         },
         "weekly": {
           "world": {
-            "mentions": 37,
-            "appearances": 32,
-            "avg_cts": 24.46,
+            "mentions": 38,
+            "appearances": 33,
+            "avg_cts": 24.45,
             "max_cts": 24.82,
             "burst": 0,
-            "prev_mentions": 20,
-            "delta_pct": 85.0
+            "prev_mentions": 16,
+            "delta_pct": 137.5
           },
           "tr": {
             "mentions": 0,
@@ -3067,13 +3067,13 @@
         },
         "monthly": {
           "world": {
-            "mentions": 114,
-            "appearances": 107,
+            "mentions": 115,
+            "appearances": 108,
             "avg_cts": 24.43,
             "max_cts": 24.89,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": 11400.0
+            "delta_pct": 11500.0
           },
           "tr": {
             "mentions": 10,
@@ -3089,9 +3089,9 @@
       "sample_topics": [
         "July 16, 2026: Kardava vs Pavlova Tennis Prediction Market - Robinhood",
         "July 18, 2026: Kubka vs Pavlova Tennis Prediction Market - Robinhood",
+        "Apple crumble pavlova with Kirsten Tibballs - 7NEWS",
         "pavlova — Pavlovas prove popular treat as ‘Santa’ salutes at San Remo - Pakenham Officer Star News",
-        "A portable pavlova to savoury s'mores: Jamie Oliver drops 10 exclusive summer recipes – here's how to get them - Yahoo Life UK",
-        "Apple crumble pavlova with Kirsten Tibballs - 7NEWS"
+        "A portable pavlova to savoury s'mores: Jamie Oliver drops 10 exclusive summer recipes – here's how to get them - Yahoo Life UK"
       ]
     },
     {
@@ -3122,13 +3122,13 @@
         },
         "weekly": {
           "world": {
-            "mentions": 21,
-            "appearances": 25,
-            "avg_cts": 24.61,
+            "mentions": 20,
+            "appearances": 24,
+            "avg_cts": 24.63,
             "max_cts": 24.77,
             "burst": 0,
-            "prev_mentions": 63,
-            "delta_pct": -66.7
+            "prev_mentions": 62,
+            "delta_pct": -67.7
           },
           "tr": {
             "mentions": 0,
@@ -3170,6 +3170,81 @@
       ]
     },
     {
+      "id": "yuzu-coffee",
+      "name_tr": "Yuzu / Narenciye Kahve",
+      "name_en": "Yuzu Coffee",
+      "group": "kahve",
+      "metrics": {
+        "daily": {
+          "world": {
+            "mentions": 3,
+            "appearances": 3,
+            "avg_cts": 24.32,
+            "max_cts": 24.35,
+            "burst": 0,
+            "prev_mentions": 4,
+            "delta_pct": -25.0
+          },
+          "tr": {
+            "mentions": 0,
+            "appearances": 0,
+            "avg_cts": null,
+            "max_cts": null,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": null
+          }
+        },
+        "weekly": {
+          "world": {
+            "mentions": 55,
+            "appearances": 50,
+            "avg_cts": 24.4,
+            "max_cts": 24.74,
+            "burst": 0,
+            "prev_mentions": 36,
+            "delta_pct": 52.8
+          },
+          "tr": {
+            "mentions": 21,
+            "appearances": 26,
+            "avg_cts": 24.31,
+            "max_cts": 24.36,
+            "burst": 0,
+            "prev_mentions": 17,
+            "delta_pct": 23.5
+          }
+        },
+        "monthly": {
+          "world": {
+            "mentions": 105,
+            "appearances": 109,
+            "avg_cts": 24.34,
+            "max_cts": 24.74,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 10500.0
+          },
+          "tr": {
+            "mentions": 40,
+            "appearances": 49,
+            "avg_cts": 24.3,
+            "max_cts": 24.36,
+            "burst": 0,
+            "prev_mentions": 0,
+            "delta_pct": 4000.0
+          }
+        }
+      },
+      "sample_topics": [
+        "yuzu coffee — 10 maddede bu hafta - Aposto",
+        "yuzu coffee — Gülşen'den dev reklam anlaşması! 14 saniyelik reklamdan resmen servet kazandı - yasemin.com",
+        "yuzu coffee — I tried the new Nespresso coffee pods and will now be ditching Starbucks - Border Counties Advertizer",
+        "yuzu coffee — 30,000 Cups Sold Weekly + Viral Online Copycats: Did This Iced Coffee Trend Suddenly Explode in Popularity? - 36 Kr",
+        "yuzu coffee — Nespresso is bringing the ultimate coffee pop-up to Vancouver and here's what to expect - curiocity.com"
+      ]
+    },
+    {
       "id": "sutlac",
       "name_tr": "Sütlaç",
       "name_en": "Rice Pudding",
@@ -3202,8 +3277,8 @@
             "avg_cts": 24.48,
             "max_cts": 24.75,
             "burst": 0,
-            "prev_mentions": 29,
-            "delta_pct": -17.2
+            "prev_mentions": 27,
+            "delta_pct": -11.1
           },
           "tr": {
             "mentions": 0,
@@ -3211,7 +3286,7 @@
             "avg_cts": null,
             "max_cts": null,
             "burst": 0,
-            "prev_mentions": 29,
+            "prev_mentions": 27,
             "delta_pct": -100.0
           }
         },
@@ -3257,8 +3332,8 @@
             "avg_cts": 24.73,
             "max_cts": 24.73,
             "burst": 0,
-            "prev_mentions": 12,
-            "delta_pct": -83.3
+            "prev_mentions": 11,
+            "delta_pct": -81.8
           },
           "tr": {
             "mentions": 0,
@@ -3320,81 +3395,6 @@
       ]
     },
     {
-      "id": "yuzu-coffee",
-      "name_tr": "Yuzu / Narenciye Kahve",
-      "name_en": "Yuzu Coffee",
-      "group": "kahve",
-      "metrics": {
-        "daily": {
-          "world": {
-            "mentions": 2,
-            "appearances": 2,
-            "avg_cts": 24.33,
-            "max_cts": 24.35,
-            "burst": 0,
-            "prev_mentions": 5,
-            "delta_pct": -60.0
-          },
-          "tr": {
-            "mentions": 0,
-            "appearances": 0,
-            "avg_cts": null,
-            "max_cts": null,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": null
-          }
-        },
-        "weekly": {
-          "world": {
-            "mentions": 54,
-            "appearances": 49,
-            "avg_cts": 24.4,
-            "max_cts": 24.74,
-            "burst": 0,
-            "prev_mentions": 38,
-            "delta_pct": 42.1
-          },
-          "tr": {
-            "mentions": 21,
-            "appearances": 26,
-            "avg_cts": 24.31,
-            "max_cts": 24.36,
-            "burst": 0,
-            "prev_mentions": 19,
-            "delta_pct": 10.5
-          }
-        },
-        "monthly": {
-          "world": {
-            "mentions": 104,
-            "appearances": 108,
-            "avg_cts": 24.34,
-            "max_cts": 24.74,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": 10400.0
-          },
-          "tr": {
-            "mentions": 40,
-            "appearances": 49,
-            "avg_cts": 24.3,
-            "max_cts": 24.36,
-            "burst": 0,
-            "prev_mentions": 0,
-            "delta_pct": 4000.0
-          }
-        }
-      },
-      "sample_topics": [
-        "yuzu coffee — 10 maddede bu hafta - Aposto",
-        "yuzu coffee — Gülşen'den dev reklam anlaşması! 14 saniyelik reklamdan resmen servet kazandı - yasemin.com",
-        "yuzu coffee — I tried the new Nespresso coffee pods and will now be ditching Starbucks - Border Counties Advertizer",
-        "yuzu coffee — 30,000 Cups Sold Weekly + Viral Online Copycats: Did This Iced Coffee Trend Suddenly Explode in Popularity? - 36 Kr",
-        "yuzu coffee — Nespresso is bringing the ultimate coffee pop-up to Vancouver and here's what to expect - curiocity.com"
-      ]
-    },
-    {
       "id": "dalgona",
       "name_tr": "Dalgona",
       "name_en": "Dalgona",
@@ -3427,7 +3427,7 @@
             "avg_cts": null,
             "max_cts": null,
             "burst": 0,
-            "prev_mentions": 76,
+            "prev_mentions": 60,
             "delta_pct": -100.0
           },
           "tr": {
@@ -3436,7 +3436,7 @@
             "avg_cts": null,
             "max_cts": null,
             "burst": 0,
-            "prev_mentions": 3,
+            "prev_mentions": 1,
             "delta_pct": -100.0
           }
         },
@@ -3482,7 +3482,7 @@
             "avg_cts": null,
             "max_cts": null,
             "burst": 0,
-            "prev_mentions": 8,
+            "prev_mentions": 7,
             "delta_pct": -100.0
           },
           "tr": {
@@ -3497,13 +3497,13 @@
         },
         "weekly": {
           "world": {
-            "mentions": 46,
-            "appearances": 45,
+            "mentions": 45,
+            "appearances": 44,
             "avg_cts": 24.41,
             "max_cts": 24.77,
             "burst": 0,
             "prev_mentions": 26,
-            "delta_pct": 76.9
+            "delta_pct": 73.1
           },
           "tr": {
             "mentions": 0,
@@ -3557,7 +3557,7 @@
             "avg_cts": null,
             "max_cts": null,
             "burst": 0,
-            "prev_mentions": 2,
+            "prev_mentions": 1,
             "delta_pct": -100.0
           },
           "tr": {
@@ -3577,8 +3577,8 @@
             "avg_cts": 24.3,
             "max_cts": 24.35,
             "burst": 0,
-            "prev_mentions": 48,
-            "delta_pct": -72.9
+            "prev_mentions": 46,
+            "delta_pct": -71.7
           },
           "tr": {
             "mentions": 0,
@@ -3627,62 +3627,62 @@
       "metrics": {
         "daily": {
           "world": {
-            "mentions": 1,
-            "appearances": 1,
-            "avg_cts": 24.34,
+            "mentions": 2,
+            "appearances": 2,
+            "avg_cts": 24.32,
             "max_cts": 24.34,
             "burst": 0,
-            "prev_mentions": 8,
-            "delta_pct": -87.5
+            "prev_mentions": 7,
+            "delta_pct": -71.4
           },
           "tr": {
-            "mentions": 1,
-            "appearances": 1,
-            "avg_cts": 24.34,
+            "mentions": 2,
+            "appearances": 2,
+            "avg_cts": 24.32,
             "max_cts": 24.34,
             "burst": 0,
-            "prev_mentions": 8,
-            "delta_pct": -87.5
+            "prev_mentions": 7,
+            "delta_pct": -71.4
           }
         },
         "weekly": {
           "world": {
-            "mentions": 40,
-            "appearances": 47,
+            "mentions": 41,
+            "appearances": 48,
             "avg_cts": 24.3,
             "max_cts": 24.36,
             "burst": 0,
-            "prev_mentions": 13,
-            "delta_pct": 207.7
+            "prev_mentions": 12,
+            "delta_pct": 241.7
           },
           "tr": {
-            "mentions": 14,
-            "appearances": 16,
+            "mentions": 15,
+            "appearances": 17,
             "avg_cts": 24.31,
             "max_cts": 24.35,
             "burst": 0,
-            "prev_mentions": 13,
-            "delta_pct": 7.7
+            "prev_mentions": 12,
+            "delta_pct": 25.0
           }
         },
         "monthly": {
           "world": {
-            "mentions": 53,
-            "appearances": 62,
+            "mentions": 54,
+            "appearances": 63,
             "avg_cts": 24.3,
             "max_cts": 24.36,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": 5300.0
+            "delta_pct": 5400.0
           },
           "tr": {
-            "mentions": 27,
-            "appearances": 31,
+            "mentions": 28,
+            "appearances": 32,
             "avg_cts": 24.3,
             "max_cts": 24.36,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": 2700.0
+            "delta_pct": 2800.0
           }
         }
       },
@@ -3722,22 +3722,22 @@
         },
         "weekly": {
           "world": {
-            "mentions": 12,
+            "mentions": 11,
             "appearances": 8,
             "avg_cts": 24.31,
             "max_cts": 24.36,
             "burst": 0,
-            "prev_mentions": 19,
-            "delta_pct": -36.8
+            "prev_mentions": 18,
+            "delta_pct": -38.9
           },
           "tr": {
-            "mentions": 12,
+            "mentions": 11,
             "appearances": 8,
             "avg_cts": 24.31,
             "max_cts": 24.36,
             "burst": 0,
-            "prev_mentions": 8,
-            "delta_pct": 50.0
+            "prev_mentions": 7,
+            "delta_pct": 57.1
           }
         },
         "monthly": {
@@ -3776,13 +3776,13 @@
       "metrics": {
         "daily": {
           "world": {
-            "mentions": 22,
+            "mentions": 24,
             "appearances": 10,
             "avg_cts": 24.63,
             "max_cts": 25.63,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": 2200.0
+            "delta_pct": 2400.0
           },
           "tr": {
             "mentions": 15,
@@ -3796,13 +3796,13 @@
         },
         "weekly": {
           "world": {
-            "mentions": 22,
+            "mentions": 24,
             "appearances": 10,
             "avg_cts": 24.63,
             "max_cts": 25.63,
             "burst": 0,
-            "prev_mentions": 4,
-            "delta_pct": 450.0
+            "prev_mentions": 2,
+            "delta_pct": 1100.0
           },
           "tr": {
             "mentions": 15,
@@ -3816,13 +3816,13 @@
         },
         "monthly": {
           "world": {
-            "mentions": 43,
+            "mentions": 45,
             "appearances": 28,
             "avg_cts": 24.55,
             "max_cts": 25.63,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": 4300.0
+            "delta_pct": 4500.0
           },
           "tr": {
             "mentions": 15,
@@ -3840,7 +3840,7 @@
         "magnolia tatlısı — Bobbie Lloyd brings a lifelong love of baking to Magnolia Bakery's C-suite - Restaurant Business",
         "magnolia tatlısı — Sturm Graz maçı öncesi... İsmail Kartal, Kante ve Muriqi kararını açıkladı - Cumhuriyet",
         "magnolia tatlısı — Sturm Graz maçı öncesi... İsmail Kartal, Kante ve Muriqi kararını açıkladı - cumhuriyet.com.tr",
-        "magnolia tatlısı — Vincenzo Italiano, Hradec Kralove 11'ini belirledi - Cumhuriyet"
+        "magnolia tatlısı — 5 NYC banana puddings as good as Magnolia's - Gothamist"
       ]
     },
     {
@@ -3925,13 +3925,13 @@
       "metrics": {
         "daily": {
           "world": {
-            "mentions": 1,
-            "appearances": 1,
-            "avg_cts": 24.34,
-            "max_cts": 24.34,
+            "mentions": 3,
+            "appearances": 2,
+            "avg_cts": 24.54,
+            "max_cts": 24.74,
             "burst": 0,
-            "prev_mentions": 5,
-            "delta_pct": -80.0
+            "prev_mentions": 4,
+            "delta_pct": -25.0
           },
           "tr": {
             "mentions": 0,
@@ -3947,11 +3947,11 @@
           "world": {
             "mentions": 30,
             "appearances": 27,
-            "avg_cts": 24.46,
+            "avg_cts": 24.47,
             "max_cts": 24.82,
             "burst": 0,
-            "prev_mentions": 10,
-            "delta_pct": 200.0
+            "prev_mentions": 12,
+            "delta_pct": 150.0
           },
           "tr": {
             "mentions": 0,
@@ -3965,13 +3965,13 @@
         },
         "monthly": {
           "world": {
-            "mentions": 40,
-            "appearances": 36,
+            "mentions": 42,
+            "appearances": 37,
             "avg_cts": 24.44,
             "max_cts": 24.82,
             "burst": 0,
             "prev_mentions": 0,
-            "delta_pct": 4000.0
+            "delta_pct": 4200.0
           },
           "tr": {
             "mentions": 0,
@@ -3988,8 +3988,8 @@
         "Here's Why Hojicha Cocktails Are On The Rise Right Now - Forbes",
         "hojicha — 5 ways to reuse leftover tea leaves - Indulge Express",
         "hojicha — Nana's Green Tea Review - One Dessert Stole the Show - Not Quite Nigella",
-        "hojicha — 5 ways to reuse leftover tea leaves - indulgexpress.com",
-        "The Coffee Bean & Tea Leaf® Introduces Enhanced Rewards Experience and Fall Menu Featuring New Hojicha Beverages and Pumpkin Favorites - PR Newswire"
+        "The Coffee Bean & Tea Leaf® Introduces Enhanced Rewards Experience and Fall Menu Featuring New Hojicha Beverages and Pumpkin Favorites - PR Newswire",
+        "hojicha — 5 ways to reuse leftover tea leaves - indulgexpress.com"
       ]
     },
     {
@@ -4020,13 +4020,13 @@
         },
         "weekly": {
           "world": {
-            "mentions": 6,
-            "appearances": 8,
+            "mentions": 5,
+            "appearances": 7,
             "avg_cts": 24.3,
             "max_cts": 24.36,
             "burst": 0,
-            "prev_mentions": 21,
-            "delta_pct": -71.4
+            "prev_mentions": 20,
+            "delta_pct": -75.0
           },
           "tr": {
             "mentions": 0,
@@ -4034,7 +4034,7 @@
             "avg_cts": null,
             "max_cts": null,
             "burst": 0,
-            "prev_mentions": 7,
+            "prev_mentions": 5,
             "delta_pct": -100.0
           }
         },
@@ -4312,17 +4312,17 @@
       "name_tr": "Türkiye",
       "windows": {
         "daily": {
-          "total_mentions": 37053,
+          "total_mentions": 37086,
           "concepts": [
             {
               "id": "trilece",
               "mentions": 15540,
-              "prev_mentions": 15544
+              "prev_mentions": 15543
             },
             {
               "id": "turk-kahvesi",
-              "mentions": 14310,
-              "prev_mentions": 16019
+              "mentions": 14321,
+              "prev_mentions": 16050
             },
             {
               "id": "kunefe",
@@ -4331,18 +4331,18 @@
             },
             {
               "id": "dubai-cikolatasi",
-              "mentions": 2291,
-              "prev_mentions": 2226
+              "mentions": 2302,
+              "prev_mentions": 2233
             },
             {
               "id": "baklava",
-              "mentions": 1082,
-              "prev_mentions": 1074
+              "mentions": 1086,
+              "prev_mentions": 1073
             },
             {
               "id": "ekler",
               "mentions": 65,
-              "prev_mentions": 107
+              "prev_mentions": 94
             },
             {
               "id": "magnolia",
@@ -4351,48 +4351,48 @@
             },
             {
               "id": "bubble-tea",
-              "mentions": 13,
-              "prev_mentions": 10
+              "mentions": 14,
+              "prev_mentions": 9
             },
             {
               "id": "croissant",
-              "mentions": 11,
+              "mentions": 14,
               "prev_mentions": 1
             },
             {
               "id": "mille-crepe",
-              "mentions": 7,
+              "mentions": 8,
               "prev_mentions": 2
             }
           ]
         },
         "weekly": {
-          "total_mentions": 245245,
+          "total_mentions": 245414,
           "concepts": [
             {
               "id": "trilece",
-              "mentions": 103823,
-              "prev_mentions": 109831
+              "mentions": 103685,
+              "prev_mentions": 109864
             },
             {
               "id": "turk-kahvesi",
-              "mentions": 96265,
-              "prev_mentions": 99050
+              "mentions": 96556,
+              "prev_mentions": 98827
             },
             {
               "id": "kunefe",
-              "mentions": 22729,
-              "prev_mentions": 23564
+              "mentions": 22745,
+              "prev_mentions": 23574
             },
             {
               "id": "dubai-cikolatasi",
-              "mentions": 14632,
-              "prev_mentions": 16185
+              "mentions": 14642,
+              "prev_mentions": 16170
             },
             {
               "id": "baklava",
-              "mentions": 6890,
-              "prev_mentions": 6672
+              "mentions": 6892,
+              "prev_mentions": 6670
             },
             {
               "id": "ekler",
@@ -4401,52 +4401,52 @@
             },
             {
               "id": "salep",
-              "mentions": 110,
-              "prev_mentions": 225
+              "mentions": 109,
+              "prev_mentions": 204
             },
             {
               "id": "matcha",
-              "mentions": 84,
-              "prev_mentions": 80
+              "mentions": 83,
+              "prev_mentions": 78
             },
             {
               "id": "bubble-tea",
-              "mentions": 58,
-              "prev_mentions": 38
+              "mentions": 56,
+              "prev_mentions": 39
             },
             {
               "id": "mille-crepe",
-              "mentions": 58,
-              "prev_mentions": 52
+              "mentions": 55,
+              "prev_mentions": 56
             }
           ]
         },
         "monthly": {
-          "total_mentions": 751147,
+          "total_mentions": 756715,
           "concepts": [
             {
               "id": "trilece",
-              "mentions": 321778,
+              "mentions": 323998,
               "prev_mentions": 0
             },
             {
               "id": "turk-kahvesi",
-              "mentions": 289677,
+              "mentions": 291997,
               "prev_mentions": 498
             },
             {
               "id": "kunefe",
-              "mentions": 69609,
+              "mentions": 70136,
               "prev_mentions": 0
             },
             {
               "id": "dubai-cikolatasi",
-              "mentions": 46228,
+              "mentions": 46564,
               "prev_mentions": 0
             },
             {
               "id": "baklava",
-              "mentions": 20978,
+              "mentions": 21134,
               "prev_mentions": 1564
             },
             {
